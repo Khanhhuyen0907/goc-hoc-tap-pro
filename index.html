@@ -1,16 +1,27 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Góc học tập của Khánh Huyền 🌸</title>
+  <!-- KHAI BÁO CÀI ĐẶT APP ĐIỆN THOẠI & ICON HOA ANH ĐÀO 🌸 -->
+  <meta name="theme-color" content="#f6a9bd">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Góc Học Tập 🌸">
+  <link rel="icon" type="image/png" sizes="192x192" href="https://img.icons8.com/color/192/cherry-blossom.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="https://img.icons8.com/color/512/cherry-blossom.png">
+  <link rel="apple-touch-icon" href="https://img.icons8.com/color/192/cherry-blossom.png">
+  <link rel="manifest" href='data:application/manifest+json,{"name":"Góc học tập của Khánh Huyền","short_name":"Góc Học Tập 🌸","start_url":".","display":"standalone","background_color":"#fff5f7","theme_color":"#f6a9bd","icons":[{"src":"https://img.icons8.com/color/192/cherry-blossom.png","sizes":"192x192","type":"image/png"},{"src":"https://img.icons8.com/color/512/cherry-blossom.png","sizes":"512x512","type":"image/png"}]}'>
 
-<!-- Fonts, Confetti & Supabase SDK -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@500;600;700;800&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Góc học tập của Khánh Huyền 🌸</title>
+
+  <!-- Fonts, Confetti & Supabase SDK -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 :root{
@@ -120,7 +131,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
 .admin-only { display: none !important; }
 .unlocked .admin-only { display: inline-flex !important; }
 
-/* TRẠNG THÁI BÀI TẬP (CÓ THÊM TRẠNG THÁI NHẮC LÀM LẠI) */
+/* TRẠNG THÁI BÀI TẬP */
 .badge-status { font-size: 11px; font-weight: 800; padding: 4px 8px; border-radius: 6px; display: inline-flex; align-items: center; gap: 4px; }
 .status-done { background: #e1f5ec; color: #36795f; }
 .status-pending { background: #fff3c9; color: #8a6a16; }
@@ -192,6 +203,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   <header class="hero">
     <div class="hero-top">
       <div>
+        <!-- TIÊU ĐỀ CHUẨN UỐN LƯỢN & ĐẬM ĐÀ -->
         <div class="eyebrow">🌸 Góc học tập của Khánh Huyền</div>
         <h1>Hôm nay mình cùng cố gắng nhé!</h1>
         <p class="subtitle">Làm bài tập, làm phiếu trắc nghiệm nhận sao hoặc luyện nói cùng Bạn học AI để đổi quà yêu thích nhé!</p>
@@ -228,6 +240,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
         <div class="panel-head">
           <div style="display: flex; align-items: center; gap: 10px;">
             <h2>🗓️ Kế hoạch học tập</h2>
+            <!-- DANH SÁCH NĂM 2026 - 2036 -->
             <select id="yearSelect" style="width: 95px; padding: 5px 8px; font-weight: 700; color: #a64e68; background: #fff0f4; border: 1px solid #f4cad7; border-radius: 10px;">
               <option value="2026" selected>2026</option>
               <option value="2027">2027</option>
@@ -339,8 +352,8 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
         📷
         <input type="file" id="aiFileInput" accept="image/*" style="display:none;">
       </label>
-      <button type="button" class="ai-btn-circle" id="aiBtnMic" title="Nói với Thỏ">🎤</button>
-      <input type="text" id="aiTextInput" placeholder="Nói hoặc gõ với Thỏ Siêu Quậy (hoặc Ctrl + V để dán ảnh)..." style="flex:1;">
+      <button type="button" class="ai-btn-circle" id="aiBtnMic" title="Bấm để nói bằng giọng nói">🎤</button>
+      <input type="text" id="aiTextInput" placeholder="Bấm Micro để nói, hoặc gõ tin nhắn (Ctrl + V dán ảnh)..." style="flex:1;">
       <button type="button" class="btn btn-primary" id="aiBtnSend">Gửi</button>
     </div>
   </div>
@@ -385,7 +398,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   </div>
 </dialog>
 
-<!-- MODAL NỘP BÀI (HIỆN RÕ LỜI NHẮC LÀM LẠI CỦA MẸ NẾU CÓ) -->
+<!-- MODAL NỘP BÀI (HỖ TRỢ CTRL + V DÁN ẢNH CHỤP MÀN HÌNH) -->
 <dialog id="submitProofDialog">
   <div class="modal-head"><h2 id="submitProofModalTitle">📝 Nộp bài tập</h2><button class="close" data-close="submitProofDialog">×</button></div>
   <form id="submitProofForm" class="modal-body">
@@ -477,6 +490,11 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   const sb = (window.supabase && window.supabase.createClient) 
     ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY) 
     : null;
+
+  // TẮT HOÀN TOÀN GIỌNG ĐỌC CỦA TRÌNH DUYỆT ĐỂ KHÔNG PHÁT RA ÂM THANH LẠ
+  if ('speechSynthesis' in window) {
+    try { window.speechSynthesis.cancel(); } catch(e){}
+  }
 
   const SUBJECTS = ['Toán','Tiếng Việt','Tiếng Anh','Khoa học','Đọc sách','Khác'];
   const $ = id => document.getElementById(id);
@@ -637,7 +655,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   });
 
   // ========================================================
-  // 🐰 BẠN HỌC AI THỎ SIÊU QUẬY
+  // 🐰 BẠN HỌC AI THỎ SIÊU QUẬY (ĐÃ TẮT ÂM THANH MÁY MÓC)
   // ========================================================
   let aiSelectedBase64 = null;
   let geminiApiKey = (localStorage.getItem('GEMINI_KEY') || '').trim();
@@ -651,6 +669,11 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   };
 
   $('btnOpenAiModal').onclick = () => {
+    // Tắt ngay bất kỳ âm thanh phát dở nào khi mở cửa sổ chat
+    if ('speechSynthesis' in window) {
+      try { window.speechSynthesis.cancel(); } catch(e){}
+    }
+
     $('aiTutorDialog').showModal();
     if (!geminiApiKey) {
       setTimeout(() => {
@@ -711,6 +734,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     $('aiFileInput').value = '';
   };
 
+  // VẪN GIỮ NGUYÊN 100% TÍNH NĂNG NHẬP LIỆU BẰNG MICRO TIẾNG VIỆT
   let recognition = null;
   if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
     const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -728,17 +752,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     if (!recognition) return alert("Trình duyệt chưa hỗ trợ ghi âm.");
     try { recognition.start(); } catch(e){ recognition.stop(); }
   };
-
-  function speakText(text) {
-    if ('speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
-      const clean = text.replace(/[*#_~]/g, '');
-      const utt = new SpeechSynthesisUtterance(clean);
-      utt.lang = /[a-zA-Z]{4,}/.test(clean) ? 'en-US' : 'vi-VN';
-      utt.rate = 0.95;
-      window.speechSynthesis.speak(utt);
-    }
-  }
 
   function appendAiMsg(role, text, imgBase64 = null) {
     const box = $('aiChatBox');
@@ -860,8 +873,8 @@ QUY TẮC TRÌNH BÀY:
         
         reply = cleanMathText(reply);
 
+        // HIỂN THỊ CHỮ MƯỢT MÀ - ĐÃ LOẠI BỎ PHÁT ÂM ROBOT
         appendAiMsg('bot', reply || 'Thỏ đây! Cậu cần tớ cùng làm bài nào nào? 🐰🌸');
-        speakText(reply);
 
         aiChatHistory.push({
           role: 'model',
@@ -1089,7 +1102,6 @@ QUY TẮC TRÌNH BÀY:
       else if (isPending) statusBadge = `<span class="badge-status status-pending">⏳ Chờ mẹ duyệt</span>`;
       else if (isRedo) statusBadge = `<span class="badge-status status-redo">⚠️ Cần làm lại</span>`;
 
-      // Nút mở trắc nghiệm tự chấm nếu có bộ đề
       let quizBtnHtml = '';
       if (t.questions && Array.isArray(t.questions) && t.questions.length > 0) {
         let qCount = t.questions.length;
@@ -1097,7 +1109,6 @@ QUY TẮC TRÌNH BÀY:
         quizBtnHtml = `<div><button type="button" class="btn-quiz" data-open-quiz="${t.id}">${btnText}</button></div>`;
       }
 
-      // Khung lời nhắc của mẹ nếu bị yêu cầu làm lại
       let redoAlertHtml = '';
       if (isRedo) {
         redoAlertHtml = `
@@ -1111,7 +1122,6 @@ QUY TẮC TRÌNH BÀY:
       if (!sub) {
         actionBtn = `<button class="btn btn-primary btn-small" data-submit-task="${t.id}">📸 Nộp bài</button>`;
       } else if (isRedo) {
-        // Nút Nộp lại bài nổi bật cho con
         actionBtn = `
           <div class="flex" style="gap:6px;">
             <button class="btn btn-primary btn-small" data-submit-task="${t.id}" style="background:#e95f83;">🔄 Nộp lại bài</button>
@@ -1447,7 +1457,6 @@ QUY TẮC TRÌNH BÀY:
       return;
     }
 
-    // Bấm Nộp bài hoặc Nộp lại bài
     const subBtn = e.target.closest('[data-submit-task]');
     if (subBtn) {
       const t = state.tasks.find(x => x.id === subBtn.dataset.submitTask);
@@ -1459,7 +1468,6 @@ QUY TẮC TRÌNH BÀY:
       $('proofNote').value = '';
       resetProofFile();
 
-      // Nếu có lời nhắc làm lại từ mẹ thì hiện rõ ràng lên modal
       if (sub && sub.status === 'redo') {
         $('submitProofModalTitle').textContent = '🔄 Nộp lại bài tập';
         $('proofMomAlert').style.display = 'block';
@@ -1516,7 +1524,7 @@ QUY TẮC TRÌNH BÀY:
     }
   });
 
-  // SUBMIT BÀI LÀM (HỖ TRỢ CẢ NỘP LẦN ĐẦU VÀ NỘP LẠI)
+  // SUBMIT BÀI LÀM
   $('submitProofForm').onsubmit = async e => {
     e.preventDefault();
     const taskId = $('proofTaskId').value;
@@ -1542,10 +1550,8 @@ QUY TẮC TRÌNH BÀY:
         publicUrl = pUrl;
       }
 
-      // Kiểm tra xem đã từng có bài nộp trước đó chưa
       const existingSub = state.submissions.find(s => s.task_id === taskId);
       if (existingSub) {
-        // Cập nhật lại bài nộp cũ sang trạng thái pending chờ mẹ duyệt lại
         const { error: upErr } = await sb.from('task_submissions').update({
           proof_url: publicUrl || existingSub.proof_url || '',
           note: note || (existingSub.status === 'redo' ? 'Con đã sửa và nộp lại bài ạ!' : (currentProofFile ? 'Con gửi ảnh chụp bài làm' : 'Con đã hoàn thành bài tập ạ!')),
@@ -1553,7 +1559,6 @@ QUY TẮC TRÌNH BÀY:
         }).eq('id', existingSub.id);
         if (upErr) throw upErr;
       } else {
-        // Tạo bài nộp mới lần đầu
         const { error: insErr } = await sb.from('task_submissions').insert([{
           task_id: taskId,
           proof_url: publicUrl,
@@ -1590,7 +1595,6 @@ QUY TẮC TRÌNH BÀY:
     }
   };
 
-  // MẸ BẤM NHẮC CON LÀM LẠI (CHO PHÉP GÕ LỜI NHẮC CỤ THỂ)
   $('btnRejectProof').onclick = async () => {
     if (!currentReviewTask) return;
     const sub = currentReviewTask.submission;
@@ -1599,12 +1603,11 @@ QUY TẮC TRÌNH BÀY:
       "Mẹ nhập lời nhắn cho con nhé (Ví dụ: Con tính lại câu 3 và kiểm tra lại đáp án nhé):",
       "Con kiểm tra lại bài và làm lại giúp mẹ nhé!"
     );
-    if (reason === null) return; // Mẹ bấm Hủy
+    if (reason === null) return;
 
     const message = reason.trim() || "Con kiểm tra lại bài và làm lại giúp mẹ nhé!";
 
     if (sb) {
-      // Cập nhật trạng thái sang redo và lưu lời nhắn của mẹ
       await sb.from('task_submissions').update({
         status: 'redo',
         note: message
