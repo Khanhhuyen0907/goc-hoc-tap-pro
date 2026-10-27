@@ -1,3 +1,6 @@
+Ý tưởng cho bé gái lớp 4 chơi phối đồ búp bê là tuyệt đỉnh luôn mẹ ơi! Con gái
+mê nhất là được tự tay chọn từng đôi bông tai, kẹp tóc nơ, dây chuyền ngọc trai,
+túi xách mini, giày búp bê, nước hoa và lọ phép thuật lung linh! 💖✨
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -36,7 +39,7 @@ button,input,select,textarea{font:inherit}
 button{cursor:pointer}
 .app{max-width:1220px;margin:0 auto;padding:24px 18px 50px}
 
-/* GIAO DIỆN HEADER ĐẸP & GỌN GÀNG CỦA MẸ */
+/* GIAO DIỆN HEADER */
 .hero{position:relative;overflow:hidden;background:linear-gradient(120deg,#fff0f4,#fff8fb 58%,#f8efff);border:1px solid #f5cbd7;border-radius:24px;padding:24px 28px 20px;box-shadow:var(--shadow)}
 .hero:after{content:"✿";position:absolute;right:22px;top:-28px;font-size:125px;color:#f3a8bf;opacity:.13;transform:rotate(15deg);pointer-events:none}
 .hero-top{display:grid;grid-template-columns:minmax(0,1fr) auto;justify-content:space-between;gap:22px;align-items:start;position:relative;z-index:1}
@@ -58,7 +61,7 @@ h1{margin:4px 0 8px;font-size:clamp(24px,3.8vw,34px);color:#9f4963;font-weight:8
 .stat .label{font-size:11.5px;color:var(--muted);font-weight:800}
 .stat .value{font-size:25px;font-weight:800;margin-top:5px;color:#a94e69}
 .stat .hint{font-size:11.5px;color:var(--muted);margin-top:3px}
-.layout{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:18px;align-items:start}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:18px;align-items:start}
 .panel{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:18px}
 .panel-head{padding:16px 20px;border-bottom:1px solid #f6e0e6;display:flex;align-items:center;justify-content:space-between;gap:12px;background:linear-gradient(90deg,#fff6f8,#fff);flex-wrap:wrap;}
 .panel-head h2{font-size:17px;margin:0;color:#a64e68}
@@ -151,7 +154,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   animation: bunnyMunchAnim 1.8s ease-in-out forwards;
 }
 .bunny-eating-face {
-  font-size: 90px;
+  font-size: 85px;
   display: inline-block;
   animation: chewing 0.28s infinite alternate;
 }
@@ -248,10 +251,38 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
 #wheelCanvas { width: 100%; height: 100%; border-radius: 50%; box-shadow: 0 8px 24px rgba(233,121,152,0.3); border: 4px solid #fff; }
 .wheel-pointer { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 14px solid transparent; border-right: 14px solid transparent; border-top: 24px solid #e95f83; z-index: 10; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); }
 
-/* NUÔI THỎ CƯNG WIDGET */
-.pet-widget { background: linear-gradient(135deg, #fff2f5, #fff8fb); border: 1px solid #f4cad7; border-radius: 16px; padding: 12px; margin-bottom: 15px; display: flex; align-items: center; gap: 12px; }
-.pet-avatar { font-size: 38px; position: relative; animation: petBounce 2s infinite ease-in-out; }
+/* NUÔI THỎ CƯNG 50 CẤP ĐỘ WIDGET */
+.pet-widget {
+  background: linear-gradient(135deg, #fff2f5, #fff8fb);
+  border: 1px solid #f4cad7; border-radius: 18px; padding: 14px;
+  margin-bottom: 15px; box-shadow: var(--shadow);
+}
+.pet-avatar-box {
+  width: 55px; height: 55px; border-radius: 50%; background: #fff;
+  border: 2px solid #f6a9bd; display: flex; align-items: center; justify-content: center;
+  font-size: 32px; position: relative; animation: petBounce 2s infinite ease-in-out;
+  flex-shrink: 0;
+}
 @keyframes petBounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+
+/* SHOP & WARDROBE STYLES */
+.shop-tabs { display: flex; gap: 6px; border-bottom: 1px solid #f4cad7; padding-bottom: 8px; margin-bottom: 14px; overflow-x: auto; }
+.shop-tab-btn { border: 0; background: #fff0f4; color: #a64e68; padding: 7px 14px; border-radius: 999px; font-weight: 800; font-size: 13px; cursor: pointer; white-space: nowrap; }
+.shop-tab-btn.active { background: #e97998; color: #fff; }
+
+.acc-filters { display: flex; gap: 5px; overflow-x: auto; margin-bottom: 12px; padding-bottom: 4px; }
+.acc-filter-btn { border: 1px solid #f4cad7; background: #fff; color: #8a5665; padding: 4px 10px; border-radius: 8px; font-weight: 700; font-size: 11.5px; cursor: pointer; white-space: nowrap; }
+.acc-filter-btn.active { background: #e97998; color: #fff; border-color: #e97998; }
+
+.shop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; max-height: 480px; overflow-y: auto; padding: 4px; }
+.shop-item-card {
+  background: #fff; border: 1px solid #f4cad7; border-radius: 14px; padding: 10px; text-align: center;
+  display: flex; flex-direction: column; justify-content: space-between; position: relative;
+}
+.shop-item-card.locked { opacity: 0.6; background: #fafafa; border-style: dashed; }
+.shop-item-icon { font-size: 32px; margin-bottom: 4px; }
+.shop-item-name { font-weight: 800; font-size: 12px; color: #51434a; line-height: 1.3; }
+.shop-item-price { font-weight: 900; font-size: 12px; color: #e95f83; margin: 4px 0 6px; }
 
 @media(max-width:850px){
   .layout{grid-template-columns:1fr}
@@ -284,7 +315,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
       <div class="hero-copy">
         <div class="eyebrow">🌸 Góc học tập của Khánh Huyền</div>
         <h1>Hôm nay mình cùng cố gắng nhé!</h1>
-        <p class="subtitle">Làm bài tập, làm phiếu trắc nghiệm nhận sao hoặc luyện nói cùng Bạn học AI để đổi quà yêu thích nhé!</p>
+        <p class="subtitle">Mỗi bài hoàn thành con nhận +1.000đ tích lũy mua Cà rốt & Sắm 100 món phụ kiện xinh xắn cho Thỏ cưng nhé!</p>
       </div>
       <div class="hero-meta">
         <div class="today-pill" id="todayPill">📅 Hôm nay</div>
@@ -394,19 +425,35 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     </main>
 
     <aside>
-      <!-- WIDGET NUÔI THỎ CƯNG -->
+      <!-- WIDGET NUÔI THỎ CƯNG 50 CẤP ĐỘ & VÍ TIỀN HỌC TẬP -->
       <div class="pet-widget">
-        <div class="pet-avatar" id="petAvatar">🐰</div>
-        <div style="flex:1;">
-          <div class="row-between">
-            <strong id="petNameLabel" style="font-size:13px; color:#a64e68;">Thỏ Bé Bỏng</strong>
-            <span style="font-size:11px; font-weight:800; color:#36795f;" id="petLevelLabel">Cấp 1</span>
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
+          <div class="pet-avatar-box" id="petAvatar">🐰</div>
+          <div style="flex:1; min-width:0;">
+            <div class="row-between">
+              <strong id="petNameLabel" style="font-size:13.5px; color:#a64e68; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Thỏ Mầm Non</strong>
+              <span style="font-size:11px; font-weight:800; color:#36795f; background:#e2f5ed; padding:2px 7px; border-radius:6px;" id="petLevelLabel">Cấp 1/50</span>
+            </div>
+            <div class="progress" style="margin:6px 0 4px;"><span id="petExpBar" style="width:0%;"></span></div>
+            <div class="row-between" style="font-size:11px; color:#888;">
+              <span id="petExpText">Ăn: 0/2 🥕</span>
+              <span id="petOutfitBadges" style="color:#c95c78; font-weight:800; font-size:12px;"></span>
+            </div>
           </div>
-          <div class="progress" style="margin:4px 0;"><span id="petExpBar" style="width:20%;"></span></div>
-          <div class="row-between" style="font-size:11.5px; color:#888;">
-            <span>Cà rốt: <strong id="petCarrotCount" style="color:#e95f83;">0 🥕</strong></span>
-            <button class="btn btn-soft btn-small" id="btnFeedPet" style="padding:2px 8px; font-size:11px;">Cho ăn 🥕</button>
+        </div>
+
+        <!-- THÔNG TIN VÍ TIỀN & NÚT MUA SẮM -->
+        <div style="background:#fff; border:1px solid #f4cad7; border-radius:12px; padding:9px 12px; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <div style="font-size:11px; color:#8a7b82; font-weight:700;">VÍ TIỀN HỌC TẬP</div>
+            <div style="font-size:17px; font-weight:900; color:#e95f83;" id="petMoneyLabel">0đ</div>
           </div>
+          <button class="btn btn-gold btn-small" id="btnOpenPetShop" style="font-size:12px; padding:6px 12px;">🛍️ Tiệm & Tủ Đồ</button>
+        </div>
+
+        <div class="row-between" style="font-size:12px;">
+          <span>Cà rốt: <strong id="petCarrotCount" style="color:#e95f83;">0 🥕</strong></span>
+          <button class="btn btn-soft btn-small" id="btnFeedPet" style="padding:4px 12px; font-size:12px; font-weight:800;">Cho ăn 🥕</button>
         </div>
       </div>
 
@@ -438,6 +485,67 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   </div>
   <div class="footer">🌸 Góc học tập của Khánh Huyền · Kết nối Supabase Cloud & Google Sheets 💕</div>
 </div>
+
+<!-- ==================================================== -->
+<!-- 🛍️ CỬA SỔ TIỆM THỜI TRANG & 100 PHỤ KIỆN CON GÁI -->
+<!-- ==================================================== -->
+<dialog id="petShopDialog" style="width: min(720px, calc(100% - 20px));">
+  <div class="modal-head">
+    <h2>🛍️ Tiệm Thời Trang & Tủ Đồ Của Thỏ</h2>
+    <div style="font-weight:900; color:#e95f83; font-size:14.5px; margin-right:8px;" id="shopDialogMoney">0đ</div>
+    <button class="close" data-close="petShopDialog">×</button>
+  </div>
+  <div class="modal-body" style="padding:14px;">
+    <!-- THANH CHỌN TAB CHÍNH -->
+    <div class="shop-tabs">
+      <button class="shop-tab-btn active" data-shop-tab="carrots">🥕 Chợ Cà Rốt</button>
+      <button class="shop-tab-btn" data-shop-tab="accessories">✨ 100 Phụ Kiện Xinh</button>
+      <button class="shop-tab-btn" data-shop-tab="outfits">👗 Thời Trang 50 Cấp</button>
+      <button class="shop-tab-btn" data-shop-tab="wardrobe">🪞 Tủ Đồ Của Bé</button>
+    </div>
+
+    <!-- TAB 1: CHỢ CÀ RỐT -->
+    <div id="tabContentCarrots">
+      <div style="background:#fffaf0; border:1px solid #f3e5b4; border-radius:14px; padding:18px; text-align:center; margin-bottom:14px;">
+        <div style="font-size:48px; margin-bottom:6px;">🥕✨</div>
+        <h3 style="margin:0 0 4px; color:#97702b;">Cà Rốt Tươi Bổ Dưỡng</h3>
+        <p class="small-note" style="margin:0 0 12px;">Giá: <b>3.000đ / củ</b> · Cho Thỏ ăn để tích điểm thăng cấp lên Cấp 50 nhé!</p>
+        <div class="flex" style="justify-content:center; gap:8px;">
+          <button class="btn btn-gold btn-small" id="btnBuy1Carrot">Mua 1 Củ (3.000đ)</button>
+          <button class="btn btn-gold btn-small" id="btnBuy5Carrots">Mua 5 Củ (15.000đ)</button>
+          <button class="btn btn-gold btn-small" id="btnBuy10Carrots">Mua 10 Củ (30.000đ)</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: TIỆM 100 PHỤ KIỆN CON GÁI -->
+    <div id="tabContentAccessories" style="display:none;">
+      <!-- THANH LỌC DANH MỤC PHỤ KIỆN -->
+      <div class="acc-filters">
+        <button class="acc-filter-btn active" data-acc-cat="all">🌟 Tất cả (100 món)</button>
+        <button class="acc-filter-btn" data-acc-cat="jewelry">💎 Bông Tai & Dây Chuyền</button>
+        <button class="acc-filter-btn" data-acc-cat="head">🎀 Nơ, Kẹp & Vương Miện</button>
+        <button class="acc-filter-btn" data-acc-cat="bag">👜 Túi Xách & Balo</button>
+        <button class="acc-filter-btn" data-acc-cat="shoes">👠 Giày & Vớ Ren</button>
+        <button class="acc-filter-btn" data-acc-cat="beauty">💄 Làm Đẹp & Lọ Thần</button>
+        <button class="acc-filter-btn" data-acc-cat="hand">🪄 Cầm Tay & Thú Mini</button>
+      </div>
+      <div class="shop-grid" id="accessoriesGrid"></div>
+    </div>
+
+    <!-- TAB 3: TIỆM THỜI TRANG 50 CẤP -->
+    <div id="tabContentOutfits" style="display:none;">
+      <div class="small-note" style="margin-bottom:10px;">🌟 Mỗi cấp độ thỏ đạt được sẽ tự động mở khóa 3 bộ trang phục tuyệt đẹp!</div>
+      <div class="shop-grid" id="outfitsGrid"></div>
+    </div>
+
+    <!-- TAB 4: TỦ ĐỒ CỦA BÉ -->
+    <div id="tabContentWardrobe" style="display:none;">
+      <div class="small-note" style="margin-bottom:10px;">👗 Đồ bé đã sắm. Bé có thể phối nhiều món phụ kiện cùng lúc cho Thỏ nhé!</div>
+      <div class="shop-grid" id="wardrobeGrid"></div>
+    </div>
+  </div>
+</dialog>
 
 <!-- ==================================================== -->
 <!-- 🥕 HIỆU ỨNG THỎ ĂN CÀ RỐT TO GIỮA MÀN HÌNH -->
@@ -486,18 +594,16 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
 </dialog>
 
 <!-- ==================================================== -->
-<!-- 🎡 CỬA SỔ VÒNG QUAY MAY MẮN (PHÁO HOA & THÔNG BÁO NỔ TRỰC DIỆN) -->
+<!-- 🎡 CỬA SỔ VÒNG QUAY MAY MẮN (PHÁO HOA BAY TRÊN MẶT) -->
 <!-- ==================================================== -->
 <dialog id="wheelDialog" style="position:relative; overflow:visible;">
-  <!-- Canvas pháo hoa bay thẳng trên mặt vòng quay không bị che -->
   <canvas id="wheelConfettiCanvas" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:999;"></canvas>
 
-  <!-- Thiệp chúc mừng kết quả trúng thưởng hiện ngay giữa vòng quay -->
   <div id="wheelWinCard">
     <div style="font-size: 45px; margin-bottom: 5px;">🎉 👑 🌟</div>
-    <div style="font-size: 15px; font-weight: 800; color: #a64e68; text-transform: uppercase; letter-spacing: 0.5px;">Chúc mừng cô chủ nhỏ!</div>
+    <div style="font-size: 15px; font-weight: 800; color: #a64e68; text-transform: uppercase;">Chúc mừng cô chủ nhỏ!</div>
     <div id="wheelWinTitle" style="font-size: 26px; font-weight: 900; color: #e95f83; margin: 10px 0;">JACKPOT 5⭐</div>
-    <p id="wheelWinSub" style="font-size: 13px; color: #66525a; margin: 0 0 15px; line-height: 1.4;">Phần thưởng đã được cộng trực tiếp vào số sao của con nhé!</p>
+    <p id="wheelWinSub" style="font-size: 13px; color: #66525a; margin: 0 0 15px; line-height: 1.4;">Phần thưởng đã được cộng trực tiếp vào túi của con nhé!</p>
     <button type="button" class="btn btn-gold" id="btnCloseWinCard" style="font-size: 14px; padding: 8px 24px; border-radius: 999px;">Nhận quà ngay ✨</button>
   </div>
 
@@ -529,13 +635,11 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     <div id="pomoTimerLabel" style="font-size:56px; font-weight:900; color:#c95c78; font-variant-numeric:tabular-nums; margin-bottom:4px;">25:00</div>
     <div id="pomoModeText" style="font-weight:800; color:#36795f; margin-bottom:12px;">📖 Đến giờ tập trung làm bài rồi!</div>
 
-    <!-- Nút điều khiển Pomodoro -->
     <div class="flex" style="justify-content:center; gap:8px; margin-bottom: 15px;">
       <button class="btn btn-primary" id="btnPomoStart">Bắt đầu ⏱️</button>
       <button class="btn btn-soft" id="btnPomoReset">Đặt lại ↩️</button>
     </div>
 
-    <!-- KHUNG CHỌN & PHÁT NHẠC YOUTUBE -->
     <div style="background:#fff0f4; border:1px solid #f4cad7; border-radius:16px; padding:12px; text-align:left;">
       <div class="row-between" style="margin-bottom:8px;">
         <span style="font-weight:800; font-size:13px; color:#a64e68;">🎵 Nhạc học tập YouTube</span>
@@ -545,20 +649,17 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
         </div>
       </div>
 
-      <!-- Ô dán link YouTube -->
       <div class="flex" style="gap:6px; margin-bottom:8px;">
         <input type="text" id="pomoYtInput" placeholder="Dán link YouTube bài con thích vào đây..." style="flex:1; font-size:12.5px; padding:7px 10px;">
         <button class="btn btn-primary btn-small" id="btnSaveYtLink">Lưu link 💾</button>
       </div>
 
-      <!-- Gợi ý chọn nhanh các bài nhạc cho phép nhúng 100% -->
       <div class="flex" style="gap:5px; margin-bottom:8px;">
         <button type="button" class="icon-btn" data-yt-preset="https://www.youtube.com/watch?v=jfKfPfyJRdk">🎹 Lofi Chill</button>
         <button type="button" class="icon-btn" data-yt-preset="https://www.youtube.com/watch?v=WPni755-Krg">🌸 Ghibli Piano</button>
         <button type="button" class="icon-btn" data-yt-preset="https://www.youtube.com/watch?v=DWcJFNfaw9c">🌿 Tập Trung</button>
       </div>
 
-      <!-- Khung video YouTube có đầy đủ quyền tránh Lỗi 153 -->
       <div style="position:relative; border-radius:10px; overflow:hidden; aspect-ratio: 16/9; max-height: 185px; background:#000;">
         <iframe id="pomoYtIframe" width="100%" height="100%" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="display:block;"></iframe>
       </div>
@@ -732,7 +833,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     <div id="reviewFileContainer" style="text-align:center; margin:15px 0;"></div>
     <div class="flex admin-only" style="justify-content:flex-end; gap:10px; margin-top:15px;">
       <button type="button" class="btn btn-soft" id="btnRejectProof" style="color:#b64b63;">↩️ Nhắc con làm lại</button>
-      <button type="button" class="btn btn-green" id="btnApproveProof" style="font-weight:900;">✅ Duyệt & Tặng sao ⭐</button>
+      <button type="button" class="btn btn-green" id="btnApproveProof" style="font-weight:900;">✅ Duyệt & Tặng sao ⭐ (+1.000đ)</button>
     </div>
   </div>
 </dialog>
@@ -789,10 +890,172 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   const dateAdd = (iso,n) => { const [y,m,d]=iso.split('-').map(Number); const x=new Date(y,m-1,d); x.setDate(x.getDate()+n); return `${x.getFullYear()}-${String(x.getMonth()+1).padStart(2,'0')}-${String(x.getDate()).padStart(2,'0')}`; };
   const mondayOf = iso => { const [y,m,d]=iso.split('-').map(Number); const x=new Date(y,m-1,d); const day=(x.getDay()+6)%7; x.setDate(x.getDate()-day); return `${x.getFullYear()}-${String(x.getMonth()+1).padStart(2,'0')}-${String(x.getDate()).padStart(2,'0')}`; };
 
+  // ========================================================
+  // 🐰 DỮ LIỆU PET 50 CẤP ĐỘ
+  // ========================================================
+  const PET_TIERS = [
+    { maxLv: 5,  name: 'Thỏ Mầm Non', avatar: '🐰' },
+    { maxLv: 10, name: 'Thỏ Học Sinh Chăm', avatar: '🐇' },
+    { maxLv: 15, name: 'Thỏ Nàng Thơ', avatar: '🐰🌸' },
+    { maxLv: 20, name: 'Thỏ Học Giả Tri Thức', avatar: '📚🐰' },
+    { maxLv: 25, name: 'Thỏ Tiên Nữ Hoa Cỏ', avatar: '🧚🐰' },
+    { maxLv: 30, name: 'Thỏ Pháp Sư Phép Thuật', avatar: '🧙‍♀️🐰' },
+    { maxLv: 35, name: 'Thỏ Hoàng Gia Công Chúa', avatar: '🐰👑' },
+    { maxLv: 40, name: 'Thỏ Nữ Thần Đại Dương', avatar: '🧜‍♀️🐰' },
+    { maxLv: 45, name: 'Thỏ Phi Hành Gia Tinh Cầu', avatar: '🚀🐰' },
+    { maxLv: 50, name: 'Nữ Hoàng Thỏ Vũ Trụ', avatar: '🌌👑' }
+  ];
+
+  function getPetTier(lv) {
+    return PET_TIERS.find(t => lv <= t.maxLv) || PET_TIERS[PET_TIERS.length - 1];
+  }
+
+  function getCarrotsNeeded(lv) {
+    if (lv >= 50) return 999;
+    return Math.min(30, Math.floor(2 + (lv - 1) * 0.55));
+  }
+
+  // ========================================================
+  // 💎 BỘ SƯU TẬP ĐÚNG 100 PHỤ KIỆN CON GÁI SIÊU ĐIỆU ĐÀ
+  // ========================================================
+  const RAW_ACCESSORIES = [
+    // 1. BÔNG TAI & TRANG SỨC (jewelry)
+    { id: 'acc_1', name: '🌸 Bông Tai Hoa Anh Đào', icon: '🌸', price: 4000, cat: 'jewelry' },
+    { id: 'acc_2', name: '🍓 Bông Tai Dâu Tây', icon: '🍓', price: 5000, cat: 'jewelry' },
+    { id: 'acc_3', name: '🍒 Bông Tai Quả Cherry', icon: '🍒', price: 6000, cat: 'jewelry' },
+    { id: 'acc_4', name: '🌙 Bông Tai Trăng Khuyết', icon: '🌙', price: 8000, cat: 'jewelry' },
+    { id: 'acc_5', name: '⭐ Bông Tai Ngôi Sao Nhỏ', icon: '⭐', price: 8000, cat: 'jewelry' },
+    { id: 'acc_6', name: '💖 Bông Tai Trái Tim Hồng', icon: '💖', price: 9000, cat: 'jewelry' },
+    { id: 'acc_7', name: '💎 Bông Tai Kim Cương Lấp Lánh', icon: '💎', price: 15000, cat: 'jewelry' },
+    { id: 'acc_8', name: '🎀 Bông Tai Nơ Bướm', icon: '🎀', price: 10000, cat: 'jewelry' },
+    { id: 'acc_9', name: '🌼 Bông Tai Hoa Cúc Họa Mi', icon: '🌼', price: 7000, cat: 'jewelry' },
+    { id: 'acc_10', name: '🍎 Bông Tai Táo Đỏ', icon: '🍎', price: 6000, cat: 'jewelry' },
+    { id: 'acc_11', name: '📿 Dây Chuyền Hạt Cườm Cầu Vồng', icon: '📿', price: 12000, cat: 'jewelry' },
+    { id: 'acc_12', name: '🤍 Vòng Cổ Ngọc Trai Quý Phái', icon: '🤍', price: 25000, cat: 'jewelry' },
+    { id: 'acc_13', name: '💖 Dây Chuyền Trái Tim Ruby', icon: '💖', price: 30000, cat: 'jewelry' },
+    { id: 'acc_14', name: '🗝️ Dây Chuyền Chìa Khóa Bí Mật', icon: '🗝️', price: 28000, cat: 'jewelry' },
+    { id: 'acc_15', name: '🍀 Mặt Dây Cỏ 4 Lá May Mắn', icon: '🍀', price: 18000, cat: 'jewelry' },
+    { id: 'acc_16', name: '🔔 Vòng Tay Lắc Chuông Nhỏ', icon: '🔔', price: 16000, cat: 'jewelry' },
+    { id: 'acc_17', name: '💍 Nhẫn Đính Hôn Công Chúa', icon: '💍', price: 35000, cat: 'jewelry' },
+    { id: 'acc_18', name: '🔮 Lắc Tay Đá Thạch Anh Tím', icon: '🔮', price: 42000, cat: 'jewelry' },
+    { id: 'acc_19', name: '✨ Lắc Chân Bạc Ngân Hà', icon: '✨', price: 22000, cat: 'jewelry' },
+    { id: 'acc_20', name: '👑 Chuỗi Ngọc Nữ Hoàng', icon: '👑', price: 80000, cat: 'jewelry' },
+
+    // 2. NƠ, KẸP TÓC, BĂNG ĐÔ & VƯƠNG MIỆN (head)
+    { id: 'acc_21', name: '🎀 Kẹp Tóc Nơ Lụa Hồng', icon: '🎀', price: 3000, cat: 'head' },
+    { id: 'acc_22', name: '🌸 Kẹp Tóc Hoa Đào Xinh', icon: '🌸', price: 4000, cat: 'head' },
+    { id: 'acc_23', name: '🌻 Cặp Kẹp Tóc Hướng Dương', icon: '🌻', price: 5000, cat: 'head' },
+    { id: 'acc_24', name: '🦋 Kẹp Bướm Phát Sáng', icon: '🦋', price: 11000, cat: 'head' },
+    { id: 'acc_25', name: '🐰 Băng Đô Tai Thỏ Lông Xù', icon: '🐰', price: 14000, cat: 'head' },
+    { id: 'acc_26', name: '🦄 Băng Đô Kỳ Lân Cầu Vồng', icon: '🦄', price: 22000, cat: 'head' },
+    { id: 'acc_27', name: '🐱 Băng Đô Tai Mèo Đính Chuông', icon: '🐱', price: 16000, cat: 'head' },
+    { id: 'acc_28', name: '👒 Nón Cói Đi Biển Vintage', icon: '👒', price: 15000, cat: 'head' },
+    { id: 'acc_29', name: '🧢 Mũ Lưỡi Trai Năng Động', icon: '🧢', price: 12000, cat: 'head' },
+    { id: 'acc_30', name: '🎓 Mũ Cử Nhân Trí Tuệ', icon: '🎓', price: 30000, cat: 'head' },
+    { id: 'acc_31', name: '👑 Vương Miện Công Chúa Nhí', icon: '👑', price: 35000, cat: 'head' },
+    { id: 'acc_32', name: '❄️ Vương Miện Băng Giá Elsa', icon: '❄️', price: 65000, cat: 'head' },
+    { id: 'acc_33', name: '🌟 Vương Miện Hoàng Gia Đính Ngọc', icon: '🌟', price: 90000, cat: 'head' },
+    { id: 'acc_34', name: '🧕 Khăn Trùm Đầu Cô Bé Quàng Khăn Đỏ', icon: '🧕', price: 18000, cat: 'head' },
+    { id: 'acc_35', name: '🌺 Vòng Hoa Đội Đầu Nàng Tiên', icon: '🌺', price: 26000, cat: 'head' },
+    { id: 'acc_36', name: '🎩 Mũ Phù Thủy Học Viện Magic', icon: '🎩', price: 40000, cat: 'head' },
+    { id: 'acc_37', name: '🎀 Băng Đô Alice Xứ Sở Diệu Kỳ', icon: '🎀', price: 20000, cat: 'head' },
+    { id: 'acc_38', name: '🍓 Kẹp Tóc Dâu Tây Đôi', icon: '🍓', price: 5000, cat: 'head' },
+
+    // 3. TÚI XÁCH & BALO (bag)
+    { id: 'acc_39', name: '👛 Ví Cầm Tay Lọ Lem', icon: '👛', price: 9000, cat: 'bag' },
+    { id: 'acc_40', name: '👜 Túi Đeo Chéo Quả Dâu', icon: '👜', price: 14000, cat: 'bag' },
+    { id: 'acc_41', name: '🎒 Balo Thỏ Con Đi Học', icon: '🎒', price: 20000, cat: 'bag' },
+    { id: 'acc_42', name: '🛍️ Giỏ Mây Dã Ngoại Mùa Hè', icon: '🛍️', price: 17000, cat: 'bag' },
+    { id: 'acc_43', name: '👛 Túi Xách Ngọc Trai Công Chúa', icon: '👛', price: 38000, cat: 'bag' },
+    { id: 'acc_44', name: '🎒 Balo Cánh Thiên Thần', icon: '🎒', price: 55000, cat: 'bag' },
+    { id: 'acc_45', name: '👜 Túi Da Thần Thoại Ngân Hà', icon: '👜', price: 72000, cat: 'bag' },
+    { id: 'acc_46', name: '👝 Ví Mini Trái Tim Hồng', icon: '👝', price: 11000, cat: 'bag' },
+    { id: 'acc_47', name: '🧺 Túi Vải Canvas Thân Thiện', icon: '🧺', price: 8000, cat: 'bag' },
+    { id: 'acc_48', name: '🧳 Vali Du Lịch Tí Hon', icon: '🧳', price: 45000, cat: 'bag' },
+
+    // 4. GIÀY DÉP & VỚ REN (shoes)
+    { id: 'acc_49', name: '👟 Sneaker Thể Thao Pastel', icon: '👟', price: 8000, cat: 'shoes' },
+    { id: 'acc_50', name: '🧦 Vớ Ren Công Chúa Đính Nơ', icon: '🧦', price: 6000, cat: 'shoes' },
+    { id: 'acc_51', name: '👡 Sandal Nơ Hồng Mùa Hè', icon: '👡', price: 12000, cat: 'shoes' },
+    { id: 'acc_52', name: '🩰 Giày Khiêu Vũ Ba-lê Lụa', icon: '🩰', price: 28000, cat: 'shoes' },
+    { id: 'acc_53', name: '👠 Hài Pha Lê Thủy Tinh Lọ Lem', icon: '👠', price: 50000, cat: 'shoes' },
+    { id: 'acc_54', name: '👢 Bốt Cổ Cao Mùa Đông Tuyết', icon: '👢', price: 34000, cat: 'shoes' },
+    { id: 'acc_55', name: '🥿 Giày Búp Bê Da Mềm Xinh', icon: '🥿', price: 19000, cat: 'shoes' },
+    { id: 'acc_56', name: '👡 Guốc Mộc Nhật Bản Cài Hoa', icon: '👡', price: 24000, cat: 'shoes' },
+    { id: 'acc_57', name: '⛸️ Giày Trượt Băng Nghệ Thuật', icon: '⛸️', price: 60000, cat: 'shoes' },
+    { id: 'acc_58', name: '👠 Giày Cao Gót Dạ Hội Kim Tuyến', icon: '👠', price: 85000, cat: 'shoes' },
+    { id: 'acc_59', name: '🥾 Giày Thám Hiểm Rừng Xanh', icon: '🥾', price: 22000, cat: 'shoes' },
+
+    // 5. LÀM ĐẸP & LỌ THẦN (beauty)
+    { id: 'acc_60', name: '🪞 Gương Soi Thần Kỳ Hoa Hồng', icon: '🪞', price: 10000, cat: 'beauty' },
+    { id: 'acc_61', name: '💄 Son Dưỡng Dâu Tây Ngọt Ngào', icon: '💄', price: 7000, cat: 'beauty' },
+    { id: 'acc_62', name: '🧴 Nước Hoa Hoa Hồng Pháp', icon: '🧴', price: 22000, cat: 'beauty' },
+    { id: 'acc_63', name: '💅 Sơn Móng Tay Kim Tuyến Lấp Lánh', icon: '💅', price: 13000, cat: 'beauty' },
+    { id: 'acc_64', name: '🪮 Lược Thần Gỡ Rối Hoàng Cung', icon: '🪮', price: 11000, cat: 'beauty' },
+    { id: 'acc_65', name: '🧪 Lọ Nước Thần Tình Bạn', icon: '🧪', price: 32000, cat: 'beauty' },
+    { id: 'acc_66', name: '✨ Bột Phấn Tiên Nữ Tỏa Sáng', icon: '✨', price: 46000, cat: 'beauty' },
+    { id: 'acc_67', name: '🫙 Lọ Thủy Tinh Chứa 1000 Ngôi Sao Giấy', icon: '🫙', price: 25000, cat: 'beauty' },
+    { id: 'acc_68', name: '🕯️ Nến Thơm Hương Vani Thư Giãn', icon: '🕯️', price: 15000, cat: 'beauty' },
+    { id: 'acc_69', name: '🫧 Nước Tạo Bong Bóng Thần Tiên', icon: '🫧', price: 9000, cat: 'beauty' },
+    { id: 'acc_70', name: '📜 Bức Thư Tình Bạn Niêm Phong Sáp', icon: '📜', price: 18000, cat: 'beauty' },
+
+    // 6. CẦM TAY & THÚ CƯNG MINI & PHÉP THUẬT (hand)
+    { id: 'acc_71', name: '🌸 Gậy Phép Thuật Sakura', icon: '🌸', price: 45000, cat: 'hand' },
+    { id: 'acc_72', name: '🪄 Đũa Thần Tinh Tú Harry', icon: '🪄', price: 50000, cat: 'hand' },
+    { id: 'acc_73', name: '🧸 Gấu Bông Teddy Tí Hon', icon: '🧸', price: 12000, cat: 'hand' },
+    { id: 'acc_74', name: '🎈 Chùm Bóng Bay Trái Tim Hồng', icon: '🎈', price: 8000, cat: 'hand' },
+    { id: 'acc_75', name: '🍭 Kẹo Mút Khổng Lồ 7 Màu', icon: '🍭', price: 15000, cat: 'hand' },
+    { id: 'acc_76', name: '🍦 Cây Kem Ốc Quế Dâu Socola', icon: '🍦', price: 7000, cat: 'hand' },
+    { id: 'acc_77', name: '🪭 Quạt Lụa Cung Đình Xếp Ren', icon: '🪭', price: 19000, cat: 'hand' },
+    { id: 'acc_78', name: '🌂 Ô Che Mưa Trong Suốt Hoa Anh Đào', icon: '🌂', price: 24000, cat: 'hand' },
+    { id: 'acc_79', name: '📖 Sách Phép Thuật Ngàn Năm', icon: '📖', price: 38000, cat: 'hand' },
+    { id: 'acc_80', name: '🐱 Mèo Con Lông Trắng Tí Hon', icon: '🐱', price: 40000, cat: 'hand' },
+    { id: 'acc_81', name: '🐶 Cún Poodle Bông Mini', icon: '🐶', price: 42000, cat: 'hand' },
+    { id: 'acc_82', name: '🐥 Bé Vịt Vàng Tắm Biển', icon: '🐥', price: 14000, cat: 'hand' },
+    { id: 'acc_83', name: '🦋 Cánh Bướm Tiên Nữ Phát Sáng', icon: '🦋', price: 85000, cat: 'hand' },
+    { id: 'acc_84', name: '🪽 Cánh Thiên Thần Thuần Khiết', icon: '🪽', price: 110000, cat: 'hand' },
+    { id: 'acc_85', name: '💎 Kim Cương Xanh Hy Vọng', icon: '💎', price: 95000, cat: 'hand' },
+    { id: 'acc_86', name: '🕊️ Quyền Trượng Nữ Hoàng Vũ Trụ', icon: '🕊️', price: 150000, cat: 'hand' },
+    { id: 'acc_87', name: '🎸 Đàn Ukulele Hồng Tí Hon', icon: '🎸', price: 33000, cat: 'hand' },
+    { id: 'acc_88', name: '🎨 Bảng Pha Màu Họa Sĩ Nhí', icon: '🎨', price: 16000, cat: 'hand' },
+    { id: 'acc_89', name: '📷 Máy Ảnh Mini Màu Pastel', icon: '📷', price: 27000, cat: 'hand' },
+    { id: 'acc_90', name: '🧋 Ly Trà Sữa Trân Châu Đường Đen', icon: '🧋', price: 9000, cat: 'hand' },
+    { id: 'acc_91', name: '🍰 Bánh Kem Dâu Sinh Nhật', icon: '🍰', price: 15000, cat: 'hand' },
+    { id: 'acc_92', name: '🍿 Bắp Rang Bơ Ngọt Ngào', icon: '🍿', price: 6000, cat: 'hand' },
+    { id: 'acc_93', name: '🎁 Hộp Quà Bí Ẩn Thắt Nơ', icon: '🎁', price: 21000, cat: 'hand' },
+    { id: 'acc_94', name: '💐 Bó Hoa Hồng Mộng Mơ', icon: '💐', price: 28000, cat: 'hand' },
+    { id: 'acc_95', name: '🪀 Con Quay Phát Sáng Yoyo', icon: '🪀', price: 10000, cat: 'hand' },
+    { id: 'acc_96', name: '🪁 Cánh Diều Cầu Vồng Tí Hon', icon: '🪁', price: 13000, cat: 'hand' },
+    { id: 'acc_97', name: '🕶️ Kính Râm Trái Tim Thời Thượng', icon: '🕶️', price: 17000, cat: 'hand' },
+    { id: 'acc_98', name: '👓 Kính Tròn Nobita Xì-tin', icon: '👓', price: 12000, cat: 'hand' },
+    { id: 'acc_99', name: '🎭 Mặt Nạ Dạ Hội Bí Ẩn', icon: '🎭', price: 31000, cat: 'hand' },
+    { id: 'acc_100', name: '🌟 Ngôi Sao Ước Nguyện Vĩnh Hằng', icon: '🌟', price: 160000, cat: 'hand' }
+  ];
+
+  const ACCESSORIES_CATALOG = RAW_ACCESSORIES;
+
+  function getOutfitsForLevel(lv) {
+    const tier = getPetTier(lv);
+    const p1 = Math.round((4000 + lv * 2200) / 1000) * 1000;
+    const p2 = Math.round((6000 + lv * 2600) / 1000) * 1000;
+    const p3 = Math.round((9000 + lv * 3200) / 1000) * 1000;
+
+    return [
+      { id: `out_${lv}_1`, name: `👗 Yếm Dạo Phố (Cấp ${lv})`, icon: '👗', price: p1, reqLv: lv },
+      { id: `out_${lv}_2`, name: `🌸 Đầm Xinh Xắn (Cấp ${lv})`, icon: '🌸', price: p2, reqLv: lv },
+      { id: `out_${lv}_3`, name: `✨ Dạ Phục ${tier.name} (Cấp ${lv})`, icon: '✨', price: p3, reqLv: lv }
+    ];
+  }
+
   let state = {
     tasks: [], submissions: [], rewards: [], redemptions: [], goal: 100,
+    money: Number(localStorage.getItem('PET_MONEY') || 0),
     carrots: Number(localStorage.getItem('PET_CARROTS') || 0),
-    petLevel: Number(localStorage.getItem('PET_LEVEL') || 1),
+    petLevel: Math.min(50, Math.max(1, Number(localStorage.getItem('PET_LEVEL') || 1))),
+    petExp: Number(localStorage.getItem('PET_EXP') || 0),
+    inventory: JSON.parse(localStorage.getItem('PET_INVENTORY') || '[]'),
+    equippedOutfits: localStorage.getItem('PET_EQUIPPED_OUTFIT') || null,
+    equippedAccessories: JSON.parse(localStorage.getItem('PET_EQUIPPED_ACC') || '[]'),
     streakShield: localStorage.getItem('STREAK_SHIELD') === 'true'
   };
 
@@ -807,6 +1070,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   let currentProofFile = null;
   let aiChatHistory = [];
   let isAiEnglishMode = false;
+  let currentAccFilter = 'all';
 
   const DEFAULT_SHEET_URL = "https://docs.google.com/spreadsheets/d/1INPJnlsU0saiIBP92mkRCLShU3qWZ20elD1OxRKnNVc/edit?gid=0#gid=0";
   function getStoredSheetUrl() { return localStorage.getItem('CUSTOM_SHEET_URL') || DEFAULT_SHEET_URL; }
@@ -851,14 +1115,13 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
       .trim();
   }
 
-  // BẮN PHÁO HOA CHUẨN XÁC KHÔNG BỊ KHUNG CHE
   function triggerCelebration(pts = 1) {
     if (window.confetti) {
       confetti({ particleCount: 150, spread: 100, origin: { y: 0.5 }, zIndex: 9999999 });
     }
     const starToast = $('star-toast');
     if(starToast) {
-      starToast.textContent = `✨ Giỏi lắm con gái iu! +${pts} sao thưởng ⭐ 🎉`;
+      starToast.textContent = `✨ Giỏi lắm con gái iu! +${pts} sao thưởng ⭐ (+1.000đ) 🎉`;
       starToast.classList.remove('show-toast');
       void starToast.offsetWidth;
       starToast.classList.add('show-toast');
@@ -1165,31 +1428,51 @@ QUY TẮC TRÌNH BÀY:
   $('aiTextInput').onkeypress = e => { if (e.key === 'Enter') sendAiMessage(); };
 
   // ========================================================
-  // 🥕 WIDGET NUÔI THỎ CƯNG & HIỆU ỨNG NHAI CÀ RỐT RỘP RỘP
+  // 🥕 WIDGET NUÔI THỎ 50 CẤP ĐỘ, TIỆM 100 PHỤ KIỆN & TỦ ĐỒ
   // ========================================================
   function updatePetUI() {
-    const avatars = ['🐰', '🐇', '🐰👑', '✨🐰✨'];
-    const titles = ['Thỏ Bé Bỏng', 'Thỏ Học Chăm', 'Thỏ Đội Vương Miện 👑', 'Siêu Thần Thỏ 🌟'];
-    const idx = Math.min(titles.length - 1, state.petLevel - 1);
+    const tier = getPetTier(state.petLevel);
+    const needed = getCarrotsNeeded(state.petLevel);
 
-    $('petAvatar').textContent = avatars[idx];
-    $('petNameLabel').textContent = titles[idx];
-    $('petLevelLabel').textContent = `Cấp ${state.petLevel}`;
+    $('petAvatar').textContent = tier.avatar;
+    $('petNameLabel').textContent = tier.name;
+    $('petLevelLabel').textContent = `Cấp ${state.petLevel}/50`;
     $('petCarrotCount').textContent = `${state.carrots} 🥕`;
+    $('petMoneyLabel').textContent = `${state.money.toLocaleString('vi-VN')}đ`;
+    if ($('shopDialogMoney')) $('shopDialogMoney').textContent = `Ví: ${state.money.toLocaleString('vi-VN')}đ`;
 
-    const currentExpInLevel = (state.carrots % 5);
-    const pct = Math.min(100, Math.round((currentExpInLevel / 5) * 100));
+    const pct = Math.min(100, Math.round((state.petExp / needed) * 100));
     $('petExpBar').style.width = `${pct}%`;
+    $('petExpText').textContent = `Ăn: ${state.petExp}/${needed} 🥕`;
 
+    // Hiển thị icon những phụ kiện & trang phục đang mặc
+    let badges = [];
+    if (state.equippedOutfits) {
+      const allOut = [];
+      for (let i = 1; i <= 50; i++) allOut.push(...getOutfitsForLevel(i));
+      const o = allOut.find(x => x.id === state.equippedOutfits);
+      if (o) badges.push(o.icon);
+    }
+    state.equippedAccessories.forEach(accId => {
+      const a = ACCESSORIES_CATALOG.find(x => x.id === accId);
+      if (a) badges.push(a.icon);
+    });
+
+    $('petOutfitBadges').textContent = badges.length ? badges.join(' ') : 'Chưa mặc đồ';
+
+    localStorage.setItem('PET_MONEY', state.money);
     localStorage.setItem('PET_CARROTS', state.carrots);
     localStorage.setItem('PET_LEVEL', state.petLevel);
+    localStorage.setItem('PET_EXP', state.petExp);
+    localStorage.setItem('PET_INVENTORY', JSON.stringify(state.inventory));
+    localStorage.setItem('PET_EQUIPPED_OUTFIT', state.equippedOutfits || '');
+    localStorage.setItem('PET_EQUIPPED_ACC', JSON.stringify(state.equippedAccessories));
   }
 
   function playCarrotMunchSound() {
     try {
       const AudioCtx = window.AudioContext || window.webkitAudioContext;
       const ctx = new AudioCtx();
-      
       const playCrunch = (delay, freq, duration) => {
         const gain = ctx.createGain();
         const bufferSize = ctx.sampleRate * duration;
@@ -1227,33 +1510,227 @@ QUY TẮC TRÌNH BÀY:
   }
 
   $('btnFeedPet').onclick = () => {
-    if (state.carrots <= 0) return alert("Hết cà rốt rồi! Con làm bài tập để nhận thêm cà rốt cho Thỏ nhé 🥕!");
+    if (state.carrots <= 0) {
+      return alert("Hết cà rốt rồi! Bé bấm vào '🛍️ Tiệm & Tủ Đồ' để mua thêm cà rốt (3.000đ/củ) cho Thỏ nhé 🥕!");
+    }
     state.carrots--;
+    state.petExp++;
+
+    const needed = getCarrotsNeeded(state.petLevel);
 
     const overlay = $('bunnyEatingOverlay');
     overlay.style.display = 'flex';
     playCarrotMunchSound();
 
     if (window.confetti) {
-      confetti({
-        particleCount: 80,
-        spread: 70,
-        origin: { y: 0.6 },
-        colors: ['#ff758c', '#ff9f43', '#1dd1a1']
-      });
+      confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 }, colors: ['#ff758c', '#ff9f43', '#1dd1a1'] });
     }
 
-    setTimeout(() => {
-      overlay.style.display = 'none';
-    }, 1800);
+    setTimeout(() => { overlay.style.display = 'none'; }, 1800);
 
     toast("Thỏ măm măm cà rốt ngon lành! (｡♥‿♥｡) 🥕✨");
-    if (state.carrots % 5 === 0 && state.petLevel < 4) {
+
+    // THĂNG CẤP
+    if (state.petExp >= needed && state.petLevel < 50) {
       state.petLevel++;
-      toast(`🎉 Chúc mừng! Thỏ đã tiến hóa lên Cấp ${state.petLevel}!`);
+      state.petExp = 0;
+      const newTier = getPetTier(state.petLevel);
+      setTimeout(() => {
+        alert(`🎉 HOAN HÔ! Thỏ cưng của con đã chính thức tiến hóa lên CẤP ${state.petLevel}: [${newTier.name}]! 3 bộ trang phục mới đã được mở khóa trong tiệm thời trang nhé! 🌸👗`);
+      }, 500);
     }
+
     updatePetUI();
   };
+
+  // MỞ CỬA HÀNG & TỦ ĐỒ
+  $('btnOpenPetShop').onclick = () => {
+    renderShopTabs('carrots');
+    $('petShopDialog').showModal();
+  };
+
+  function renderShopTabs(tabName) {
+    document.querySelectorAll('.shop-tab-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.shopTab === tabName);
+    });
+
+    $('tabContentCarrots').style.display = tabName === 'carrots' ? 'block' : 'none';
+    $('tabContentAccessories').style.display = tabName === 'accessories' ? 'block' : 'none';
+    $('tabContentOutfits').style.display = tabName === 'outfits' ? 'block' : 'none';
+    $('tabContentWardrobe').style.display = tabName === 'wardrobe' ? 'block' : 'none';
+
+    if (tabName === 'accessories') renderAccessoriesShop(currentAccFilter);
+    if (tabName === 'outfits') renderOutfitsShop();
+    if (tabName === 'wardrobe') renderWardrobe();
+  }
+
+  document.querySelectorAll('[data-shop-tab]').forEach(btn => {
+    btn.onclick = () => renderShopTabs(btn.dataset.shopTab);
+  });
+
+  // MUA CÀ RỐT
+  function buyCarrots(count, totalCost) {
+    if (state.money < totalCost) {
+      return alert(`Con chưa đủ tiền rồi! Cần ${totalCost.toLocaleString('vi-VN')}đ, con làm bài tập để Mẹ duyệt tích thêm tiền nhé! 🌸`);
+    }
+    state.money -= totalCost;
+    state.carrots += count;
+    updatePetUI();
+    toast(`🎉 Đã mua thành công ${count} củ cà rốt thơm ngon! 🥕`);
+  }
+
+  $('btnBuy1Carrot').onclick = () => buyCarrots(1, 3000);
+  $('btnBuy5Carrots').onclick = () => buyCarrots(5, 15000);
+  $('btnBuy10Carrots').onclick = () => buyCarrots(10, 30000);
+
+  // LỌC TIỆM 100 PHỤ KIỆN
+  document.querySelectorAll('[data-acc-cat]').forEach(btn => {
+    btn.onclick = () => {
+      document.querySelectorAll('[data-acc-cat]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentAccFilter = btn.dataset.accCat;
+      renderAccessoriesShop(currentAccFilter);
+    };
+  });
+
+  // RENDER TIỆM 100 PHỤ KIỆN
+  function renderAccessoriesShop(cat = 'all') {
+    const box = $('accessoriesGrid');
+    const items = (cat === 'all') 
+      ? ACCESSORIES_CATALOG 
+      : ACCESSORIES_CATALOG.filter(x => x.cat === cat);
+
+    box.innerHTML = items.map(item => {
+      const isOwned = state.inventory.includes(item.id);
+      let btnHtml = isOwned
+        ? `<span style="font-size:11px; font-weight:800; color:#36795f;">✓ Đã có</span>`
+        : `<button class="btn btn-primary btn-small" data-buy-item="${item.id}" data-price="${item.price}" style="padding:3px 8px; font-size:11px;">Mua</button>`;
+
+      return `
+        <div class="shop-item-card">
+          <div class="shop-item-icon">${item.icon}</div>
+          <div class="shop-item-name">${escapeHTML(item.name)}</div>
+          <div class="shop-item-price">${item.price.toLocaleString('vi-VN')}đ</div>
+          ${btnHtml}
+        </div>
+      `;
+    }).join('');
+  }
+
+  // RENDER TIỆM THỜI TRANG 50 CẤP
+  function renderOutfitsShop() {
+    const box = $('outfitsGrid');
+    const allOutfits = [];
+    for (let i = 1; i <= 50; i++) allOutfits.push(...getOutfitsForLevel(i));
+
+    box.innerHTML = allOutfits.map(item => {
+      const isOwned = state.inventory.includes(item.id);
+      const isLocked = state.petLevel < item.reqLv;
+
+      let btnHtml = '';
+      if (isOwned) {
+        btnHtml = `<span style="font-size:11px; font-weight:800; color:#36795f;">✓ Đã có</span>`;
+      } else if (isLocked) {
+        btnHtml = `<span style="font-size:11px; font-weight:800; color:#888;">🔒 Cần Cấp ${item.reqLv}</span>`;
+      } else {
+        btnHtml = `<button class="btn btn-primary btn-small" data-buy-item="${item.id}" data-price="${item.price}" style="padding:3px 8px; font-size:11px;">Mua</button>`;
+      }
+
+      return `
+        <div class="shop-item-card ${isLocked ? 'locked' : ''}">
+          <div class="shop-item-icon">${item.icon}</div>
+          <div class="shop-item-name">${escapeHTML(item.name)}</div>
+          <div class="shop-item-price">${item.price.toLocaleString('vi-VN')}đ</div>
+          ${btnHtml}
+        </div>
+      `;
+    }).join('');
+  }
+
+  // RENDER TỦ ĐỒ (WARDROBE)
+  function renderWardrobe() {
+    const box = $('wardrobeGrid');
+    const allItems = [...ACCESSORIES_CATALOG];
+    for (let i = 1; i <= 50; i++) allItems.push(...getOutfitsForLevel(i));
+
+    const ownedList = allItems.filter(x => state.inventory.includes(x.id));
+
+    if (ownedList.length === 0) {
+      box.innerHTML = `<div class="empty" style="grid-column: 1/-1;">Tủ đồ còn trống. Con dùng tiền tích lũy sang các tab bên cạnh để sắm 100 món phụ kiện cho Thỏ nhé! 💎🌸</div>`;
+      return;
+    }
+
+    box.innerHTML = ownedList.map(item => {
+      const isOutfit = item.id.startsWith('out_');
+      const isEquipped = isOutfit 
+        ? (state.equippedOutfits === item.id)
+        : state.equippedAccessories.includes(item.id);
+
+      return `
+        <div class="shop-item-card" style="border-color:${isEquipped ? '#e97998' : '#f4cad7'}; background:${isEquipped ? '#fff0f4' : '#fff'};">
+          <div class="shop-item-icon">${item.icon}</div>
+          <div class="shop-item-name">${escapeHTML(item.name)}</div>
+          <div style="margin-top:6px;">
+            ${isEquipped 
+              ? `<button class="btn btn-soft btn-small" data-unequip-item="${item.id}" style="color:#b64b63; padding:3px 8px; font-size:11px;">Tháo ra</button>`
+              : `<button class="btn btn-primary btn-small" data-equip-item="${item.id}" style="padding:3px 8px; font-size:11px;">Mặc vào ✨</button>`
+            }
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  // SỰ KIỆN MUA ĐỒ & PHỐI NHIỀU MÓN
+  document.addEventListener('click', e => {
+    const buyBtn = e.target.closest('[data-buy-item]');
+    if (buyBtn) {
+      const id = buyBtn.dataset.buyItem;
+      const price = Number(buyBtn.dataset.price);
+
+      if (state.money < price) {
+        return alert(`Con chưa đủ tiền rồi! Món này giá ${price.toLocaleString('vi-VN')}đ, con hãy chăm chỉ làm bài tập để kiếm thêm tiền nhé! 🌸`);
+      }
+
+      state.money -= price;
+      state.inventory.push(id);
+      updatePetUI();
+      toast("🎉 Chúc mừng con đã rinh món đồ mới toanh vào tủ đồ!");
+      const activeTab = document.querySelector('.shop-tab-btn.active').dataset.shopTab;
+      renderShopTabs(activeTab);
+      return;
+    }
+
+    const equipBtn = e.target.closest('[data-equip-item]');
+    if (equipBtn) {
+      const id = equipBtn.dataset.equipItem;
+      if (id.startsWith('out_')) {
+        state.equippedOutfits = id;
+      } else {
+        if (!state.equippedAccessories.includes(id)) {
+          state.equippedAccessories.push(id);
+        }
+      }
+      updatePetUI();
+      toast("Đã diện phụ kiện xinh lung linh cho Thỏ cưng! ✨💎");
+      renderWardrobe();
+      return;
+    }
+
+    const unequipBtn = e.target.closest('[data-unequip-item]');
+    if (unequipBtn) {
+      const id = unequipBtn.dataset.unequipItem;
+      if (id.startsWith('out_')) {
+        state.equippedOutfits = null;
+      } else {
+        state.equippedAccessories = state.equippedAccessories.filter(x => x !== id);
+      }
+      updatePetUI();
+      toast("Đã tháo món đồ ra rồi nè!");
+      renderWardrobe();
+      return;
+    }
+  });
 
   // KHIÊN BẢO VỆ STREAK
   $('streakShieldHint').onclick = () => {
@@ -1269,7 +1746,7 @@ QUY TẮC TRÌNH BÀY:
   };
 
   // ========================================================
-  // 🎡 VÒNG QUAY MAY MẮN (PHÁO HOA BAY TRÊN MẶT DIALOG)
+  // 🎡 VÒNG QUAY MAY MẮN (PHÁO HOA BAY TRÊN MẶT)
   // ========================================================
   const wheelSlices = [
     { text: '+1 ⭐', color: '#ffb3ba' },
@@ -1314,7 +1791,6 @@ QUY TẮC TRÌNH BÀY:
     }
   }
 
-  // PHÁO HOA NỔ NGAY BÊN TRONG CỬA SỔ VÒNG QUAY
   function fireConfettiInsideWheel() {
     const canvas = $('wheelConfettiCanvas');
     if (!canvas || !window.confetti) return;
@@ -1421,12 +1897,10 @@ QUY TẮC TRÌNH BÀY:
         $('btnSpinWheel').style.cursor = 'not-allowed';
         $('btnSpinWheel').textContent = 'ĐÃ QUAY HÔM NAY ✓';
 
-        // BẬT BẢNG VINH DANH TRÚNG THƯỞNG TO NGAY TRÊN MẶT VÒNG QUAY
         $('wheelWinTitle').textContent = prize.text;
         $('wheelWinCard').classList.add('pop-win');
         $('wheelResultText').innerHTML = `🎉 <b>Hoan hô! Con nhận được: ${prize.text}!</b>`;
 
-        // BẮN PHÁO HOA NGAY BÊN TRONG CỬA SỔ ĐANG MỞ
         fireConfettiInsideWheel();
         const applause = $('applauseAudio');
         if (applause) { applause.currentTime = 0; applause.play().catch(()=>{}); }
@@ -1444,7 +1918,7 @@ QUY TẮC TRÌNH BÀY:
   };
 
   // ========================================================
-  // 🍅 ĐỒNG HỒ POMODORO (TỰ ĐỘNG SỬA DỨT ĐIỂM LỖI 153)
+  // 🍅 ĐỒNG HỒ POMODORO (SỬA DỨT ĐIỂM LỖI 153)
   // ========================================================
   let pomoTime = 25 * 60;
   let pomoTimer = null;
@@ -1458,7 +1932,6 @@ QUY TẮC TRÌNH BÀY:
     return (match && match[2].length === 11) ? match[2] : 'jfKfPfyJRdk';
   }
 
-  // TỰ ĐỘNG THAY THẾ LINK CŨ 5qap5aO4i9A NẾU MÁY BỊ LƯU NHẦM
   function getStoredYtUrl() {
     let u = localStorage.getItem('POMO_YT_URL');
     if (!u || u.includes('5qap5aO4i9A')) {
@@ -1482,7 +1955,6 @@ QUY TẮC TRÌNH BÀY:
     if ($('pomoYtInput')) $('pomoYtInput').value = url;
   }
 
-  // NÚT TẮT / BẬT NHẠC RIÊNG BIỆT
   $('btnToggleMusic').onclick = () => {
     isMusicEnabled = !isMusicEnabled;
     const btn = $('btnToggleMusic');
@@ -1944,7 +2416,7 @@ QUY TẮC TRÌNH BÀY:
     const monthTasks = state.tasks.filter(t => monthISO(t.task_date) === selectedMonth && (filterSubject === 'all' || t.subject === filterSubject));
     const currentDayTasks = monthTasks.filter(t => t.task_date === selectedDate);
     const y = Number(selectedMonth.split('-')[0]), m = Number(selectedMonth.split('-')[1]);
-    $('phase').innerHTML = `<b>Kế hoạch học tập (Tháng ${m}/${y}):</b> Mỗi bài học hoàn thành là một bước tiến nhỏ! 🌸`;
+    $('phase').innerHTML = `<b>Kế hoạch học tập (Tháng ${m}/${y}):</b> Mỗi bài học hoàn thành là +1.000đ nuôi Thỏ! 🌸`;
 
     const cards = currentDayTasks.length ? currentDayTasks.map(t => {
       const sub = state.submissions.find(s => s.task_id === t.id);
@@ -1953,7 +2425,7 @@ QUY TẮC TRÌNH BÀY:
       const isRedo = sub && sub.status === 'redo';
 
       let statusBadge = `<span class="badge-status status-todo">Chưa làm</span>`;
-      if (isApproved) statusBadge = `<span class="badge-status status-done">✓ Mẹ đã duyệt (+${t.points}⭐)</span>`;
+      if (isApproved) statusBadge = `<span class="badge-status status-done">✓ Mẹ đã duyệt (+${t.points}⭐) (+1k)</span>`;
       else if (isPending) statusBadge = `<span class="badge-status status-pending">⏳ Chờ mẹ duyệt</span>`;
       else if (isRedo) statusBadge = `<span class="badge-status status-redo">⚠️ Cần làm lại</span>`;
 
@@ -2181,9 +2653,9 @@ QUY TẮC TRÌNH BÀY:
     resBox.style.display = 'block';
     if (scorePercent >= 70) {
       resBox.style.background = '#e1f5ec'; resBox.style.border = '1px solid #c3ebda'; resBox.style.color = '#36795f';
-      resBox.innerHTML = `<h3 style="margin:0 0 4px;">🎉 Điểm số: ${score10}/10 (Đúng ${correctCount}/${total} câu)</h3><p style="margin:0; font-size:13px;">Xuất sắc! Con đã hoàn thành bài tập và nhận sao thưởng ⭐!</p>`;
+      resBox.innerHTML = `<h3 style="margin:0 0 4px;">🎉 Điểm số: ${score10}/10 (Đúng ${correctCount}/${total} câu)</h3><p style="margin:0; font-size:13px;">Xuất sắc! Con nhận sao thưởng và +1.000đ vào ví nhé! ⭐</p>`;
       
-      state.carrots += 1;
+      state.money += 1000;
       updatePetUI();
 
       if (sb) {
@@ -2419,9 +2891,6 @@ QUY TẮC TRÌNH BÀY:
         if (insErr) throw insErr;
       }
 
-      state.carrots += 1;
-      updatePetUI();
-
       sendTelegramAlert(currentTask ? currentTask.title : 'Bài tập', note);
 
       $('submitProofDialog').close();
@@ -2435,10 +2904,14 @@ QUY TẮC TRÌNH BÀY:
     }
   };
 
+  // DUYỆT BÀI & CỘNG TIỀN +1.000đ VÀO VÍ
   async function approveSubmission(submissionId, pts = 1) {
     if (!sb) return;
     const { error } = await sb.from('task_submissions').update({ status: 'approved' }).eq('id', submissionId);
     if (!error) {
+      state.money += 1000;
+      updatePetUI();
+
       triggerCelebration(pts);
       loadDataFromSupabase();
     }
@@ -2467,9 +2940,7 @@ QUY TẮC TRÌNH BÀY:
     }
   };
 
-  // ==========================================
   // GIAO BÀI TẬP (MẸ)
-  // ==========================================
   $('btnMainAddTask').onclick = () => {
     $('taskForm').reset();
     $('taskId').value = '';
