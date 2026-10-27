@@ -1,6 +1,3 @@
-Ý tưởng cho bé gái lớp 4 chơi phối đồ búp bê là tuyệt đỉnh luôn mẹ ơi! Con gái
-mê nhất là được tự tay chọn từng đôi bông tai, kẹp tóc nơ, dây chuyền ngọc trai,
-túi xách mini, giày búp bê, nước hoa và lọ phép thuật lung linh! 💖✨
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -185,6 +182,14 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
 @keyframes popWinAnim {
   0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
   100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+/* HIỆU ỨNG RUNG LẮC KHI NHẬP SAI MẬT KHẨU */
+.shake-anim { animation: shakeError 0.4s ease-in-out; border-color: #ff4757 !important; }
+@keyframes shakeError {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-8px); }
+  40%, 80% { transform: translateX(8px); }
 }
 
 .role-switch { display: flex; background: #fff0f4; border: 1px solid #f4cad7; border-radius: 999px; padding: 3px; gap: 4px; }
@@ -487,6 +492,46 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
 </div>
 
 <!-- ==================================================== -->
+<!-- 👑 HỘP THOẠI XÁC THỰC MẬT MÃ CỦA MẸ (SIÊU XINH, HẾT PHÈN) -->
+<!-- ==================================================== -->
+<dialog id="momPassDialog" style="width: min(380px, calc(100% - 24px)); border-radius: 26px; border: 2px solid #f6a9bd; box-shadow: 0 20px 60px rgba(201,92,120,0.3); overflow: hidden;">
+  <div style="background: linear-gradient(135deg, #fff0f4, #fff8fb); padding: 26px 22px; text-align: center;">
+    <div style="font-size: 45px; margin-bottom: 6px;">👩👑✨</div>
+    <h3 style="margin: 0 0 6px; color: #a64e68; font-size: 20px; font-weight: 800;">Xác Thực Quyền Mẹ</h3>
+    <p style="margin: 0 0 16px; font-size: 13px; color: #8a7b82;">Mẹ nhập mật mã 4 số bí mật để giao bài và duyệt bài cho con nhé!</p>
+    
+    <input type="password" id="momPassInput" maxlength="10" placeholder="••••" style="text-align: center; font-size: 28px; letter-spacing: 8px; font-weight: 900; width: 190px; padding: 10px; border-radius: 16px; border: 2px solid #f4cad7; color: #a64e68; background: #fff; outline: none; margin-bottom: 6px;">
+    
+    <div id="momPassError" style="font-size: 12px; font-weight: 800; color: #e95f83; min-height: 20px; margin-bottom: 14px;"></div>
+
+    <div class="flex" style="justify-content: center; gap: 10px;">
+      <button type="button" class="btn btn-soft" data-close="momPassDialog" style="padding: 8px 18px; border-radius: 12px;">Hủy bỏ</button>
+      <button type="button" class="btn btn-primary" id="btnConfirmMomPass" style="padding: 8px 24px; border-radius: 12px;">Xác nhận 💖</button>
+    </div>
+  </div>
+</dialog>
+
+<!-- ==================================================== -->
+<!-- 🌸 HỘP THOẠI THÔNG BÁO HOÀNG GIA CHUNG (THAY THẾ TOÀN BỘ ALERT/CONFIRM/PROMPT) -->
+<!-- ==================================================== -->
+<dialog id="customModalDialog" style="width: min(400px, calc(100% - 24px)); border-radius: 26px; border: 2px solid #f6a9bd; box-shadow: 0 20px 60px rgba(201,92,120,0.3); overflow: hidden; padding: 0;">
+  <div style="background: linear-gradient(135deg, #fff0f4, #fff8fb); padding: 26px 22px; text-align: center;">
+    <div id="customModalIcon" style="font-size: 45px; margin-bottom: 6px;">🌸</div>
+    <h3 id="customModalTitle" style="margin: 0 0 8px; color: #a64e68; font-size: 19px; font-weight: 800;">Thông báo</h3>
+    <p id="customModalMsg" style="margin: 0 0 16px; font-size: 13.5px; color: #66525a; line-height: 1.5;"></p>
+    
+    <div id="customModalInputBox" style="display: none; margin-bottom: 16px;">
+      <input type="text" id="customModalInput" style="text-align: center; font-size: 14px; font-weight: 700; width: 100%; padding: 10px 12px; border-radius: 12px; border: 2px solid #f4cad7; color: #a64e68; background: #fff; outline: none;">
+    </div>
+
+    <div class="flex" style="justify-content: center; gap: 10px;">
+      <button type="button" class="btn btn-soft" id="customModalBtnCancel" style="display: none; padding: 8px 18px; border-radius: 12px;">Hủy bỏ</button>
+      <button type="button" class="btn btn-primary" id="customModalBtnOk" style="padding: 8px 24px; border-radius: 12px;">Đã hiểu nha ✨</button>
+    </div>
+  </div>
+</dialog>
+
+<!-- ==================================================== -->
 <!-- 🛍️ CỬA SỔ TIỆM THỜI TRANG & 100 PHỤ KIỆN CON GÁI -->
 <!-- ==================================================== -->
 <dialog id="petShopDialog" style="width: min(720px, calc(100% - 20px));">
@@ -496,7 +541,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     <button class="close" data-close="petShopDialog">×</button>
   </div>
   <div class="modal-body" style="padding:14px;">
-    <!-- THANH CHỌN TAB CHÍNH -->
     <div class="shop-tabs">
       <button class="shop-tab-btn active" data-shop-tab="carrots">🥕 Chợ Cà Rốt</button>
       <button class="shop-tab-btn" data-shop-tab="accessories">✨ 100 Phụ Kiện Xinh</button>
@@ -520,7 +564,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
 
     <!-- TAB 2: TIỆM 100 PHỤ KIỆN CON GÁI -->
     <div id="tabContentAccessories" style="display:none;">
-      <!-- THANH LỌC DANH MỤC PHỤ KIỆN -->
       <div class="acc-filters">
         <button class="acc-filter-btn active" data-acc-cat="all">🌟 Tất cả (100 món)</button>
         <button class="acc-filter-btn" data-acc-cat="jewelry">💎 Bông Tai & Dây Chuyền</button>
@@ -891,6 +934,80 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   const mondayOf = iso => { const [y,m,d]=iso.split('-').map(Number); const x=new Date(y,m-1,d); const day=(x.getDay()+6)%7; x.setDate(x.getDate()-day); return `${x.getFullYear()}-${String(x.getMonth()+1).padStart(2,'0')}-${String(x.getDate()).padStart(2,'0')}`; };
 
   // ========================================================
+  // 🌸 HỘP THOẠI HOÀNG GIA CHUNG (THAY THẾ TOÀN BỘ ALERT / CONFIRM / PROMPT)
+  // ========================================================
+  function showCustomAlert(message, title = 'Góc Học Tập 🌸', icon = '🌸') {
+    return new Promise(resolve => {
+      $('customModalIcon').textContent = icon;
+      $('customModalTitle').textContent = title;
+      $('customModalMsg').textContent = message;
+      $('customModalInputBox').style.display = 'none';
+      $('customModalBtnCancel').style.display = 'none';
+      $('customModalBtnOk').textContent = 'Đã hiểu nha ✨';
+      
+      const dlg = $('customModalDialog');
+      dlg.showModal();
+      
+      $('customModalBtnOk').onclick = () => {
+        dlg.close();
+        resolve(true);
+      };
+    });
+  }
+
+  function showCustomConfirm(message, title = 'Xác nhận nhé 🌸', icon = '❓') {
+    return new Promise(resolve => {
+      $('customModalIcon').textContent = icon;
+      $('customModalTitle').textContent = title;
+      $('customModalMsg').textContent = message;
+      $('customModalInputBox').style.display = 'none';
+      $('customModalBtnCancel').style.display = 'inline-flex';
+      $('customModalBtnOk').textContent = 'Đồng ý 💖';
+      
+      const dlg = $('customModalDialog');
+      dlg.showModal();
+      
+      $('customModalBtnOk').onclick = () => {
+        dlg.close();
+        resolve(true);
+      };
+      $('customModalBtnCancel').onclick = () => {
+        dlg.close();
+        resolve(false);
+      };
+    });
+  }
+
+  function showCustomPrompt(message, defaultValue = '', title = 'Nhập thông tin 🌸', icon = '✍️') {
+    return new Promise(resolve => {
+      $('customModalIcon').textContent = icon;
+      $('customModalTitle').textContent = title;
+      $('customModalMsg').textContent = message;
+      $('customModalInputBox').style.display = 'block';
+      $('customModalInput').value = defaultValue;
+      $('customModalBtnCancel').style.display = 'inline-flex';
+      $('customModalBtnOk').textContent = 'Xác nhận 💖';
+      
+      const dlg = $('customModalDialog');
+      dlg.showModal();
+      setTimeout(() => { $('customModalInput').focus(); $('customModalInput').select(); }, 120);
+      
+      const handleOk = () => {
+        const val = $('customModalInput').value.trim();
+        dlg.close();
+        resolve(val);
+      };
+      
+      $('customModalBtnOk').onclick = handleOk;
+      $('customModalInput').onkeypress = (e) => { if(e.key === 'Enter') handleOk(); };
+      $('customModalBtnCancel').onclick = () => {
+        dlg.close();
+        resolve(null);
+      };
+    });
+  }
+
+  // ========================================================
   // 🐰 DỮ LIỆU PET 50 CẤP ĐỘ
   // ========================================================
   const PET_TIERS = [
@@ -915,9 +1032,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     return Math.min(30, Math.floor(2 + (lv - 1) * 0.55));
   }
 
-  // ========================================================
-  // 💎 BỘ SƯU TẬP ĐÚNG 100 PHỤ KIỆN CON GÁI SIÊU ĐIỆU ĐÀ
-  // ========================================================
+  // 100 PHỤ KIỆN CON GÁI XINH XẮN
   const RAW_ACCESSORIES = [
     // 1. BÔNG TAI & TRANG SỨC (jewelry)
     { id: 'acc_1', name: '🌸 Bông Tai Hoa Anh Đào', icon: '🌸', price: 4000, cat: 'jewelry' },
@@ -930,7 +1045,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     { id: 'acc_8', name: '🎀 Bông Tai Nơ Bướm', icon: '🎀', price: 10000, cat: 'jewelry' },
     { id: 'acc_9', name: '🌼 Bông Tai Hoa Cúc Họa Mi', icon: '🌼', price: 7000, cat: 'jewelry' },
     { id: 'acc_10', name: '🍎 Bông Tai Táo Đỏ', icon: '🍎', price: 6000, cat: 'jewelry' },
-    { id: 'acc_11', name: '📿 Dây Chuyền Hạt Cườm Cầu Vồng', icon: '📿', price: 12000, cat: 'jewelry' },
+    { id: 'acc_11', name: '📿 Dây Chuyền Cầu Vồng', icon: '📿', price: 12000, cat: 'jewelry' },
     { id: 'acc_12', name: '🤍 Vòng Cổ Ngọc Trai Quý Phái', icon: '🤍', price: 25000, cat: 'jewelry' },
     { id: 'acc_13', name: '💖 Dây Chuyền Trái Tim Ruby', icon: '💖', price: 30000, cat: 'jewelry' },
     { id: 'acc_14', name: '🗝️ Dây Chuyền Chìa Khóa Bí Mật', icon: '🗝️', price: 28000, cat: 'jewelry' },
@@ -955,7 +1070,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     { id: 'acc_31', name: '👑 Vương Miện Công Chúa Nhí', icon: '👑', price: 35000, cat: 'head' },
     { id: 'acc_32', name: '❄️ Vương Miện Băng Giá Elsa', icon: '❄️', price: 65000, cat: 'head' },
     { id: 'acc_33', name: '🌟 Vương Miện Hoàng Gia Đính Ngọc', icon: '🌟', price: 90000, cat: 'head' },
-    { id: 'acc_34', name: '🧕 Khăn Trùm Đầu Cô Bé Quàng Khăn Đỏ', icon: '🧕', price: 18000, cat: 'head' },
+    { id: 'acc_34', name: '🧕 Khăn Trùm Cô Bé Quàng Khăn Đỏ', icon: '🧕', price: 18000, cat: 'head' },
     { id: 'acc_35', name: '🌺 Vòng Hoa Đội Đầu Nàng Tiên', icon: '🌺', price: 26000, cat: 'head' },
     { id: 'acc_36', name: '🎩 Mũ Phù Thủy Học Viện Magic', icon: '🎩', price: 40000, cat: 'head' },
     { id: 'acc_37', name: '🎀 Băng Đô Alice Xứ Sở Diệu Kỳ', icon: '🎀', price: 20000, cat: 'head' },
@@ -983,18 +1098,18 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     { id: 'acc_55', name: '🥿 Giày Búp Bê Da Mềm Xinh', icon: '🥿', price: 19000, cat: 'shoes' },
     { id: 'acc_56', name: '👡 Guốc Mộc Nhật Bản Cài Hoa', icon: '👡', price: 24000, cat: 'shoes' },
     { id: 'acc_57', name: '⛸️ Giày Trượt Băng Nghệ Thuật', icon: '⛸️', price: 60000, cat: 'shoes' },
-    { id: 'acc_58', name: '👠 Giày Cao Gót Dạ Hội Kim Tuyến', icon: '👠', price: 85000, cat: 'shoes' },
+    { id: 'acc_58', name: '👠 Giày Dạ Hội Kim Tuyến', icon: '👠', price: 85000, cat: 'shoes' },
     { id: 'acc_59', name: '🥾 Giày Thám Hiểm Rừng Xanh', icon: '🥾', price: 22000, cat: 'shoes' },
 
     // 5. LÀM ĐẸP & LỌ THẦN (beauty)
     { id: 'acc_60', name: '🪞 Gương Soi Thần Kỳ Hoa Hồng', icon: '🪞', price: 10000, cat: 'beauty' },
     { id: 'acc_61', name: '💄 Son Dưỡng Dâu Tây Ngọt Ngào', icon: '💄', price: 7000, cat: 'beauty' },
     { id: 'acc_62', name: '🧴 Nước Hoa Hoa Hồng Pháp', icon: '🧴', price: 22000, cat: 'beauty' },
-    { id: 'acc_63', name: '💅 Sơn Móng Tay Kim Tuyến Lấp Lánh', icon: '💅', price: 13000, cat: 'beauty' },
+    { id: 'acc_63', name: '💅 Sơn Móng Tay Kim Tuyến', icon: '💅', price: 13000, cat: 'beauty' },
     { id: 'acc_64', name: '🪮 Lược Thần Gỡ Rối Hoàng Cung', icon: '🪮', price: 11000, cat: 'beauty' },
     { id: 'acc_65', name: '🧪 Lọ Nước Thần Tình Bạn', icon: '🧪', price: 32000, cat: 'beauty' },
     { id: 'acc_66', name: '✨ Bột Phấn Tiên Nữ Tỏa Sáng', icon: '✨', price: 46000, cat: 'beauty' },
-    { id: 'acc_67', name: '🫙 Lọ Thủy Tinh Chứa 1000 Ngôi Sao Giấy', icon: '🫙', price: 25000, cat: 'beauty' },
+    { id: 'acc_67', name: '🫙 Lọ Thủy Tinh 1000 Ngôi Sao Giấy', icon: '🫙', price: 25000, cat: 'beauty' },
     { id: 'acc_68', name: '🕯️ Nến Thơm Hương Vani Thư Giãn', icon: '🕯️', price: 15000, cat: 'beauty' },
     { id: 'acc_69', name: '🫧 Nước Tạo Bong Bóng Thần Tiên', icon: '🫧', price: 9000, cat: 'beauty' },
     { id: 'acc_70', name: '📜 Bức Thư Tình Bạn Niêm Phong Sáp', icon: '📜', price: 18000, cat: 'beauty' },
@@ -1007,7 +1122,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     { id: 'acc_75', name: '🍭 Kẹo Mút Khổng Lồ 7 Màu', icon: '🍭', price: 15000, cat: 'hand' },
     { id: 'acc_76', name: '🍦 Cây Kem Ốc Quế Dâu Socola', icon: '🍦', price: 7000, cat: 'hand' },
     { id: 'acc_77', name: '🪭 Quạt Lụa Cung Đình Xếp Ren', icon: '🪭', price: 19000, cat: 'hand' },
-    { id: 'acc_78', name: '🌂 Ô Che Mưa Trong Suốt Hoa Anh Đào', icon: '🌂', price: 24000, cat: 'hand' },
+    { id: 'acc_78', name: '🌂 Ô Che Trong Suốt Hoa Đào', icon: '🌂', price: 24000, cat: 'hand' },
     { id: 'acc_79', name: '📖 Sách Phép Thuật Ngàn Năm', icon: '📖', price: 38000, cat: 'hand' },
     { id: 'acc_80', name: '🐱 Mèo Con Lông Trắng Tí Hon', icon: '🐱', price: 40000, cat: 'hand' },
     { id: 'acc_81', name: '🐶 Cún Poodle Bông Mini', icon: '🐶', price: 42000, cat: 'hand' },
@@ -1238,31 +1353,30 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     sendAiMessage();
   };
 
-  $('btnResetAiChat').onclick = () => {
-    if (confirm("Cậu muốn tụi mình bắt đầu bài học mới hả?")) {
+  $('btnResetAiChat').onclick = async () => {
+    const ok = await showCustomConfirm("Cậu muốn tụi mình bắt đầu bài học mới hả?", "Bắt đầu bài mới 🔄", "🐰");
+    if (ok) {
       aiChatHistory = [];
       $('aiChatBox').innerHTML = `<div class="ai-msg bot">🌸 Hí chào Khánh Huyền! Tớ là Thỏ Siêu Quậy nè 🐰 Cậu có câu đố hay bài tập nào thú vị không, tụi mình cùng chiến nào! ⭐🐰</div>`;
       toast("Đã làm mới cuộc trò chuyện!");
     }
   };
 
-  $('btnOpenAiModal').onclick = () => {
+  $('btnOpenAiModal').onclick = async () => {
     if ('speechSynthesis' in window) try { window.speechSynthesis.cancel(); } catch(e){}
     $('aiTutorDialog').showModal();
     if (!geminiApiKey) {
-      setTimeout(() => {
-        const k = prompt("Mẹ nhập Gemini API Key để kích hoạt bạn học Thỏ Siêu Quậy cho con nhé:");
-        if (k && k.trim()) {
-          geminiApiKey = k.trim();
-          localStorage.setItem('GEMINI_KEY', geminiApiKey);
-          toast("Đã lưu API Key!");
-        }
-      }, 300);
+      const k = await showCustomPrompt("Mẹ nhập Gemini API Key để kích hoạt bạn học Thỏ Siêu Quậy cho con nhé:", "", "Kích hoạt Bạn Học AI 🐰", "🔑");
+      if (k && k.trim()) {
+        geminiApiKey = k.trim();
+        localStorage.setItem('GEMINI_KEY', geminiApiKey);
+        toast("Đã lưu API Key!");
+      }
     }
   };
 
-  $('btnAiKeySettings').onclick = () => {
-    const k = prompt("Cập nhật Gemini API Key:", geminiApiKey);
+  $('btnAiKeySettings').onclick = async () => {
+    const k = await showCustomPrompt("Cập nhật Gemini API Key:", geminiApiKey, "Cài đặt Gemini Key ⚙️", "🔑");
     if (k !== null) {
       geminiApiKey = k.trim();
       localStorage.setItem('GEMINI_KEY', geminiApiKey);
@@ -1306,8 +1420,8 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     recognition.onresult = e => { $('aiTextInput').value = e.results[0][0].transcript; sendAiMessage(); };
   }
 
-  $('aiBtnMic').onclick = () => {
-    if (!recognition) return alert("Trình duyệt chưa hỗ trợ ghi âm.");
+  $('aiBtnMic').onclick = async () => {
+    if (!recognition) return await showCustomAlert("Trình duyệt chưa hỗ trợ ghi âm hoặc chưa cấp quyền Micro.", "Micro thu âm 🎤", "🎤");
     try { recognition.lang = isAiEnglishMode ? 'en-US' : 'vi-VN'; recognition.start(); } catch(e){ recognition.stop(); }
   };
 
@@ -1364,7 +1478,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   async function sendAiMessage() {
     const text = $('aiTextInput').value.trim();
     if (!text && !aiSelectedBase64) return;
-    if (!geminiApiKey) return alert("Mẹ bấm vào nút '⚙️ Key' ở góc trên để điền Gemini API Key nhé!");
+    if (!geminiApiKey) return await showCustomAlert("Mẹ bấm vào nút '⚙️ Key' ở góc trên để điền Gemini API Key nhé!", "Chưa có API Key 🔑", "🔑");
 
     const userImg = aiSelectedBase64;
     appendAiMsg('user', text, userImg);
@@ -1445,7 +1559,6 @@ QUY TẮC TRÌNH BÀY:
     $('petExpBar').style.width = `${pct}%`;
     $('petExpText').textContent = `Ăn: ${state.petExp}/${needed} 🥕`;
 
-    // Hiển thị icon những phụ kiện & trang phục đang mặc
     let badges = [];
     if (state.equippedOutfits) {
       const allOut = [];
@@ -1509,9 +1622,9 @@ QUY TẮC TRÌNH BÀY:
     } catch(e) { console.warn("Lỗi phát âm thanh nhai:", e); }
   }
 
-  $('btnFeedPet').onclick = () => {
+  $('btnFeedPet').onclick = async () => {
     if (state.carrots <= 0) {
-      return alert("Hết cà rốt rồi! Bé bấm vào '🛍️ Tiệm & Tủ Đồ' để mua thêm cà rốt (3.000đ/củ) cho Thỏ nhé 🥕!");
+      return await showCustomAlert("Hết cà rốt rồi! Bé bấm vào '🛍️ Tiệm & Tủ Đồ' để mua thêm cà rốt (3.000đ/củ) cho Thỏ nhé 🥕!", "Hết cà rốt rồi 🥕", "🥕");
     }
     state.carrots--;
     state.petExp++;
@@ -1535,8 +1648,8 @@ QUY TẮC TRÌNH BÀY:
       state.petLevel++;
       state.petExp = 0;
       const newTier = getPetTier(state.petLevel);
-      setTimeout(() => {
-        alert(`🎉 HOAN HÔ! Thỏ cưng của con đã chính thức tiến hóa lên CẤP ${state.petLevel}: [${newTier.name}]! 3 bộ trang phục mới đã được mở khóa trong tiệm thời trang nhé! 🌸👗`);
+      setTimeout(async () => {
+        await showCustomAlert(`Thỏ cưng của con đã chính thức tiến hóa lên CẤP ${state.petLevel}: [${newTier.name}]! 3 bộ trang phục mới đã được mở khóa trong tiệm thời trang nhé! 🌸👗`, "🎉 HOAN HÔ THĂNG CẤP! 🎉", "🌟");
       }, 500);
     }
 
@@ -1569,9 +1682,9 @@ QUY TẮC TRÌNH BÀY:
   });
 
   // MUA CÀ RỐT
-  function buyCarrots(count, totalCost) {
+  async function buyCarrots(count, totalCost) {
     if (state.money < totalCost) {
-      return alert(`Con chưa đủ tiền rồi! Cần ${totalCost.toLocaleString('vi-VN')}đ, con làm bài tập để Mẹ duyệt tích thêm tiền nhé! 🌸`);
+      return await showCustomAlert(`Con chưa đủ tiền rồi! Cần ${totalCost.toLocaleString('vi-VN')}đ, con làm bài tập để Mẹ duyệt tích thêm tiền nhé! 🌸`, "Chưa đủ tiền tích lũy 💰", "🥕");
     }
     state.money -= totalCost;
     state.carrots += count;
@@ -1682,14 +1795,14 @@ QUY TẮC TRÌNH BÀY:
   }
 
   // SỰ KIỆN MUA ĐỒ & PHỐI NHIỀU MÓN
-  document.addEventListener('click', e => {
+  document.addEventListener('click', async e => {
     const buyBtn = e.target.closest('[data-buy-item]');
     if (buyBtn) {
       const id = buyBtn.dataset.buyItem;
       const price = Number(buyBtn.dataset.price);
 
       if (state.money < price) {
-        return alert(`Con chưa đủ tiền rồi! Món này giá ${price.toLocaleString('vi-VN')}đ, con hãy chăm chỉ làm bài tập để kiếm thêm tiền nhé! 🌸`);
+        return await showCustomAlert(`Con chưa đủ tiền rồi! Món này giá ${price.toLocaleString('vi-VN')}đ, con hãy chăm chỉ làm bài tập để kiếm thêm tiền nhé! 🌸`, "Chưa đủ tiền tích lũy 💰", "💰");
       }
 
       state.money -= price;
@@ -1733,10 +1846,12 @@ QUY TẮC TRÌNH BÀY:
   });
 
   // KHIÊN BẢO VỆ STREAK
-  $('streakShieldHint').onclick = () => {
-    if (state.streakShield) return alert("Con đang có Khiên bảo vệ Streak rồi nè! Yên tâm nhé 🛡️");
-    if (earnedPoints() < 5) return alert("Con cần 5 ⭐ để mua Khiên bảo vệ Streak nhé!");
-    if (confirm("Dùng 5 sao thưởng để mua Khiên bảo vệ Streak (không lo đứt chuỗi học) nhé con?")) {
+  $('streakShieldHint').onclick = async () => {
+    if (state.streakShield) return await showCustomAlert("Con đang có Khiên bảo vệ Streak rồi nè! Yên tâm nhé 🛡️", "Khiên bảo vệ 🛡️", "🛡️");
+    if (earnedPoints() < 5) return await showCustomAlert("Con cần 5 ⭐ để mua Khiên bảo vệ Streak nhé!", "Chưa đủ sao thưởng ⭐", "⭐");
+    
+    const ok = await showCustomConfirm("Dùng 5 sao thưởng để mua Khiên bảo vệ Streak (không lo đứt chuỗi học) nhé con?", "Mua Khiên Bảo Vệ 🛡️", "🛡️");
+    if (ok) {
       state.redemptions.push({ id: 'shield_' + Date.now(), name: 'Khiên bảo vệ Streak 🛡️', cost: 5, created_at: new Date().toISOString() });
       state.streakShield = true;
       localStorage.setItem('STREAK_SHIELD', 'true');
@@ -1746,7 +1861,7 @@ QUY TẮC TRÌNH BÀY:
   };
 
   // ========================================================
-  // 🎡 VÒNG QUAY MAY MẮN (PHÁO HOA BAY TRÊN MẶT)
+  // 🎡 VÒNG QUAY MAY MẮN
   // ========================================================
   const wheelSlices = [
     { text: '+1 ⭐', color: '#ffb3ba' },
@@ -1847,10 +1962,10 @@ QUY TẮC TRÌNH BÀY:
     $('wheelWinCard').classList.remove('pop-win');
   };
 
-  $('btnSpinWheel').onclick = () => {
+  $('btnSpinWheel').onclick = async () => {
     const { is100, alreadySpun } = checkWheelEligibility();
     if (!isAdminUnlocked && (!is100 || alreadySpun)) {
-      return alert("Chưa đủ điều kiện quay đâu con ơi! Hãy hoàn thành 100% bài tập mẹ giao nhé!");
+      return await showCustomAlert("Chưa đủ điều kiện quay đâu con ơi! Hãy hoàn thành 100% bài tập mẹ giao nhé!", "Chưa mở khóa vòng quay 🔒", "🎡");
     }
 
     if (isSpinning) return;
@@ -2028,7 +2143,7 @@ QUY TẮC TRÌNH BÀY:
           isPomoRunning = false;
           triggerCelebration(0);
           $('pomoYtIframe').src = '';
-          alert("🎉 Hết 25 phút tập trung rồi! Con nghỉ ngơi 5 phút nhé cô chủ nhỏ!");
+          showCustomAlert("🎉 Hết 25 phút tập trung rồi! Con nghỉ ngơi 5 phút nhé cô chủ nhỏ!", "Nghỉ giải lao thôi nào! 🍅", "🍅");
         }
       }, 1000);
     }
@@ -2322,7 +2437,7 @@ QUY TẮC TRÌNH BÀY:
 
       await loadDataFromSupabase();
     } catch (err) {
-      alert("Lỗi đồng bộ: " + err.message);
+      await showCustomAlert("Lỗi đồng bộ: " + err.message, "Đồng bộ thất bại ⚠️", "⚠️");
     } finally {
       btn.disabled = false;
       btn.textContent = '🔄 Đồng bộ Google Sheets';
@@ -2713,7 +2828,7 @@ QUY TẮC TRÌNH BÀY:
 
     if (sb) {
       const { error } = await sb.from('rewards').insert([{ name, desc_text: desc, cost }]);
-      if (error) alert('Lỗi thêm quà: ' + error.message);
+      if (error) await showCustomAlert('Lỗi thêm quà: ' + error.message, 'Thông báo lỗi ⚠️', '⚠️');
       else { toast('🎉 Đã thêm phần quà mới!'); await loadDataFromSupabase(); }
     }
     $('rewardDialog').close();
@@ -2724,8 +2839,10 @@ QUY TẮC TRÌNH BÀY:
     if (redBtn) {
       const r = state.rewards.find(x => x.id === redBtn.dataset.redeem);
       if (!r) return;
-      if (earnedPoints() < r.cost) return alert('Con chưa đủ sao để đổi phần quà này rồi!');
-      if (confirm(`Con muốn đổi quà "${r.name}" với ${r.cost} sao thưởng nhé?`)) {
+      if (earnedPoints() < r.cost) return await showCustomAlert('Con chưa đủ sao để đổi phần quà này rồi! Cố gắng làm thêm bài tập nhé!', 'Chưa đủ sao thưởng ⭐', '🎁');
+      
+      const ok = await showCustomConfirm(`Con muốn đổi quà "${r.name}" với ${r.cost} sao thưởng nhé?`, 'Đổi quà yêu thích 🎁', '🎁');
+      if (ok) {
         if (sb) await sb.from('redemptions').insert([{ reward_id: r.id, name: r.name, cost: r.cost }]);
         triggerCelebration(0);
         toast('🎉 Đổi quà thành công!');
@@ -2735,10 +2852,13 @@ QUY TẮC TRÌNH BÀY:
     }
 
     const delRewBtn = e.target.closest('[data-delete-reward]');
-    if (delRewBtn && confirm('Mẹ có chắc muốn xóa phần quà này?')) {
-      if (sb) await sb.from('rewards').delete().eq('id', delRewBtn.dataset.deleteReward);
-      toast('Đã xóa phần thưởng!');
-      loadDataFromSupabase();
+    if (delRewBtn) {
+      const ok = await showCustomConfirm('Mẹ có chắc muốn xóa phần quà này?', 'Xóa quà tặng 🗑️', '🎁');
+      if (ok) {
+        if (sb) await sb.from('rewards').delete().eq('id', delRewBtn.dataset.deleteReward);
+        toast('Đã xóa phần thưởng!');
+        loadDataFromSupabase();
+      }
       return;
     }
   });
@@ -2835,13 +2955,15 @@ QUY TẮC TRÌNH BÀY:
     }
 
     const delBtn = e.target.closest('[data-delete-task]');
-    if (delBtn && confirm('Mẹ có chắc muốn xóa bài này không?')) {
-      if (sb) {
-        sb.from('tasks').delete().eq('id', delBtn.dataset.deleteTask).then(() => {
-          loadDataFromSupabase();
-          toast('Đã xóa bài tập!');
-        });
-      }
+    if (delBtn) {
+      showCustomConfirm('Mẹ có chắc muốn xóa bài này không?', 'Xóa bài tập 🗑️', '🗑️').then(ok => {
+        if (ok && sb) {
+          sb.from('tasks').delete().eq('id', delBtn.dataset.deleteTask).then(() => {
+            loadDataFromSupabase();
+            toast('Đã xóa bài tập!');
+          });
+        }
+      });
       return;
     }
   });
@@ -2897,7 +3019,7 @@ QUY TẮC TRÌNH BÀY:
       toast('🎉 Hoan hô! Đã nộp bài cho Mẹ xem rồi nhé!');
       await loadDataFromSupabase();
     } catch(err) {
-      alert('Lỗi nộp bài: ' + err.message);
+      await showCustomAlert('Lỗi nộp bài: ' + err.message, 'Lỗi nộp bài ⚠️', '⚠️');
     } finally {
       btn.disabled = false;
       btn.textContent = 'Nộp bài ngay 🎉';
@@ -2928,7 +3050,8 @@ QUY TẮC TRÌNH BÀY:
     if (!currentReviewTask) return;
     const sub = currentReviewTask.submission;
 
-    const reason = prompt("Mẹ nhập lời nhắn cho con nhé (Ví dụ: Con tính lại câu 3 và kiểm tra lại đáp án nhé):", "Con kiểm tra lại bài và làm lại giúp mẹ nhé!");
+    // HỘP THOẠI PROMPT HOÀNG GIA CHO MẸ NHẬP LỜI NHẮN
+    const reason = await showCustomPrompt("Mẹ nhập lời nhắn cho con nhé (Ví dụ: Con tính lại câu 3 và kiểm tra lại đáp án nhé):", "Con kiểm tra lại bài và làm lại giúp mẹ nhé!", "Nhắc con làm lại bài 📢", "👩📝");
     if (reason === null) return;
 
     const message = reason.trim() || "Con kiểm tra lại bài và làm lại giúp mẹ nhé!";
@@ -2977,11 +3100,13 @@ QUY TẮC TRÌNH BÀY:
         $('taskDialog').close();
         toast('Đã giao bài tập mới!');
         await loadDataFromSupabase();
-      } else { alert('Lỗi giao bài: ' + error.message); }
+      } else { await showCustomAlert('Lỗi giao bài: ' + error.message, 'Thông báo lỗi ⚠️', '⚠️'); }
     }
   };
 
-  // ROLE SWITCH
+  // ========================================================
+  // 👑 PHÂN QUYỀN MẸ / BÉ (HỘP THOẠI HOÀNG GIA SANG XỊN)
+  // ========================================================
   $('btnRoleKid').onclick = () => {
     isAdminUnlocked = false;
     $('appBody').classList.remove('unlocked');
@@ -2993,23 +3118,41 @@ QUY TẮC TRÌNH BÀY:
 
   $('btnRoleMom').onclick = () => {
     if (!isAdminUnlocked) {
-      const pwd = prompt("Nhập mật mã của Mẹ để giao và duyệt bài:");
-      if (pwd === "2017") {
-        isAdminUnlocked = true;
-        $('appBody').classList.add('unlocked');
-        $('btnRoleMom').classList.add('active');
-        $('btnRoleKid').classList.remove('active');
-        renderTasks();
-        renderRewards();
-        toast('Chào Mẹ! Mẹ có thể giao bài, thêm quà và duyệt bài.');
-      } else if (pwd !== null) {
-        alert('Sai mật khẩu rồi mẹ ơi!');
-      }
+      $('momPassInput').value = '';
+      $('momPassError').textContent = '';
+      $('momPassInput').classList.remove('shake-anim');
+      $('momPassDialog').showModal();
+      setTimeout(() => $('momPassInput').focus(), 150);
     } else {
       $('btnRoleMom').classList.add('active');
       $('btnRoleKid').classList.remove('active');
     }
   };
+
+  function verifyMomPassword() {
+    const pwd = $('momPassInput').value.trim();
+    if (pwd === "2017") {
+      isAdminUnlocked = true;
+      $('appBody').classList.add('unlocked');
+      $('btnRoleMom').classList.add('active');
+      $('btnRoleKid').classList.remove('active');
+      $('momPassDialog').close();
+      renderTasks();
+      renderRewards();
+      toast('👑 Chào Mẹ yêu! Mẹ có thể giao bài, thêm quà và duyệt bài cho con!');
+    } else {
+      const inp = $('momPassInput');
+      inp.classList.remove('shake-anim');
+      void inp.offsetWidth;
+      inp.classList.add('shake-anim');
+      $('momPassError').textContent = '❌ Mật khẩu chưa đúng rồi Mẹ ơi!';
+      inp.value = '';
+      inp.focus();
+    }
+  }
+
+  $('btnConfirmMomPass').onclick = verifyMomPassword;
+  $('momPassInput').onkeypress = e => { if (e.key === 'Enter') verifyMomPassword(); };
 
   // ĐIỀU HƯỚNG LỊCH
   document.addEventListener('click', e => {
