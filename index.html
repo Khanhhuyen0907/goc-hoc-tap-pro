@@ -166,6 +166,24 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   100% { transform: scale(0.6); opacity: 0; }
 }
 
+/* THIỆP CHÚC MỪNG TRÚNG VÒNG QUAY NỔ PHÁO HOA NGAY TRÊN DIALOG */
+#wheelWinCard {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.6);
+  background: linear-gradient(135deg, #fffdf2, #fff0f4);
+  border: 4px solid #ffb300; border-radius: 26px;
+  padding: 24px 30px; text-align: center;
+  box-shadow: 0 15px 50px rgba(255,179,0,0.45);
+  z-index: 1000; display: none; width: 85%; max-width: 380px;
+}
+#wheelWinCard.pop-win {
+  display: block !important;
+  animation: popWinAnim 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+@keyframes popWinAnim {
+  0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
 .role-switch { display: flex; background: #fff0f4; border: 1px solid #f4cad7; border-radius: 999px; padding: 3px; gap: 4px; }
 .role-btn { background: transparent; border: 0; border-radius: 999px; padding: 6px 14px; font-size: 12px; font-weight: 800; color: #a6536c; cursor: pointer; transition: 0.2s; }
 .role-btn.active { background: #e97998; color: #fff; box-shadow: 0 2px 8px rgba(233,121,152,0.3); }
@@ -277,7 +295,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
       </div>
     </div>
 
-    <!-- THANH CÔNG CỤ 2 HÀNG ĐÃ ĐƯỢC GIỮ NGUYÊN Y HỆT HÌNH ẢNH MẸ THIẾT KẾ -->
+    <!-- THANH CÔNG CỤ 2 HÀNG CỦA MẸ -->
     <div class="hero-tools" aria-label="Công cụ học tập">
       <div class="tool-group">
         <span class="tool-group-label">📚 HỌC TẬP</span>
@@ -468,9 +486,21 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
 </dialog>
 
 <!-- ==================================================== -->
-<!-- 🎡 CỬA SỔ VÒNG QUAY MAY MẮN -->
+<!-- 🎡 CỬA SỔ VÒNG QUAY MAY MẮN (PHÁO HOA & THÔNG BÁO NỔ TRỰC DIỆN) -->
 <!-- ==================================================== -->
-<dialog id="wheelDialog">
+<dialog id="wheelDialog" style="position:relative; overflow:visible;">
+  <!-- Canvas pháo hoa bay thẳng trên mặt vòng quay không bị che -->
+  <canvas id="wheelConfettiCanvas" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:999;"></canvas>
+
+  <!-- Thiệp chúc mừng kết quả trúng thưởng hiện ngay giữa vòng quay -->
+  <div id="wheelWinCard">
+    <div style="font-size: 45px; margin-bottom: 5px;">🎉 👑 🌟</div>
+    <div style="font-size: 15px; font-weight: 800; color: #a64e68; text-transform: uppercase; letter-spacing: 0.5px;">Chúc mừng cô chủ nhỏ!</div>
+    <div id="wheelWinTitle" style="font-size: 26px; font-weight: 900; color: #e95f83; margin: 10px 0;">JACKPOT 5⭐</div>
+    <p id="wheelWinSub" style="font-size: 13px; color: #66525a; margin: 0 0 15px; line-height: 1.4;">Phần thưởng đã được cộng trực tiếp vào số sao của con nhé!</p>
+    <button type="button" class="btn btn-gold" id="btnCloseWinCard" style="font-size: 14px; padding: 8px 24px; border-radius: 999px;">Nhận quà ngay ✨</button>
+  </div>
+
   <div class="modal-head"><h2>🎡 Vòng quay may mắn</h2><button class="close" data-close="wheelDialog">×</button></div>
   <div class="modal-body" style="text-align:center;">
     <div class="wheel-container">
@@ -488,22 +518,53 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
 </dialog>
 
 <!-- ==================================================== -->
-<!-- 🍅 CỬA SỔ ĐỒNG HỒ POMODORO & NHẠC PIANO THƯ GIÃN -->
+<!-- 🍅 CỬA SỔ ĐỒNG HỒ POMODORO TÍCH HỢP YOUTUBE -->
 <!-- ==================================================== -->
-<dialog id="pomodoroDialog">
-  <div class="modal-head"><h2>🍅 Giờ học tập trung Pomodoro</h2><button class="close" data-close="pomodoroDialog">×</button></div>
-  <div class="modal-body" style="text-align:center; padding:25px;">
-    <div id="pomoTimerLabel" style="font-size:58px; font-weight:900; color:#c95c78; font-variant-numeric:tabular-nums; margin-bottom:10px;">25:00</div>
-    <div id="pomoModeText" style="font-weight:800; color:#36795f; margin-bottom:20px;">📖 Đến giờ tập trung làm bài rồi!</div>
-    <div class="flex" style="justify-content:center; gap:10px;">
+<dialog id="pomodoroDialog" style="width: min(520px, calc(100% - 24px));">
+  <div class="modal-head">
+    <h2>🍅 Giờ học Pomodoro & Nhạc YouTube</h2>
+    <button class="close" data-close="pomodoroDialog">×</button>
+  </div>
+  <div class="modal-body" style="text-align:center; padding: 18px;">
+    <div id="pomoTimerLabel" style="font-size:56px; font-weight:900; color:#c95c78; font-variant-numeric:tabular-nums; margin-bottom:4px;">25:00</div>
+    <div id="pomoModeText" style="font-weight:800; color:#36795f; margin-bottom:12px;">📖 Đến giờ tập trung làm bài rồi!</div>
+
+    <!-- Nút điều khiển Pomodoro -->
+    <div class="flex" style="justify-content:center; gap:8px; margin-bottom: 15px;">
       <button class="btn btn-primary" id="btnPomoStart">Bắt đầu ⏱️</button>
       <button class="btn btn-soft" id="btnPomoReset">Đặt lại ↩️</button>
-      <button class="btn btn-soft" id="btnPomoMusic">🎹 Nhạc Piano: Tắt</button>
+    </div>
+
+    <!-- KHUNG CHỌN & PHÁT NHẠC YOUTUBE -->
+    <div style="background:#fff0f4; border:1px solid #f4cad7; border-radius:16px; padding:12px; text-align:left;">
+      <div class="row-between" style="margin-bottom:8px;">
+        <span style="font-weight:800; font-size:13px; color:#a64e68;">🎵 Nhạc học tập YouTube</span>
+        <div class="flex" style="gap:6px;">
+          <button type="button" class="btn btn-soft btn-small" id="btnToggleMusic" style="font-weight:800; font-size:11.5px; padding:3px 9px;">🔊 Tắt nhạc</button>
+          <span id="pomoYtStatus" style="font-size:11px; font-weight:700; color:#36795f;">Sẵn sàng</span>
+        </div>
+      </div>
+
+      <!-- Ô dán link YouTube -->
+      <div class="flex" style="gap:6px; margin-bottom:8px;">
+        <input type="text" id="pomoYtInput" placeholder="Dán link YouTube bài con thích vào đây..." style="flex:1; font-size:12.5px; padding:7px 10px;">
+        <button class="btn btn-primary btn-small" id="btnSaveYtLink">Lưu link 💾</button>
+      </div>
+
+      <!-- Gợi ý chọn nhanh các bài nhạc cho phép nhúng 100% -->
+      <div class="flex" style="gap:5px; margin-bottom:8px;">
+        <button type="button" class="icon-btn" data-yt-preset="https://www.youtube.com/watch?v=jfKfPfyJRdk">🎹 Lofi Chill</button>
+        <button type="button" class="icon-btn" data-yt-preset="https://www.youtube.com/watch?v=WPni755-Krg">🌸 Ghibli Piano</button>
+        <button type="button" class="icon-btn" data-yt-preset="https://www.youtube.com/watch?v=DWcJFNfaw9c">🌿 Tập Trung</button>
+      </div>
+
+      <!-- Khung video YouTube có đầy đủ quyền tránh Lỗi 153 -->
+      <div style="position:relative; border-radius:10px; overflow:hidden; aspect-ratio: 16/9; max-height: 185px; background:#000;">
+        <iframe id="pomoYtIframe" width="100%" height="100%" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="display:block;"></iframe>
+      </div>
     </div>
   </div>
 </dialog>
-<!-- AUDIO NHẠC PIANO KHÔNG LỜI DU DƯƠNG -->
-<audio id="pianoAudio" loop preload="none" src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3"></audio>
 
 <!-- ==================================================== -->
 <!-- 🎴 FLASHCARD 3D -->
@@ -790,8 +851,11 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
       .trim();
   }
 
+  // BẮN PHÁO HOA CHUẨN XÁC KHÔNG BỊ KHUNG CHE
   function triggerCelebration(pts = 1) {
-    if(window.confetti) confetti({ particleCount: 150, spread: 100, origin: { y: 0.5 } });
+    if (window.confetti) {
+      confetti({ particleCount: 150, spread: 100, origin: { y: 0.5 }, zIndex: 9999999 });
+    }
     const starToast = $('star-toast');
     if(starToast) {
       starToast.textContent = `✨ Giỏi lắm con gái iu! +${pts} sao thưởng ⭐ 🎉`;
@@ -1121,14 +1185,12 @@ QUY TẮC TRÌNH BÀY:
     localStorage.setItem('PET_LEVEL', state.petLevel);
   }
 
-  // ÂM THANH NHAI CÀ RỐT GIÒN RỤM CHÂN THỰC
   function playCarrotMunchSound() {
     try {
       const AudioCtx = window.AudioContext || window.webkitAudioContext;
       const ctx = new AudioCtx();
       
       const playCrunch = (delay, freq, duration) => {
-        const osc = ctx.createOscillator();
         const gain = ctx.createGain();
         const bufferSize = ctx.sampleRate * duration;
         const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
@@ -1155,7 +1217,6 @@ QUY TẮC TRÌNH BÀY:
         whiteNoise.stop(now + duration);
       };
 
-      // 4 tiếng nhai rộp rộp liên tiếp
       playCrunch(0.00, 1800, 0.12);
       playCrunch(0.18, 1400, 0.14);
       playCrunch(0.40, 2000, 0.12);
@@ -1169,7 +1230,6 @@ QUY TẮC TRÌNH BÀY:
     if (state.carrots <= 0) return alert("Hết cà rốt rồi! Con làm bài tập để nhận thêm cà rốt cho Thỏ nhé 🥕!");
     state.carrots--;
 
-    // Hiện pop-up Thỏ ăn cà rốt to giữa màn hình
     const overlay = $('bunnyEatingOverlay');
     overlay.style.display = 'flex';
     playCarrotMunchSound();
@@ -1209,7 +1269,7 @@ QUY TẮC TRÌNH BÀY:
   };
 
   // ========================================================
-  // 🎡 VÒNG QUAY MAY MẮN
+  // 🎡 VÒNG QUAY MAY MẮN (PHÁO HOA BAY TRÊN MẶT DIALOG)
   // ========================================================
   const wheelSlices = [
     { text: '+1 ⭐', color: '#ffb3ba' },
@@ -1254,7 +1314,19 @@ QUY TẮC TRÌNH BÀY:
     }
   }
 
+  // PHÁO HOA NỔ NGAY BÊN TRONG CỬA SỔ VÒNG QUAY
+  function fireConfettiInsideWheel() {
+    const canvas = $('wheelConfettiCanvas');
+    if (!canvas || !window.confetti) return;
+    const myConfetti = confetti.create(canvas, { resize: true, useWorker: true });
+    myConfetti({ particleCount: 90, spread: 80, origin: { y: 0.6 } });
+    setTimeout(() => {
+      myConfetti({ particleCount: 70, spread: 100, origin: { y: 0.4 } });
+    }, 250);
+  }
+
   $('btnOpenWheel').onclick = () => {
+    $('wheelWinCard').classList.remove('pop-win');
     const { todayTasks, approvedCount, kpi, is100, alreadySpun } = checkWheelEligibility();
     const resultBox = $('wheelResultText');
     const spinBtn = $('btnSpinWheel');
@@ -1290,8 +1362,13 @@ QUY TẮC TRÌNH BÀY:
     spinBtn.style.opacity = '1';
     spinBtn.style.cursor = 'pointer';
     spinBtn.textContent = 'QUAY NGAY 🎯';
+    $('wheelWinCard').classList.remove('pop-win');
     $('wheelResultText').innerHTML = `👑 <b>Mẹ đã tặng con thêm 1 lượt quay may mắn!</b>`;
     toast("Đã tặng bé thêm 1 lượt quay! 🎁");
+  };
+
+  $('btnCloseWinCard').onclick = () => {
+    $('wheelWinCard').classList.remove('pop-win');
   };
 
   $('btnSpinWheel').onclick = () => {
@@ -1302,6 +1379,7 @@ QUY TẮC TRÌNH BÀY:
 
     if (isSpinning) return;
     isSpinning = true;
+    $('wheelWinCard').classList.remove('pop-win');
     $('wheelResultText').textContent = 'Đang quay... 🎯';
 
     const numSlices = wheelSlices.length;
@@ -1343,8 +1421,15 @@ QUY TẮC TRÌNH BÀY:
         $('btnSpinWheel').style.cursor = 'not-allowed';
         $('btnSpinWheel').textContent = 'ĐÃ QUAY HÔM NAY ✓';
 
+        // BẬT BẢNG VINH DANH TRÚNG THƯỞNG TO NGAY TRÊN MẶT VÒNG QUAY
+        $('wheelWinTitle').textContent = prize.text;
+        $('wheelWinCard').classList.add('pop-win');
         $('wheelResultText').innerHTML = `🎉 <b>Hoan hô! Con nhận được: ${prize.text}!</b>`;
-        triggerCelebration(0);
+
+        // BẮN PHÁO HOA NGAY BÊN TRONG CỬA SỔ ĐANG MỞ
+        fireConfettiInsideWheel();
+        const applause = $('applauseAudio');
+        if (applause) { applause.currentTime = 0; applause.play().catch(()=>{}); }
 
         if (prize.text.includes('+1 ⭐')) state.redemptions.push({ id: 'rw_'+Date.now(), name: 'Trúng Vòng Quay', cost: -1, created_at: todayISO() });
         if (prize.text.includes('+2 ⭐')) state.redemptions.push({ id: 'rw_'+Date.now(), name: 'Trúng Vòng Quay', cost: -2, created_at: todayISO() });
@@ -1359,15 +1444,87 @@ QUY TẮC TRÌNH BÀY:
   };
 
   // ========================================================
-  // 🍅 ĐỒNG HỒ POMODORO & NHẠC KHÔNG LỜI PIANO
+  // 🍅 ĐỒNG HỒ POMODORO (TỰ ĐỘNG SỬA DỨT ĐIỂM LỖI 153)
   // ========================================================
   let pomoTime = 25 * 60;
   let pomoTimer = null;
   let isPomoRunning = false;
-  let isPianoPlaying = false;
-  const pianoAudio = $('pianoAudio');
+  let isMusicEnabled = true;
 
-  $('btnOpenPomodoro').onclick = () => $('pomodoroDialog').showModal();
+  function extractYoutubeId(url) {
+    if (!url || url.includes('5qap5aO4i9A')) return 'jfKfPfyJRdk';
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    const match = url.match(regExp);
+    return (match && match[2].length === 11) ? match[2] : 'jfKfPfyJRdk';
+  }
+
+  // TỰ ĐỘNG THAY THẾ LINK CŨ 5qap5aO4i9A NẾU MÁY BỊ LƯU NHẦM
+  function getStoredYtUrl() {
+    let u = localStorage.getItem('POMO_YT_URL');
+    if (!u || u.includes('5qap5aO4i9A')) {
+      u = 'https://www.youtube.com/watch?v=jfKfPfyJRdk';
+      localStorage.setItem('POMO_YT_URL', u);
+    }
+    return u;
+  }
+
+  function loadYtVideo(url, autoPlay = false) {
+    const videoId = extractYoutubeId(url);
+    const iframe = $('pomoYtIframe');
+    if (iframe) {
+      if (!isMusicEnabled) {
+        iframe.src = '';
+        return;
+      }
+      const originParam = encodeURIComponent(window.location.origin || 'https://khanhhuyen0907.github.io');
+      iframe.src = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&autoplay=${autoPlay ? 1 : 0}&loop=1&playlist=${videoId}&origin=${originParam}`;
+    }
+    if ($('pomoYtInput')) $('pomoYtInput').value = url;
+  }
+
+  // NÚT TẮT / BẬT NHẠC RIÊNG BIỆT
+  $('btnToggleMusic').onclick = () => {
+    isMusicEnabled = !isMusicEnabled;
+    const btn = $('btnToggleMusic');
+    const status = $('pomoYtStatus');
+
+    if (isMusicEnabled) {
+      btn.textContent = "🔊 Tắt nhạc";
+      btn.style.color = "#a64e68";
+      status.textContent = isPomoRunning ? "Đang phát nhạc 🎶" : "Sẵn sàng";
+      loadYtVideo(getStoredYtUrl(), isPomoRunning);
+      toast("Đã bật lại tiếng nhạc! 🎵");
+    } else {
+      btn.textContent = "🔇 Bật nhạc";
+      btn.style.color = "#888";
+      status.textContent = "Đã tắt nhạc";
+      $('pomoYtIframe').src = '';
+      toast("Đã tắt nhạc (Đồng hồ vẫn chạy) 🤫");
+    }
+  };
+
+  $('btnOpenPomodoro').onclick = () => {
+    loadYtVideo(getStoredYtUrl(), false);
+    $('pomodoroDialog').showModal();
+  };
+
+  $('btnSaveYtLink').onclick = () => {
+    const val = $('pomoYtInput').value.trim();
+    if (val) {
+      localStorage.setItem('POMO_YT_URL', val);
+      loadYtVideo(val, isPomoRunning && isMusicEnabled);
+      toast("Đã lưu bài hát YouTube yêu thích của con! 🎶");
+    }
+  };
+
+  document.querySelectorAll('[data-yt-preset]').forEach(btn => {
+    btn.onclick = () => {
+      const url = btn.dataset.ytPreset;
+      localStorage.setItem('POMO_YT_URL', url);
+      loadYtVideo(url, isPomoRunning && isMusicEnabled);
+      toast("Đã đổi bài hát! 🎵");
+    };
+  });
 
   function updatePomoDisplay() {
     const m = Math.floor(pomoTime / 60);
@@ -1380,9 +1537,16 @@ QUY TẮC TRÌNH BÀY:
       clearInterval(pomoTimer);
       isPomoRunning = false;
       $('btnPomoStart').textContent = "Tiếp tục ⏱️";
+      $('pomoYtStatus').textContent = "Đang tạm dừng";
+      $('pomoYtStatus').style.color = "#c98319";
+      if (isMusicEnabled) loadYtVideo(getStoredYtUrl(), false);
     } else {
       isPomoRunning = true;
       $('btnPomoStart').textContent = "Tạm dừng ⏸️";
+      $('pomoYtStatus').textContent = isMusicEnabled ? "Đang phát nhạc 🎶" : "Đã tắt nhạc";
+      $('pomoYtStatus').style.color = "#36795f";
+      if (isMusicEnabled) loadYtVideo(getStoredYtUrl(), true);
+
       pomoTimer = setInterval(() => {
         if (pomoTime > 0) {
           pomoTime--;
@@ -1391,10 +1555,8 @@ QUY TẮC TRÌNH BÀY:
           clearInterval(pomoTimer);
           isPomoRunning = false;
           triggerCelebration(0);
-          if (pianoAudio) pianoAudio.pause();
-          isPianoPlaying = false;
-          $('btnPomoMusic').textContent = "🎹 Nhạc Piano: Tắt";
-          alert("🎉 Hết 25 phút tập trung rồi! Con nghỉ giải lao 5 phút nhé!");
+          $('pomoYtIframe').src = '';
+          alert("🎉 Hết 25 phút tập trung rồi! Con nghỉ ngơi 5 phút nhé cô chủ nhỏ!");
         }
       }, 1000);
     }
@@ -1405,33 +1567,19 @@ QUY TẮC TRÌNH BÀY:
     isPomoRunning = false;
     pomoTime = 25 * 60;
     $('btnPomoStart').textContent = "Bắt đầu ⏱️";
+    $('pomoYtStatus').textContent = isMusicEnabled ? "Sẵn sàng" : "Đã tắt nhạc";
+    $('pomoYtStatus').style.color = "#36795f";
+    if (isMusicEnabled) loadYtVideo(getStoredYtUrl(), false);
     updatePomoDisplay();
   };
 
-  function togglePianoMusic() {
-    if (!pianoAudio) return;
-    if (isPianoPlaying) {
-      pianoAudio.pause();
-      isPianoPlaying = false;
-      $('btnPomoMusic').textContent = "🎹 Nhạc Piano: Tắt";
-    } else {
-      pianoAudio.play().then(() => {
-        isPianoPlaying = true;
-        $('btnPomoMusic').textContent = "🎹 Nhạc Piano: Đang phát";
-      }).catch(err => {
-        console.warn("Lỗi phát audio:", err);
-        alert("Vui lòng tương tác với màn hình để bật nhạc nhé!");
-      });
-    }
-  }
-  $('btnPomoMusic').onclick = togglePianoMusic;
-
-  // Dừng nhạc khi đóng popup Pomodoro
   $('pomodoroDialog').addEventListener('close', () => {
-    if (pianoAudio && isPianoPlaying) {
-      pianoAudio.pause();
-      isPianoPlaying = false;
-      $('btnPomoMusic').textContent = "🎹 Nhạc Piano: Tắt";
+    const iframe = $('pomoYtIframe');
+    if (iframe) iframe.src = '';
+    if (isPomoRunning) {
+      clearInterval(pomoTimer);
+      isPomoRunning = false;
+      $('btnPomoStart').textContent = "Bắt đầu ⏱️";
     }
   });
 
