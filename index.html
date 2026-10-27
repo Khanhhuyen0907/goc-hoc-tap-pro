@@ -134,6 +134,38 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   100% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
 }
 
+/* KHUNG HIỂN THỊ THỎ ĂN CÀ RỐT TO GIỮA MÀN HÌNH */
+#bunnyEatingOverlay {
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(255, 240, 245, 0.75); backdrop-filter: blur(4px);
+  z-index: 999999; display: none; align-items: center; justify-content: center;
+  pointer-events: none;
+}
+.bunny-eat-card {
+  background: linear-gradient(135deg, #fff, #fff0f5);
+  border: 3px solid #f6a9bd;
+  border-radius: 32px;
+  padding: 30px 45px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(201,92,120,0.3);
+  animation: bunnyMunchAnim 1.8s ease-in-out forwards;
+}
+.bunny-eating-face {
+  font-size: 90px;
+  display: inline-block;
+  animation: chewing 0.28s infinite alternate;
+}
+@keyframes chewing {
+  0% { transform: scale(1) rotate(-3deg); }
+  100% { transform: scale(1.15) rotate(4deg) translateY(-8px); }
+}
+@keyframes bunnyMunchAnim {
+  0% { transform: scale(0.4); opacity: 0; }
+  15% { transform: scale(1.08); opacity: 1; }
+  85% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(0.6); opacity: 0; }
+}
+
 .role-switch { display: flex; background: #fff0f4; border: 1px solid #f4cad7; border-radius: 999px; padding: 3px; gap: 4px; }
 .role-btn { background: transparent; border: 0; border-radius: 999px; padding: 6px 14px; font-size: 12px; font-weight: 800; color: #a6536c; cursor: pointer; transition: 0.2s; }
 .role-btn.active { background: #e97998; color: #fff; box-shadow: 0 2px 8px rgba(233,121,152,0.3); }
@@ -288,7 +320,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
         <div class="panel-head">
           <div style="display: flex; align-items: center; gap: 10px;">
             <h2>🗓️ Kế hoạch học tập</h2>
-            <!-- DANH SÁCH NĂM 2026 - 2036 -->
             <select id="yearSelect" style="width: 95px; padding: 5px 8px; font-weight: 700; color: #a64e68; background: #fff0f4; border: 1px solid #f4cad7; border-radius: 10px;">
               <option value="2026" selected>2026</option>
               <option value="2027">2027</option>
@@ -391,6 +422,17 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
 </div>
 
 <!-- ==================================================== -->
+<!-- 🥕 HIỆU ỨNG THỎ ĂN CÀ RỐT TO GIỮA MÀN HÌNH -->
+<!-- ==================================================== -->
+<div id="bunnyEatingOverlay">
+  <div class="bunny-eat-card">
+    <div class="bunny-eating-face" id="bunnyEatFace">(｡♥‿♥｡) 🐰🥕✨</div>
+    <div style="font-weight:900; font-size:24px; color:#e95f83; margin-top:14px;">Rộp rộp! Rộp rộp! 🥕😋</div>
+    <div style="font-weight:700; font-size:16px; color:#8a5665; margin-top:6px;">Măm măm ngon quá! Cảm ơn cô chủ nhỏ Khánh Huyền! 🌸💕</div>
+  </div>
+</div>
+
+<!-- ==================================================== -->
 <!-- 🐰 CỬA SỔ BẠN HỌC AI THỎ SIÊU QUẬY -->
 <!-- ==================================================== -->
 <dialog id="aiTutorDialog" style="width: min(650px, calc(100% - 20px));">
@@ -426,7 +468,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
 </dialog>
 
 <!-- ==================================================== -->
-<!-- 🎡 CỬA SỔ VÒNG QUAY MAY MẮN (CHUẨN 1000% + KHÓA 100% KPI) -->
+<!-- 🎡 CỬA SỔ VÒNG QUAY MAY MẮN -->
 <!-- ==================================================== -->
 <dialog id="wheelDialog">
   <div class="modal-head"><h2>🎡 Vòng quay may mắn</h2><button class="close" data-close="wheelDialog">×</button></div>
@@ -446,7 +488,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
 </dialog>
 
 <!-- ==================================================== -->
-<!-- 🍅 CỬA SỔ ĐỒNG HỒ POMODORO & TIẾNG MƯA TẬP TRUNG -->
+<!-- 🍅 CỬA SỔ ĐỒNG HỒ POMODORO & NHẠC PIANO THƯ GIÃN -->
 <!-- ==================================================== -->
 <dialog id="pomodoroDialog">
   <div class="modal-head"><h2>🍅 Giờ học tập trung Pomodoro</h2><button class="close" data-close="pomodoroDialog">×</button></div>
@@ -456,13 +498,15 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     <div class="flex" style="justify-content:center; gap:10px;">
       <button class="btn btn-primary" id="btnPomoStart">Bắt đầu ⏱️</button>
       <button class="btn btn-soft" id="btnPomoReset">Đặt lại ↩️</button>
-      <button class="btn btn-soft" id="btnPomoRain">🌧️ Tiếng mưa: Tắt</button>
+      <button class="btn btn-soft" id="btnPomoMusic">🎹 Nhạc Piano: Tắt</button>
     </div>
   </div>
 </dialog>
+<!-- AUDIO NHẠC PIANO KHÔNG LỜI DU DƯƠNG -->
+<audio id="pianoAudio" loop preload="none" src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3"></audio>
 
 <!-- ==================================================== -->
-<!-- 🎴 CỬA SỔ FLASHCARD KHÔNG GIỚI HẠN & XÁO TRỘN NGẪU NHIÊN -->
+<!-- 🎴 FLASHCARD 3D -->
 <!-- ==================================================== -->
 <dialog id="flashcardDialog">
   <div class="modal-head">
@@ -507,7 +551,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
 </dialog>
 
 <!-- ==================================================== -->
-<!-- 🖼️ CỬA SỔ THIỆP VINH DANH THÀNH TÍCH ĐỂ ĐĂNG ZALO/FB -->
+<!-- 🖼️ THIỆP VINH DANH THÀNH TÍCH -->
 <!-- ==================================================== -->
 <dialog id="certDialog">
   <div class="modal-head"><h2>🖼️ Thiệp vinh danh thành tích</h2><button class="close" data-close="certDialog">×</button></div>
@@ -520,7 +564,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
 </dialog>
 
 <!-- ==================================================== -->
-<!-- ⚙️ CÀI ĐẶT SHEET & BẮN TIN NHẮN TELEGRAM CHO MẸ -->
+<!-- ⚙️ CÀI ĐẶT SHEET & TELEGRAM -->
 <!-- ==================================================== -->
 <dialog id="configDialog">
   <div class="modal-head"><h2>⚙️ Cài đặt hệ thống & Thông báo</h2><button class="close" data-close="configDialog">×</button></div>
@@ -773,9 +817,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     return n;
   }
 
-  // ========================================================
-  // 🎯 KIỂM TRA ĐIỀU KIỆN QUAY VÒNG QUAY (KPI HÔM NAY = 100%)
-  // ========================================================
   function checkWheelEligibility() {
     const todayTasks = state.tasks.filter(t => t.task_date === todayISO());
     const approvedCount = todayTasks.filter(t => state.submissions.some(s => s.task_id === t.id && s.status === 'approved')).length;
@@ -1060,7 +1101,7 @@ QUY TẮC TRÌNH BÀY:
   $('aiTextInput').onkeypress = e => { if (e.key === 'Enter') sendAiMessage(); };
 
   // ========================================================
-  // 🥕 WIDGET NUÔI THỎ CƯNG (VIRTUAL PET)
+  // 🥕 WIDGET NUÔI THỎ CƯNG & HIỆU ỨNG NHAI CÀ RỐT RỘP RỘP
   // ========================================================
   function updatePetUI() {
     const avatars = ['🐰', '🐇', '🐰👑', '✨🐰✨'];
@@ -1080,11 +1121,73 @@ QUY TẮC TRÌNH BÀY:
     localStorage.setItem('PET_LEVEL', state.petLevel);
   }
 
+  // ÂM THANH NHAI CÀ RỐT GIÒN RỤM CHÂN THỰC
+  function playCarrotMunchSound() {
+    try {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      const ctx = new AudioCtx();
+      
+      const playCrunch = (delay, freq, duration) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        const bufferSize = ctx.sampleRate * duration;
+        const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+        const output = noiseBuffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) output[i] = (Math.random() * 2 - 1);
+
+        const whiteNoise = ctx.createBufferSource();
+        whiteNoise.buffer = noiseBuffer;
+
+        const filter = ctx.createBiquadFilter();
+        filter.type = 'bandpass';
+        filter.frequency.value = freq;
+        filter.Q.value = 3.0;
+
+        whiteNoise.connect(filter);
+        filter.connect(gain);
+        gain.connect(ctx.destination);
+
+        const now = ctx.currentTime + delay;
+        gain.gain.setValueAtTime(0.35, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+
+        whiteNoise.start(now);
+        whiteNoise.stop(now + duration);
+      };
+
+      // 4 tiếng nhai rộp rộp liên tiếp
+      playCrunch(0.00, 1800, 0.12);
+      playCrunch(0.18, 1400, 0.14);
+      playCrunch(0.40, 2000, 0.12);
+      playCrunch(0.62, 1600, 0.16);
+
+      setTimeout(() => { try { ctx.close(); } catch(e){} }, 1200);
+    } catch(e) { console.warn("Lỗi phát âm thanh nhai:", e); }
+  }
+
   $('btnFeedPet').onclick = () => {
     if (state.carrots <= 0) return alert("Hết cà rốt rồi! Con làm bài tập để nhận thêm cà rốt cho Thỏ nhé 🥕!");
     state.carrots--;
-    triggerCelebration(0);
-    toast("Thỏ măm măm cà rốt ngon lành! 🐰🥕");
+
+    // Hiện pop-up Thỏ ăn cà rốt to giữa màn hình
+    const overlay = $('bunnyEatingOverlay');
+    overlay.style.display = 'flex';
+    playCarrotMunchSound();
+
+    if (window.confetti) {
+      confetti({
+        particleCount: 80,
+        spread: 70,
+        origin: { y: 0.6 },
+        colors: ['#ff758c', '#ff9f43', '#1dd1a1']
+      });
+    }
+
+    setTimeout(() => {
+      overlay.style.display = 'none';
+    }, 1800);
+
+    toast("Thỏ măm măm cà rốt ngon lành! (｡♥‿♥｡) 🥕✨");
     if (state.carrots % 5 === 0 && state.petLevel < 4) {
       state.petLevel++;
       toast(`🎉 Chúc mừng! Thỏ đã tiến hóa lên Cấp ${state.petLevel}!`);
@@ -1106,7 +1209,7 @@ QUY TẮC TRÌNH BÀY:
   };
 
   // ========================================================
-  // 🎡 VÒNG QUAY MAY MẮN (CANVAS) - CHUẨN XÁC & CÓ KHÓA ĐIỀU KIỆN
+  // 🎡 VÒNG QUAY MAY MẮN
   // ========================================================
   const wheelSlices = [
     { text: '+1 ⭐', color: '#ffb3ba' },
@@ -1151,7 +1254,6 @@ QUY TẮC TRÌNH BÀY:
     }
   }
 
-  // MỞ VÒNG QUAY & KIỂM TRA ĐIỀU KIỆN 100% KPI HÔM NAY
   $('btnOpenWheel').onclick = () => {
     const { todayTasks, approvedCount, kpi, is100, alreadySpun } = checkWheelEligibility();
     const resultBox = $('wheelResultText');
@@ -1181,7 +1283,6 @@ QUY TẮC TRÌNH BÀY:
     setTimeout(drawWheel, 100);
   };
 
-  // MẸ BẤM TẶNG THÊM LƯỢT QUAY CHO CON
   $('btnMomGiftSpin').onclick = () => {
     localStorage.removeItem('LAST_WHEEL_SPIN_DATE');
     const spinBtn = $('btnSpinWheel');
@@ -1205,7 +1306,6 @@ QUY TẮC TRÌNH BÀY:
 
     const numSlices = wheelSlices.length;
     const arc = (2 * Math.PI) / numSlices;
-
     const winningIdx = Math.floor(Math.random() * numSlices);
     const prize = wheelSlices[winningIdx];
 
@@ -1237,14 +1337,12 @@ QUY TẮC TRÌNH BÀY:
         currentWheelAngle = finalAngle;
         drawWheel();
 
-        // GHI NHỚ ĐÃ QUAY HÔM NAY (KHÓA LẠI NGAY LẬP TỨC)
         localStorage.setItem('LAST_WHEEL_SPIN_DATE', todayISO());
         $('btnSpinWheel').disabled = true;
         $('btnSpinWheel').style.opacity = '0.5';
         $('btnSpinWheel').style.cursor = 'not-allowed';
         $('btnSpinWheel').textContent = 'ĐÃ QUAY HÔM NAY ✓';
 
-        // THÔNG BÁO KẾT QUẢ CHUẨN XÁC
         $('wheelResultText').innerHTML = `🎉 <b>Hoan hô! Con nhận được: ${prize.text}!</b>`;
         triggerCelebration(0);
 
@@ -1261,13 +1359,13 @@ QUY TẮC TRÌNH BÀY:
   };
 
   // ========================================================
-  // 🍅 ĐỒNG HỒ POMODORO & TIẾNG MƯA THƯ GIÃN (WEB AUDIO)
+  // 🍅 ĐỒNG HỒ POMODORO & NHẠC KHÔNG LỜI PIANO
   // ========================================================
   let pomoTime = 25 * 60;
   let pomoTimer = null;
   let isPomoRunning = false;
-  let isRainPlaying = false;
-  let rainAudioCtx = null, rainSource = null;
+  let isPianoPlaying = false;
+  const pianoAudio = $('pianoAudio');
 
   $('btnOpenPomodoro').onclick = () => $('pomodoroDialog').showModal();
 
@@ -1293,6 +1391,9 @@ QUY TẮC TRÌNH BÀY:
           clearInterval(pomoTimer);
           isPomoRunning = false;
           triggerCelebration(0);
+          if (pianoAudio) pianoAudio.pause();
+          isPianoPlaying = false;
+          $('btnPomoMusic').textContent = "🎹 Nhạc Piano: Tắt";
           alert("🎉 Hết 25 phút tập trung rồi! Con nghỉ giải lao 5 phút nhé!");
         }
       }, 1000);
@@ -1307,41 +1408,35 @@ QUY TẮC TRÌNH BÀY:
     updatePomoDisplay();
   };
 
-  function toggleRainSound() {
-    if (isRainPlaying) {
-      if (rainAudioCtx) rainAudioCtx.close();
-      isRainPlaying = false;
-      $('btnPomoRain').textContent = "🌧️ Tiếng mưa: Tắt";
+  function togglePianoMusic() {
+    if (!pianoAudio) return;
+    if (isPianoPlaying) {
+      pianoAudio.pause();
+      isPianoPlaying = false;
+      $('btnPomoMusic').textContent = "🎹 Nhạc Piano: Tắt";
     } else {
-      try {
-        const AudioCtx = window.AudioContext || window.webkitAudioContext;
-        rainAudioCtx = new AudioCtx();
-        const bufferSize = rainAudioCtx.sampleRate * 2;
-        const buffer = rainAudioCtx.createBuffer(1, bufferSize, rainAudioCtx.sampleRate);
-        const output = buffer.getChannelData(0);
-        for (let i = 0; i < bufferSize; i++) output[i] = (Math.random() * 2 - 1) * 0.05;
-
-        rainSource = rainAudioCtx.createBufferSource();
-        rainSource.buffer = buffer;
-        rainSource.loop = true;
-
-        const filter = rainAudioCtx.createBiquadFilter();
-        filter.type = 'lowpass';
-        filter.frequency.value = 1000;
-
-        rainSource.connect(filter);
-        filter.connect(rainAudioCtx.destination);
-        rainSource.start();
-
-        isRainPlaying = true;
-        $('btnPomoRain').textContent = "🌧️ Tiếng mưa: Đang bật";
-      } catch(e){ alert("Trình duyệt không hỗ trợ Web Audio."); }
+      pianoAudio.play().then(() => {
+        isPianoPlaying = true;
+        $('btnPomoMusic').textContent = "🎹 Nhạc Piano: Đang phát";
+      }).catch(err => {
+        console.warn("Lỗi phát audio:", err);
+        alert("Vui lòng tương tác với màn hình để bật nhạc nhé!");
+      });
     }
   }
-  $('btnPomoRain').onclick = toggleRainSound;
+  $('btnPomoMusic').onclick = togglePianoMusic;
+
+  // Dừng nhạc khi đóng popup Pomodoro
+  $('pomodoroDialog').addEventListener('close', () => {
+    if (pianoAudio && isPianoPlaying) {
+      pianoAudio.pause();
+      isPianoPlaying = false;
+      $('btnPomoMusic').textContent = "🎹 Nhạc Piano: Tắt";
+    }
+  });
 
   // ========================================================
-  // 🎴 THẺ FLASHCARD 3D (KHO RỘNG LỚN & XÁO TRỘN NGẪU NHIÊN)
+  // 🎴 THẺ FLASHCARD 3D
   // ========================================================
   const MASTER_FLASHCARDS = [
     { front: "Rectangle", back: "Hình chữ nhật", type: "cambridge", cat: "Tiếng Anh Cambridge" },
@@ -1659,7 +1754,6 @@ QUY TẮC TRÌNH BÀY:
     renderHistory();
     updatePetUI();
 
-    // CẬP NHẬT TRẠNG THÁI NÚT VÒNG QUAY
     const wheelStatus = checkWheelEligibility();
     const btnWheel = $('btnOpenWheel');
     if (btnWheel) {
