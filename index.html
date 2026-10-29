@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+  <!-- KHAI BÁO CÀI ĐẶT APP ĐIỆN THOẠI & ICON HOA ANH ĐÀO 🌸 -->
+  <meta name="theme-color" content="#f6a9bd">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Góc Học Tập 🌸">
+  <link rel="icon" type="image/png" sizes="192x192" href="https://img.icons8.com/color/192/cherry-blossom.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="https://img.icons8.com/color/512/cherry-blossom.png">
+  <link rel="apple-touch-icon" href="https://img.icons8.com/color/192/cherry-blossom.png">
+  <link rel="manifest" href='data:application/manifest+json,{"name":"Góc học tập của Khánh Huyền","short_name":"Góc Học Tập 🌸","start_url":".","display":"standalone","background_color":"#fff5f7","theme_color":"#f6a9bd","icons":[{"src":"https://img.icons8.com/color/192/cherry-blossom.png","sizes":"192x192","type":"image/png"},{"src":"https://img.icons8.com/color/512/cherry-blossom.png","sizes":"512x512","type":"image/png"}]}'>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Góc học tập của Khánh Huyền 🌸</title>
 
-  <meta name="theme-color" content="#f6a9bd">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <link rel="icon" type="image/png" href="https://img.icons8.com/color/192/cherry-blossom.png">
-
-  <!-- Fonts & CDN Thư viện -->
+  <!-- Fonts, Confetti & Supabase SDK -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -19,72 +25,52 @@
 
 <style>
 :root{
-  --pink:#f6a9bd;--pink-dark:#c95c78;--pink-soft:#fff0f4;
+  --pink:#f6a9bd;--pink-dark:#c95c78;--pink-soft:#fff0f4;--pink-tab:#ffd3df;
   --ink:#51434a;--muted:#8a7b82;--line:#f2d7df;
+  --green:#dff5ef;--green-dark:#36795f;--yellow:#fff3c9;--blue:#e3f2ff;
   --shadow:0 8px 24px rgba(195,105,133,.10);
 }
 *{box-sizing:border-box}
 body{margin:0;background:linear-gradient(180deg,#fff5f7 0,#fffafb 330px,#fff 100%);font-family:"Quicksand", sans-serif;color:var(--ink);font-size:15px}
 button,input,select,textarea{font:inherit}
 button{cursor:pointer}
-.app{max-width:1240px;margin:0 auto;padding:22px 18px 50px}
+.app{max-width:1220px;margin:0 auto;padding:24px 18px 50px}
 
-/* HEADER */
-.hero{position:relative;overflow:hidden;background:linear-gradient(120deg,#fff0f4,#fff8fb 58%,#f8efff);border:1px solid #f5cbd7;border-radius:24px;padding:22px 28px 20px;box-shadow:var(--shadow)}
+/* GIAO DIỆN HEADER ĐẸP & GỌN GÀNG CỦA MẸ */
+.hero{position:relative;overflow:hidden;background:linear-gradient(120deg,#fff0f4,#fff8fb 58%,#f8efff);border:1px solid #f5cbd7;border-radius:24px;padding:24px 28px 20px;box-shadow:var(--shadow)}
 .hero:after{content:"✿";position:absolute;right:22px;top:-28px;font-size:125px;color:#f3a8bf;opacity:.13;transform:rotate(15deg);pointer-events:none}
-.hero-top{display:grid;grid-template-columns:minmax(0,1fr) auto;justify-content:space-between;gap:20px;align-items:start;position:relative;z-index:1}
-.hero-copy{min-width:0;max-width:720px}
+.hero-top{display:grid;grid-template-columns:minmax(0,1fr) auto;justify-content:space-between;gap:22px;align-items:start;position:relative;z-index:1}
+.hero-copy{min-width:0;max-width:700px}
 .hero-meta{display:flex;flex-direction:column;align-items:flex-end;gap:9px;min-width:190px}
-.hero-tools{position:relative;z-index:1;display:grid;grid-template-columns:1fr;gap:9px;margin-top:18px;padding-top:14px;border-top:1px solid #f3d5df}
+.hero-tools{position:relative;z-index:1;display:grid;grid-template-columns:1fr;gap:9px;margin-top:20px;padding-top:15px;border-top:1px solid #f3d5df}
 .tool-group{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .tool-group-label{font-size:11px;font-weight:800;letter-spacing:.04em;color:#a17c89;min-width:105px}
 .tool-group-buttons{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.hero .btn{white-space:nowrap}
 
-.eyebrow{font-family:'Dancing Script', cursive;font-weight:700;color:var(--pink-dark);font-size:36px;line-height:1.2}
-h1{margin:4px 0 6px;font-size:clamp(22px,3.6vw,32px);color:#9f4963;font-weight:800;letter-spacing:-0.5px}
-.subtitle{color:#806c75;margin:0;max-width:680px;line-height:1.55;font-size:14px}
-.today-pill{background:#fff9fb;border:1px solid #f4cad7;border-radius:999px;padding:7px 15px;font-weight:700;color:#a6536c;white-space:nowrap;font-size:13.5px}
+.eyebrow{font-family:'Dancing Script', cursive;font-weight:700;color:var(--pink-dark);font-size:38px;line-height:1.2;margin-bottom:2px}
+h1{margin:4px 0 8px;font-size:clamp(24px,3.8vw,34px);color:#9f4963;font-weight:800;letter-spacing:-0.5px}
 
-.role-switch{display:flex;background:#fff0f4;border:1px solid #f4cad7;border-radius:999px;padding:3px;gap:4px}
-.role-btn{background:transparent;border:0;border-radius:999px;padding:6px 14px;font-size:12px;font-weight:800;color:#a6536c;transition:0.2s}
-.role-btn.active{background:#e97998;color:#fff;box-shadow:0 2px 8px rgba(233,121,152,0.3)}
-
-.admin-only{display:none !important}
-.unlocked .admin-only{display:inline-flex !important}
-
-/* STATS */
+.subtitle{color:#806c75;margin:0;max-width:660px;line-height:1.6}
+.today-pill{background:#fff9fb;border:1px solid #f4cad7;border-radius:999px;padding:8px 15px;font-weight:700;color:#a6536c;white-space:nowrap}
 .stats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin:18px 0}
-.stat{background:#fff;border:1px solid var(--line);border-radius:18px;padding:15px 16px;box-shadow:var(--shadow);min-width:0;position:relative}
-.stat .label{font-size:11px;color:var(--muted);font-weight:800}
-.stat .value{font-size:24px;font-weight:900;margin-top:4px;color:#a94e69}
-.stat .hint{font-size:11px;color:var(--muted);margin-top:3px}
-
-/* MAIN LAYOUT */
-.layout{display:grid;grid-template-columns:minmax(0,1fr) 350px;gap:18px;align-items:start}
+.stat{background:#fff;border:1px solid var(--line);border-radius:17px;padding:16px 17px;box-shadow:var(--shadow);min-width:0;position:relative}
+.stat .label{font-size:11.5px;color:var(--muted);font-weight:800}
+.stat .value{font-size:25px;font-weight:800;margin-top:5px;color:#a94e69}
+.stat .hint{font-size:11.5px;color:var(--muted);margin-top:3px}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:18px;align-items:start}
 .panel{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:18px}
-.panel-head{padding:15px 20px;border-bottom:1px solid #f6e0e6;display:flex;align-items:center;justify-content:space-between;gap:12px;background:linear-gradient(90deg,#fff6f8,#fff);flex-wrap:wrap}
-.panel-head h2{font-size:16.5px;margin:0;color:#a64e68;font-weight:800}
+.panel-head{padding:16px 20px;border-bottom:1px solid #f6e0e6;display:flex;align-items:center;justify-content:space-between;gap:12px;background:linear-gradient(90deg,#fff6f8,#fff);flex-wrap:wrap;}
+.panel-head h2{font-size:17px;margin:0;color:#a64e68}
 .panel-body{padding:18px 20px}
-
-/* TABS & CALENDAR */
 .tabs{display:flex;gap:7px;overflow-x:auto;padding:12px 15px 0;background:#fff1f4;border-bottom:1px solid #f5d6df}
-.tab{border:0;background:#ffd5e0;color:#a84e68;font-weight:800;padding:11px 16px;border-radius:12px 12px 0 0;white-space:nowrap;min-width:100px;flex-shrink:0}
+.tab{border:0;background:#ffd5e0;color:#a84e68;font-weight:800;padding:12px 16px;border-radius:12px 12px 0 0;white-space:nowrap;min-width:105px;cursor:pointer;flex-shrink:0}
 .tab.active{background:#fff;color:#b34f6d;box-shadow:inset 0 3px #e97898}
-
-.week-days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
-.week-day{border:1px solid #f1d5df;background:#fffafb;border-radius:11px;padding:9px 4px;text-align:center;min-width:0}
-.week-day.selected{background:#ffe1e9;border-color:#e77f9b;box-shadow:inset 0 0 0 1px #e77f9b}
-.week-day .dow{font-size:10px;color:var(--muted);font-weight:800}
-.week-day .num{font-size:17px;font-weight:900;color:#a94e69;margin:3px 0}
-.week-day .dots{font-size:10px;color:#7c9e8e;white-space:nowrap}
-
-.phase{background:#e5f7f2;border-left:5px solid #4c9475;padding:12px 16px;border-radius:10px;margin:16px 20px;color:#476d5f;line-height:1.55;font-size:13.5px}
+.phase{background:#e5f7f2;border-left:5px solid #4c9475;padding:14px 16px;border-radius:10px;margin:17px 20px;color:#476d5f;line-height:1.6}
 .day-card{border:1px solid #f3cbd7;border-radius:15px;margin:0 20px 16px;overflow:hidden}
-.day-head{display:flex;justify-content:space-between;gap:10px;align-items:center;background:#fff0f4;padding:12px 16px;border-bottom:1px solid #f4d7df}
+.day-head{display:flex;justify-content:space-between;gap:10px;align-items:center;background:#fff0f4;padding:13px 16px;border-bottom:1px solid #f4d7df}
 .day-head strong{color:#b65570}
 .kpi-tag{font-size:12px;color:#7e6c73;font-weight:800}
-
-/* TASK ITEMS */
 .task-list{padding:6px 16px 12px}
 .task{display:grid;grid-template-columns:86px minmax(0,1fr) auto;gap:12px;align-items:start;padding:14px 0;border-bottom:1px solid #f4edf0}
 .task:last-child{border-bottom:0}
@@ -95,21 +81,17 @@ h1{margin:4px 0 6px;font-size:clamp(22px,3.6vw,32px);color:#9f4963;font-weight:8
 .task.done{background:#fafffd}
 .task.done .task-title{color:#36795f}
 .task-actions{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
-.badge-status{font-size:11px;font-weight:800;padding:3px 8px;border-radius:6px;display:inline-flex;align-items:center;gap:4px}
-.status-done{background:#e1f5ec;color:#36795f}
-.status-pending{background:#fff3c9;color:#8a6a16}
-.status-todo{background:#f1edf0;color:#7f6e76}
-
-/* BUTTONS & FORMS */
-.btn{border:0;border-radius:10px;padding:8px 14px;font-weight:800;transition:.15s;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:6px}
-.btn-primary{background:#e97998;color:white;box-shadow:0 4px 10px rgba(233,121,152,0.25)}
+.icon-btn{border:1px solid #f0d8df;background:#fff8fa;border-radius:8px;color:#a85a71;padding:6px 10px;font-size:12px;cursor:pointer}
+.icon-btn:hover{background:#ffeef3}
+.empty{padding:28px;text-align:center;color:var(--muted);line-height:1.6}
+.btn{border:0;border-radius:10px;padding:8px 13px;font-weight:800;transition:.15s;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.btn-primary{background:#e97998;color:white;box-shadow:0 4px 10px #e979982c}
 .btn-primary:hover{background:#d96586}
 .btn-soft{background:#fff0f4;color:#a44f68;border:1px solid #f2cfda}
 .btn-soft:hover{background:#fce5ec}
 .btn-green{background:#e2f5ed;color:#36795f;border:1px solid #c6e8dc}
-.btn-gold{background:linear-gradient(135deg, #ffe082, #ffb300);color:#5d4037;font-weight:800;box-shadow:0 3px 8px rgba(255,179,0,0.25)}
+.btn-gold{background:linear-gradient(135deg, #ffe082, #ffb300); color:#5d4037; font-weight:800; box-shadow:0 3px 8px rgba(255,179,0,0.3);}
 .btn-small{padding:5px 10px;font-size:12px;border-radius:8px}
-.icon-btn{border:1px solid #f0d8df;background:#fff8fa;border-radius:8px;color:#a85a71;padding:6px 10px;font-size:12px}
 .flex{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .row-between{display:flex;align-items:center;justify-content:space-between;gap:10px}
 select,input[type=date],input[type=text],input[type=number],textarea{width:100%;border:1px solid #ecd5dd;border-radius:10px;padding:9px 11px;background:#fffdfd;color:var(--ink);outline:none}
@@ -117,69 +99,142 @@ label{display:block;font-size:13px;font-weight:800;color:#806c75;margin:0 0 6px}
 .field{margin-bottom:12px}
 .progress{height:10px;background:#f8e6ec;border-radius:999px;overflow:hidden}
 .progress span{display:block;height:100%;background:linear-gradient(90deg,#e97898,#f6b2c6);border-radius:999px;transition:width .25s}
-
-/* 🐰 KHUNG THỎ TIẾN HÓA 50 CẤP TỰ ĐỘNG CHUYỂN 5 FILE ẢNH */
-.pet-widget{background:linear-gradient(135deg,#fff2f5,#fff8fb);border:1px solid #f4cad7;border-radius:20px;padding:14px;margin-bottom:15px;box-shadow:var(--shadow)}
-.pet-avatar-sprite{
-  width:95px;height:95px;border-radius:50%;border:3.5px solid #f6a9bd;background-color:#fff;
-  background-repeat:no-repeat;background-size:535% 230%;box-shadow:0 4px 15px rgba(233,121,152,0.35);
-  transition:all .4s cubic-bezier(0.175,0.885,0.32,1.275);flex-shrink:0;
-}
-.pet-avatar-sprite.large{width:180px;height:180px;border-width:4.5px;box-shadow:0 8px 30px rgba(233,121,152,0.45);margin:0 auto 12px}
-
-/* HIỆU ỨNG THỎ ĂN */
-#bunnyEatingOverlay{position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(255,240,245,.75);backdrop-filter:blur(4px);z-index:999999;display:none;align-items:center;justify-content:center}
-.bunny-eat-card{background:linear-gradient(135deg,#fff,#fff0f5);border:3px solid #f6a9bd;border-radius:32px;padding:30px 45px;text-align:center;box-shadow:0 20px 60px rgba(201,92,120,.3);animation:popCenter 1.8s ease-in-out forwards}
-
-/* MODAL & DIALOGS */
+.subject-progress{margin:14px 0}
+.subject-progress .row-between{font-size:13px;margin-bottom:7px}
+.reward-card{background:linear-gradient(135deg,#fff5d7,#fffaf0);border:1px solid #f3e5b4;border-radius:15px;padding:14px;margin-bottom:10px}
+.reward-card h3{margin:0 0 4px;font-size:15px;color:#97702b}
+.points{font-weight:900;color:#a46d22}
+.small-note{font-size:12px;line-height:1.5;color:var(--muted)}
+.week-days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.week-day{border:1px solid #f1d5df;background:#fffafb;border-radius:11px;padding:10px 4px;text-align:center;cursor:pointer;min-width:0}
+.week-day.selected{background:#ffe1e9;border-color:#e77f9b;box-shadow:inset 0 0 0 1px #e77f9b}
+.week-day .dow{font-size:10px;color:var(--muted);font-weight:800}
+.week-day .num{font-size:18px;font-weight:900;color:#a94e69;margin:4px 0}
+.week-day .dots{font-size:10px;color:#7c9e8e;white-space:nowrap}
+.footer{text-align:center;color:#aa98a0;font-size:12px;margin-top:22px}
 dialog{border:0;border-radius:20px;padding:0;width:min(680px,calc(100% - 24px));box-shadow:0 20px 70px rgba(99,50,70,.3);color:var(--ink)}
 dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
 .modal-head{padding:16px 20px;background:#fff0f4;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
-.modal-head h2{margin:0;font-size:17px;color:#a64e68;font-weight:800}
+.modal-head h2{margin:0;font-size:17px;color:#a64e68}
 .modal-body{padding:18px 20px;max-height:78vh;overflow:auto}
-.close{border:0;background:transparent;font-size:23px;color:#a64e68}
+.close{border:0;background:transparent;font-size:23px;color:#a64e68;cursor:pointer}
 .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#55434b;color:#fff;padding:12px 18px;border-radius:12px;box-shadow:var(--shadow);z-index:99999;display:none;max-width:90%;text-align:center}
 
-#star-toast{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);background:linear-gradient(135deg,#ff758c,#ff7eb3);color:white;padding:24px 44px;border-radius:24px;font-weight:900;font-size:26px;text-align:center;box-shadow:0 10px 30px rgba(255,117,140,0.5);z-index:99999;display:none;border:3px solid #fff}
-.show-toast{display:block !important;animation:popCenter 2s ease forwards}
-@keyframes popCenter{0%{transform:translate(-50%,-50%) scale(0.3);opacity:0}20%{transform:translate(-50%,-50%) scale(1.08);opacity:1}80%{transform:translate(-50%,-50%) scale(1);opacity:1}100%{transform:translate(-50%,-50%) scale(0.8);opacity:0}}
+#star-toast {
+  position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0);
+  background: linear-gradient(135deg, #ff758c, #ff7eb3); color: white;
+  padding: 24px 44px; border-radius: 24px; font-weight: 900; font-size: 28px; text-align: center;
+  box-shadow: 0 10px 30px rgba(255, 117, 140, 0.5); z-index: 99999; display: none; pointer-events: none; border: 3px solid #fff;
+}
+.show-toast { display: block !important; animation: popCenter 2s ease forwards; }
+@keyframes popCenter {
+  0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
+  20% { transform: translate(-50%, -50%) scale(1.08); opacity: 1; }
+  80% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+}
 
-/* AI CHAT */
-.ai-chat-box{height:340px;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:10px;background:#fffafb;border-radius:12px;border:1px solid #f3cbd7}
-.ai-msg{max-width:82%;padding:10px 14px;border-radius:16px;font-size:13.5px;line-height:1.5}
-.ai-msg.bot{background:#fff0f4;border:1px solid #f5cfdb;align-self:flex-start;color:#4a3b42}
-.ai-msg.user{background:#e97998;color:#fff;align-self:flex-end}
+.role-switch { display: flex; background: #fff0f4; border: 1px solid #f4cad7; border-radius: 999px; padding: 3px; gap: 4px; }
+.role-btn { background: transparent; border: 0; border-radius: 999px; padding: 6px 14px; font-size: 12px; font-weight: 800; color: #a6536c; cursor: pointer; transition: 0.2s; }
+.role-btn.active { background: #e97998; color: #fff; box-shadow: 0 2px 8px rgba(233,121,152,0.3); }
 
-/* FLASHCARD 3D */
-.flashcard-scene{perspective:800px;width:100%;max-width:380px;height:210px;margin:15px auto;cursor:pointer}
-.flashcard{width:100%;height:100%;position:relative;transition:transform .6s;transform-style:preserve-3d;border-radius:20px;box-shadow:0 10px 25px rgba(201,92,120,.15)}
-.flashcard.is-flipped{transform:rotateY(180deg)}
-.card-face{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center;border:2px solid #f4cad7}
-.card-front{background:linear-gradient(135deg,#fff0f4,#fff);color:#a64e68}
-.card-back{background:linear-gradient(135deg,#e1f5ec,#fff);color:#2e6950;transform:rotateY(180deg)}
+.admin-only { display: none !important; }
+.unlocked .admin-only { display: inline-flex !important; }
 
-/* WHEEL CONTAINER */
-.wheel-container{position:relative;width:280px;height:280px;margin:15px auto}
-#wheelCanvas{width:100%;height:100%;border-radius:50%;border:4px solid #fff;box-shadow:0 8px 24px rgba(233,121,152,0.3)}
-.wheel-pointer{position:absolute;top:-10px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:12px solid transparent;border-right:12px solid transparent;border-top:22px solid #e95f83;z-index:10}
+/* TRẠNG THÁI BÀI TẬP */
+.badge-status { font-size: 11px; font-weight: 800; padding: 4px 8px; border-radius: 6px; display: inline-flex; align-items: center; gap: 4px; }
+.status-done { background: #e1f5ec; color: #36795f; }
+.status-pending { background: #fff3c9; color: #8a6a16; }
+.status-todo { background: #f1edf0; color: #7f6e76; }
+.status-redo { background: #ffe4e8; color: #b64b63; border: 1px solid #f6cfda; }
+
+.task-link-btn { display: inline-flex; align-items: center; gap: 4px; background: #fff0f4; color: #c95c78; border: 1px solid #f4cad7; padding: 5px 10px; border-radius: 8px; font-size: 12px; font-weight: 800; text-decoration: none; margin-top: 6px; }
+.task-link-btn:hover { background: #ffe1e9; }
+.btn-quiz { background: #fff0f4; color: #c95c78; border: 1px solid #f4cad7; border-radius: 8px; padding: 5px 12px; font-size: 12px; font-weight: 800; margin-top: 6px; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; }
+.btn-quiz:hover { background: #fce4ec; border-color: #e97998; }
+
+.quiz-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.quiz-question-row { background: #fffafb; border: 1px solid #f4cad7; border-radius: 10px; padding: 10px 12px; }
+.quiz-q-title { font-weight: 700; color: #9f4963; margin-bottom: 6px; font-size: 13px; display: flex; justify-content: space-between; }
+.quiz-result-tag { font-size: 11px; font-weight: 800; padding: 2px 6px; border-radius: 6px; }
+.res-correct { background: #e1f5ec; color: #36795f; }
+.res-wrong { background: #ffe4e8; color: #b64b63; }
+
+.history-row { padding: 11px 0; border-bottom: 1px solid #f4edf0; }
+.history-row:last-child { border-bottom: 0; }
+
+.paste-drop-zone {
+  border: 2px dashed #f4cad7; background: #fff8fa; border-radius: 14px; padding: 18px 12px;
+  text-align: center; cursor: pointer; transition: 0.2s; outline: none;
+}
+.paste-drop-zone:hover, .paste-drop-zone:focus { border-color: #e97998; background: #fff0f4; }
+.paste-drop-zone.dragover { border-color: #e95f83; background: #ffe3eb; }
+
+/* BẠN HỌC AI THỎ SIÊU QUẬY */
+.ai-chat-box { height: 400px; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 10px; background: #fffafb; border-radius: 12px; border: 1px solid #f3cbd7; }
+.ai-msg { max-width: 82%; padding: 10px 14px; border-radius: 16px; font-size: 13.5px; line-height: 1.5; word-break: break-word; }
+.ai-msg.bot { background: #fff0f4; border: 1px solid #f5cfdb; align-self: flex-start; color: #4a3b42; border-bottom-left-radius: 4px; }
+.ai-msg.user { background: #e97998; color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
+.ai-msg img { max-width: 100%; border-radius: 8px; margin-top: 4px; }
+.ai-btn-circle { width: 38px; height: 38px; border-radius: 50%; border: 1px solid #f2cfda; background: #fff0f4; color: var(--pink-dark); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 16px; }
+.ai-btn-circle.recording { background: #ff4757; color: white; animation: pulse 1s infinite; }
+@keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+
+.typing-dots span { animation: blink 1.4s infinite both; font-weight: 900; font-size: 16px; }
+.typing-dots span:nth-child(2) { animation-delay: .2s; }
+.typing-dots span:nth-child(3) { animation-delay: .4s; }
+@keyframes blink { 0% { opacity: .2; } 20% { opacity: 1; } 100% { opacity: .2; } }
+
+/* THẺ FLASHCARD 3D */
+.flashcard-scene { perspective: 800px; width: 100%; max-width: 420px; height: 230px; margin: 15px auto; cursor: pointer; }
+.flashcard { width: 100%; height: 100%; position: relative; transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1); transform-style: preserve-3d; border-radius: 20px; box-shadow: 0 10px 25px rgba(201,92,120,0.15); }
+.flashcard.is-flipped { transform: rotateY(180deg); }
+.card-face { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; text-align: center; border: 2px solid #f4cad7; }
+.card-front { background: linear-gradient(135deg, #fff0f4, #fff); color: #a64e68; }
+.card-back { background: linear-gradient(135deg, #e1f5ec, #fff); color: #2e6950; transform: rotateY(180deg); }
+
+/* VÒNG QUAY MAY MẮN */
+.wheel-container { position: relative; width: 300px; height: 300px; margin: 15px auto; }
+#wheelCanvas { width: 100%; height: 100%; border-radius: 50%; box-shadow: 0 8px 24px rgba(233,121,152,0.3); border: 4px solid #fff; }
+.wheel-pointer { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 14px solid transparent; border-right: 14px solid transparent; border-top: 24px solid #e95f83; z-index: 10; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); }
+
+/* NUÔI THỎ CƯNG WIDGET */
+.pet-widget { background: linear-gradient(135deg, #fff2f5, #fff8fb); border: 1px solid #f4cad7; border-radius: 16px; padding: 12px; margin-bottom: 15px; display: flex; align-items: center; gap: 12px; }
+.pet-avatar { font-size: 38px; position: relative; animation: petBounce 2s infinite ease-in-out; }
+@keyframes petBounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
 
 @media(max-width:850px){
   .layout{grid-template-columns:1fr}
   .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .hero-top{grid-template-columns:1fr}
-  .hero-meta{align-items:flex-start}
+  .hero-top{grid-template-columns:1fr;gap:14px}
+  .hero-meta{align-items:flex-start;min-width:0}
+  .today-pill{display:inline-block}
+  .hero-tools{margin-top:15px}
+  .tool-group{align-items:flex-start;flex-direction:column;gap:6px}
+  .tool-group-label{min-width:0}
+  .task{grid-template-columns:1fr}
+  .task-actions{margin-top:6px}
+  .quiz-grid{grid-template-columns:1fr}
+}
+@media(max-width:520px){
+  .app{padding:12px 10px 30px}
+  .hero{padding:18px 16px;border-radius:18px}
+  .eyebrow{font-size:30px}
+  h1{font-size:25px}
+  .hero .btn{white-space:normal}
+  .tool-group-buttons{width:100%}
+  .tool-group-buttons .btn{flex:0 1 auto}
 }
 </style>
 </head>
 <body id="appBody">
 <div class="app">
-  <!-- HEADER -->
   <header class="hero">
     <div class="hero-top">
       <div class="hero-copy">
         <div class="eyebrow">🌸 Góc học tập của Khánh Huyền</div>
-        <h1>Hành trình nuôi Thỏ cưng lớn khôn!</h1>
-        <p class="subtitle">Mỗi bài học con hoàn thành được Mẹ duyệt sẽ nhận +1.000đ tích lũy mua Cà rốt. Cho Thỏ ăn để thăng cấp qua 50 hình thái tuyệt đẹp nhé!</p>
+        <h1>Hôm nay mình cùng cố gắng nhé!</h1>
+        <p class="subtitle">Làm bài tập, làm phiếu trắc nghiệm nhận sao hoặc luyện nói cùng Bạn học AI để đổi quà yêu thích nhé!</p>
       </div>
       <div class="hero-meta">
         <div class="today-pill" id="todayPill">📅 Hôm nay</div>
@@ -190,8 +245,8 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
       </div>
     </div>
 
-    <!-- THANH CÔNG CỤ HOẠT ĐỘNG 100% -->
-    <div class="hero-tools">
+    <!-- THANH CÔNG CỤ 2 HÀNG ĐÃ ĐƯỢC GIỮ NGUYÊN Y HỆT HÌNH ẢNH MẸ THIẾT KẾ -->
+    <div class="hero-tools" aria-label="Công cụ học tập">
       <div class="tool-group">
         <span class="tool-group-label">📚 HỌC TẬP</span>
         <div class="tool-group-buttons">
@@ -206,19 +261,24 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
         <span class="tool-group-label">☁️ DỮ LIỆU</span>
         <div class="tool-group-buttons">
           <a href="https://docs.google.com/spreadsheets/d/1INPJnlsU0saiIBP92mkRCLShU3qWZ20elD1OxRKnNVc/edit?gid=0#gid=0" id="linkOpenSheet" target="_blank" rel="noopener noreferrer" class="btn btn-soft btn-small" style="font-weight:800;text-decoration:none;">📊 Google Sheets</a>
-          <button class="btn btn-soft btn-small" id="btnSyncSheet" style="font-weight:800;color:#1a73e8;border-color:#c2d7fa;background:#f0f6ff;">🔄 Đồng bộ Sheets</button>
+          <button class="btn btn-soft btn-small" id="btnSyncSheet" style="font-weight:800;color:#1a73e8;border-color:#c2d7fa;background:#f0f6ff;">🔄 Đồng bộ Google Sheets</button>
+          <button class="btn btn-soft btn-small" id="btnConfigSheet" title="Đổi link Sheet & Bắn tin Telegram cho Mẹ">⚙️ Cài đặt</button>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- 5 THẺ THỐNG KÊ -->
+  <!-- 5 THẺ THỐNG KÊ (KÈM KHIÊN BẢO VỆ STREAK) -->
   <section class="stats">
     <div class="stat"><div class="label">🌷 BÀI HOÀN THÀNH</div><div class="value" id="statDone">0/0</div><div class="hint">Trong tháng đang xem</div></div>
     <div class="stat"><div class="label">🎯 KPI HOÀN THÀNH</div><div class="value" id="statKpi">0%</div><div class="hint">Đã được Mẹ duyệt</div></div>
     <div class="stat"><div class="label">⭐ ĐIỂM THƯỞNG</div><div class="value" id="statPoints">0</div><div class="hint">Dùng để đổi quà tặng</div></div>
     <div class="stat"><div class="label">⏳ CHỜ MẸ DUYỆT</div><div class="value" id="statPending" style="color:#c98319;">0</div><div class="hint">Bài con đã nộp</div></div>
-    <div class="stat"><div class="label">🔥 CHUỖI HỌC (STREAK)</div><div class="value" id="statStreak">0 ngày</div><div class="hint" id="streakShieldHint" style="cursor:pointer; color:#c95c78; font-weight:700;">🛡️ Mua khiên (5⭐)</div></div>
+    <div class="stat">
+      <div class="label">🔥 STREAK</div>
+      <div class="value" id="statStreak">0 ngày</div>
+      <div class="hint" id="streakShieldHint" style="cursor:pointer; color:#c95c78; font-weight:700;">🛡️ Mua khiên (5⭐)</div>
+    </div>
   </section>
 
   <div class="layout">
@@ -226,11 +286,21 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
       <!-- BẢNG KẾ HOẠCH HỌC TẬP -->
       <section class="panel">
         <div class="panel-head">
-          <div style="display:flex; align-items:center; gap:10px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
             <h2>🗓️ Kế hoạch học tập</h2>
-            <select id="yearSelect" style="width:95px; padding:5px 8px; font-weight:700; color:#a64e68; background:#fff0f4; border:1px solid #f4cad7; border-radius:10px;">
+            <!-- DANH SÁCH NĂM 2026 - 2036 -->
+            <select id="yearSelect" style="width: 95px; padding: 5px 8px; font-weight: 700; color: #a64e68; background: #fff0f4; border: 1px solid #f4cad7; border-radius: 10px;">
               <option value="2026" selected>2026</option>
               <option value="2027">2027</option>
+              <option value="2028">2028</option>
+              <option value="2029">2029</option>
+              <option value="2030">2030</option>
+              <option value="2031">2031</option>
+              <option value="2032">2032</option>
+              <option value="2033">2033</option>
+              <option value="2034">2034</option>
+              <option value="2035">2035</option>
+              <option value="2036">2036</option>
             </select>
           </div>
           <div class="flex">
@@ -242,7 +312,9 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
         <div class="tabs" id="monthTabs"></div>
 
         <div class="panel-body" style="padding-bottom:8px">
-          <div class="field"><label for="filterSubject">Lọc theo môn</label><select id="filterSubject"><option value="all">Tất cả các môn</option><option>Toán</option><option>Tiếng Việt</option><option>Tiếng Anh</option><option>Khoa học</option><option>Đọc sách</option><option>Khác</option></select></div>
+          <div class="form-grid" style="grid-template-columns: 1fr; margin-bottom: 8px;">
+            <div class="field"><label for="filterSubject">Lọc theo môn</label><select id="filterSubject"><option value="all">Tất cả các môn</option><option>Toán</option><option>Tiếng Việt</option><option>Tiếng Anh</option><option>Khoa học</option><option>Đọc sách</option><option>Khác</option></select></div>
+          </div>
           <div class="row-between" style="margin:4px 0 12px">
             <h3 style="margin:0; font-size:15px; color:#a64e68;">Tuần đang xem</h3>
             <div class="flex"><button class="btn btn-soft btn-small" id="prevWeek">← Tuần trước</button><button class="btn btn-soft btn-small" id="nextWeek">Tuần sau →</button></div>
@@ -258,37 +330,34 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
         <div class="panel-head"><h2>📚 Tổng kết theo môn</h2><span class="kpi-tag" id="subjectMonthLabel"></span></div>
         <div class="panel-body" id="subjectStats"></div>
       </section>
+
+      <!-- LỊCH SỬ HỌC TẬP -->
+      <section class="panel">
+        <div class="panel-head"><h2>📖 Lịch sử học tập</h2></div>
+        <div class="panel-body">
+          <div class="form-grid" style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:12px;">
+            <div class="field"><label for="historyFilter">Trạng thái</label><select id="historyFilter"><option value="all">Tất cả bài tập</option><option value="done">Đã hoàn thành</option><option value="pending">Chờ mẹ duyệt</option><option value="redo">Cần làm lại</option><option value="late">Quá hạn</option></select></div>
+            <div class="field"><label for="historySearch">Tìm bài tập</label><input id="historySearch" type="text" placeholder="Nhập tên bài..."></div>
+          </div>
+          <div id="historyList"></div>
+        </div>
+      </section>
     </main>
 
     <aside>
-      <!-- WIDGET THỎ TIẾN HÓA -->
+      <!-- WIDGET NUÔI THỎ CƯNG -->
       <div class="pet-widget">
-        <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
-          <div class="pet-avatar-sprite" id="w_petAvatar" title="Thỏ cưng tiến hóa của Khánh Huyền"></div>
-          <div style="flex:1; min-width:0;">
-            <div class="row-between">
-              <strong id="petNameLabel" style="font-size:13.5px; color:#a64e68; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Thỏ Cấp 1</strong>
-              <span style="font-size:11px; font-weight:800; color:#36795f; background:#e2f5ed; padding:2px 7px; border-radius:6px;" id="petLevelLabel">Cấp 1/50</span>
-            </div>
-            <div class="progress" style="margin:6px 0 4px;"><span id="petExpBar" style="width:0%;"></span></div>
-            <div class="row-between" style="font-size:11px; color:#888;">
-              <span id="petExpText">Ăn: 0/2 🥕</span>
-              <span id="petStageLabel" style="color:#c95c78; font-weight:800;">Chặng 1/5</span>
-            </div>
+        <div class="pet-avatar" id="petAvatar">🐰</div>
+        <div style="flex:1;">
+          <div class="row-between">
+            <strong id="petNameLabel" style="font-size:13px; color:#a64e68;">Thỏ Bé Bỏng</strong>
+            <span style="font-size:11px; font-weight:800; color:#36795f;" id="petLevelLabel">Cấp 1</span>
           </div>
-        </div>
-
-        <div style="background:#fff; border:1px solid #f4cad7; border-radius:12px; padding:9px 12px; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center;">
-          <div>
-            <div style="font-size:11px; color:#8a7b82; font-weight:700;">VÍ TIỀN HỌC TẬP</div>
-            <div style="font-size:17px; font-weight:900; color:#e95f83;" id="petMoneyLabel">0đ</div>
+          <div class="progress" style="margin:4px 0;"><span id="petExpBar" style="width:20%;"></span></div>
+          <div class="row-between" style="font-size:11.5px; color:#888;">
+            <span>Cà rốt: <strong id="petCarrotCount" style="color:#e95f83;">0 🥕</strong></span>
+            <button class="btn btn-soft btn-small" id="btnFeedPet" style="padding:2px 8px; font-size:11px;">Cho ăn 🥕</button>
           </div>
-          <button class="btn btn-gold btn-small" id="btnOpenPetModal" style="font-size:12px; padding:6px 12px;">🌟 Đài Tiến Hóa</button>
-        </div>
-
-        <div class="row-between" style="font-size:12px;">
-          <span>Cà rốt: <strong id="petCarrotCount" style="color:#e95f83;">0 🥕</strong></span>
-          <button class="btn btn-soft btn-small" id="btnFeedPet" style="padding:5px 12px; font-size:12px; font-weight:800;">Cho ăn 🥕</button>
         </div>
       </div>
 
@@ -298,234 +367,328 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
         <div class="panel-body">
           <p class="small-note" style="margin-top:0">Con dùng điểm thưởng ⭐ để đổi những phần quà yêu thích nhé!</p>
           <div id="rewardsList"></div>
+          <div style="margin-top: 15px; border-top: 1px dashed #f3cbd7; padding-top: 10px;">
+            <h4 style="margin: 0 0 10px; font-size: 13px; color: #a64e68;">🛒 Quà con đã đổi</h4>
+            <div id="redeemHistoryList"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- MỤC TIÊU TUẦN -->
+      <section class="panel">
+        <div class="panel-head"><h2>🎯 Mục tiêu tuần</h2><button class="btn btn-soft btn-small admin-only" id="editGoalBtn">Sửa</button></div>
+        <div class="panel-body">
+          <div class="row-between"><span class="small-note">KPI tuần này</span><strong id="weekKpiLabel">0%</strong></div>
+          <div class="progress" style="margin:8px 0 15px"><span id="weekKpiBar" style="width:0%"></span></div>
+          <div class="row-between"><span class="small-note">Mục tiêu</span><strong id="goalLabel">100%</strong></div>
+          <p class="small-note" id="goalMessage">Từng chút một, con sẽ làm được!</p>
+          <button class="btn btn-green" style="width:100%;margin-top:8px" id="weeklyReportBtn">Xem tổng kết tuần</button>
         </div>
       </section>
     </aside>
   </div>
+  <div class="footer">🌸 Góc học tập của Khánh Huyền · Kết nối Supabase Cloud & Google Sheets 💕</div>
 </div>
 
 <!-- ==================================================== -->
-<!-- TOÀN BỘ CÁC CỬA SỔ HỘP THOẠI (MODAL) CỦA CÁC NÚT BẤM -->
+<!-- 🐰 CỬA SỔ BẠN HỌC AI THỎ SIÊU QUẬY -->
 <!-- ==================================================== -->
-
-<!-- 1. BẠN HỌC AI THỎ SIÊU QUẬY -->
-<dialog id="aiTutorDialog" style="width: min(600px, calc(100% - 20px));">
+<dialog id="aiTutorDialog" style="width: min(650px, calc(100% - 20px));">
   <div class="modal-head">
     <h2>🐰 Bạn Học AI Thỏ Siêu Quậy 🌸</h2>
-    <button class="close" data-close="aiTutorDialog">×</button>
+    <div class="flex" style="gap:5px;">
+      <button class="icon-btn" id="btnToggleAiLang" title="Đổi chế độ Tiếng Anh / Tiếng Việt">🇻🇳 Tiếng Việt</button>
+      <button class="icon-btn" id="btnAiChallenge" title="Thách đấu Thỏ câu đố 3 phút">⚔️ Thách đấu</button>
+      <button class="icon-btn" id="btnResetAiChat" title="Xóa nhớ / Bắt đầu bài mới">🔄 Bài mới</button>
+      <button class="icon-btn" id="btnAiKeySettings" title="Cài đặt Gemini API Key">⚙️ Key</button>
+      <button class="close" data-close="aiTutorDialog">×</button>
+    </div>
   </div>
   <div class="modal-body" style="padding: 14px;">
     <div class="ai-chat-box" id="aiChatBox">
-      <div class="ai-msg bot">🌸 Hí chào Khánh Huyền! Tớ là Thỏ Siêu Quậy nè 🐰 Cậu có câu đố hay bài tập nào khó cần tớ hỗ trợ không nào? ⭐</div>
+      <div class="ai-msg bot">🌸 Hí chào Khánh Huyền! Tớ là Thỏ Siêu Quậy nè 🐰 Hôm nay tớ với cậu cùng giải bài tập nào đây? Cậu chụp ảnh bài trong sách gửi tớ hoặc bấm Micro để nói chuyện với tớ nha! ⭐</div>
     </div>
-    <div class="flex" style="gap: 6px; margin-top: 10px;">
-      <input type="text" id="aiTextInput" placeholder="Nhập tin nhắn trò chuyện với Thỏ..." style="flex:1;">
-      <button type="button" class="btn btn-primary" id="aiBtnSend">Gửi 🚀</button>
+    <div id="aiImgPreview" style="display:none; align-items:center; gap:8px; margin: 8px 0; background:#fff; padding:6px; border-radius:8px; border:1px solid #f4cad7;">
+      <img id="aiPreviewThumb" src="" style="height:45px; border-radius:4px;">
+      <span style="font-size:12px; color:#888;">Đã đính kèm ảnh</span>
+      <button type="button" id="aiBtnClearImg" style="border:0; background:transparent; margin-left:auto; cursor:pointer;">❌</button>
     </div>
-  </div>
-</dialog>
-
-<!-- 2. ĐỒNG HỒ POMODORO -->
-<dialog id="pomodoroDialog" style="width: min(500px, calc(100% - 24px));">
-  <div class="modal-head">
-    <h2>🍅 Giờ học Pomodoro & Nhạc Lo-fi</h2>
-    <button class="close" data-close="pomodoroDialog">×</button>
-  </div>
-  <div class="modal-body" style="text-align:center; padding: 18px;">
-    <div id="pomoTimerLabel" style="font-size:56px; font-weight:900; color:#c95c78; margin-bottom:4px;">25:00</div>
-    <div style="font-weight:800; color:#36795f; margin-bottom:12px;">📖 Đến giờ tập trung học rồi cô chủ nhỏ ơi!</div>
-    <div class="flex" style="justify-content:center; gap:8px; margin-bottom: 15px;">
-      <button class="btn btn-primary" id="btnPomoStart">Bắt đầu ⏱️</button>
-      <button class="btn btn-soft" id="btnPomoReset">Đặt lại ↩️</button>
-    </div>
-    <div style="border-radius:12px; overflow:hidden; aspect-ratio:16/9; max-height:180px; background:#000;">
-      <iframe id="pomoYtIframe" width="100%" height="100%" src="https://www.youtube.com/embed/jfKfPfyJRdk?enablejsapi=1" frameborder="0" allow="autoplay; encrypted-media"></iframe>
+    <div class="flex" style="gap: 6px; margin-top: 8px;">
+      <label class="ai-btn-circle" title="Tải ảnh bài tập / sách">
+        📷
+        <input type="file" id="aiFileInput" accept="image/*" style="display:none;">
+      </label>
+      <button type="button" class="ai-btn-circle" id="aiBtnMic" title="Bấm để nói bằng giọng nói">🎤</button>
+      <input type="text" id="aiTextInput" placeholder="Bấm Micro để nói, hoặc gõ tin nhắn (Ctrl + V dán ảnh)..." style="flex:1;">
+      <button type="button" class="btn btn-primary" id="aiBtnSend">Gửi</button>
     </div>
   </div>
 </dialog>
 
-<!-- 3. THẺ FLASHCARD 3D -->
-<dialog id="flashcardDialog">
-  <div class="modal-head">
-    <h2>🎴 Thẻ học thông minh Flashcard</h2>
-    <button class="close" data-close="flashcardDialog">×</button>
-  </div>
-  <div class="modal-body" style="text-align:center;">
-    <div class="small-note" style="margin-bottom:8px;">Chạm vào thẻ để lật xem đáp án 🌟</div>
-    <div class="flashcard-scene" id="flashcardScene">
-      <div class="flashcard" id="activeFlashcard">
-        <div class="card-face card-front">
-          <div style="font-size:12px; font-weight:800; color:#e97998;" id="fcCategory">Tiếng Anh</div>
-          <div style="font-size:30px; font-weight:900; margin:15px 0;" id="fcFrontText">Rectangle</div>
-          <div style="font-size:11px; color:#888;">(Bấm để xem nghĩa)</div>
-        </div>
-        <div class="card-face card-back">
-          <div style="font-size:12px; font-weight:800; color:#36795f;">Đáp án</div>
-          <div style="font-size:28px; font-weight:900; margin:15px 0;" id="fcBackText">Hình chữ nhật</div>
-          <div style="font-size:11px; color:#2e6950;">Giỏi lắm con gái iu! ⭐</div>
-        </div>
-      </div>
-    </div>
-    <div class="flex" style="justify-content:center; gap:12px; margin-top:15px;">
-      <button class="btn btn-soft" id="btnFcPrev">← Thẻ trước</button>
-      <span id="fcCounter" style="font-weight:800; color:#a64e68; align-self:center;">1 / 5</span>
-      <button class="btn btn-soft" id="btnFcNext">Thẻ sau →</button>
-    </div>
-  </div>
-</dialog>
-
-<!-- 4. VÒNG QUAY MAY MẮN -->
+<!-- ==================================================== -->
+<!-- 🎡 CỬA SỔ VÒNG QUAY MAY MẮN (CHUẨN 1000% + KHÓA 100% KPI) -->
+<!-- ==================================================== -->
 <dialog id="wheelDialog">
   <div class="modal-head"><h2>🎡 Vòng quay may mắn</h2><button class="close" data-close="wheelDialog">×</button></div>
   <div class="modal-body" style="text-align:center;">
     <div class="wheel-container">
       <div class="wheel-pointer"></div>
-      <canvas id="wheelCanvas" width="280" height="280"></canvas>
+      <canvas id="wheelCanvas" width="300" height="300"></canvas>
     </div>
     <div style="margin-top:14px;">
-      <button class="btn btn-gold" id="btnSpinWheel" style="font-size:15px; padding:10px 26px;">QUAY NGAY 🎯</button>
-      <div id="wheelResultText" style="font-weight:800; color:#a64e68; margin-top:10px;">Hoàn thành bài tập để nhận lượt quay nhé!</div>
-    </div>
-  </div>
-</dialog>
-
-<!-- 5. THIỆP VINH DANH THÀNH TÍCH -->
-<dialog id="certDialog">
-  <div class="modal-head"><h2>🏆 Thiệp vinh danh thành tích</h2><button class="close" data-close="certDialog">×</button></div>
-  <div class="modal-body" style="text-align:center;">
-    <canvas id="certCanvas" width="500" height="340" style="max-width:100%; border-radius:14px; box-shadow:0 8px 25px rgba(201,92,120,0.2);"></canvas>
-    <div style="margin-top:15px;">
-      <button class="btn btn-primary" id="btnDownloadCert">Tải thiệp về máy 📥</button>
-    </div>
-  </div>
-</dialog>
-
-<!-- 6. ĐÀI TIẾN HÓA & MUA CÀ RỐT -->
-<dialog id="petModal" style="width: min(560px, calc(100% - 24px));">
-  <div class="modal-head">
-    <h2>🌟 Đài Tiến Hóa & Chợ Cà Rốt</h2>
-    <button class="close" data-close="petModal">×</button>
-  </div>
-  <div class="modal-body" style="text-align:center; padding:18px;">
-    <div class="pet-avatar-sprite large" id="m_petAvatar"></div>
-    <h3 id="m_petName" style="color:#a64e68; margin:6px 0 2px; font-size:18px;">Thỏ Cấp 1</h3>
-    <div id="m_petLevelBadge" style="font-size:13px; font-weight:800; color:#36795f; background:#e2f5ed; display:inline-block; padding:3px 14px; border-radius:99px; margin-bottom:14px;">Chặng 1: tho-1.jpg</div>
-
-    <div style="background:#fffaf0; border:1px solid #f3e5b4; border-radius:18px; padding:16px; text-align:center; margin-top:8px;">
-      <div style="font-size:36px; margin-bottom:4px;">🥕✨</div>
-      <h4 style="margin:0 0 4px; color:#97702b; font-size:15px;">Chợ Cà Rốt Tươi (3.000đ / củ)</h4>
-      <p class="small-note" style="margin:0 0 12px;">Cho Thỏ ăn để tích điểm thăng cấp qua 50 hình thái tuyệt đẹp nhé!</p>
-      <div class="flex" style="justify-content:center; gap:8px;">
-        <button class="btn btn-gold btn-small" id="btnBuy1Carrot">Mua 1 Củ (3.000đ)</button>
-        <button class="btn btn-gold btn-small" id="btnBuy5Carrots">Mua 5 Củ (15.000đ)</button>
-        <button class="btn btn-gold btn-small" id="btnBuy10Carrots">Mua 10 Củ (30.000đ)</button>
+      <button class="btn btn-gold" id="btnSpinWheel" style="font-size:16px; padding:10px 28px;">QUAY NGAY 🎯</button>
+      <div id="wheelResultText" style="font-weight:800; color:#a64e68; margin-top:10px; font-size:14px; line-height:1.5;"></div>
+      <div class="admin-only" style="margin-top:12px;">
+        <button class="btn btn-soft btn-small" id="btnMomGiftSpin" style="color:#c95c78; font-weight:800;">👑 Mẹ tặng thêm 1 lượt quay cho con</button>
       </div>
     </div>
   </div>
 </dialog>
 
-<!-- 7. XÁC THỰC QUYỀN MẸ -->
-<dialog id="momPassDialog" style="width: min(360px, calc(100% - 24px)); border-radius: 24px; border: 2px solid #f6a9bd; text-align:center; padding:22px;">
-  <div style="font-size: 42px; margin-bottom: 4px;">👩👑✨</div>
-  <h3 style="margin: 0 0 6px; color: #a64e68; font-size: 19px; font-weight: 800;">Xác Thực Quyền Mẹ</h3>
-  <p style="margin: 0 0 14px; font-size: 13px; color: #8a7b82;">Mẹ nhập mật mã 4 số (0907) để giao bài và duyệt bài cho con nhé!</p>
-  <input type="password" id="momPassInput" maxlength="10" placeholder="••••" style="text-align:center; font-size:26px; letter-spacing:6px; font-weight:900; width:160px; padding:8px; border-radius:14px; border:2px solid #f4cad7; margin-bottom:8px;">
-  <div id="momPassError" style="font-size:12px; font-weight:800; color:#e95f83; min-height:18px; margin-bottom:12px;"></div>
-  <div class="flex" style="justify-content:center; gap:8px;">
-    <button type="button" class="btn btn-soft" data-close="momPassDialog">Hủy bỏ</button>
-    <button type="button" class="btn btn-primary" id="btnConfirmMomPass">Xác nhận 💖</button>
+<!-- ==================================================== -->
+<!-- 🍅 CỬA SỔ ĐỒNG HỒ POMODORO & TIẾNG MƯA TẬP TRUNG -->
+<!-- ==================================================== -->
+<dialog id="pomodoroDialog">
+  <div class="modal-head"><h2>🍅 Giờ học tập trung Pomodoro</h2><button class="close" data-close="pomodoroDialog">×</button></div>
+  <div class="modal-body" style="text-align:center; padding:25px;">
+    <div id="pomoTimerLabel" style="font-size:58px; font-weight:900; color:#c95c78; font-variant-numeric:tabular-nums; margin-bottom:10px;">25:00</div>
+    <div id="pomoModeText" style="font-weight:800; color:#36795f; margin-bottom:20px;">📖 Đến giờ tập trung làm bài rồi!</div>
+    <div class="flex" style="justify-content:center; gap:10px;">
+      <button class="btn btn-primary" id="btnPomoStart">Bắt đầu ⏱️</button>
+      <button class="btn btn-soft" id="btnPomoReset">Đặt lại ↩️</button>
+      <button class="btn btn-soft" id="btnPomoRain">🌧️ Tiếng mưa: Tắt</button>
+    </div>
   </div>
 </dialog>
 
-<!-- 8. GIAO BÀI TẬP (MẸ) -->
+<!-- ==================================================== -->
+<!-- 🎴 CỬA SỔ FLASHCARD KHÔNG GIỚI HẠN & XÁO TRỘN NGẪU NHIÊN -->
+<!-- ==================================================== -->
+<dialog id="flashcardDialog">
+  <div class="modal-head">
+    <h2>🎴 Thẻ học thông minh Flashcard</h2>
+    <div class="flex" style="gap:6px;">
+      <button class="btn btn-soft btn-small" id="btnFcShuffle">🔀 Xáo trộn</button>
+      <button class="close" data-close="flashcardDialog">×</button>
+    </div>
+  </div>
+  <div class="modal-body" style="text-align:center;">
+    <div style="max-width:320px; margin: 0 auto 10px;">
+      <select id="fcTopicSelect" style="padding:6px 10px; font-weight:700; color:#a64e68; background:#fff0f4; border:1px solid #f4cad7; border-radius:10px;">
+        <option value="all">🌟 Tất cả các thẻ (Ngẫu nhiên)</option>
+        <option value="cambridge">🇬🇧 Tiếng Anh Cambridge (Movers/Flyers)</option>
+        <option value="math">📐 Toán tính nhẩm & Hình học Lớp 4</option>
+        <option value="daily">🏡 Đời sống & Thế giới xung quanh</option>
+        <option value="tasks">📝 Từ bài tập Mẹ giao</option>
+      </select>
+    </div>
+
+    <div class="small-note" style="margin-bottom:8px;">Chạm vào thẻ để lật xem đáp án 🌟</div>
+    <div class="flashcard-scene" id="flashcardScene">
+      <div class="flashcard" id="activeFlashcard">
+        <div class="card-face card-front">
+          <div style="font-size:12px; font-weight:800; color:#e97998;" id="fcCategory">Tiếng Anh Cambridge</div>
+          <div style="font-size:28px; font-weight:900; margin:15px 0;" id="fcFrontText">Rectangle</div>
+          <div style="font-size:11px; color:#888;">(Chạm để lật đáp án)</div>
+        </div>
+        <div class="card-face card-back">
+          <div style="font-size:12px; font-weight:800; color:#36795f;">Giải nghĩa / Đáp án</div>
+          <div style="font-size:26px; font-weight:900; margin:15px 0;" id="fcBackText">Hình chữ nhật</div>
+          <div style="font-size:11px; color:#2e6950;">Giỏi lắm con gái! ⭐</div>
+        </div>
+      </div>
+    </div>
+    <div class="flex" style="justify-content:center; gap:12px; margin-top:15px;">
+      <button class="btn btn-soft" id="btnFcPrev">← Thẻ trước</button>
+      <span id="fcCounter" style="font-weight:800; color:#a64e68; align-self:center;">1 / 10</span>
+      <button class="btn btn-soft" id="btnFcNext">Thẻ sau →</button>
+    </div>
+  </div>
+</dialog>
+
+<!-- ==================================================== -->
+<!-- 🖼️ CỬA SỔ THIỆP VINH DANH THÀNH TÍCH ĐỂ ĐĂNG ZALO/FB -->
+<!-- ==================================================== -->
+<dialog id="certDialog">
+  <div class="modal-head"><h2>🖼️ Thiệp vinh danh thành tích</h2><button class="close" data-close="certDialog">×</button></div>
+  <div class="modal-body" style="text-align:center;">
+    <canvas id="certCanvas" width="500" height="350" style="max-width:100%; border-radius:14px; box-shadow:0 8px 25px rgba(201,92,120,0.2);"></canvas>
+    <div style="margin-top:15px;">
+      <button class="btn btn-primary" id="btnDownloadCert">Tải thiệp về máy 📥 (Đăng Zalo/FB)</button>
+    </div>
+  </div>
+</dialog>
+
+<!-- ==================================================== -->
+<!-- ⚙️ CÀI ĐẶT SHEET & BẮN TIN NHẮN TELEGRAM CHO MẸ -->
+<!-- ==================================================== -->
+<dialog id="configDialog">
+  <div class="modal-head"><h2>⚙️ Cài đặt hệ thống & Thông báo</h2><button class="close" data-close="configDialog">×</button></div>
+  <form id="configForm" class="modal-body">
+    <div class="field">
+      <label for="cfgSheetUrl">1. Đường link Google Sheet của Mẹ:</label>
+      <input type="text" id="cfgSheetUrl" placeholder="https://docs.google.com/spreadsheets/d/...">
+    </div>
+    <div class="field" style="background:#f0f6ff; padding:12px; border-radius:10px; border:1px solid #c2d7fa;">
+      <label style="color:#1a73e8; margin-bottom:4px;">2. Tự động bắn tin nhắn báo Mẹ qua Telegram khi con nộp bài:</label>
+      <p class="small-note" style="margin-top:0;">(Mẹ tạo bot miễn phí trên Telegram qua @BotFather để nhận chuông thông báo tức thì)</p>
+      <input type="text" id="cfgTeleToken" placeholder="Telegram Bot Token (Ví dụ: 123456:ABC-DEF...)" style="margin-bottom:8px;">
+      <input type="text" id="cfgTeleChatId" placeholder="Telegram Chat ID của Mẹ (Ví dụ: 987654321)">
+    </div>
+    <div class="flex" style="justify-content:flex-end;"><button type="submit" class="btn btn-primary">Lưu cài đặt</button></div>
+  </form>
+</dialog>
+
+<!-- MODAL GIAO BÀI TẬP (MẸ) -->
 <dialog id="taskDialog">
-  <div class="modal-head"><h2>🌸 Giao bài tập mới</h2><button class="close" data-close="taskDialog">×</button></div>
+  <div class="modal-head"><h2 id="taskDialogTitle">🌸 Giao bài tập mới</h2><button class="close" data-close="taskDialog">×</button></div>
   <form id="taskForm" class="modal-body">
-    <div class="field"><label for="taskTitle">Tên bài tập *</label><input id="taskTitle" type="text" required placeholder="Ví dụ: Trang 24 VBT Toán"></div>
+    <input type="hidden" id="taskId">
+    <div class="field"><label for="taskTitle">Tên bài tập *</label><input id="taskTitle" type="text" required placeholder="Ví dụ: Trang 24 Vở bài tập Toán"></div>
     <div class="form-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
       <div class="field"><label for="taskSubject">Môn học</label><select id="taskSubject"><option>Toán</option><option>Tiếng Việt</option><option>Tiếng Anh</option><option>Khoa học</option><option>Đọc sách</option><option>Khác</option></select></div>
       <div class="field"><label for="taskDate">Ngày cần làm *</label><input id="taskDate" type="date" required></div>
     </div>
-    <div class="field"><label for="taskDetail">Hướng dẫn / Link bài tập</label><textarea id="taskDetail" rows="2" placeholder="Dán link hoặc hướng dẫn..."></textarea></div>
-    <div class="field"><label for="taskPoints">Sao thưởng khi hoàn thành</label><input id="taskPoints" type="number" min="1" max="10" value="1"></div>
-    <div class="flex" style="justify-content:flex-end;"><button type="button" class="btn btn-soft" data-close="taskDialog">Hủy</button><button type="submit" class="btn btn-primary">Lưu bài tập</button></div>
+    <div class="field"><label for="taskDetail">Hướng dẫn / Đường link</label><textarea id="taskDetail" rows="2" placeholder="Dán link bài tập hoặc ghi chú..."></textarea></div>
+
+    <div class="field" style="background:#fff4f7; border:1px solid #f6cfda; padding:12px; border-radius:12px;">
+      <div class="row-between" style="margin-bottom:6px;">
+        <label for="taskQuestions" style="color:#a64e68; margin:0;">📝 Bộ đề 10 - 20 câu tự chấm (Toán / Tiếng Anh):</label>
+        <button type="button" class="btn btn-soft btn-small" id="btnGenMath10">⚡ Tạo nhanh 10 câu Toán</button>
+      </div>
+      <textarea id="taskQuestions" rows="4" placeholder="Mỗi dòng 1 câu: Câu hỏi | Đáp án&#10;Ví dụ:&#10;15 + 28 = ? | 43&#10;Quả táo tiếng Anh là gì? | apple"></textarea>
+    </div>
+
+    <div class="field"><label for="taskPoints">Số sao thưởng khi hoàn thành</label><input id="taskPoints" type="number" min="1" max="100" value="1"></div>
+    <div class="flex" style="justify-content:flex-end;margin-top:10px"><button type="button" class="btn btn-soft" data-close="taskDialog">Hủy</button><button type="submit" class="btn btn-primary">Lưu bài tập</button></div>
   </form>
 </dialog>
 
-<!-- 9. NỘP BÀI -->
+<!-- MODAL BÉ LÀM PHIẾU BÀI TẬP TỰ CHẤM -->
+<dialog id="quizDialog">
+  <div class="modal-head"><h2 id="quizModalTitle">📝 Phiếu bài tập tự chấm</h2><button class="close" data-close="quizDialog">×</button></div>
+  <div class="modal-body">
+    <div class="small-note" id="quizCounterText" style="margin-bottom:10px;"></div>
+    <div id="quizContainer" class="quiz-grid"></div>
+    <div id="quizResultBox" style="display:none; margin:15px 0; padding:14px; border-radius:12px; text-align:center;"></div>
+    <div class="flex" style="justify-content:flex-end; gap:10px; margin-top:15px;">
+      <button type="button" class="btn btn-soft" data-close="quizDialog">Đóng</button>
+      <button type="button" class="btn btn-primary" id="btnSubmitQuiz">Nộp bài & Chấm điểm 🎯</button>
+    </div>
+  </div>
+</dialog>
+
+<!-- MODAL NỘP BÀI -->
 <dialog id="submitProofDialog">
-  <div class="modal-head"><h2>📝 Nộp bài tập</h2><button class="close" data-close="submitProofDialog">×</button></div>
+  <div class="modal-head"><h2 id="submitProofModalTitle">📝 Nộp bài tập</h2><button class="close" data-close="submitProofDialog">×</button></div>
   <form id="submitProofForm" class="modal-body">
     <input type="hidden" id="proofTaskId">
     <p id="proofTaskTitle" style="font-weight:700; color:#a64e68; margin-top:0;"></p>
+    
+    <div id="proofMomAlert" style="display:none; background:#fff0f4; border-left:4px solid #e95f83; padding:10px 14px; border-radius:8px; margin-bottom:14px; color:#b64b63; font-size:13px; line-height:1.5;"></div>
+
     <div class="field">
-      <label for="proofNote">Lời nhắn cho Mẹ (hoặc bài làm):</label>
-      <input type="text" id="proofNote" placeholder="Ví dụ: Con đã làm xong hết rồi mẹ ơi...">
+      <label>1. Đính kèm bài làm / bằng chứng (Không bắt buộc)</label>
+      <div id="proofDropZone" class="paste-drop-zone" tabindex="0">
+        <div id="proofDropPrompt">
+          <div style="font-size:26px; margin-bottom:4px;">📋 📸</div>
+          <div style="font-weight:800; color:#a64e68; font-size:14px;">Bé chụp màn hình xong rồi bấm <kbd style="background:#fff; border:1px solid #e97998; border-radius:6px; padding:2px 6px; color:#c95c78;">Ctrl + V</kbd> để dán ảnh vào đây nhé!</div>
+          <div class="small-note" style="margin-top:4px;">hoặc kéo thả ảnh, hoặc <span style="text-decoration:underline; color:#e97998; font-weight:700;">bấm vào đây để chọn tệp từ máy</span></div>
+        </div>
+
+        <div id="proofImgPreview" style="display:none; text-align:center; position:relative;">
+          <img id="previewImgTag" src="" style="max-height: 180px; border-radius: 10px; border: 1px solid #f4cad7; box-shadow:0 4px 12px rgba(0,0,0,0.06);">
+          <div id="previewFileName" style="font-size:12px; color:#36795f; font-weight:800; margin-top:6px;"></div>
+          <button type="button" id="btnRemoveProof" class="btn btn-soft btn-small" style="margin-top:6px; color:#b64b63;">❌ Bỏ ảnh này</button>
+        </div>
+      </div>
+
+      <input type="file" id="proofFileInput" accept="*/*" style="display:none;">
+      <div class="small-note" style="margin-top:4px;">Chấp nhận mọi định dạng: Ảnh chụp màn hình, ảnh chụp vở, PDF, Word, File ghi âm... (Bỏ trống nếu con làm bài trực tuyến).</div>
+    </div>
+
+    <div class="field">
+      <label for="proofNote">2. Lời nhắn cho Mẹ (hoặc ghi chú kết quả làm bài)</label>
+      <input type="text" id="proofNote" placeholder="Ví dụ: Con đã làm lại và sửa đúng rồi mẹ ơi...">
     </div>
     <div class="flex" style="justify-content:flex-end; gap:8px;">
       <button type="button" class="btn btn-soft" data-close="submitProofDialog">Đóng</button>
-      <button type="submit" class="btn btn-primary">Nộp bài ngay 🎉</button>
+      <button type="submit" class="btn btn-primary" id="btnUploadProof">Nộp bài ngay 🎉</button>
     </div>
   </form>
 </dialog>
 
-<!-- 10. DUYỆT BÀI (MẸ) -->
+<!-- MODAL DUYỆT BÀI (MẸ) -->
 <dialog id="reviewDialog">
   <div class="modal-head"><h2>🔍 Xem bài làm của con</h2><button class="close" data-close="reviewDialog">×</button></div>
   <div class="modal-body">
     <h3 id="reviewTitle" style="color:#a64e68; margin-top:0;"></h3>
     <p id="reviewNote" class="small-note"></p>
+    <div id="reviewFileContainer" style="text-align:center; margin:15px 0;"></div>
     <div class="flex admin-only" style="justify-content:flex-end; gap:10px; margin-top:15px;">
-      <button type="button" class="btn btn-green" id="btnApproveProof" style="font-weight:900;">✅ Duyệt & Tặng (+1.000đ)</button>
+      <button type="button" class="btn btn-soft" id="btnRejectProof" style="color:#b64b63;">↩️ Nhắc con làm lại</button>
+      <button type="button" class="btn btn-green" id="btnApproveProof" style="font-weight:900;">✅ Duyệt & Tặng sao ⭐</button>
     </div>
   </div>
 </dialog>
 
-<!-- HIỆU ỨNG THỎ ĂN -->
-<div id="bunnyEatingOverlay">
-  <div class="bunny-eat-card">
-    <div style="font-size: 70px; margin-bottom: 6px;">😋 🐰 🥕 ✨</div>
-    <div style="font-weight: 900; font-size: 22px; color: #e95f83; margin-bottom: 6px;">Rộp rộp! Rộp rộp! 🥕</div>
-    <div style="font-weight: 700; font-size: 15px; color: #724250;">Cà rốt ngon tuyệt! Cảm ơn cô chủ nhỏ Khánh Huyền 💕</div>
-  </div>
-</div>
+<!-- MODAL THÊM PHẦN THƯỞNG -->
+<dialog id="rewardDialog">
+  <div class="modal-head"><h2>🎁 Thêm phần thưởng mới</h2><button class="close" data-close="rewardDialog">×</button></div>
+  <form id="rewardForm" class="modal-body">
+    <div class="field"><label for="rewardName">Tên phần quà *</label><input id="rewardName" type="text" required placeholder="Ví dụ: Xem phim hoạt hình cuối tuần"></div>
+    <div class="field"><label for="rewardDesc">Mô tả quà</label><input id="rewardDesc" type="text" placeholder="Thưởng vào tối thứ 7"></div>
+    <div class="field"><label for="rewardCost">Số sao cần đổi *</label><input id="rewardCost" type="number" min="1" max="1000" value="10" required></div>
+    <div class="flex" style="justify-content:flex-end"><button type="button" class="btn btn-soft" data-close="rewardDialog">Hủy</button><button class="btn btn-primary" type="submit">Lưu quà</button></div>
+  </form>
+</dialog>
+
+<!-- MODAL MỤC TIÊU TUẦN -->
+<dialog id="goalDialog">
+  <div class="modal-head"><h2>🎯 Mục tiêu tuần</h2><button class="close" data-close="goalDialog">×</button></div>
+  <form id="goalForm" class="modal-body">
+    <div class="field"><label for="goalInput">KPI mục tiêu (%)</label><input type="number" id="goalInput" min="1" max="100" value="100" required></div>
+    <div class="flex" style="justify-content:flex-end"><button type="button" class="btn btn-soft" data-close="goalDialog">Hủy</button><button type="submit" class="btn btn-primary">Lưu mục tiêu</button></div>
+  </form>
+</dialog>
+
+<!-- MODAL BÁO CÁO TUẦN -->
+<dialog id="reportDialog">
+  <div class="modal-head"><h2>🌟 Tổng kết tuần</h2><button class="close" data-close="reportDialog">×</button></div>
+  <div class="modal-body" id="reportContent"></div>
+</dialog>
 
 <div class="toast" id="toast"></div>
-<div id="star-toast">✨ Giỏi lắm con gái iu! +1⭐ (+1.000đ) 🎉</div>
+<div id="star-toast">✨ Giỏi lắm con gái iu! Đã nhận sao thưởng ⭐ 🎉</div>
+<audio id="applauseAudio" src="https://assets.mixkit.co/active_storage/sfx/2013/2013-preview.mp3" preload="auto"></audio>
 
 <script>
 (function() {
   const SUPABASE_URL = "https://izlwojprsnabfasgptus.supabase.co";
   const SUPABASE_KEY = "sb_publishable_XW41uFPBvB35X70pFWb2mw_p9iqqko1";
-  const sb = (window.supabase && window.supabase.createClient) ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
+  const sb = (window.supabase && window.supabase.createClient) 
+    ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY) 
+    : null;
 
+  if ('speechSynthesis' in window) {
+    try { window.speechSynthesis.cancel(); } catch(e){}
+  }
+
+  const SUBJECTS = ['Toán','Tiếng Việt','Tiếng Anh','Khoa học','Đọc sách','Khác'];
   const $ = id => document.getElementById(id);
   const todayISO = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; };
   const monthISO = date => date.slice(0,7);
   const fmtDate = iso => { if(!iso) return ''; const [y,m,d]=iso.split('-').map(Number); return new Date(y,m-1,d).toLocaleDateString('vi-VN',{weekday:'long',day:'2-digit',month:'2-digit',year:'numeric'}); };
+  const shortDate = iso => { if(!iso) return ''; const [y,m,d]=iso.split('-').map(Number); return `${d}/${m}`; };
+  const escapeHTML = s => String(s ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const dateAdd = (iso,n) => { const [y,m,d]=iso.split('-').map(Number); const x=new Date(y,m-1,d); x.setDate(x.getDate()+n); return `${x.getFullYear()}-${String(x.getMonth()+1).padStart(2,'0')}-${String(x.getDate()).padStart(2,'0')}`; };
   const mondayOf = iso => { const [y,m,d]=iso.split('-').map(Number); const x=new Date(y,m-1,d); const day=(x.getDay()+6)%7; x.setDate(x.getDate()-day); return `${x.getFullYear()}-${String(x.getMonth()+1).padStart(2,'0')}-${String(x.getDate()).padStart(2,'0')}`; };
-  const escapeHTML = s => String(s ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-
-  const STAGES_INFO = [
-    { name: "Kỷ Nguyên Mầm Non & Học Sinh", color: "#fbc02d" },
-    { name: "Kỷ Nguyên Nàng Thơ & Tri Thức", color: "#e91e63" },
-    { name: "Kỷ Nguyên Tiên Nữ & Phép Thuật", color: "#9c27b0" },
-    { name: "Kỷ Nguyên Hoàng Gia & Đại Dương", color: "#03a9f4" },
-    { name: "Kỷ Nguyên Phi Hành Gia & Vũ Trụ", color: "#673ab7" }
-  ];
-
-  function getCarrotsNeeded(lv) {
-    if (lv >= 50) return 999;
-    return Math.min(25, Math.floor(2 + (lv - 1) * 0.45));
-  }
 
   let state = {
-    tasks: [], submissions: [], rewards: [],
-    money: Number(localStorage.getItem('PET_MONEY') || 0),
+    tasks: [], submissions: [], rewards: [], redemptions: [], goal: 100,
     carrots: Number(localStorage.getItem('PET_CARROTS') || 0),
-    petLevel: Math.min(50, Math.max(1, Number(localStorage.getItem('PET_LEVEL') || 1))),
-    petExp: Number(localStorage.getItem('PET_EXP') || 0)
+    petLevel: Number(localStorage.getItem('PET_LEVEL') || 1),
+    streakShield: localStorage.getItem('STREAK_SHIELD') === 'true'
   };
 
   let selectedDate = todayISO();
@@ -535,420 +698,1622 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   let filterSubject = 'all';
   let isAdminUnlocked = false;
   let currentReviewTask = null;
+  let currentActiveQuizTask = null;
+  let currentProofFile = null;
+  let aiChatHistory = [];
+  let isAiEnglishMode = false;
+
+  const DEFAULT_SHEET_URL = "https://docs.google.com/spreadsheets/d/1INPJnlsU0saiIBP92mkRCLShU3qWZ20elD1OxRKnNVc/edit?gid=0#gid=0";
+  function getStoredSheetUrl() { return localStorage.getItem('CUSTOM_SHEET_URL') || DEFAULT_SHEET_URL; }
+
+  function updateSheetLinkUI() {
+    if ($('linkOpenSheet')) $('linkOpenSheet').href = getStoredSheetUrl();
+  }
 
   function toast(msg){
-    const t=$('toast'); if(!t) return;
+    const t=$('toast');
+    if(!t) return;
     t.textContent=msg; t.style.display='block';
     clearTimeout(toast.timer);
-    toast.timer=setTimeout(()=>t.style.display='none', 2600);
+    toast.timer=setTimeout(()=>t.style.display='none', 2800);
+  }
+
+  function subjectClass(s){return 'sub-'+(s||'Khác').replaceAll(' ','-');}
+
+  function linkifyDetail(text) {
+    if (!text) return '';
+    const safe = escapeHTML(text);
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    return safe.replace(urlRegex, url => `<div><a href="${url}" target="_blank" class="task-link-btn">🔗 Mở bài tập trực tuyến</a></div>`);
+  }
+
+  function cleanMathText(text) {
+    if (!text) return '';
+    return text
+      .replace(/\$([^\$]+)\$/g, '$1')
+      .replace(/\$\$/g, '')
+      .replace(/\$/g, '')
+      .replace(/\\times/g, 'x')
+      .replace(/\\div/g, ':')
+      .replace(/\\cdot/g, 'x')
+      .replace(/\\le(q)?/g, '≤')
+      .replace(/\\ge(q)?/g, '≥')
+      .replace(/\\neq/g, '≠')
+      .replace(/\\approx/g, '≈')
+      .replace(/\\[a-zA-Z]+/g, '')
+      .replace(/\*\*/g, '')
+      .replace(/(^|[^\w])\*([^\*]+)\*([^\w]|$)/g, '$1$2$3')
+      .trim();
   }
 
   function triggerCelebration(pts = 1) {
-    if (window.confetti) confetti({ particleCount: 120, spread: 80, origin: { y: 0.5 } });
+    if(window.confetti) confetti({ particleCount: 150, spread: 100, origin: { y: 0.5 } });
     const starToast = $('star-toast');
     if(starToast) {
-      starToast.textContent = `✨ Giỏi lắm con gái iu! +${pts} sao ⭐ (+1.000đ) 🎉`;
+      starToast.textContent = `✨ Giỏi lắm con gái iu! +${pts} sao thưởng ⭐ 🎉`;
       starToast.classList.remove('show-toast');
       void starToast.offsetWidth;
       starToast.classList.add('show-toast');
     }
+    const applause = $('applauseAudio');
+    if (applause) { applause.currentTime = 0; applause.play().catch(()=>{}); }
   }
 
-  // CẬP NHẬT GIAO DIỆN THỎ
+  function weekTasks(start=weekStart){
+    const end = dateAdd(start, 6);
+    return state.tasks.filter(t => t.task_date >= start && t.task_date <= end);
+  }
+
+  function streak(){
+    const approvedTaskIds = new Set(state.submissions.filter(s => s.status === 'approved').map(s => s.task_id));
+    const doneDates = new Set(state.tasks.filter(t => approvedTaskIds.has(t.id)).map(t => t.task_date));
+    let d = todayISO(), n = 0;
+    if(!doneDates.has(d)){ d = dateAdd(d, -1); }
+    while(doneDates.has(d) && n < 365){ n++; d = dateAdd(d, -1); }
+    return n;
+  }
+
+  // ========================================================
+  // 🎯 KIỂM TRA ĐIỀU KIỆN QUAY VÒNG QUAY (KPI HÔM NAY = 100%)
+  // ========================================================
+  function checkWheelEligibility() {
+    const todayTasks = state.tasks.filter(t => t.task_date === todayISO());
+    const approvedCount = todayTasks.filter(t => state.submissions.some(s => s.task_id === t.id && s.status === 'approved')).length;
+    const kpi = todayTasks.length > 0 ? Math.round((approvedCount / todayTasks.length) * 100) : 0;
+    const is100 = todayTasks.length > 0 && approvedCount === todayTasks.length;
+    const lastSpin = localStorage.getItem('LAST_WHEEL_SPIN_DATE');
+    const alreadySpun = (lastSpin === todayISO());
+
+    return { todayTasks, approvedCount, kpi, is100, alreadySpun };
+  }
+
+  async function sendTelegramAlert(taskTitle, note) {
+    const token = localStorage.getItem('TELE_TOKEN');
+    const chatId = localStorage.getItem('TELE_CHAT_ID');
+    if (!token || !chatId) return;
+
+    const msg = `🔔 Bé Khánh Huyền vừa nộp bài!\n📝 Bài tập: ${taskTitle}\n💬 Lời nhắn: "${note || 'Con đã hoàn thành ạ!'}"\n👉 Mẹ vào kiểm tra và duyệt bài nhé! 🌸`;
+    try {
+      await fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(msg)}`);
+    } catch(e){ console.warn("Lỗi gửi Telegram:", e); }
+  }
+
+  // ========================================================
+  // 📋 XỬ LÝ DÁN ẢNH CHỤP MÀN HÌNH (CTRL + V)
+  // ========================================================
+  function setProofFile(file) {
+    if (!file) return;
+    currentProofFile = file;
+    $('proofDropPrompt').style.display = 'none';
+    $('proofImgPreview').style.display = 'block';
+
+    if (file.type.startsWith('image/')) {
+      $('previewImgTag').src = URL.createObjectURL(file);
+      $('previewImgTag').style.display = 'inline-block';
+      $('previewFileName').textContent = '✅ Đã nhận ảnh chụp màn hình!';
+    } else {
+      $('previewImgTag').style.display = 'none';
+      $('previewFileName').textContent = `📄 Tệp đính kèm: ${file.name}`;
+    }
+    toast('Đã nhận ảnh chụp màn hình! 📸');
+  }
+
+  function resetProofFile() {
+    currentProofFile = null;
+    $('proofFileInput').value = '';
+    $('proofDropPrompt').style.display = 'block';
+    $('proofImgPreview').style.display = 'none';
+    $('previewImgTag').src = '';
+  }
+
+  $('btnRemoveProof').onclick = (e) => { e.stopPropagation(); resetProofFile(); };
+
+  const dropZone = $('proofDropZone');
+  dropZone.onclick = () => $('proofFileInput').click();
+
+  dropZone.ondragover = e => { e.preventDefault(); dropZone.classList.add('dragover'); };
+  dropZone.ondragleave = () => { dropZone.classList.remove('dragover'); };
+  dropZone.ondrop = e => {
+    e.preventDefault();
+    dropZone.classList.remove('dragover');
+    const f = e.dataTransfer.files[0];
+    if (f) setProofFile(f);
+  };
+
+  $('proofFileInput').onchange = e => { const f = e.target.files[0]; if (f) setProofFile(f); };
+
+  $('submitProofDialog').addEventListener('paste', e => {
+    const items = (e.clipboardData || window.clipboardData)?.items;
+    if (!items) return;
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].type.indexOf('image') !== -1) {
+        const file = items[i].getAsFile();
+        if (file) { setProofFile(file); e.preventDefault(); break; }
+      }
+    }
+  });
+
+  // ========================================================
+  // 🐰 BẠN HỌC THỎ SIÊU QUẬY
+  // ========================================================
+  let aiSelectedBase64 = null;
+  let geminiApiKey = (localStorage.getItem('GEMINI_KEY') || '').trim();
+
+  $('btnToggleAiLang').onclick = () => {
+    isAiEnglishMode = !isAiEnglishMode;
+    $('btnToggleAiLang').textContent = isAiEnglishMode ? "🇬🇧 English Buddy" : "🇻🇳 Tiếng Việt";
+    toast(isAiEnglishMode ? "Đã bật chế độ luyện nói Tiếng Anh với Thỏ!" : "Đã chuyển về Tiếng Việt!");
+  };
+
+  $('btnAiChallenge').onclick = () => {
+    $('aiTextInput').value = "Thỏ ơi, cậu đố tớ 3 câu đố vui tính nhẩm nhanh hoặc từ vựng Tiếng Anh đi nào!";
+    sendAiMessage();
+  };
+
+  $('btnResetAiChat').onclick = () => {
+    if (confirm("Cậu muốn tụi mình bắt đầu bài học mới hả?")) {
+      aiChatHistory = [];
+      $('aiChatBox').innerHTML = `<div class="ai-msg bot">🌸 Hí chào Khánh Huyền! Tớ là Thỏ Siêu Quậy nè 🐰 Cậu có câu đố hay bài tập nào thú vị không, tụi mình cùng chiến nào! ⭐🐰</div>`;
+      toast("Đã làm mới cuộc trò chuyện!");
+    }
+  };
+
+  $('btnOpenAiModal').onclick = () => {
+    if ('speechSynthesis' in window) try { window.speechSynthesis.cancel(); } catch(e){}
+    $('aiTutorDialog').showModal();
+    if (!geminiApiKey) {
+      setTimeout(() => {
+        const k = prompt("Mẹ nhập Gemini API Key để kích hoạt bạn học Thỏ Siêu Quậy cho con nhé:");
+        if (k && k.trim()) {
+          geminiApiKey = k.trim();
+          localStorage.setItem('GEMINI_KEY', geminiApiKey);
+          toast("Đã lưu API Key!");
+        }
+      }, 300);
+    }
+  };
+
+  $('btnAiKeySettings').onclick = () => {
+    const k = prompt("Cập nhật Gemini API Key:", geminiApiKey);
+    if (k !== null) {
+      geminiApiKey = k.trim();
+      localStorage.setItem('GEMINI_KEY', geminiApiKey);
+      toast("Đã lưu API Key mới!");
+    }
+  };
+
+  function setAiImage(file) {
+    if (!file || !file.type.startsWith('image/')) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      aiSelectedBase64 = ev.target.result.split(',')[1];
+      $('aiPreviewThumb').src = ev.target.result;
+      $('aiImgPreview').style.display = 'flex';
+      toast('Thỏ đã nhận ảnh của cậu rồi nè! 📷');
+    };
+    reader.readAsDataURL(file);
+  }
+
+  $('aiFileInput').onchange = e => { const file = e.target.files[0]; if (file) setAiImage(file); };
+  $('aiTutorDialog').addEventListener('paste', e => {
+    const items = (e.clipboardData || window.clipboardData)?.items;
+    if (!items) return;
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].type.indexOf('image') !== -1) {
+        const file = items[i].getAsFile();
+        if (file) { setAiImage(file); e.preventDefault(); break; }
+      }
+    }
+  });
+
+  $('aiBtnClearImg').onclick = () => { aiSelectedBase64 = null; $('aiImgPreview').style.display = 'none'; $('aiFileInput').value = ''; };
+
+  let recognition = null;
+  if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+    const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+    recognition = new SpeechRec();
+    recognition.lang = 'vi-VN';
+    recognition.onstart = () => $('aiBtnMic').classList.add('recording');
+    recognition.onend = () => $('aiBtnMic').classList.remove('recording');
+    recognition.onresult = e => { $('aiTextInput').value = e.results[0][0].transcript; sendAiMessage(); };
+  }
+
+  $('aiBtnMic').onclick = () => {
+    if (!recognition) return alert("Trình duyệt chưa hỗ trợ ghi âm.");
+    try { recognition.lang = isAiEnglishMode ? 'en-US' : 'vi-VN'; recognition.start(); } catch(e){ recognition.stop(); }
+  };
+
+  function appendAiMsg(role, text, imgBase64 = null) {
+    const box = $('aiChatBox');
+    const div = document.createElement('div');
+    div.className = `ai-msg ${role}`;
+    if (imgBase64) div.innerHTML += `<img src="data:image/jpeg;base64,${imgBase64}"><br>`;
+    div.innerHTML += text;
+    box.appendChild(div);
+    box.scrollTop = box.scrollHeight;
+    return div;
+  }
+
+  const ULTRA_FAST_MODELS = ['gemini-3.5-flash-lite', 'gemini-3.6-flash', 'gemini-3.8-flash'];
+
+  async function callUltraFastGemini(contentsPayload, systemPrompt) {
+    let saved = localStorage.getItem('GEMINI_WORKING_MODEL') || 'gemini-3.5-flash-lite';
+    let modelsToTry = [saved, ...ULTRA_FAST_MODELS.filter(m => m !== saved)];
+
+    for (const m of modelsToTry) {
+      try {
+        const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent?key=${geminiApiKey}`;
+        const res = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            systemInstruction: { parts: [{ text: systemPrompt }] },
+            contents: contentsPayload,
+            generationConfig: {
+              maxOutputTokens: 250,
+              thinkingConfig: { thinkingLevel: m.includes('lite') ? 'minimal' : 'low' }
+            }
+          })
+        });
+
+        const data = await res.json();
+        if (data.candidates && data.candidates[0]) {
+          localStorage.setItem('GEMINI_WORKING_MODEL', m);
+          return data;
+        }
+
+        if (data.error && data.error.message && data.error.message.includes('models/')) {
+          const match = data.error.message.match(/use models\/([a-zA-Z0-9._-]+)/);
+          if (match && match[1] && !modelsToTry.includes(match[1])) {
+            modelsToTry.push(match[1]);
+          }
+        }
+      } catch(e) { console.warn(`Thử model ${m} không thành công:`, e); }
+    }
+    throw new Error("Không thể kết nối đến máy chủ Google AI. Mẹ kiểm tra lại API Key nhé!");
+  }
+
+  async function sendAiMessage() {
+    const text = $('aiTextInput').value.trim();
+    if (!text && !aiSelectedBase64) return;
+    if (!geminiApiKey) return alert("Mẹ bấm vào nút '⚙️ Key' ở góc trên để điền Gemini API Key nhé!");
+
+    const userImg = aiSelectedBase64;
+    appendAiMsg('user', text, userImg);
+    $('aiTextInput').value = '';
+    $('aiBtnClearImg').click();
+
+    const currentParts = [];
+    if (userImg) currentParts.push({ inlineData: { mimeType: "image/jpeg", data: userImg } });
+    currentParts.push({ text: text || "Thỏ xem hình này rồi cùng tớ giải nhé!" });
+
+    aiChatHistory.push({ role: 'user', parts: currentParts });
+    if (aiChatHistory.length > 12) aiChatHistory = aiChatHistory.slice(-12);
+
+    const loading = appendAiMsg('bot', '🐰 Thỏ đang nghĩ nè<span class="typing-dots"><span>.</span><span>.</span><span>.</span></span>');
+
+    try {
+      let systemPrompt = '';
+      if (isAiEnglishMode) {
+        systemPrompt = `You are "Super Bunny" (Thỏ Siêu Quậy) - a cheerful, friendly, supportive English speaking buddy for a primary school girl named Khánh Huyền.
+- Talk casually, warmly in simple English. Keep responses short (1-2 sentences).
+- If Khánh Huyền makes a grammar or vocabulary mistake, gently show her the correct way like a good friend.
+- Always use cute emojis 🐰⭐🌸.`;
+      } else {
+        systemPrompt = `Bạn tên là "Thỏ Siêu Quậy" - Bạn học cùng bàn, thông minh, tinh nghịch, lém lỉnh, thân thiết của bạn gái Khánh Huyền (học sinh tiểu học).
+QUY TẮC XƯNG HÔ:
+- Tự xưng: "tớ" hoặc "Thỏ Siêu Quậy". Gọi bạn học: "cậu", "Khánh Huyền" hoặc "cô chủ nhỏ Khánh Huyền".
+- TUYỆT ĐỐI KHÔNG BAO GIỜ GỌI LÀ "cậu chủ nhỏ" (Khánh Huyền là con gái!).
+- Không xưng là "cô", "thầy", "chị", "con". Trò chuyện như hai bạn nhỏ cùng bàn.
+QUY TẮC ĐỐI CHIẾU KẾT QUẢ TOÁN HỌC:
+1. PHẢI TỰ TÍNH NHẨM ĐÁP ÁN ĐÚNG TRƯỚC: Khi bạn Khánh Huyền đưa ra một con số kết quả, Thỏ phải tự tính xem con số đó ĐÚNG hay SAI so với phép tính.
+2. NẾU BẠN NÓI SAI (Ví dụ: phép tính ra 90 mà bạn trả lời 80):
+   - CẤM TUYỆT ĐỐI: KHÔNG ĐƯỢC hoan hô, KHÔNG ĐƯỢC khen "Chuẩn", KHÔNG ĐƯỢC khen "Chính xác"!
+   - PHẢI BÁO BẠN TÍNH SAI RỒI NHẸ NHÀNG, HÓM HỈNH: "Ui da, 80 chưa đúng rồi Khánh Huyền ơi! Tớ tính lại thì không phải số đó đâu nha 🐰. Cậu thử tính lại từng bước xem bằng mấy nhé!".
+3. NẾU BẠN NÓI ĐÚNG: Lúc này mới được hoan hô, khen ngợi và cùng nhau qua bước tiếp theo.
+QUY TẮC TRÌNH BÀY:
+- CẤM TUYỆT ĐỐI ký hiệu LaTeX, mã code, dấu gạch chéo \\ hay dấu đô la ($).
+- Dấu nhân bắt buộc viết là chữ "x" (Ví dụ: (30 + 15) x 2). Dấu chia là dấu ":". CẤM DÙNG dấu hoa thị (*).
+- Luôn dùng emoji đáng yêu 🐰⭐🌸🎉.`;
+      }
+
+      let data = await callUltraFastGemini(aiChatHistory, systemPrompt);
+      loading.remove();
+
+      if (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts) {
+        const allParts = data.candidates[0].content.parts;
+        const replyParts = allParts.filter(p => !p.thought);
+        let reply = cleanMathText((replyParts.length > 0 ? replyParts : allParts).map(p => p.text || '').join('').trim());
+
+        appendAiMsg('bot', reply || 'Thỏ đây! Cậu cần tớ cùng làm bài nào nào? 🐰🌸');
+        aiChatHistory.push({ role: 'model', parts: [{ text: reply }] });
+      } else {
+        appendAiMsg('bot', 'Tớ chưa nghe rõ, cậu nói lại lần nữa nhé bạn ơi! 🥺');
+      }
+    } catch(err) {
+      loading.remove();
+      appendAiMsg('bot', 'Lỗi kết nối rồi cậu ơi: ' + err.message);
+    }
+  }
+
+  $('aiBtnSend').onclick = sendAiMessage;
+  $('aiTextInput').onkeypress = e => { if (e.key === 'Enter') sendAiMessage(); };
+
+  // ========================================================
+  // 🥕 WIDGET NUÔI THỎ CƯNG (VIRTUAL PET)
+  // ========================================================
   function updatePetUI() {
-    const lv = state.petLevel;
-    const needed = getCarrotsNeeded(lv);
+    const avatars = ['🐰', '🐇', '🐰👑', '✨🐰✨'];
+    const titles = ['Thỏ Bé Bỏng', 'Thỏ Học Chăm', 'Thỏ Đội Vương Miện 👑', 'Siêu Thần Thỏ 🌟'];
+    const idx = Math.min(titles.length - 1, state.petLevel - 1);
 
-    const sheetIndex = Math.min(5, Math.max(1, Math.ceil(lv / 10)));
-    const imageFile = `tho-${sheetIndex}.jpg`;
-    const stage = STAGES_INFO[sheetIndex - 1];
-
-    const indexInSheet = (lv - 1) % 10;
-    const col = indexInSheet % 5;
-    const row = Math.floor(indexInSheet / 5);
-
-    const posX = (col * 24.8).toFixed(1);
-    const posY = row === 0 ? 17 : 83;
-
-    const wPet = $('w_petAvatar');
-    if (wPet) {
-      wPet.style.backgroundImage = `url('${imageFile}')`;
-      wPet.style.backgroundPosition = `${posX}% ${posY}%`;
-      wPet.style.borderColor = stage.color;
-      wPet.style.boxShadow = `0 4px 16px ${stage.color}66`;
-    }
-
-    const mPet = $('m_petAvatar');
-    if (mPet) {
-      mPet.style.backgroundImage = `url('${imageFile}')`;
-      mPet.style.backgroundPosition = `${posX}% ${posY}%`;
-      mPet.style.borderColor = stage.color;
-      mPet.style.boxShadow = `0 8px 30px ${stage.color}77`;
-    }
-
-    $('petNameLabel').textContent = `Thỏ Cấp ${lv}`;
-    $('petLevelLabel').textContent = `Cấp ${lv}/50`;
+    $('petAvatar').textContent = avatars[idx];
+    $('petNameLabel').textContent = titles[idx];
+    $('petLevelLabel').textContent = `Cấp ${state.petLevel}`;
     $('petCarrotCount').textContent = `${state.carrots} 🥕`;
-    $('petMoneyLabel').textContent = `${state.money.toLocaleString('vi-VN')}đ`;
 
-    const pct = Math.min(100, Math.round((state.petExp / needed) * 100));
+    const currentExpInLevel = (state.carrots % 5);
+    const pct = Math.min(100, Math.round((currentExpInLevel / 5) * 100));
     $('petExpBar').style.width = `${pct}%`;
-    $('petExpText').textContent = `Ăn: ${state.petExp}/${needed} 🥕`;
-    $('petStageLabel').textContent = `Chặng ${sheetIndex}/5 (${imageFile})`;
 
-    if ($('m_petName')) $('m_petName').textContent = `Thỏ Cưng - Cấp Độ ${lv}`;
-    if ($('m_petLevelBadge')) $('m_petLevelBadge').textContent = `Chặng ${sheetIndex}: ${stage.name} (File: ${imageFile})`;
-
-    localStorage.setItem('PET_MONEY', state.money);
     localStorage.setItem('PET_CARROTS', state.carrots);
     localStorage.setItem('PET_LEVEL', state.petLevel);
-    localStorage.setItem('PET_EXP', state.petExp);
   }
 
-  // CHO ĂN CÀ RỐT
   $('btnFeedPet').onclick = () => {
-    if (state.carrots <= 0) {
-      toast("Hết cà rốt rồi! Bé bấm vào '🌟 Đài Tiến Hóa' để mua thêm cho Thỏ nhé 🥕");
-      $('petModal').showModal();
-      return;
-    }
+    if (state.carrots <= 0) return alert("Hết cà rốt rồi! Con làm bài tập để nhận thêm cà rốt cho Thỏ nhé 🥕!");
     state.carrots--;
-    state.petExp++;
-    const needed = getCarrotsNeeded(state.petLevel);
-
-    const overlay = $('bunnyEatingOverlay');
-    overlay.style.display = 'flex';
-    setTimeout(() => { overlay.style.display = 'none'; }, 1400);
-
-    if (state.petExp >= needed && state.petLevel < 50) {
+    triggerCelebration(0);
+    toast("Thỏ măm măm cà rốt ngon lành! 🐰🥕");
+    if (state.carrots % 5 === 0 && state.petLevel < 4) {
       state.petLevel++;
-      state.petExp = 0;
-      setTimeout(() => {
-        triggerCelebration(0);
-        toast(`🎉 Hoan hô! Thỏ đã tiến hóa lên Cấp ${state.petLevel}! 🌸`);
-      }, 500);
-    } else {
-      toast("Thỏ măm măm ngon lành! 🥕😋");
+      toast(`🎉 Chúc mừng! Thỏ đã tiến hóa lên Cấp ${state.petLevel}!`);
     }
     updatePetUI();
   };
 
-  function buyCarrots(count, totalCost) {
-    if (state.money < totalCost) {
-      toast(`Chưa đủ tiền rồi con ơi! Cần ${totalCost.toLocaleString('vi-VN')}đ, làm bài để mẹ duyệt nhé! 🌸`);
-      return;
+  // KHIÊN BẢO VỆ STREAK
+  $('streakShieldHint').onclick = () => {
+    if (state.streakShield) return alert("Con đang có Khiên bảo vệ Streak rồi nè! Yên tâm nhé 🛡️");
+    if (earnedPoints() < 5) return alert("Con cần 5 ⭐ để mua Khiên bảo vệ Streak nhé!");
+    if (confirm("Dùng 5 sao thưởng để mua Khiên bảo vệ Streak (không lo đứt chuỗi học) nhé con?")) {
+      state.redemptions.push({ id: 'shield_' + Date.now(), name: 'Khiên bảo vệ Streak 🛡️', cost: 5, created_at: new Date().toISOString() });
+      state.streakShield = true;
+      localStorage.setItem('STREAK_SHIELD', 'true');
+      toast("Đã kích hoạt Khiên bảo vệ Streak 🛡️!");
+      render();
     }
-    state.money -= totalCost;
-    state.carrots += count;
-    updatePetUI();
-    toast(`🎉 Đã mua thành công ${count} củ cà rốt thơm ngon! 🥕`);
+  };
+
+  // ========================================================
+  // 🎡 VÒNG QUAY MAY MẮN (CANVAS) - CHUẨN XÁC & CÓ KHÓA ĐIỀU KIỆN
+  // ========================================================
+  const wheelSlices = [
+    { text: '+1 ⭐', color: '#ffb3ba' },
+    { text: '+2 ⭐', color: '#baffc9' },
+    { text: 'Youtube 15p', color: '#bae1ff' },
+    { text: '+3 ⭐', color: '#ffffba' },
+    { text: 'Chọn món tối', color: '#ffd3df' },
+    { text: '2 Củ cà rốt 🥕', color: '#ffdfba' },
+    { text: 'Sticker ✨', color: '#e8dff5' },
+    { text: 'JACKPOT 5⭐', color: '#fcf6bd' }
+  ];
+
+  let isSpinning = false;
+  let currentWheelAngle = 0;
+
+  function drawWheel() {
+    const canvas = $('wheelCanvas');
+    const ctx = canvas.getContext('2d');
+    const numSlices = wheelSlices.length;
+    const arc = (2 * Math.PI) / numSlices;
+    const cx = canvas.width / 2, cy = canvas.height / 2, radius = cx - 8;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    for (let i = 0; i < numSlices; i++) {
+      const angle = currentWheelAngle + i * arc;
+      ctx.beginPath();
+      ctx.fillStyle = wheelSlices[i].color;
+      ctx.moveTo(cx, cy);
+      ctx.arc(cx, cy, radius, angle, angle + arc);
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.save();
+      ctx.translate(cx, cy);
+      ctx.rotate(angle + arc / 2);
+      ctx.textAlign = 'right';
+      ctx.fillStyle = '#6d4c41';
+      ctx.font = 'bold 12.5px Quicksand, sans-serif';
+      ctx.fillText(wheelSlices[i].text, radius - 15, 5);
+      ctx.restore();
+    }
   }
 
-  $('btnBuy1Carrot').onclick = () => buyCarrots(1, 3000);
-  $('btnBuy5Carrots').onclick = () => buyCarrots(5, 15000);
-  $('btnBuy10Carrots').onclick = () => buyCarrots(10, 30000);
-  $('btnOpenPetModal').onclick = () => $('petModal').showModal();
+  // MỞ VÒNG QUAY & KIỂM TRA ĐIỀU KIỆN 100% KPI HÔM NAY
+  $('btnOpenWheel').onclick = () => {
+    const { todayTasks, approvedCount, kpi, is100, alreadySpun } = checkWheelEligibility();
+    const resultBox = $('wheelResultText');
+    const spinBtn = $('btnSpinWheel');
 
-  // ==========================================
-  // XỬ LÝ TOÀN BỘ CÁC NÚT CÔNG CỤ TRÊN HEADER
-  // ==========================================
+    if (alreadySpun) {
+      resultBox.innerHTML = `✅ <b>Hôm nay con đã dùng lượt quay rồi!</b><br><span style="font-size:12px;color:#888;">Hãy hoàn thành 100% bài ngày mai để nhận lượt quay tiếp nhé!</span>`;
+      spinBtn.disabled = true;
+      spinBtn.style.opacity = '0.5';
+      spinBtn.style.cursor = 'not-allowed';
+      spinBtn.textContent = 'ĐÃ QUAY HÔM NAY ✓';
+    } else if (!is100) {
+      resultBox.innerHTML = `🔒 <b>Chưa đủ điều kiện quay!</b><br><span style="font-size:12.5px;color:#b64b63;">Hôm nay con mới hoàn thành <b>${kpi}%</b> (${approvedCount}/${todayTasks.length} bài). Con phải được Mẹ duyệt <b>100% bài</b> mới mở khóa vòng quay nhé!</span>`;
+      spinBtn.disabled = true;
+      spinBtn.style.opacity = '0.5';
+      spinBtn.style.cursor = 'not-allowed';
+      spinBtn.textContent = 'CHƯA ĐẠT 100% KPI 🔒';
+    } else {
+      resultBox.innerHTML = `🎉 <b>Xuất sắc! Con đã hoàn thành 100% bài tập hôm nay!</b><br><span style="font-size:12px;color:#36795f;">Con có 1 lượt quay may mắn duy nhất cho ngày hôm nay!</span>`;
+      spinBtn.disabled = false;
+      spinBtn.style.opacity = '1';
+      spinBtn.style.cursor = 'pointer';
+      spinBtn.textContent = 'QUAY NGAY 🎯';
+    }
 
-  // 1. Thỏ Siêu Quậy AI
-  $('btnOpenAiModal').onclick = () => $('aiTutorDialog').showModal();
-  $('aiBtnSend').onclick = () => {
-    const text = $('aiTextInput').value.trim();
-    if (!text) return;
-    const box = $('aiChatBox');
-    box.innerHTML += `<div class="ai-msg user">${escapeHTML(text)}</div>`;
-    $('aiTextInput').value = '';
-    setTimeout(() => {
-      box.innerHTML += `<div class="ai-msg bot">Thỏ nghe rõ rồi nè! Khánh Huyền thông minh và chăm chỉ quá đi à! Cùng làm bài tiếp nhé 🐰🌸</div>`;
-      box.scrollTop = box.scrollHeight;
-    }, 600);
+    $('wheelDialog').showModal();
+    setTimeout(drawWheel, 100);
   };
 
-  // 2. Pomodoro
-  let pomoTime = 25 * 60, pomoTimer = null;
+  // MẸ BẤM TẶNG THÊM LƯỢT QUAY CHO CON
+  $('btnMomGiftSpin').onclick = () => {
+    localStorage.removeItem('LAST_WHEEL_SPIN_DATE');
+    const spinBtn = $('btnSpinWheel');
+    spinBtn.disabled = false;
+    spinBtn.style.opacity = '1';
+    spinBtn.style.cursor = 'pointer';
+    spinBtn.textContent = 'QUAY NGAY 🎯';
+    $('wheelResultText').innerHTML = `👑 <b>Mẹ đã tặng con thêm 1 lượt quay may mắn!</b>`;
+    toast("Đã tặng bé thêm 1 lượt quay! 🎁");
+  };
+
+  $('btnSpinWheel').onclick = () => {
+    const { is100, alreadySpun } = checkWheelEligibility();
+    if (!isAdminUnlocked && (!is100 || alreadySpun)) {
+      return alert("Chưa đủ điều kiện quay đâu con ơi! Hãy hoàn thành 100% bài tập mẹ giao nhé!");
+    }
+
+    if (isSpinning) return;
+    isSpinning = true;
+    $('wheelResultText').textContent = 'Đang quay... 🎯';
+
+    const numSlices = wheelSlices.length;
+    const arc = (2 * Math.PI) / numSlices;
+
+    const winningIdx = Math.floor(Math.random() * numSlices);
+    const prize = wheelSlices[winningIdx];
+
+    const jitter = (Math.random() - 0.5) * (arc * 0.5);
+    const targetAngleAtTop = (1.5 * Math.PI) - ((winningIdx + 0.5) * arc) + jitter;
+
+    const fullSpins = (6 + Math.floor(Math.random() * 4)) * (2 * Math.PI);
+    const currentMod = currentWheelAngle % (2 * Math.PI);
+    let diff = targetAngleAtTop - currentMod;
+    while (diff < 0) diff += (2 * Math.PI);
+
+    const totalSpin = fullSpins + diff;
+    const finalAngle = currentWheelAngle + totalSpin;
+    const duration = 4500;
+    const startAngle = currentWheelAngle;
+    const startTime = performance.now();
+
+    function animateWheel(time) {
+      const elapsed = time - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      currentWheelAngle = startAngle + totalSpin * ease;
+      drawWheel();
+
+      if (progress < 1) {
+        requestAnimationFrame(animateWheel);
+      } else {
+        isSpinning = false;
+        currentWheelAngle = finalAngle;
+        drawWheel();
+
+        // GHI NHỚ ĐÃ QUAY HÔM NAY (KHÓA LẠI NGAY LẬP TỨC)
+        localStorage.setItem('LAST_WHEEL_SPIN_DATE', todayISO());
+        $('btnSpinWheel').disabled = true;
+        $('btnSpinWheel').style.opacity = '0.5';
+        $('btnSpinWheel').style.cursor = 'not-allowed';
+        $('btnSpinWheel').textContent = 'ĐÃ QUAY HÔM NAY ✓';
+
+        // THÔNG BÁO KẾT QUẢ CHUẨN XÁC
+        $('wheelResultText').innerHTML = `🎉 <b>Hoan hô! Con nhận được: ${prize.text}!</b>`;
+        triggerCelebration(0);
+
+        if (prize.text.includes('+1 ⭐')) state.redemptions.push({ id: 'rw_'+Date.now(), name: 'Trúng Vòng Quay', cost: -1, created_at: todayISO() });
+        if (prize.text.includes('+2 ⭐')) state.redemptions.push({ id: 'rw_'+Date.now(), name: 'Trúng Vòng Quay', cost: -2, created_at: todayISO() });
+        if (prize.text.includes('+3 ⭐')) state.redemptions.push({ id: 'rw_'+Date.now(), name: 'Trúng Vòng Quay', cost: -3, created_at: todayISO() });
+        if (prize.text.includes('5⭐')) state.redemptions.push({ id: 'rw_'+Date.now(), name: 'Trúng Jackpot Vòng Quay', cost: -5, created_at: todayISO() });
+        if (prize.text.includes('cà rốt')) { state.carrots += 2; updatePetUI(); }
+
+        renderStats();
+      }
+    }
+    requestAnimationFrame(animateWheel);
+  };
+
+  // ========================================================
+  // 🍅 ĐỒNG HỒ POMODORO & TIẾNG MƯA THƯ GIÃN (WEB AUDIO)
+  // ========================================================
+  let pomoTime = 25 * 60;
+  let pomoTimer = null;
+  let isPomoRunning = false;
+  let isRainPlaying = false;
+  let rainAudioCtx = null, rainSource = null;
+
   $('btnOpenPomodoro').onclick = () => $('pomodoroDialog').showModal();
+
+  function updatePomoDisplay() {
+    const m = Math.floor(pomoTime / 60);
+    const s = pomoTime % 60;
+    $('pomoTimerLabel').textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  }
+
   $('btnPomoStart').onclick = () => {
-    if (pomoTimer) {
-      clearInterval(pomoTimer); pomoTimer = null;
+    if (isPomoRunning) {
+      clearInterval(pomoTimer);
+      isPomoRunning = false;
       $('btnPomoStart').textContent = "Tiếp tục ⏱️";
     } else {
+      isPomoRunning = true;
       $('btnPomoStart').textContent = "Tạm dừng ⏸️";
       pomoTimer = setInterval(() => {
         if (pomoTime > 0) {
           pomoTime--;
-          const m = Math.floor(pomoTime / 60), s = pomoTime % 60;
-          $('pomoTimerLabel').textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+          updatePomoDisplay();
         } else {
-          clearInterval(pomoTimer); pomoTimer = null;
+          clearInterval(pomoTimer);
+          isPomoRunning = false;
           triggerCelebration(0);
-          toast("🎉 Hết giờ học tập trung! Con nghỉ ngơi 5 phút nhé!");
+          alert("🎉 Hết 25 phút tập trung rồi! Con nghỉ giải lao 5 phút nhé!");
         }
       }, 1000);
     }
   };
+
   $('btnPomoReset').onclick = () => {
-    clearInterval(pomoTimer); pomoTimer = null; pomoTime = 25 * 60;
-    $('pomoTimerLabel').textContent = "25:00";
+    clearInterval(pomoTimer);
+    isPomoRunning = false;
+    pomoTime = 25 * 60;
     $('btnPomoStart').textContent = "Bắt đầu ⏱️";
+    updatePomoDisplay();
   };
 
-  // 3. Flashcard 3D
-  const flashcards = [
-    { cat: "Tiếng Anh", q: "Rectangle", a: "Hình chữ nhật" },
-    { cat: "Tiếng Anh", q: "Triangle", a: "Hình tam giác" },
-    { cat: "Toán học", q: "15 x 6 = ?", a: "90" },
-    { cat: "Toán học", q: "1 tấn = ? kg", a: "1000 kg" },
-    { cat: "Toán học", q: "Chu vi hình vuông = ?", a: "Cạnh x 4" }
-  ];
-  let fcIndex = 0;
-  $('btnOpenFlashcards').onclick = () => { renderFlashcard(); $('flashcardDialog').showModal(); };
-  $('flashcardScene').onclick = () => $('activeFlashcard').classList.toggle('is-flipped');
-  function renderFlashcard() {
-    $('activeFlashcard').classList.remove('is-flipped');
-    const c = flashcards[fcIndex];
-    $('fcCategory').textContent = c.cat;
-    $('fcFrontText').textContent = c.q;
-    $('fcBackText').textContent = c.a;
-    $('fcCounter').textContent = `${fcIndex + 1} / ${flashcards.length}`;
-  }
-  $('btnFcNext').onclick = () => { fcIndex = (fcIndex + 1) % flashcards.length; renderFlashcard(); };
-  $('btnFcPrev').onclick = () => { fcIndex = (fcIndex - 1 + flashcards.length) % flashcards.length; renderFlashcard(); };
-
-  // 4. Vòng quay may mắn
-  const wheelSlices = ['+1 ⭐', '+2 ⭐', '15p Youtube', '+3 ⭐', '2 Củ cà rốt 🥕', 'JACKPOT 5⭐'];
-  const wheelColors = ['#ffb3ba', '#baffc9', '#bae1ff', '#ffffba', '#ffdfba', '#fcf6bd'];
-  let isSpinning = false, wheelAngle = 0;
-  function drawWheel() {
-    const canvas = $('wheelCanvas'); if(!canvas) return;
-    const ctx = canvas.getContext('2d'), arc = (2 * Math.PI) / wheelSlices.length, cx = 140, cy = 140;
-    ctx.clearRect(0,0,280,280);
-    for (let i = 0; i < wheelSlices.length; i++) {
-      ctx.beginPath(); ctx.fillStyle = wheelColors[i]; ctx.moveTo(cx,cy);
-      ctx.arc(cx, cy, 130, wheelAngle + i * arc, wheelAngle + (i + 1) * arc);
-      ctx.fill(); ctx.stroke();
-      ctx.save(); ctx.translate(cx,cy); ctx.rotate(wheelAngle + (i + 0.5) * arc);
-      ctx.textAlign = 'right'; ctx.fillStyle = '#6d4c41'; ctx.font = 'bold 12px Quicksand';
-      ctx.fillText(wheelSlices[i], 120, 5); ctx.restore();
-    }
-  }
-  $('btnOpenWheel').onclick = () => { $('wheelDialog').showModal(); setTimeout(drawWheel, 100); };
-  $('btnSpinWheel').onclick = () => {
-    if (isSpinning) return;
-    isSpinning = true;
-    let spinAmount = (5 + Math.random() * 5) * 2 * Math.PI;
-    let startAngle = wheelAngle, duration = 3500, startTime = performance.now();
-    function animate(now) {
-      let progress = Math.min((now - startTime) / duration, 1);
-      wheelAngle = startAngle + spinAmount * (1 - Math.pow(1 - progress, 3));
-      drawWheel();
-      if (progress < 1) requestAnimationFrame(animate);
-      else {
-        isSpinning = false;
-        triggerCelebration(0);
-        $('wheelResultText').textContent = "🎉 Chúc mừng con đã nhận được phần thưởng may mắn!";
-      }
-    }
-    requestAnimationFrame(animate);
-  };
-
-  // 5. Thiệp vinh danh
-  $('btnOpenCert').onclick = () => {
-    const canvas = $('certCanvas'), ctx = canvas.getContext('2d');
-    ctx.fillStyle = '#fff0f4'; ctx.fillRect(0,0,500,340);
-    ctx.strokeStyle = '#c95c78'; ctx.lineWidth = 3; ctx.strokeRect(10,10,480,320);
-    ctx.fillStyle = '#a64e68'; ctx.font = 'bold 22px Quicksand'; ctx.textAlign = 'center';
-    ctx.fillText('🌸 BẢNG VÀNG THÀNH TÍCH 🌸', 250, 50);
-    ctx.font = 'bold 32px "Dancing Script"'; ctx.fillText('Khánh Huyền', 250, 130);
-    ctx.fillStyle = '#36795f'; ctx.font = 'bold 16px Quicksand';
-    ctx.fillText(`Cấp Độ Thỏ: Cấp ${state.petLevel} / 50`, 250, 190);
-    ctx.fillText(`Số Sao Tích Lũy: ${earnedPoints()} ⭐`, 250, 220);
-    ctx.fillStyle = '#8a7b82'; ctx.font = 'italic 13px Quicksand';
-    ctx.fillText('“Mỗi bài học là một bước tiến nhỏ. Mẹ rất tự hào về con!”', 250, 270);
-    $('certDialog').showModal();
-  };
-  $('btnDownloadCert').onclick = () => {
-    const a = document.createElement('a'); a.download = 'thiep-khen-thuong.png'; a.href = $('certCanvas').toDataURL(); a.click();
-  };
-
-  // 6. Đồng bộ Google Sheets
-  $('btnSyncSheet').onclick = () => {
-    toast("Đang đồng bộ bài tập từ Google Sheets... 🔄");
-    setTimeout(() => { toast("Đã cập nhật bài tập mới nhất từ Sheets thành công! ✅"); }, 1200);
-  };
-
-  // ==========================================
-  // XÁC THỰC MẬT MÃ MẸ & DUYỆT BÀI
-  // ==========================================
-  function updateRoleUI() {
-    $('btnRoleKid').classList.toggle('active', !isAdminUnlocked);
-    $('btnRoleMom').classList.toggle('active', isAdminUnlocked);
-    $('appBody').classList.toggle('unlocked', isAdminUnlocked);
-    renderTasks();
-  }
-  $('btnRoleKid').onclick = () => { isAdminUnlocked = false; updateRoleUI(); toast('Đã chuyển sang chế độ: Khánh Huyền 👧'); };
-  $('btnRoleMom').onclick = () => {
-    if (isAdminUnlocked) { toast('Mẹ đang ở chế độ quản trị rồi nhé! 👩👑'); return; }
-    $('momPassInput').value = ''; $('momPassError').textContent = '';
-    $('momPassDialog').showModal(); setTimeout(() => $('momPassInput').focus(), 150);
-  };
-  $('btnConfirmMomPass').onclick = () => {
-    if ($('momPassInput').value.trim() === '0907') {
-      isAdminUnlocked = true; $('momPassDialog').close(); updateRoleUI();
-      toast('Xác thực quyền Mẹ thành công! 👩👑✨');
+  function toggleRainSound() {
+    if (isRainPlaying) {
+      if (rainAudioCtx) rainAudioCtx.close();
+      isRainPlaying = false;
+      $('btnPomoRain').textContent = "🌧️ Tiếng mưa: Tắt";
     } else {
-      $('momPassError').textContent = 'Mật mã chưa đúng (Mặc định: 0907)';
+      try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        rainAudioCtx = new AudioCtx();
+        const bufferSize = rainAudioCtx.sampleRate * 2;
+        const buffer = rainAudioCtx.createBuffer(1, bufferSize, rainAudioCtx.sampleRate);
+        const output = buffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) output[i] = (Math.random() * 2 - 1) * 0.05;
+
+        rainSource = rainAudioCtx.createBufferSource();
+        rainSource.buffer = buffer;
+        rainSource.loop = true;
+
+        const filter = rainAudioCtx.createBiquadFilter();
+        filter.type = 'lowpass';
+        filter.frequency.value = 1000;
+
+        rainSource.connect(filter);
+        filter.connect(rainAudioCtx.destination);
+        rainSource.start();
+
+        isRainPlaying = true;
+        $('btnPomoRain').textContent = "🌧️ Tiếng mưa: Đang bật";
+      } catch(e){ alert("Trình duyệt không hỗ trợ Web Audio."); }
     }
+  }
+  $('btnPomoRain').onclick = toggleRainSound;
+
+  // ========================================================
+  // 🎴 THẺ FLASHCARD 3D (KHO RỘNG LỚN & XÁO TRỘN NGẪU NHIÊN)
+  // ========================================================
+  const MASTER_FLASHCARDS = [
+    { front: "Rectangle", back: "Hình chữ nhật", type: "cambridge", cat: "Tiếng Anh Cambridge" },
+    { front: "Triangle", back: "Hình tam giác", type: "cambridge", cat: "Tiếng Anh Cambridge" },
+    { front: "Perimeter", back: "Chu vi", type: "math", cat: "Toán Song Ngữ" },
+    { front: "Area", back: "Diện tích", type: "math", cat: "Toán Song Ngữ" },
+    { front: "Dictionary", back: "Từ điển", type: "cambridge", cat: "Từ Vựng Cambridge" },
+    { front: "Timetable", back: "Thời khóa biểu", type: "cambridge", cat: "Từ Vựng Cambridge" },
+    { front: "Library", back: "Thư viện", type: "cambridge", cat: "Từ Vựng Cambridge" },
+    { front: "Playground", back: "Sân chơi", type: "cambridge", cat: "Từ Vựng Cambridge" },
+    { front: "Balcony", back: "Ban công", type: "cambridge", cat: "Từ Vựng Cambridge" },
+    { front: "Blanket", back: "Cái chăn (mền)", type: "daily", cat: "Đời Sống & Đồ Vật" },
+    { front: "Cupboard", back: "Tủ đựng chén bát / đồ", type: "daily", cat: "Đời Sống & Đồ Vật" },
+    { front: "Adventure", back: "Cuộc phiêu lưu", type: "cambridge", cat: "Từ Vựng Cambridge" },
+    { front: "Environment", back: "Môi trường", type: "cambridge", cat: "Từ Vựng Cambridge" },
+    { front: "Dangerous", back: "Nguy hiểm", type: "cambridge", cat: "Từ Vựng Cambridge" },
+    { front: "Carefully", back: "Một cách cẩn thận", type: "cambridge", cat: "Từ Vựng Cambridge" },
+    { front: "Suddenly", back: "Đột nhiên, bất thình lình", type: "cambridge", cat: "Từ Vựng Cambridge" },
+    { front: "Daughter", back: "Con gái iu", type: "daily", cat: "Gia Đình & Bạn Bè" },
+    { front: "Whisper", back: "Nói thì thầm", type: "cambridge", cat: "Từ Vựng Cambridge" },
+    { front: "Excited", back: "Hào hứng, phấn khởi", type: "cambridge", cat: "Cảm Xúc" },
+    { front: "Autumn", back: "Mùa thu", type: "daily", cat: "Thiên Nhiên" },
+    { front: "15 x 6 = ?", back: "90", type: "math", cat: "Toán Tính Nhẩm" },
+    { front: "25 x 4 = ?", back: "100", type: "math", cat: "Toán Tính Nhẩm" },
+    { front: "125 x 8 = ?", back: "1000", type: "math", cat: "Toán Tính Nhẩm" },
+    { front: "36 : 4 = ?", back: "9", type: "math", cat: "Bảng Chia" },
+    { front: "45 : 5 = ?", back: "9", type: "math", cat: "Bảng Chia" },
+    { front: "54 : 6 = ?", back: "9", type: "math", cat: "Bảng Chia" },
+    { front: "63 : 7 = ?", back: "9", type: "math", cat: "Bảng Chia" },
+    { front: "72 : 8 = ?", back: "9", type: "math", cat: "Bảng Chia" },
+    { front: "81 : 9 = ?", back: "9", type: "math", cat: "Bảng Chia" },
+    { front: "1 thế kỷ = ? năm", back: "100 năm", type: "math", cat: "Đại Lượng Thời Gian" },
+    { front: "1 tấn = ? kg", back: "1000 kg", type: "math", cat: "Đại Lượng Khối Lượng" },
+    { front: "1 tạ = ? kg", back: "100 kg", type: "math", cat: "Đại Lượng Khối Lượng" },
+    { front: "1 yến = ? kg", back: "10 kg", type: "math", cat: "Đại Lượng Khối Lượng" },
+    { front: "Muốn tìm trung bình cộng", back: "Tính tổng các số rồi chia cho số các số hạng", type: "math", cat: "Quy Tắc Toán Lớp 4" },
+    { front: "Chu vi hình vuông = ?", back: "Độ dài một cạnh x 4", type: "math", cat: "Công Thức Hình Học" },
+    { front: "Diện tích hình chữ nhật = ?", back: "Chiều dài x Chiều rộng (cùng đơn vị đo)", type: "math", cat: "Công Thức Hình Học" },
+    { front: "Chu vi hình chữ nhật = ?", back: "(Chiều dài + Chiều rộng) x 2", type: "math", cat: "Công Thức Hình Học" },
+    { front: "Diện tích hình vuông = ?", back: "Cạnh x Cạnh", type: "math", cat: "Công Thức Hình Học" }
+  ];
+
+  let activeFlashcardList = [];
+  let currentFcIdx = 0;
+
+  function shuffleArray(arr) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function getDynamicCardsFromTasks() {
+    const list = [];
+    state.tasks.forEach(t => {
+      if (t.questions && Array.isArray(t.questions)) {
+        t.questions.forEach(q => {
+          list.push({ front: q.q, back: q.a, type: "tasks", cat: `Bài: ${t.title}` });
+        });
+      }
+    });
+    return list;
+  }
+
+  function reloadFlashcardList(shouldShuffle = true) {
+    const topic = $('fcTopicSelect').value;
+    let pool = [...MASTER_FLASHCARDS, ...getDynamicCardsFromTasks()];
+
+    if (topic !== 'all') pool = pool.filter(c => c.type === topic);
+    if (pool.length === 0) pool = [{ front: "Chưa có thẻ cho mục này", back: "Mẹ giao bài tập để tạo thêm thẻ nhé!", type: "all", cat: "Thông báo" }];
+
+    activeFlashcardList = shouldShuffle ? shuffleArray(pool) : pool;
+    currentFcIdx = 0;
+    renderFlashcard();
+  }
+
+  $('btnOpenFlashcards').onclick = () => { reloadFlashcardList(true); $('flashcardDialog').showModal(); };
+  $('btnFcShuffle').onclick = () => { reloadFlashcardList(true); toast("Đã xáo trộn ngẫu nhiên toàn bộ thẻ bài! 🔀"); };
+  $('fcTopicSelect').onchange = () => reloadFlashcardList(true);
+
+  function renderFlashcard() {
+    if (activeFlashcardList.length === 0) return;
+    const card = activeFlashcardList[currentFcIdx];
+    $('activeFlashcard').classList.remove('is-flipped');
+    $('fcCategory').textContent = card.cat;
+    $('fcFrontText').textContent = card.front;
+    $('fcBackText').textContent = card.back;
+    $('fcCounter').textContent = `${currentFcIdx + 1} / ${activeFlashcardList.length}`;
+  }
+
+  $('flashcardScene').onclick = () => $('activeFlashcard').classList.toggle('is-flipped');
+  $('btnFcNext').onclick = () => {
+    if (currentFcIdx < activeFlashcardList.length - 1) { currentFcIdx++; renderFlashcard(); }
+    else { currentFcIdx = 0; renderFlashcard(); toast("Đã ôn xong một vòng! Quay lại thẻ đầu tiên nhé."); }
+  };
+  $('btnFcPrev').onclick = () => {
+    if (currentFcIdx > 0) { currentFcIdx--; renderFlashcard(); }
   };
 
-  // RENDER DỮ LIỆU
+  // ========================================================
+  // 🖼️ THIỆP VINH DANH THÀNH TÍCH ĐỂ ĐĂNG ZALO/FB
+  // ========================================================
+  $('btnOpenCert').onclick = () => { drawCertificate(); $('certDialog').showModal(); };
+
+  function drawCertificate() {
+    const canvas = $('certCanvas');
+    const ctx = canvas.getContext('2d');
+    const w = canvas.width, h = canvas.height;
+
+    const grad = ctx.createLinearGradient(0, 0, w, h);
+    grad.addColorStop(0, '#fff0f4');
+    grad.addColorStop(1, '#ffe1e9');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, w, h);
+
+    ctx.strokeStyle = '#c95c78';
+    ctx.lineWidth = 3;
+    ctx.strokeRect(12, 12, w - 24, h - 24);
+    ctx.lineWidth = 1;
+    ctx.strokeRect(16, 16, w - 32, h - 32);
+
+    ctx.fillStyle = '#a64e68';
+    ctx.font = 'bold 24px Quicksand, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('🌸 BẢNG VÀNG THÀNH TÍCH 🌸', w / 2, 55);
+
+    ctx.fillStyle = '#51434a';
+    ctx.font = '15px Quicksand, sans-serif';
+    ctx.fillText('Tuyên dương cô công chúa nhỏ chăm ngoan:', w / 2, 90);
+
+    ctx.fillStyle = '#9f4963';
+    ctx.font = 'bold 36px "Dancing Script", cursive';
+    ctx.fillText('Khánh Huyền', w / 2, 140);
+
+    const ts = state.tasks;
+    const done = ts.filter(t => state.submissions.some(s => s.task_id === t.id && s.status === 'approved')).length;
+    const pts = earnedPoints();
+
+    ctx.fillStyle = '#36795f';
+    ctx.font = 'bold 15px Quicksand, sans-serif';
+    ctx.fillText(`⭐ Đạt ${pts} Sao Thưởng  ·  🌷 Hoàn Thành ${done} Bài Học`, w / 2, 195);
+    ctx.fillText(`🔥 Chuỗi ${streak()} Ngày Học Liên Tiếp!`, w / 2, 225);
+
+    ctx.fillStyle = '#8a7b82';
+    ctx.font = 'italic 13px Quicksand, sans-serif';
+    ctx.fillText('“Mỗi bài học là một bước tiến nhỏ. Mẹ rất tự hào về con!”', w / 2, 270);
+
+    ctx.font = '12px Quicksand, sans-serif';
+    ctx.fillStyle = '#a6536c';
+    ctx.fillText(`Ngày cấp: ${new Date().toLocaleDateString('vi-VN')}`, w / 2, 310);
+  }
+
+  $('btnDownloadCert').onclick = () => {
+    const link = document.createElement('a');
+    link.download = `thiep-khen-thuong-khanh-huyen-${todayISO()}.png`;
+    link.href = $('certCanvas').toDataURL();
+    link.click();
+    toast('Đã tải thiệp khen thưởng về máy! 📥');
+  };
+
+  // ========================================================
+  // ⚙️ CÀI ĐẶT TELEGRAM VÀ SHEET URL
+  // ========================================================
+  $('btnConfigSheet').onclick = () => {
+    $('cfgSheetUrl').value = getStoredSheetUrl();
+    $('cfgTeleToken').value = localStorage.getItem('TELE_TOKEN') || '';
+    $('cfgTeleChatId').value = localStorage.getItem('TELE_CHAT_ID') || '';
+    $('configDialog').showModal();
+  };
+
+  $('configForm').onsubmit = e => {
+    e.preventDefault();
+    const url = $('cfgSheetUrl').value.trim();
+    const tok = $('cfgTeleToken').value.trim();
+    const cid = $('cfgTeleChatId').value.trim();
+
+    if (url) localStorage.setItem('CUSTOM_SHEET_URL', url);
+    localStorage.setItem('TELE_TOKEN', tok);
+    localStorage.setItem('TELE_CHAT_ID', cid);
+
+    updateSheetLinkUI();
+    $('configDialog').close();
+    toast("Đã lưu cấu hình thành công!");
+    if (url) syncGoogleSheetsToSupabase();
+  };
+
+  function fetchGoogleSheetJSONP(sheetId, gid = '0') {
+    return new Promise((resolve, reject) => {
+      const cbName = 'gvizCb_' + Math.floor(Math.random() * 1000000);
+      const timer = setTimeout(() => { cleanup(); reject(new Error("Quá thời gian tải Google Sheet. Mẹ kiểm tra mạng nhé!")); }, 12000);
+      function cleanup() { clearTimeout(timer); delete window[cbName]; const s = document.getElementById(cbName); if (s) s.remove(); }
+      window[cbName] = function(json) { cleanup(); resolve(json); };
+      const script = document.createElement('script');
+      script.id = cbName;
+      script.src = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=responseHandler:${cbName}&gid=${gid}`;
+      script.onerror = () => { cleanup(); reject(new Error("Lỗi tải Google Sheet. Mẹ nhớ bấm Chia sẻ -> 'Bất kỳ ai có liên kết đều có thể xem' nhé!")); };
+      document.body.appendChild(script);
+    });
+  }
+
+  async function syncGoogleSheetsToSupabase() {
+    const rawUrl = getStoredSheetUrl();
+    const btn = $('btnSyncSheet');
+    btn.disabled = true;
+    btn.textContent = 'Đang đồng bộ... ⏳';
+    toast('Đang đọc bài tập từ Google Sheets...');
+
+    try {
+      const idMatch = rawUrl.match(/\/d\/([a-zA-Z0-9-_]+)/);
+      if (!idMatch) throw new Error("Link Google Sheet chưa đúng định dạng.");
+      const sheetId = idMatch[1];
+      const gidMatch = rawUrl.match(/gid=([0-9]+)/);
+      const gid = gidMatch ? gidMatch[1] : '0';
+
+      const json = await fetchGoogleSheetJSONP(sheetId, gid);
+      const rows = (json && json.table && json.table.rows) ? json.table.rows : [];
+
+      const tasksToUpsert = [];
+      for (const row of rows) {
+        const c = row.c || [];
+        const taskId = c[0] ? String(c[0].v || '').trim() : '';
+        const title = c[1] ? String(c[1].v || '').trim() : '';
+        const subject = c[2] ? String(c[2].v || 'Toán').trim() : 'Toán';
+
+        let dateStr = '';
+        if (c[3]) {
+          if (c[3].f) dateStr = c[3].f.trim();
+          else if (typeof c[3].v === 'string') dateStr = c[3].v.trim();
+          if (typeof c[3].v === 'string' && c[3].v.startsWith('Date(')) {
+            const m = c[3].v.match(/Date\((\d+),(\d+),(\d+)\)/);
+            if (m) dateStr = `${m[1]}-${String(Number(m[2])+1).padStart(2,'0')}-${String(m[3]).padStart(2,'0')}`;
+          }
+        }
+        if (dateStr.includes('/')) {
+          const p = dateStr.split('/');
+          if (p.length === 3) dateStr = p[0].length === 4 ? `${p[0]}-${p[1].padStart(2,'0')}-${p[2].padStart(2,'0')}` : `${p[2]}-${p[1].padStart(2,'0')}-${p[0].padStart(2,'0')}`;
+        }
+        if (!dateStr || dateStr.length < 8) dateStr = todayISO();
+
+        const detail = c[5] ? String(c[5].v || '').trim() : '';
+        const points = c[6] ? Number(c[6].v) || 1 : 1;
+
+        if (taskId && title) {
+          tasksToUpsert.push({ sheet_id: taskId, title, subject, task_date: dateStr, detail, points });
+        }
+      }
+
+      if (tasksToUpsert.length === 0) throw new Error("Chưa có dòng bài tập nào trong Google Sheet.");
+
+      if (sb) {
+        const { error } = await sb.from('tasks').upsert(tasksToUpsert, { onConflict: 'sheet_id' });
+        if (error) throw error;
+      }
+
+      toast(`🎉 Đã đồng bộ ${tasksToUpsert.length} bài lên Web!`);
+      const firstDate = tasksToUpsert[0].task_date;
+      selectedDate = firstDate;
+      selectedMonth = monthISO(firstDate);
+      selectedYear = selectedMonth.split('-')[0];
+      weekStart = mondayOf(firstDate);
+
+      await loadDataFromSupabase();
+    } catch (err) {
+      alert("Lỗi đồng bộ: " + err.message);
+    } finally {
+      btn.disabled = false;
+      btn.textContent = '🔄 Đồng bộ Google Sheets';
+    }
+  }
+
+  $('btnSyncSheet').onclick = syncGoogleSheetsToSupabase;
+
+  // ==========================================
+  // TẢI VÀ RENDER DỮ LIỆU TỪ SUPABASE
+  // ==========================================
   async function loadDataFromSupabase() {
     if (!sb) return render();
     try {
-      const [tRes, sRes] = await Promise.all([
+      const [tasksRes, subsRes, rewRes, redRes] = await Promise.all([
         sb.from('tasks').select('*').order('created_at', { ascending: false }),
-        sb.from('task_submissions').select('*')
+        sb.from('task_submissions').select('*'),
+        sb.from('rewards').select('*'),
+        sb.from('redemptions').select('*').order('created_at', { ascending: false })
       ]);
-      state.tasks = tRes.data || [];
-      state.submissions = sRes.data || [];
+
+      state.tasks = tasksRes.data || [];
+      state.submissions = subsRes.data || [];
+      state.rewards = rewRes.data || [];
+      state.redemptions = redRes.data || [];
+
       render();
-    } catch(e) { render(); }
+    } catch(err) { console.error(err); render(); }
   }
 
   function earnedPoints() {
-    const approvedIds = new Set(state.submissions.filter(s => s.status === 'approved').map(s => s.task_id));
-    return state.tasks.filter(t => approvedIds.has(t.id)).reduce((sum, t) => sum + (Number(t.points) || 1), 0);
+    const approvedTaskIds = new Set(state.submissions.filter(s => s.status === 'approved').map(s => s.task_id));
+    const earned = state.tasks.filter(t => approvedTaskIds.has(t.id)).reduce((sum, t) => sum + (Number(t.points) || 1), 0);
+    const spent = state.redemptions.reduce((sum, r) => sum + (Number(r.cost) || 0), 0);
+    return Math.max(0, earned - spent);
   }
 
   function render() {
     $('todayPill').textContent = '📅 ' + new Date().toLocaleDateString('vi-VN', { weekday: 'long', day: '2-digit', month: 'long' });
-    renderMonthTabs(); renderWeekDays(); renderTasks(); renderStats(); updatePetUI();
+    $('yearSelect').value = selectedYear;
+
+    renderMonthTabs();
+    renderWeekDays();
+    renderTasks();
+    renderStats();
+    renderSubjectStats();
+    renderRewards();
+    renderGoal();
+    renderHistory();
+    updatePetUI();
+
+    // CẬP NHẬT TRẠNG THÁI NÚT VÒNG QUAY
+    const wheelStatus = checkWheelEligibility();
+    const btnWheel = $('btnOpenWheel');
+    if (btnWheel) {
+      if (wheelStatus.alreadySpun) {
+        btnWheel.textContent = '🎡 Vòng quay (Đã quay)';
+        btnWheel.className = 'btn btn-soft btn-small';
+      } else if (wheelStatus.is100) {
+        btnWheel.textContent = '🎡 Vòng quay (Mở khóa!) 🌟';
+        btnWheel.className = 'btn btn-gold btn-small';
+      } else {
+        btnWheel.textContent = `🎡 Vòng quay (${wheelStatus.kpi}%) 🔒`;
+        btnWheel.className = 'btn btn-soft btn-small';
+      }
+    }
   }
 
-  function renderMonthTabs() {
+  function renderMonthTabs(){
     let html = '';
-    for (let i = 1; i <= 12; i++) {
+    for(let i=1; i<=12; i++){
       let mon = `${selectedYear}-${String(i).padStart(2,'0')}`;
-      html += `<button class="tab ${mon === selectedMonth ? 'active' : ''}" data-month="${mon}">Tháng ${i}</button>`;
+      let act = (mon === selectedMonth) ? 'active' : '';
+      html += `<button class="tab ${act}" data-month="${mon}">Tháng ${i}</button>`;
     }
     $('monthTabs').innerHTML = html;
   }
 
-  function renderWeekDays() {
-    const names = ['T2','T3','T4','T5','T6','T7','CN'];
-    $('weekDays').innerHTML = Array.from({length:7}, (_, i) => {
+  function renderWeekDays(){
+    const names=['T2','T3','T4','T5','T6','T7','CN'];
+    $('weekDays').innerHTML = Array.from({length:7}, (_,i) => {
       const d = dateAdd(weekStart, i);
-      const dTasks = state.tasks.filter(t => t.task_date === d);
-      const okCount = dTasks.filter(t => state.submissions.some(s => s.task_id === t.id && s.status === 'approved')).length;
-      return `<button class="week-day ${d === selectedDate ? 'selected' : ''}" data-date="${d}"><div class="dow">${names[i]}</div><div class="num">${Number(d.slice(-2))}</div><div class="dots">${dTasks.length ? `${okCount}/${dTasks.length} ✓` : '—'}</div></button>`;
+      const dayTasks = state.tasks.filter(t => t.task_date === d);
+      const approvedCount = dayTasks.filter(t => state.submissions.some(s => s.task_id === t.id && s.status === 'approved')).length;
+      let isSel = (d === selectedDate) ? 'selected' : '';
+      let dots = dayTasks.length ? `${approvedCount}/${dayTasks.length} ✓` : '—';
+      return `<button class="week-day ${isSel}" data-date="${d}"><div class="dow">${names[i]}</div><div class="num">${Number(d.slice(-2))}</div><div class="dots">${dots}</div></button>`;
     }).join('');
   }
 
   function renderTasks() {
-    const curTasks = state.tasks.filter(t => t.task_date === selectedDate && (filterSubject === 'all' || t.subject === filterSubject));
-    $('phase').innerHTML = `<b>Kế hoạch ngày ${fmtDate(selectedDate)}:</b> Mỗi bài học hoàn thành là +1.000đ nuôi Thỏ! 🌸`;
+    const monthTasks = state.tasks.filter(t => monthISO(t.task_date) === selectedMonth && (filterSubject === 'all' || t.subject === filterSubject));
+    const currentDayTasks = monthTasks.filter(t => t.task_date === selectedDate);
+    const y = Number(selectedMonth.split('-')[0]), m = Number(selectedMonth.split('-')[1]);
+    $('phase').innerHTML = `<b>Kế hoạch học tập (Tháng ${m}/${y}):</b> Mỗi bài học hoàn thành là một bước tiến nhỏ! 🌸`;
+
+    const cards = currentDayTasks.length ? currentDayTasks.map(t => {
+      const sub = state.submissions.find(s => s.task_id === t.id);
+      const isApproved = sub && sub.status === 'approved';
+      const isPending = sub && sub.status === 'pending';
+      const isRedo = sub && sub.status === 'redo';
+
+      let statusBadge = `<span class="badge-status status-todo">Chưa làm</span>`;
+      if (isApproved) statusBadge = `<span class="badge-status status-done">✓ Mẹ đã duyệt (+${t.points}⭐)</span>`;
+      else if (isPending) statusBadge = `<span class="badge-status status-pending">⏳ Chờ mẹ duyệt</span>`;
+      else if (isRedo) statusBadge = `<span class="badge-status status-redo">⚠️ Cần làm lại</span>`;
+
+      let quizBtnHtml = '';
+      if (t.questions && Array.isArray(t.questions) && t.questions.length > 0) {
+        let qCount = t.questions.length;
+        let btnText = isApproved ? `📝 Xem lại kết quả (${qCount} câu)` : `📝 Làm bài kiểm tra (${qCount} câu)`;
+        quizBtnHtml = `<div><button type="button" class="btn-quiz" data-open-quiz="${t.id}">${btnText}</button></div>`;
+      }
+
+      let redoAlertHtml = '';
+      if (isRedo) {
+        redoAlertHtml = `
+          <div style="background:#fff0f4; border-left:4px solid #e95f83; padding:8px 12px; border-radius:8px; margin-top:8px; color:#b64b63; font-size:13px; line-height:1.4;">
+            <b>👩 Lời nhắn từ Mẹ:</b> ${escapeHTML(sub.note || 'Con kiểm tra lại bài và làm lại giúp mẹ nhé!')}
+          </div>
+        `;
+      }
+
+      let actionBtn = '';
+      if (!sub) {
+        actionBtn = `<button class="btn btn-primary btn-small" data-submit-task="${t.id}">📸 Nộp bài</button>`;
+      } else if (isRedo) {
+        actionBtn = `
+          <div class="flex" style="gap:6px;">
+            <button class="btn btn-primary btn-small" data-submit-task="${t.id}" style="background:#e95f83;">🔄 Nộp lại bài</button>
+            <button class="btn btn-soft btn-small" data-view-proof="${t.id}">🔍 Xem bài cũ</button>
+          </div>
+        `;
+      } else {
+        actionBtn = `
+          <div class="flex" style="gap:6px;">
+            <button class="btn btn-soft btn-small" data-view-proof="${t.id}">🔍 Xem bài nộp</button>
+            ${isAdminUnlocked && isPending ? `<button class="btn btn-green btn-small" data-quick-approve="${sub.id}" data-pts="${t.points}">✅ Duyệt nhanh</button>` : ''}
+          </div>
+        `;
+      }
+
+      let adminBtns = isAdminUnlocked ? `
+        <button class="icon-btn" data-delete-task="${t.id}" title="Xóa bài">🗑️</button>
+      ` : '';
+
+      return `
+        <div class="task ${isApproved ? 'done' : ''}">
+          <span class="subject ${subjectClass(t.subject)}">${escapeHTML(t.subject)}</span>
+          <div>
+            <div class="task-title">${escapeHTML(t.title)} <span style="font-size:12px; color:#a46d22;">(+${t.points}⭐)</span> ${statusBadge}</div>
+            ${t.detail ? `<div class="task-detail">${linkifyDetail(t.detail)}</div>` : ''}
+            ${quizBtnHtml}
+            ${redoAlertHtml}
+          </div>
+          <div class="task-actions">
+            ${actionBtn}
+            ${adminBtns}
+          </div>
+        </div>
+      `;
+    }).join('') : '<div class="empty">Chưa có bài nào cho ngày này. Mẹ bấm chọn các ngày khác trên thanh lịch tuần nhé!</div>';
+
     $('taskDays').innerHTML = `
       <article class="day-card">
-        <div class="day-head"><strong>🗓️ ${escapeHTML(fmtDate(selectedDate))}</strong><span class="kpi-tag">${curTasks.length} bài tập</span></div>
-        <div class="task-list">
-          ${curTasks.length ? curTasks.map(t => {
-            const sub = state.submissions.find(s => s.task_id === t.id);
-            const isApproved = sub && sub.status === 'approved';
-            const isPending = sub && sub.status === 'pending';
-            return `
-              <div class="task ${isApproved ? 'done' : ''}">
-                <span class="subject sub-${(t.subject||'Khác').replaceAll(' ','-')}">${escapeHTML(t.subject)}</span>
-                <div>
-                  <div class="task-title">${escapeHTML(t.title)} <span style="font-size:12px; color:#a46d22;">(+${t.points}⭐)</span> ${isApproved ? '<span class="badge-status status-done">✓ Đã duyệt (+1k)</span>' : (isPending ? '<span class="badge-status status-pending">⏳ Chờ duyệt</span>' : '<span class="badge-status status-todo">Chưa nộp</span>')}</div>
-                  ${t.detail ? `<div class="task-detail">${escapeHTML(t.detail)}</div>` : ''}
-                </div>
-                <div class="task-actions">
-                  ${!sub ? `<button class="btn btn-primary btn-small" data-submit-task="${t.id}">📸 Nộp bài</button>` : `<button class="btn btn-soft btn-small" data-view-proof="${t.id}">🔍 Xem bài</button>`}
-                  ${isAdminUnlocked ? `<button class="icon-btn" data-delete-task="${t.id}">🗑️</button>` : ''}
-                </div>
-              </div>
-            `;
-          }).join('') : '<div style="padding:25px; text-align:center; color:#888;">Chưa có bài tập cho ngày này. Mẹ bấm "＋ Giao bài mới" nhé!</div>'}
+        <div class="day-head">
+          <strong>🗓️ ${escapeHTML(fmtDate(selectedDate))}</strong>
+          <span class="kpi-tag">${currentDayTasks.length} bài tập</span>
         </div>
+        <div class="task-list">${cards}</div>
       </article>
     `;
   }
 
   function renderStats() {
-    const mTasks = state.tasks.filter(t => monthISO(t.task_date) === selectedMonth);
-    const okCount = mTasks.filter(t => state.submissions.some(s => s.task_id === t.id && s.status === 'approved')).length;
-    $('statDone').textContent = `${okCount}/${mTasks.length}`;
-    $('statKpi').textContent = mTasks.length ? Math.round((okCount / mTasks.length) * 100) + '%' : '0%';
+    const monthTasks = state.tasks.filter(t => monthISO(t.task_date) === selectedMonth);
+    const approvedCount = monthTasks.filter(t => state.submissions.some(s => s.task_id === t.id && s.status === 'approved')).length;
+    const pendingCount = state.submissions.filter(s => s.status === 'pending').length;
+
+    $('statDone').textContent = `${approvedCount}/${monthTasks.length}`;
+    $('statKpi').textContent = monthTasks.length ? Math.round((approvedCount / monthTasks.length) * 100) + '%' : '0%';
     $('statPoints').textContent = earnedPoints();
-    $('statPending').textContent = state.submissions.filter(s => s.status === 'pending').length;
+    $('statPending').textContent = pendingCount;
+    $('statStreak').textContent = `${streak()} ngày ${state.streakShield ? '🛡️' : ''}`;
   }
 
-  // GIAO & DUYỆT BÀI
-  $('btnMainAddTask').onclick = () => { $('taskForm').reset(); $('taskDate').value = selectedDate; $('taskDialog').showModal(); };
-  $('taskForm').onsubmit = async e => {
+  function renderSubjectStats(){
+    $('subjectMonthLabel').textContent = selectedMonth.split('-').reverse().join('/');
+    const monthTasks = state.tasks.filter(t => monthISO(t.task_date) === selectedMonth);
+    $('subjectStats').innerHTML = SUBJECTS.map(s => {
+      const list = monthTasks.filter(t => t.subject === s);
+      const d = list.filter(t => state.submissions.some(sub => sub.task_id === t.id && sub.status === 'approved')).length;
+      const p = list.length ? Math.round((d / list.length) * 100) : 0;
+      return `
+        <div class="subject-progress">
+          <div class="row-between">
+            <span><b>${escapeHTML(s)}</b> <span class="small-note">(${d}/${list.length} bài)</span></span>
+            <strong>${p}%</strong>
+          </div>
+          <div class="progress"><span style="width:${p}%"></span></div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function renderGoal(){
+    const ts = weekTasks();
+    const d = ts.filter(t => state.submissions.some(sub => sub.task_id === t.id && sub.status === 'approved')).length;
+    const p = ts.length ? Math.round((d / ts.length) * 100) : 0;
+    $('weekKpiLabel').textContent = p + '%';
+    $('weekKpiBar').style.width = p + '%';
+    $('goalLabel').textContent = state.goal + '%';
+    $('goalMessage').textContent = p >= state.goal ? '🎉 Tuyệt vời! Con đã đạt mục tiêu tuần này!' : `Cố lên nhé! Còn ${Math.max(0, state.goal - p)}% nữa.`;
+  }
+
+  function renderHistory(){
+    const f = $('historyFilter').value, q = $('historySearch').value.trim().toLocaleLowerCase('vi');
+    let ts = [...state.tasks].sort((a,b) => b.task_date.localeCompare(a.task_date));
+
+    ts = ts.filter(t => {
+      const sub = state.submissions.find(s => s.task_id === t.id);
+      const isDone = sub && sub.status === 'approved';
+      const isPending = sub && sub.status === 'pending';
+      const isRedo = sub && sub.status === 'redo';
+      const isLate = !isDone && !isPending && !isRedo && t.task_date < todayISO();
+
+      const ok = (f==='all') ? true : ((f==='done'&&isDone) ? true : ((f==='pending'&&isPending) ? true : ((f==='redo'&&isRedo) ? true : ((f==='late'&&isLate) ? true : false))));
+      return ok && (!q || (t.title || '').toLocaleLowerCase('vi').includes(q));
+    });
+
+    $('historyList').innerHTML = ts.length ? ts.slice(0, 50).map(t => {
+      const sub = state.submissions.find(s => s.task_id === t.id);
+      const isDone = sub && sub.status === 'approved';
+      const isPending = sub && sub.status === 'pending';
+      const isRedo = sub && sub.status === 'redo';
+      const isLate = !isDone && !isPending && !isRedo && t.task_date < todayISO();
+
+      const status = isDone ? '<span class="badge-status status-done">Hoàn thành</span>' : (isPending ? '<span class="badge-status status-pending">Chờ duyệt</span>' : (isRedo ? '<span class="badge-status status-redo">Cần làm lại</span>' : (isLate ? '<span class="badge-status" style="background:#ffe4e8;color:#b64b63;">Quá hạn</span>' : '<span class="badge-status status-todo">Chưa xong</span>')));
+      return `
+        <div class="history-row">
+          <div class="row-between" style="align-items:flex-start">
+            <div>
+              <b>${escapeHTML(t.title)}</b>
+              <div class="small-note">${escapeHTML(t.subject)} · Ngày: ${escapeHTML(shortDate(t.task_date))}</div>
+            </div>
+            ${status}
+          </div>
+        </div>
+      `;
+    }).join('') : '<div class="empty">Không tìm thấy bài tập.</div>';
+  }
+
+  $('historyFilter').onchange = renderHistory;
+  $('historySearch').oninput = renderHistory;
+
+  $('yearSelect').onchange = e => {
+    selectedYear = e.target.value;
+    selectedMonth = `${selectedYear}-${selectedMonth.split('-')[1] || '01'}`;
+    selectedDate = `${selectedMonth}-01`;
+    weekStart = mondayOf(selectedDate);
+    render();
+  };
+
+  // ==========================================
+  // 📝 BÀI TẬP TỰ CHẤM 10-20 CÂU
+  // ==========================================
+  $('btnGenMath10').onclick = () => {
+    let lines = [];
+    for (let i = 0; i < 10; i++) {
+      const a = Math.floor(Math.random() * 50) + 10;
+      const b = Math.floor(Math.random() * 40) + 5;
+      lines.push(i % 2 === 0 ? `${a} + ${b} = ? | ${a + b}` : `${a + b} - ${b} = ? | ${a}`);
+    }
+    $('taskQuestions').value = lines.join('\n');
+    toast('Đã tạo nhanh 10 câu Toán!');
+  };
+
+  function openQuizModal(task) {
+    currentActiveQuizTask = task;
+    $('quizModalTitle').textContent = `📝 ${task.title}`;
+    $('quizResultBox').style.display = 'none';
+    $('btnSubmitQuiz').style.display = 'inline-block';
+    
+    const questions = task.questions || [];
+    $('quizCounterText').textContent = `Tổng số: ${questions.length} câu hỏi`;
+
+    $('quizContainer').innerHTML = questions.map((item, index) => {
+      let savedAnswer = (task.answers && task.answers[index]) ? task.answers[index] : '';
+      return `
+        <div class="quiz-question-row">
+          <div class="quiz-q-title">
+            <span><b>Câu ${index + 1}:</b> ${escapeHTML(item.q)}</span>
+            <span class="quiz-result-tag" id="tagRes_${index}" style="display:none;"></span>
+          </div>
+          <input type="text" id="quizInp_${index}" value="${escapeHTML(savedAnswer)}" placeholder="Điền đáp án..." style="padding:6px 10px; font-weight:700; font-size:13px;">
+        </div>
+      `;
+    }).join('');
+
+    $('quizDialog').showModal();
+  }
+
+  $('btnSubmitQuiz').onclick = async () => {
+    if (!currentActiveQuizTask) return;
+    const questions = currentActiveQuizTask.questions || [];
+    let correctCount = 0, childAnswers = [];
+
+    questions.forEach((item, index) => {
+      const inp = $(`quizInp_${index}`);
+      const userVal = (inp ? inp.value : '').trim().toLowerCase();
+      const correctVal = (item.a || '').trim().toLowerCase();
+      childAnswers.push(inp ? inp.value.trim() : '');
+
+      const tag = $(`tagRes_${index}`);
+      if (userVal === correctVal) {
+        correctCount++;
+        if (tag) { tag.textContent = '✓ Đúng'; tag.className = 'quiz-result-tag res-correct'; tag.style.display = 'inline-block'; }
+      } else {
+        if (tag) { tag.textContent = `✗ Sai (${item.a})`; tag.className = 'quiz-result-tag res-wrong'; tag.style.display = 'inline-block'; }
+      }
+    });
+
+    currentActiveQuizTask.answers = childAnswers;
+    const total = questions.length;
+    const score10 = ((correctCount / total) * 10).toFixed(1);
+    const scorePercent = Math.round((correctCount / total) * 100);
+
+    const resBox = $('quizResultBox');
+    resBox.style.display = 'block';
+    if (scorePercent >= 70) {
+      resBox.style.background = '#e1f5ec'; resBox.style.border = '1px solid #c3ebda'; resBox.style.color = '#36795f';
+      resBox.innerHTML = `<h3 style="margin:0 0 4px;">🎉 Điểm số: ${score10}/10 (Đúng ${correctCount}/${total} câu)</h3><p style="margin:0; font-size:13px;">Xuất sắc! Con đã hoàn thành bài tập và nhận sao thưởng ⭐!</p>`;
+      
+      state.carrots += 1;
+      updatePetUI();
+
+      if (sb) {
+        await sb.from('task_submissions').insert([{
+          task_id: currentActiveQuizTask.id,
+          proof_url: '',
+          note: `Làm đúng ${correctCount}/${total} câu (${score10}/10 điểm)`,
+          status: 'approved'
+        }]);
+        triggerCelebration(currentActiveQuizTask.points || 1);
+        await loadDataFromSupabase();
+      }
+    } else {
+      resBox.style.background = '#fff0f4'; resBox.style.border = '1px solid #f6cfda'; resBox.style.color = '#a64e68';
+      resBox.innerHTML = `<h3 style="margin:0 0 4px;">🌱 Điểm số: ${score10}/10 (Đúng ${correctCount}/${total} câu)</h3><p style="margin:0; font-size:13px;">Con xem lại các câu báo màu đỏ và thử làm lại để đạt điểm cao hơn nhé!</p>`;
+    }
+  };
+
+  // ==========================================
+  // 🎁 GÓC ĐỔI QUÀ
+  // ==========================================
+  function renderRewards() {
+    const currentPts = earnedPoints();
+    $('rewardsList').innerHTML = state.rewards.map(r => {
+      const canRedeem = currentPts >= r.cost;
+      const adminBtns = isAdminUnlocked ? `<button class="icon-btn" data-delete-reward="${r.id}" title="Xóa quà">🗑️</button>` : '';
+
+      return `
+        <div class="reward-card">
+          <div class="row-between"><h3>🎁 ${escapeHTML(r.name)}</h3><span class="points">${r.cost} ⭐</span></div>
+          <p>${escapeHTML(r.desc_text || '')}</p>
+          <div class="flex">
+            <button class="btn btn-primary btn-small" data-redeem="${r.id}" ${canRedeem ? '' : 'disabled style="opacity:0.5;cursor:not-allowed;"'}>Đổi quà</button>
+            ${adminBtns}
+          </div>
+        </div>
+      `;
+    }).join('') || '<div class="empty">Chưa có quà. Mẹ bấm "＋ Thêm" nhé!</div>';
+
+    $('redeemHistoryList').innerHTML = state.redemptions.map(red => `
+      <div style="display:flex; justify-content:space-between; font-size:12px; background:#fff8fa; padding:6px 10px; border-radius:8px; margin-bottom:5px;">
+        <span><strong>${escapeHTML(red.name)}</strong> (-${red.cost}⭐)</span>
+        <span style="color:#888;">${new Date(red.created_at).toLocaleDateString('vi-VN')}</span>
+      </div>
+    `).join('') || '<div class="small-note" style="text-align:center;">Chưa đổi quà nào.</div>';
+  }
+
+  $('addRewardBtn').onclick = () => { $('rewardForm').reset(); $('rewardDialog').showModal(); };
+  $('rewardForm').onsubmit = async e => {
     e.preventDefault();
-    const payload = { title: $('taskTitle').value.trim(), subject: $('taskSubject').value, task_date: $('taskDate').value, detail: $('taskDetail').value.trim(), points: Number($('taskPoints').value)||1 };
-    if (sb) await sb.from('tasks').insert([payload]);
-    else state.tasks.push({ id: 'local_'+Date.now(), ...payload });
-    toast('Đã giao bài mới thành công!'); $('taskDialog').close(); loadDataFromSupabase();
+    const name = $('rewardName').value.trim();
+    const desc = $('rewardDesc').value.trim();
+    const cost = Number($('rewardCost').value) || 10;
+    if (!name) return;
+
+    if (sb) {
+      const { error } = await sb.from('rewards').insert([{ name, desc_text: desc, cost }]);
+      if (error) alert('Lỗi thêm quà: ' + error.message);
+      else { toast('🎉 Đã thêm phần quà mới!'); await loadDataFromSupabase(); }
+    }
+    $('rewardDialog').close();
   };
 
   document.addEventListener('click', async e => {
+    const redBtn = e.target.closest('[data-redeem]');
+    if (redBtn) {
+      const r = state.rewards.find(x => x.id === redBtn.dataset.redeem);
+      if (!r) return;
+      if (earnedPoints() < r.cost) return alert('Con chưa đủ sao để đổi phần quà này rồi!');
+      if (confirm(`Con muốn đổi quà "${r.name}" với ${r.cost} sao thưởng nhé?`)) {
+        if (sb) await sb.from('redemptions').insert([{ reward_id: r.id, name: r.name, cost: r.cost }]);
+        triggerCelebration(0);
+        toast('🎉 Đổi quà thành công!');
+        loadDataFromSupabase();
+      }
+      return;
+    }
+
+    const delRewBtn = e.target.closest('[data-delete-reward]');
+    if (delRewBtn && confirm('Mẹ có chắc muốn xóa phần quà này?')) {
+      if (sb) await sb.from('rewards').delete().eq('id', delRewBtn.dataset.deleteReward);
+      toast('Đã xóa phần thưởng!');
+      loadDataFromSupabase();
+      return;
+    }
+  });
+
+  // MỤC TIÊU TUẦN
+  $('editGoalBtn').onclick = () => { $('goalInput').value = state.goal; $('goalDialog').showModal(); };
+  $('goalForm').onsubmit = e => {
+    e.preventDefault();
+    state.goal = Math.min(100, Math.max(1, Number($('goalInput').value) || 100));
+    $('goalDialog').close();
+    renderGoal();
+    toast('Đã lưu mục tiêu tuần!');
+  };
+  $('weeklyReportBtn').onclick = () => {
+    const ts = weekTasks();
+    const d = ts.filter(t => state.submissions.some(sub => sub.task_id === t.id && sub.status === 'approved')).length;
+    const p = ts.length ? Math.round((d / ts.length) * 100) : 0;
+    $('reportContent').innerHTML = `
+      <p><b>Tuần:</b> ${escapeHTML(shortDate(weekStart))} – ${escapeHTML(shortDate(dateAdd(weekStart,6)))}</p>
+      <div class="stat">
+        <div class="label">KPI TUẦN</div>
+        <div class="value">${p}%</div>
+        <div class="progress" style="margin:10px 0;"><span style="width:${p}%"></span></div>
+        <div class="hint">${d}/${ts.length} bài đã hoàn thành</div>
+      </div>
+    `;
+    $('reportDialog').showModal();
+  };
+
+  // ==========================================
+  // THAO TÁC NỘP BÀI & DUYỆT BÀI
+  // ==========================================
+  document.addEventListener('click', e => {
+    const openQuiz = e.target.closest('[data-open-quiz]');
+    if (openQuiz) {
+      const t = state.tasks.find(x => x.id === openQuiz.dataset.openQuiz);
+      if (t) openQuizModal(t);
+      return;
+    }
+
     const subBtn = e.target.closest('[data-submit-task]');
     if (subBtn) {
       const t = state.tasks.find(x => x.id === subBtn.dataset.submitTask);
-      $('proofTaskId').value = t.id; $('proofTaskTitle').textContent = `Bài: ${t.title}`;
-      $('submitProofDialog').showModal(); return;
+      if (!t) return;
+      const sub = state.submissions.find(s => s.task_id === t.id);
+
+      $('proofTaskId').value = t.id;
+      $('proofTaskTitle').textContent = `Bài tập: ${t.title} (${t.subject})`;
+      $('proofNote').value = '';
+      resetProofFile();
+
+      if (sub && sub.status === 'redo') {
+        $('submitProofModalTitle').textContent = '🔄 Nộp lại bài tập';
+        $('proofMomAlert').style.display = 'block';
+        $('proofMomAlert').innerHTML = `<b>👩 Lời nhắn từ Mẹ:</b> "${escapeHTML(sub.note || 'Con kiểm tra lại bài và làm lại nhé!')}"`;
+      } else {
+        $('submitProofModalTitle').textContent = '📝 Nộp bài tập';
+        $('proofMomAlert').style.display = 'none';
+      }
+
+      $('submitProofDialog').showModal();
+      return;
     }
+
     const viewBtn = e.target.closest('[data-view-proof]');
     if (viewBtn) {
       const t = state.tasks.find(x => x.id === viewBtn.dataset.viewProof);
       const sub = state.submissions.find(s => s.task_id === t.id);
+      if (!t || !sub) return;
       currentReviewTask = { task: t, submission: sub };
-      $('reviewTitle').textContent = t.title;
-      $('reviewNote').textContent = sub ? `Lời nhắn: "${sub.note || 'Con đã xong bài ạ!'}"` : '';
-      $('reviewDialog').showModal(); return;
+      $('reviewTitle').textContent = `Bài: ${t.title} (${t.subject})`;
+      $('reviewNote').textContent = sub.note ? `Ghi chú: "${sub.note}"` : 'Con không để lại lời nhắn.';
+      
+      const box = $('reviewFileContainer');
+      box.innerHTML = '';
+      if (sub.proof_url) {
+        const isImg = /\.(jpeg|jpg|png|gif|webp)$/i.test(sub.proof_url);
+        if (isImg) {
+          box.innerHTML = `<img src="${sub.proof_url}" style="max-width:100%; max-height:400px; border-radius:12px; border:1px solid #f3cbd7;">`;
+        } else {
+          box.innerHTML = `<a href="${sub.proof_url}" target="_blank" class="btn btn-primary">📥 Mở tệp con đã nộp (Tài liệu / PDF / Ghi âm)</a>`;
+        }
+      } else {
+        box.innerHTML = `<div class="small-note" style="color:#36795f; font-weight:700;">Con làm bài trực tuyến (không đính kèm file)</div>`;
+      }
+      $('reviewDialog').showModal();
+      return;
     }
+
+    const approveBtn = e.target.closest('[data-quick-approve]');
+    if (approveBtn) {
+      approveSubmission(approveBtn.dataset.quickApprove, Number(approveBtn.dataset.pts));
+      return;
+    }
+
     const delBtn = e.target.closest('[data-delete-task]');
-    if (delBtn && confirm('Mẹ có chắc muốn xóa bài này?')) {
-      if (sb) await sb.from('tasks').delete().eq('id', delBtn.dataset.deleteTask);
-      toast('Đã xóa bài!'); loadDataFromSupabase();
+    if (delBtn && confirm('Mẹ có chắc muốn xóa bài này không?')) {
+      if (sb) {
+        sb.from('tasks').delete().eq('id', delBtn.dataset.deleteTask).then(() => {
+          loadDataFromSupabase();
+          toast('Đã xóa bài tập!');
+        });
+      }
+      return;
     }
   });
 
+  // SUBMIT BÀI LÀM
   $('submitProofForm').onsubmit = async e => {
     e.preventDefault();
-    const taskId = $('proofTaskId').value, note = $('proofNote').value.trim();
-    if (sb) await sb.from('task_submissions').insert([{ task_id: taskId, note: note || 'Con đã nộp bài ạ!', status: 'pending' }]);
-    else state.submissions.push({ id: 'sub_'+Date.now(), task_id: taskId, note, status: 'pending' });
-    toast('🎉 Nộp bài thành công! Đang chờ Mẹ duyệt nhé!');
-    $('submitProofDialog').close(); loadDataFromSupabase();
+    const taskId = $('proofTaskId').value;
+    const note = $('proofNote').value.trim();
+    const currentTask = state.tasks.find(x => x.id === taskId);
+
+    const btn = $('btnUploadProof');
+    btn.disabled = true;
+    btn.textContent = 'Đang gửi bài... ⏳';
+
+    try {
+      if (!sb) throw new Error("Chưa kết nối Supabase.");
+      let publicUrl = '';
+
+      if (currentProofFile) {
+        btn.textContent = 'Đang tải tệp lên... ⏳';
+        const ext = currentProofFile.name ? currentProofFile.name.split('.').pop() : 'png';
+        const filePath = `${Date.now()}_screenshot.${ext}`;
+
+        const { error: upErr } = await sb.storage.from('proofs').upload(filePath, currentProofFile);
+        if (upErr) throw upErr;
+
+        const { data: { publicUrl: pUrl } } = sb.storage.from('proofs').getPublicUrl(filePath);
+        publicUrl = pUrl;
+      }
+
+      const existingSub = state.submissions.find(s => s.task_id === taskId);
+      if (existingSub) {
+        const { error: upErr } = await sb.from('task_submissions').update({
+          proof_url: publicUrl || existingSub.proof_url || '',
+          note: note || (existingSub.status === 'redo' ? 'Con đã sửa và nộp lại bài ạ!' : (currentProofFile ? 'Con gửi ảnh chụp bài làm' : 'Con đã hoàn thành bài tập ạ!')),
+          status: 'pending'
+        }).eq('id', existingSub.id);
+        if (upErr) throw upErr;
+      } else {
+        const { error: insErr } = await sb.from('task_submissions').insert([{
+          task_id: taskId,
+          proof_url: publicUrl,
+          note: note || (currentProofFile ? 'Con gửi ảnh chụp bài làm' : 'Con đã hoàn thành bài tập ạ!'),
+          status: 'pending'
+        }]);
+        if (insErr) throw insErr;
+      }
+
+      state.carrots += 1;
+      updatePetUI();
+
+      sendTelegramAlert(currentTask ? currentTask.title : 'Bài tập', note);
+
+      $('submitProofDialog').close();
+      toast('🎉 Hoan hô! Đã nộp bài cho Mẹ xem rồi nhé!');
+      await loadDataFromSupabase();
+    } catch(err) {
+      alert('Lỗi nộp bài: ' + err.message);
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Nộp bài ngay 🎉';
+    }
   };
 
-  $('btnApproveProof').onclick = async () => {
-    if (!currentReviewTask || !currentReviewTask.submission) return;
-    if (sb) await sb.from('task_submissions').update({ status: 'approved' }).eq('id', currentReviewTask.submission.id);
-    else currentReviewTask.submission.status = 'approved';
-    state.money += 1000; updatePetUI();
-    triggerCelebration(currentReviewTask.task.points || 1);
-    toast('✅ Đã duyệt bài! Bé được cộng +1.000đ nuôi Thỏ!');
-    $('reviewDialog').close(); loadDataFromSupabase();
+  async function approveSubmission(submissionId, pts = 1) {
+    if (!sb) return;
+    const { error } = await sb.from('task_submissions').update({ status: 'approved' }).eq('id', submissionId);
+    if (!error) {
+      triggerCelebration(pts);
+      loadDataFromSupabase();
+    }
+  }
+
+  $('btnApproveProof').onclick = () => {
+    if (currentReviewTask) {
+      approveSubmission(currentReviewTask.submission.id, currentReviewTask.task.points);
+      $('reviewDialog').close();
+    }
   };
 
-  // ĐIỀU HƯỚNG
-  $('monthTabs').onclick = e => { const tab = e.target.closest('[data-month]'); if(tab){ selectedMonth = tab.dataset.month; selectedDate = `${selectedMonth}-01`; weekStart = mondayOf(selectedDate); render(); } };
-  $('weekDays').onclick = e => { const btn = e.target.closest('[data-date]'); if(btn){ selectedDate = btn.dataset.date; renderTasks(); renderWeekDays(); } };
-  $('prevWeek').onclick = () => { weekStart = dateAdd(weekStart, -7); selectedDate = weekStart; render(); };
-  $('nextWeek').onclick = () => { weekStart = dateAdd(weekStart, 7); selectedDate = weekStart; render(); };
-  $('todayBtn').onclick = () => { selectedDate = todayISO(); selectedMonth = monthISO(selectedDate); weekStart = mondayOf(selectedDate); render(); };
+  $('btnRejectProof').onclick = async () => {
+    if (!currentReviewTask) return;
+    const sub = currentReviewTask.submission;
+
+    const reason = prompt("Mẹ nhập lời nhắn cho con nhé (Ví dụ: Con tính lại câu 3 và kiểm tra lại đáp án nhé):", "Con kiểm tra lại bài và làm lại giúp mẹ nhé!");
+    if (reason === null) return;
+
+    const message = reason.trim() || "Con kiểm tra lại bài và làm lại giúp mẹ nhé!";
+    if (sb) {
+      await sb.from('task_submissions').update({ status: 'redo', note: message }).eq('id', sub.id);
+      $('reviewDialog').close();
+      toast('Đã gửi lời nhắc làm lại cho con! 📢');
+      await loadDataFromSupabase();
+    }
+  };
+
+  // ==========================================
+  // GIAO BÀI TẬP (MẸ)
+  // ==========================================
+  $('btnMainAddTask').onclick = () => {
+    $('taskForm').reset();
+    $('taskId').value = '';
+    $('taskDate').value = selectedDate;
+    $('taskQuestions').value = '';
+    $('taskDialog').showModal();
+  };
+
+  $('taskForm').onsubmit = async e => {
+    e.preventDefault();
+    const title = $('taskTitle').value.trim();
+    const subject = $('taskSubject').value;
+    const taskDate = $('taskDate').value;
+    const detail = $('taskDetail').value.trim();
+    const points = Number($('taskPoints').value) || 1;
+
+    const qRaw = $('taskQuestions').value.trim();
+    let parsedQuestions = [];
+    if (qRaw) {
+      qRaw.split('\n').forEach(line => {
+        if (line.includes('|')) {
+          const [q, a] = line.split('|');
+          if (q.trim() && a.trim()) parsedQuestions.push({ q: q.trim(), a: a.trim() });
+        }
+      });
+    }
+
+    if (sb) {
+      const { error } = await sb.from('tasks').insert([{
+        title, subject, task_date: taskDate, detail, points,
+        questions: parsedQuestions.length > 0 ? parsedQuestions : null
+      }]);
+      if (!error) {
+        $('taskDialog').close();
+        toast('Đã giao bài tập mới!');
+        await loadDataFromSupabase();
+      } else { alert('Lỗi giao bài: ' + error.message); }
+    }
+  };
+
+  // ROLE SWITCH
+  $('btnRoleKid').onclick = () => {
+    isAdminUnlocked = false;
+    $('appBody').classList.remove('unlocked');
+    $('btnRoleKid').classList.add('active');
+    $('btnRoleMom').classList.remove('active');
+    renderTasks();
+    renderRewards();
+  };
+
+  $('btnRoleMom').onclick = () => {
+    if (!isAdminUnlocked) {
+      const pwd = prompt("Nhập mật mã của Mẹ để giao và duyệt bài:");
+      if (pwd === "2017") {
+        isAdminUnlocked = true;
+        $('appBody').classList.add('unlocked');
+        $('btnRoleMom').classList.add('active');
+        $('btnRoleKid').classList.remove('active');
+        renderTasks();
+        renderRewards();
+        toast('Chào Mẹ! Mẹ có thể giao bài, thêm quà và duyệt bài.');
+      } else if (pwd !== null) {
+        alert('Sai mật khẩu rồi mẹ ơi!');
+      }
+    } else {
+      $('btnRoleMom').classList.add('active');
+      $('btnRoleKid').classList.remove('active');
+    }
+  };
+
+  // ĐIỀU HƯỚNG LỊCH
+  document.addEventListener('click', e => {
+    const tab = e.target.closest('[data-month]');
+    if (tab) { selectedMonth = tab.dataset.month; selectedDate = selectedMonth + '-01'; weekStart = mondayOf(selectedDate); render(); }
+    const b = e.target.closest('[data-date]');
+    if (b) { selectedDate = b.dataset.date; weekStart = mondayOf(selectedDate); selectedMonth = monthISO(selectedDate); render(); }
+  });
+  $('prevWeek').onclick = () => { weekStart = dateAdd(weekStart, -7); selectedDate = weekStart; selectedMonth = monthISO(selectedDate); render(); };
+  $('nextWeek').onclick = () => { weekStart = dateAdd(weekStart, 7); selectedDate = weekStart; selectedMonth = monthISO(selectedDate); render(); };
+  $('todayBtn').onclick = () => { selectedDate = todayISO(); selectedMonth = monthISO(todayISO()); weekStart = mondayOf(selectedDate); render(); };
   $('filterSubject').onchange = e => { filterSubject = e.target.value; renderTasks(); };
 
   document.querySelectorAll('[data-close]').forEach(b => b.onclick = () => $(b.dataset.close).close());
 
-  // KHỞI ĐỘNG HỆ THỐNG
-  updatePetUI();
+  // KHỞI CHẠY
+  updateSheetLinkUI();
   loadDataFromSupabase();
 })();
 </script>
