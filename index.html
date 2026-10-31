@@ -61,7 +61,7 @@ h1{margin:4px 0 8px;font-size:clamp(24px,3.8vw,34px);color:#9f4963;font-weight:8
 .main-tab-btn.active { background: #e97998; color: #fff; border-color: #e97998; box-shadow: 0 4px 12px rgba(233,121,152,0.25); }
 
 .view-homework { display: grid; grid-template-columns: minmax(400px, 1fr) 340px; gap: 18px; align-items: start; }
-.view-essay { display: grid; grid-template-columns: minmax(350px, 1fr) minmax(400px, 1.2fr); gap: 18px; align-items: stretch; }
+.view-essay { display: grid; grid-template-columns: 280px minmax(320px, 1fr) minmax(380px, 1.2fr); gap: 16px; align-items: stretch; }
 
 .panel{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:18px}
 .panel-head{padding:16px 20px;border-bottom:1px solid #f6e0e6;display:flex;align-items:center;justify-content:space-between;gap:12px;background:linear-gradient(90deg,#fff6f8,#fff);flex-wrap:wrap;}
@@ -138,7 +138,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   100% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
 }
 
-/* THỎ ĂN CÀ RỐT TO */
 #bunnyEatingOverlay {
   position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
   background: rgba(255, 240, 245, 0.75); backdrop-filter: blur(4px);
@@ -153,7 +152,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
 @keyframes chewing { 0% { transform: scale(1) rotate(-3deg); } 100% { transform: scale(1.15) rotate(4deg) translateY(-8px); } }
 @keyframes bunnyMunchAnim { 0% { transform: scale(0.4); opacity: 0; } 15% { transform: scale(1.08); opacity: 1; } 85% { transform: scale(1); opacity: 1; } 100% { transform: scale(0.6); opacity: 0; } }
 
-/* VÒNG QUAY WIN POPUP */
 #wheelWinCard {
   position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.6);
   background: linear-gradient(135deg, #fffdf2, #fff0f4); border: 4px solid #ffb300; border-radius: 26px;
@@ -173,7 +171,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
 .admin-only { display: none !important; }
 .unlocked .admin-only { display: inline-flex !important; }
 
-/* TRẠNG THÁI */
 .badge-status { font-size: 11px; font-weight: 800; padding: 4px 8px; border-radius: 6px; display: inline-flex; align-items: center; gap: 4px; }
 .status-done { background: #e1f5ec; color: #36795f; }
 .status-pending { background: #fff3c9; color: #8a6a16; }
@@ -268,10 +265,15 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
 .shop-item-name { font-weight: 800; font-size: 12px; color: #51434a; line-height: 1.3; }
 .shop-item-price { font-weight: 900; font-size: 12px; color: #e95f83; margin: 4px 0 6px; }
 
-/* Responsive adjustments cho các tabs */
+/* CSS MỚI CHO GÓC TẬP LÀM VĂN 3 CỘT */
+.essay-list-container { display: flex; flex-direction: column; gap: 8px; max-height: 650px; overflow-y: auto; padding-right: 4px; }
+.essay-item-card { background: #fff; border: 1px solid #f4cad7; border-radius: 12px; padding: 12px; cursor: pointer; transition: 0.2s; }
+.essay-item-card:hover { background: #fff0f4; border-color: #e97998; }
+.essay-item-card.active { background: #fff0f4; border-color: #e97998; box-shadow: 0 4px 12px rgba(233,121,152,0.18); }
+
 @media(max-width:1200px){
   .view-homework { grid-template-columns: 1fr 340px; }
-  .view-essay { grid-template-columns: 1fr 1fr; }
+  .view-essay { grid-template-columns: 1fr; }
 }
 @media(max-width:850px){
   .view-homework { grid-template-columns: 1fr; }
@@ -422,49 +424,34 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
 
     <!-- CỘT 3 (BÀI TẬP): THỎ CƯNG VÀ TIỆN ÍCH -->
     <aside>
-      <!-- 🐰 BÉ THỎ CÔNG CHÚA MẶC THẬT VÁY ÁO & PHỤ KIỆN -->
       <div class="pet-widget">
         <div class="pet-stage">
           <div class="pet-doll-container">
             <svg class="bunny-svg" viewBox="0 0 160 200" id="mainBunnySvg">
-              <!-- CÁNH SAU LƯNG -->
               <g id="svgWingsLayer"></g>
-              
-              <!-- THỎ TRẮNG HỒNG XINH XẮN GỐC -->
               <g id="svgBaseBunny">
                 <path d="M50 85 C35 30, 42 10, 58 10 C70 10, 68 45, 60 85 Z" fill="#ffffff" stroke="#f6b2c6" stroke-width="3" />
                 <path d="M50 75 C42 35, 47 20, 56 20 C62 20, 62 45, 57 75 Z" fill="#ffc2d1" />
-
                 <path d="M110 85 C125 30, 118 10, 102 10 C90 10, 92 45, 100 85 Z" fill="#ffffff" stroke="#f6b2c6" stroke-width="3" />
                 <path d="M110 75 C118 35, 113 20, 104 20 C98 20, 98 45, 103 75 Z" fill="#ffc2d1" />
-
                 <ellipse cx="80" cy="145" rx="42" ry="40" fill="#ffffff" stroke="#f6b2c6" stroke-width="3" />
                 <ellipse cx="80" cy="148" rx="28" ry="26" fill="#fff5f8" />
-
                 <ellipse cx="58" cy="184" rx="14" ry="10" fill="#ffffff" stroke="#f6b2c6" stroke-width="2.5" />
                 <ellipse cx="102" cy="184" rx="14" ry="10" fill="#ffffff" stroke="#f6b2c6" stroke-width="2.5" />
-
                 <ellipse cx="80" cy="95" rx="45" ry="38" fill="#ffffff" stroke="#f6b2c6" stroke-width="3" />
-
                 <ellipse cx="54" cy="106" rx="9" ry="5.5" fill="#ffb3ba" opacity="0.65" />
                 <ellipse cx="106" cy="106" rx="9" ry="5.5" fill="#ffb3ba" opacity="0.65" />
-
                 <ellipse cx="62" cy="92" rx="7.5" ry="9" fill="#4a2835" />
                 <circle cx="60" cy="89" r="3" fill="#ffffff" />
                 <circle cx="65" cy="94" r="1.5" fill="#ffffff" />
-
                 <ellipse cx="98" cy="92" rx="7.5" ry="9" fill="#4a2835" />
                 <circle cx="96" cy="89" r="3" fill="#ffffff" />
                 <circle cx="101" cy="94" r="1.5" fill="#ffffff" />
-
                 <polygon points="78,102 82,102 80,105" fill="#ff758c" />
                 <path d="M75 106 Q80 110 80 106 Q80 110 85 106" fill="none" stroke="#b25d74" stroke-width="2" stroke-linecap="round" />
-
                 <ellipse cx="48" cy="138" rx="9" ry="14" fill="#ffffff" stroke="#f6b2c6" stroke-width="2.5" transform="rotate(20 48 138)" />
                 <ellipse cx="112" cy="138" rx="9" ry="14" fill="#ffffff" stroke="#f6b2c6" stroke-width="2.5" transform="rotate(-20 112 138)" />
               </g>
-
-              <!-- MẶC THẬT ĐỒ -->
               <g id="svgDressLayer"></g>
               <g id="svgShoesLayer"></g>
               <g id="svgHeadLayer"></g>
@@ -526,29 +513,49 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     </aside>
   </div>
 
-  <!-- VIEW 2: GÓC TẬP LÀM VĂN -->
+  <!-- VIEW 2: GÓC TẬP LÀM VĂN (3 CỘT) -->
   <div class="view-essay" id="viewEssay" style="display: none;">
-    <!-- CỘT 1: TÀI LIỆU HỌC TẬP (PDF VIEWER) -->
+    <!-- CỘT 1: DANH SÁCH BÀI TẬP -->
+    <section class="panel" style="display: flex; flex-direction: column; height: 100%;">
+      <div class="panel-head">
+        <h2>📝 Danh Sách Bài Tập</h2>
+      </div>
+      <div class="panel-body" style="padding: 12px; flex: 1;">
+        <div id="essayListContainer" class="essay-list-container">
+          <div class="empty">Đang tải danh sách bài tập từ Google Sheet...</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CỘT 2: TÀI LIỆU HƯỚNG DẪN -->
     <section class="panel" style="display: flex; flex-direction: column; height: 100%;">
       <div class="panel-head" style="justify-content: space-between;">
-        <h2 style="display:flex; align-items:center; gap:6px;">📚 Tài liệu học tập</h2>
-        <!-- Nút tải file trực tiếp từ máy (Dự phòng) -->
-        <input type="file" id="pdfUploader" accept="application/pdf" title="Mở file từ máy tính" style="font-size: 12px; max-width: 150px; padding: 5px;">
+        <h2 style="display:flex; align-items:center; gap:6px;">📖 Tài Liệu Hướng Dẫn</h2>
       </div>
       <div class="panel-body" style="padding: 0; flex: 1; display: flex; min-height: 600px;">
-        <!-- Khung hiển thị PDF -->
         <iframe id="pdfViewer" src="" style="width:100%; height:100%; border:none; background-color: #f9f9f9; flex: 1;"></iframe>
       </div>
     </section>
 
-    <!-- CỘT 2: KHU VỰC VIẾT VĂN & BÀI TẬP -->
+    <!-- CỘT 3: GÓC SOẠN THẢO & AI -->
     <section class="panel" style="display: flex; flex-direction: column; height: 100%;">
-      <div class="panel-head">
-        <h2>✍️ Góc Tập Làm Văn</h2>
+      <div class="panel-head" style="justify-content: space-between;">
+        <h2>✍️ Góc Soạn Thảo</h2>
         <button class="btn btn-primary btn-small" id="btnAiCheckEssay" style="background:#4c9475; box-shadow:0 4px 10px rgba(76,148,117,0.3);">✨ Nhờ Thỏ AI Sửa Bài</button>
       </div>
-      <div class="panel-body" style="padding: 0; flex: 1; display: flex; min-height: 600px;">
-        <textarea id="essayEditor" placeholder="Con gõ bài văn vào đây nhé... &#10;(Gõ xong bấm nút 'Nhờ Thỏ AI Sửa Bài' ở trên để Thỏ góp ý cho con nha!)" style="width:100%; flex: 1; border:none; resize:none; padding: 20px; font-size: 16px; line-height: 1.8; outline:none; background: #fffcfd;"></textarea>
+      <div class="panel-body" style="padding: 12px; flex: 1; display: flex; flex-direction: column;">
+        <textarea id="essayEditor" placeholder="Con chọn bài bên trái, sau đó gõ bài tập làm văn vào đây nhé..." style="width:100%; flex: 1; border:1px solid #f4cad7; border-radius:12px; resize:none; padding: 16px; font-size: 15px; line-height: 1.7; outline:none; background: #fffcfd;"></textarea>
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px; pt-2; border-top: 1px solid #f6e0e6;">
+          <div class="flex" style="gap: 8px;">
+            <button class="btn btn-primary btn-small" id="btnSaveEssay">💾 Lưu Bài Viết</button>
+            <span id="saveStatusText" style="font-size: 11.5px; color: #36795f; font-weight: 800;"></span>
+          </div>
+          <label style="display: flex; align-items: center; gap: 6px; cursor: pointer; margin: 0;">
+            <input type="checkbox" id="essayCompleteCheckbox" style="width: 16px; height: 16px; accent-color: #e97998;">
+            <span style="font-size: 13px; font-weight: 800; color: #a64e68;">Đã hoàn thành bài tập</span>
+          </label>
+        </div>
       </div>
     </section>
   </div>
@@ -560,7 +567,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
 <!-- CÁC HỘP THOẠI (DIALOGS) -->
 <!-- ==================================================== -->
 
-<!-- 👑 HỘP THOẠI MẬT MÃ CỦA MẸ (HOÀNG GIA HỒNG) -->
 <dialog id="momPassDialog" style="width: min(380px, calc(100% - 24px)); border-radius: 26px; border: 2px solid #f6a9bd; box-shadow: 0 20px 60px rgba(201,92,120,0.3); overflow: hidden;">
   <div style="background: linear-gradient(135deg, #fff0f4, #fff8fb); padding: 26px 22px; text-align: center;">
     <div style="font-size: 45px; margin-bottom: 6px;">👩👑✨</div>
@@ -575,12 +581,10 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   </div>
 </dialog>
 
-<!-- 🌸 HỘP THOẠI HOÀNG GIA CHUNG (THAY THẾ TOÀN BỘ ALERT) -->
 <dialog id="customModalDialog" style="width: min(400px, calc(100% - 24px)); border-radius: 26px; border: 2px solid #f6a9bd; box-shadow: 0 20px 60px rgba(201,92,120,0.3); overflow: hidden; padding: 0;">
   <div style="background: linear-gradient(135deg, #fff0f4, #fff8fb); padding: 26px 22px; text-align: center;">
     <div id="customModalIcon" style="font-size: 45px; margin-bottom: 6px;">🌸</div>
     <h3 id="customModalTitle" style="margin: 0 0 8px; color: #a64e68; font-size: 19px; font-weight: 800;">Thông báo</h3>
-    <!-- Đã thêm white-space: pre-wrap để hiển thị đoạn văn nhận xét của AI xuống dòng đẹp đẽ -->
     <p id="customModalMsg" style="margin: 0 0 16px; font-size: 14px; color: #66525a; line-height: 1.6; white-space: pre-wrap; text-align: left;"></p>
     <div id="customModalInputBox" style="display: none; margin-bottom: 16px;">
       <input type="text" id="customModalInput" style="text-align: center; font-size: 14px; font-weight: 700; width: 100%; padding: 10px 12px; border-radius: 12px; border: 2px solid #f4cad7; color: #a64e68; background: #fff; outline: none;">
@@ -592,7 +596,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   </div>
 </dialog>
 
-<!-- 🛍️ CỬA SỔ PHÒNG THAY ĐỒ & TIỆM THỜI TRANG 100 MÓN -->
 <dialog id="petShopDialog" style="width: min(740px, calc(100% - 20px));">
   <div class="modal-head">
     <h2>👗 Phòng Thay Đồ & Tiệm Thời Trang Thỏ Cưng</h2>
@@ -607,13 +610,11 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
       <button class="shop-tab-btn" data-shop-tab="carrots">🥕 Chợ Cà Rốt</button>
     </div>
 
-    <!-- TAB 1: TỦ ĐỒ CỦA BÉ -->
     <div id="tabContentWardrobe">
       <div class="small-note" style="margin-bottom:10px;">✨ Chạm vào món đồ để mặc thật váy áo, vương miện, giày dép vào người bé Thỏ!</div>
       <div class="shop-grid" id="wardrobeGrid"></div>
     </div>
 
-    <!-- TAB 2: TIỆM 100 PHỤ KIỆN CON GÁI -->
     <div id="tabContentAccessories" style="display:none;">
       <div class="acc-filters">
         <button class="acc-filter-btn active" data-acc-cat="all">🌟 Tất cả (100 món)</button>
@@ -627,13 +628,11 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
       <div class="shop-grid" id="accessoriesGrid"></div>
     </div>
 
-    <!-- TAB 3: TIỆM THỜI TRANG 50 CẤP -->
     <div id="tabContentOutfits" style="display:none;">
       <div class="small-note" style="margin-bottom:10px;">🌟 Mỗi cấp độ thỏ đạt được sẽ tự động mở khóa 3 bộ váy áo công chúa tuyệt đẹp!</div>
       <div class="shop-grid" id="outfitsGrid"></div>
     </div>
 
-    <!-- TAB 4: CHỢ CÀ RỐT -->
     <div id="tabContentCarrots" style="display:none;">
       <div style="background:#fffaf0; border:1px solid #f3e5b4; border-radius:14px; padding:18px; text-align:center; margin-bottom:14px;">
         <div style="font-size:48px; margin-bottom:6px;">🥕✨</div>
@@ -649,7 +648,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   </div>
 </dialog>
 
-<!-- 🥕 HIỆU ỨNG THỎ ĂN CÀ RỐT TO GIỮA MÀN HÌNH -->
 <div id="bunnyEatingOverlay">
   <div class="bunny-eat-card">
     <div class="bunny-eating-face" id="bunnyEatFace">(｡♥‿♥｡) 🐰🥕✨</div>
@@ -658,7 +656,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   </div>
 </div>
 
-<!-- 🐰 CỬA SỔ BẠN HỌC AI THỎ SIÊU QUẬY -->
 <dialog id="aiTutorDialog" style="width: min(650px, calc(100% - 20px));">
   <div class="modal-head">
     <h2>🐰 Bạn Học AI Thỏ Siêu Quậy 🌸</h2>
@@ -691,7 +688,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   </div>
 </dialog>
 
-<!-- 🎡 CỬA SỔ VÒNG QUAY MAY MẮN -->
 <dialog id="wheelDialog" style="position:relative; overflow:visible;">
   <canvas id="wheelConfettiCanvas" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:999;"></canvas>
   <div id="wheelWinCard">
@@ -717,7 +713,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   </div>
 </dialog>
 
-<!-- 🍅 CỬA SỔ ĐỒNG HỒ POMODORO TÍCH HỢP YOUTUBE -->
 <dialog id="pomodoroDialog" style="width: min(520px, calc(100% - 24px));">
   <div class="modal-head">
     <h2>🍅 Giờ học Pomodoro & Nhạc YouTube</h2>
@@ -754,7 +749,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   </div>
 </dialog>
 
-<!-- 🎴 FLASHCARD 3D -->
 <dialog id="flashcardDialog">
   <div class="modal-head">
     <h2>🎴 Thẻ học thông minh Flashcard</h2>
@@ -793,7 +787,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   </div>
 </dialog>
 
-<!-- 🖼️ THIỆP VINH DANH THÀNH TÍCH -->
 <dialog id="certDialog">
   <div class="modal-head"><h2>🖼️ Thiệp vinh danh thành tích</h2><button class="close" data-close="certDialog">×</button></div>
   <div class="modal-body" style="text-align:center;">
@@ -802,24 +795,31 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   </div>
 </dialog>
 
-<!-- ⚙️ CÀI ĐẶT SHEET & TELEGRAM -->
+<!-- ⚙️ CÀI ĐẶT HỆ THỐNG -->
 <dialog id="configDialog">
   <div class="modal-head"><h2>⚙️ Cài đặt hệ thống & Thông báo</h2><button class="close" data-close="configDialog">×</button></div>
   <form id="configForm" class="modal-body">
     <div class="field">
-      <label for="cfgSheetUrl">1. Đường link Google Sheet của Mẹ:</label>
+      <label for="cfgSheetUrl">1. Đường link Google Sheet của Mẹ (Góc Bài Tập):</label>
       <input type="text" id="cfgSheetUrl" placeholder="https://docs.google.com/spreadsheets/d/...">
     </div>
-    <div class="field" style="background:#f0f6ff; padding:12px; border-radius:10px; border:1px solid #c2d7fa;">
-      <label style="color:#1a73e8; margin-bottom:4px;">2. Tự động bắn tin nhắn báo Mẹ qua Telegram khi con nộp bài:</label>
+    <div class="field" style="margin-top: 14px;">
+      <label for="cfgEssaySheetUrl">2. Đường link Google Sheet Góc Tập Làm Văn (Dán link Sheet chứa danh sách bài văn):</label>
+      <input type="text" id="cfgEssaySheetUrl" placeholder="https://docs.google.com/spreadsheets/d/...">
+    </div>
+    <div class="field" style="margin-top: 14px; background:#fff5f7; padding:12px; border-radius:10px; border:1px solid #f6cfda;">
+      <label style="color:#a64e68; margin-bottom:4px;">3. Google Gemini API Key (để Thỏ AI chấm bài và trò chuyện):</label>
+      <input type="password" id="cfgGeminiKey" placeholder="Dán mã AIza... vào đây">
+    </div>
+    <div class="field" style="background:#f0f6ff; padding:12px; border-radius:10px; border:1px solid #c2d7fa; margin-top: 14px;">
+      <label style="color:#1a73e8; margin-bottom:4px;">4. Tự động bắn tin nhắn báo Mẹ qua Telegram khi con nộp bài:</label>
       <input type="text" id="cfgTeleToken" placeholder="Telegram Bot Token" style="margin-bottom:8px;">
       <input type="text" id="cfgTeleChatId" placeholder="Telegram Chat ID của Mẹ">
     </div>
-    <div class="flex" style="justify-content:flex-end;"><button type="submit" class="btn btn-primary">Lưu cài đặt</button></div>
+    <div class="flex" style="justify-content:flex-end; margin-top: 16px;"><button type="submit" class="btn btn-primary">Lưu cài đặt</button></div>
   </form>
 </dialog>
 
-<!-- MODAL GIAO BÀI TẬP -->
 <dialog id="taskDialog">
   <div class="modal-head"><h2 id="taskDialogTitle">🌸 Giao bài tập mới</h2><button class="close" data-close="taskDialog">×</button></div>
   <form id="taskForm" class="modal-body">
@@ -842,7 +842,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   </form>
 </dialog>
 
-<!-- MODAL LÀM PHIẾU BÀI TẬP TỰ CHẤM -->
 <dialog id="quizDialog">
   <div class="modal-head"><h2 id="quizModalTitle">📝 Phiếu bài tập tự chấm</h2><button class="close" data-close="quizDialog">×</button></div>
   <div class="modal-body">
@@ -856,7 +855,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   </div>
 </dialog>
 
-<!-- MODAL NỘP BÀI -->
 <dialog id="submitProofDialog">
   <div class="modal-head"><h2 id="submitProofModalTitle">📝 Nộp bài tập</h2><button class="close" data-close="submitProofDialog">×</button></div>
   <form id="submitProofForm" class="modal-body">
@@ -890,7 +888,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   </form>
 </dialog>
 
-<!-- MODAL DUYỆT BÀI -->
 <dialog id="reviewDialog">
   <div class="modal-head"><h2>🔍 Xem bài làm của con</h2><button class="close" data-close="reviewDialog">×</button></div>
   <div class="modal-body">
@@ -904,7 +901,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   </div>
 </dialog>
 
-<!-- MODAL THÊM PHẦN THƯỞNG -->
 <dialog id="rewardDialog">
   <div class="modal-head"><h2>🎁 Thêm phần thưởng mới</h2><button class="close" data-close="rewardDialog">×</button></div>
   <form id="rewardForm" class="modal-body">
@@ -915,7 +911,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   </form>
 </dialog>
 
-<!-- MODAL MỤC TIÊU TUẦN & BÁO CÁO -->
 <dialog id="goalDialog">
   <div class="modal-head"><h2>🎯 Mục tiêu tuần</h2><button class="close" data-close="goalDialog">×</button></div>
   <form id="goalForm" class="modal-body">
@@ -951,9 +946,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   const dateAdd = (iso,n) => { const [y,m,d]=iso.split('-').map(Number); const x=new Date(y,m-1,d); x.setDate(x.getDate()+n); return `${x.getFullYear()}-${String(x.getMonth()+1).padStart(2,'0')}-${String(x.getDate()).padStart(2,'0')}`; };
   const mondayOf = iso => { const [y,m,d]=iso.split('-').map(Number); const x=new Date(y,m-1,d); const day=(x.getDay()+6)%7; x.setDate(x.getDate()-day); return `${x.getFullYear()}-${String(x.getMonth()+1).padStart(2,'0')}-${String(x.getDate()).padStart(2,'0')}`; };
 
-  // ========================================================
-  // 🌸 HỘP THOẠI HOÀNG GIA CHUNG (THAY THẾ TOÀN BỘ ALERT / CONFIRM / PROMPT)
-  // ========================================================
   function showCustomAlert(message, title = 'Góc Học Tập 🌸', icon = '🌸') {
     return new Promise(resolve => {
       $('customModalIcon').textContent = icon;
@@ -1003,42 +995,153 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   }
 
   // ========================================================
-  // 📚 XỬ LÝ TÀI LIỆU PDF (GOOGLE DRIVE & UPLOAD TỪ MÁY)
+  // ✍️ ĐỒNG BỘ GÓC TẬP LÀM VĂN TỪ GOOGLE SHEET (DÙNG GVIZ CHỐNG LỖI CORS)
   // ========================================================
-  const pdfViewer = $('pdfViewer');
-  const pdfUploader = $('pdfUploader');
+  const DEFAULT_ESSAY_SHEET_URL = "https://docs.google.com/spreadsheets/d/1p4TBXqVhIStmcgvK0C6Ktdm84SMMKWr4qjXr-1hqwRg/edit?gid=0#gid=0";
+  function getEssaySheetUrl() { return localStorage.getItem('CUSTOM_ESSAY_SHEET_URL') || DEFAULT_ESSAY_SHEET_URL; }
 
-  // 1. Tự động nhận diện tài liệu nếu mở từ link Google Sheet có đuôi ?docid=...
-  const urlParams = new URLSearchParams(window.location.search);
-  const docId = urlParams.get('docid');
+  let essayListData = [];
+  let currentSelectedEssayId = null;
 
-  if (docId) {
-      // Render thẳng file từ Google Drive
-      pdfViewer.src = `https://drive.google.com/file/d/${docId}/preview`;
-  } else {
-      // Mặc định hiển thị trang trắng hoặc hướng dẫn
-      const html = `<html><body style="font-family:'Quicksand',sans-serif;text-align:center;padding-top:100px;color:#8a7b82;background:#f9f9f9;">
-          <h2 style="color:#a64e68;font-size:20px;">Chưa có tài liệu được chọn 🌸</h2>
-          <p style="line-height:1.6;font-size:15px;">Mẹ đính kèm link Drive vào Google Sheet, <br>khi con click vào link web sẽ tự động mở tài liệu ở đây nhé!</p>
-          <p style="font-size:13px;opacity:0.7;">(Con cũng có thể bấm nút "Chọn tệp" ở góc trên<br>để tải trực tiếp file PDF từ máy tính lên).</p>
-          </body></html>`;
-      pdfViewer.src = 'data:text/html;charset=utf-8,' + encodeURIComponent(html);
+  function fetchGoogleSheetJSONP(sheetId, gid = '0') {
+    return new Promise((resolve, reject) => {
+      const cbName = 'gvizCb_' + Math.floor(Math.random() * 1000000);
+      const timer = setTimeout(() => { cleanup(); reject(new Error("Quá thời gian tải Google Sheet.")); }, 12000);
+      function cleanup() { clearTimeout(timer); delete window[cbName]; const s = document.getElementById(cbName); if (s) s.remove(); }
+      window[cbName] = function(json) { cleanup(); resolve(json); };
+      const script = document.createElement('script'); script.id = cbName;
+      script.src = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=responseHandler:${cbName}&gid=${gid}`;
+      document.body.appendChild(script);
+    });
   }
 
-  // 2. Xử lý sự kiện khi tự chọn file PDF từ máy tính (dự phòng)
-  if (pdfUploader) {
-      pdfUploader.addEventListener('change', function(event) {
-          const file = event.target.files[0];
-          if (file && file.type === 'application/pdf') {
-              const fileURL = URL.createObjectURL(file);
-              pdfViewer.src = fileURL;
-              toast("Đã mở tài liệu PDF thành công! 📚");
-          }
-      });
+  async function loadEssayTabFromSheet() {
+    const container = $('essayListContainer');
+    if (!container) return;
+    try {
+      const rawUrl = getEssaySheetUrl();
+      const match = rawUrl.match(/\/d\/([a-zA-Z0-9-_]+)/);
+      if (!match) throw new Error("Đường link Google Sheet không hợp lệ.");
+      const sheetId = match[1];
+      const gid = (rawUrl.match(/gid=([0-9]+)/) || [])[1] || '0';
+
+      const json = await fetchGoogleSheetJSONP(sheetId, gid);
+      const rows = (json && json.table && json.table.rows) ? json.table.rows : [];
+      
+      essayListData = [];
+      for (let i = 1; i < rows.length; i++) {
+        const c = rows[i].c || [];
+        const id = c[0] ? String(c[0].v || '').trim() : '';
+        const tieuDe = c[1] ? String(c[1].v || '').trim() : '';
+        const monHoc = c[2] ? String(c[2].v || 'TV').trim() : 'TV';
+        const ngayCanLam = c[3] ? String(c[3].f || c[3].v || '').trim() : '';
+        let linkTaiLieu = c[4] ? String(c[4].v || '').trim() : '';
+        
+        if (linkTaiLieu.includes('drive.google.com') && !linkTaiLieu.includes('/preview')) {
+          linkTaiLieu = linkTaiLieu.replace(/\/view.*$/, '/preview');
+        }
+
+        const soSao = c[5] ? String(c[5].v || '1').trim() : '1';
+        const trangThai = c[6] ? String(c[6].v || 'Chưa làm').trim() : 'Chưa làm';
+        
+        const savedKey = `essay_content_${id}`;
+        const noiDungBaiLam = localStorage.getItem(savedKey) || (c[7] ? String(c[7].v || '').trim() : '');
+
+        if (id && tieuDe) {
+          essayListData.push({ id, tieuDe, monHoc, ngayCanLam, linkTaiLieu, soSao, trangThai, noiDungBaiLam });
+        }
+      }
+
+      renderEssayListUI();
+      if (essayListData.length > 0 && !currentSelectedEssayId) {
+        selectEssayItem(essayListData[0].id);
+      }
+    } catch (err) {
+      container.innerHTML = `<div class="empty" style="color:#b64b63;">Không thể tải danh sách tập làm văn: ${err.message}. Mẹ kiểm tra lại quyền công khai của Google Sheet nhé!</div>`;
+    }
   }
 
+  function renderEssayListUI() {
+    const container = $('essayListContainer');
+    if (!container) return;
+    if (essayListData.length === 0) {
+      container.innerHTML = `<div class="empty">Chưa có bài tập nào trong Google Sheet.</div>`;
+      return;
+    }
+
+    container.innerHTML = essayListData.map(item => {
+      const isSelected = item.id === currentSelectedEssayId;
+      const isDone = item.trangThai.toLowerCase().includes('đã') || item.trangThai.toLowerCase().includes('hoàn thành');
+      return `
+        <div class="essay-item-card ${isSelected ? 'active' : ''}" data-essay-id="${item.id}">
+          <div style="font-weight: 800; font-size: 13.5px; color: #a64e68; margin-bottom: 4px;">${escapeHTML(item.tieuDe)}</div>
+          <div class="row-between" style="font-size: 11.5px;">
+            <span class="${isDone ? 'text-green-600' : 'text-orange-500'}" style="font-weight:700;">● ${escapeHTML(item.trangThai)}</span>
+            <span class="badge-status" style="background:#fff3c9; color:#8a6a16;">⭐ ${escapeHTML(item.soSao)} sao</span>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    document.querySelectorAll('.essay-item-card').forEach(card => {
+      card.onclick = () => selectEssayItem(card.dataset.essayId);
+    });
+  }
+
+  function selectEssayItem(id) {
+    currentSelectedEssayId = id;
+    renderEssayListUI();
+    const item = essayListData.find(x => x.id === id);
+    if (!item) return;
+
+    const pdfViewer = $('pdfViewer');
+    if (pdfViewer) {
+      pdfViewer.src = item.linkTaiLieu || 'about:blank';
+    }
+
+    const editor = $('essayEditor');
+    if (editor) {
+      editor.value = item.noiDungBaiLam || '';
+    }
+
+    const checkbox = $('essayCompleteCheckbox');
+    if (checkbox) {
+      checkbox.checked = item.trangThai.toLowerCase().includes('đã') || item.trangThai.toLowerCase().includes('hoàn thành');
+    }
+    $('saveStatusText').textContent = '';
+  }
+
+  $('btnSaveEssay').onclick = () => {
+    if (!currentSelectedEssayId) return;
+    const item = essayListData.find(x => x.id === currentSelectedEssayId);
+    if (!item) return;
+
+    const editorVal = $('essayEditor').value;
+    const isChecked = $('essayCompleteCheckbox').checked;
+
+    item.noiDungBaiLam = editorVal;
+    item.trangThai = isChecked ? 'Đã hoàn thành' : 'Chưa làm';
+
+    localStorage.setItem(`essay_content_${currentSelectedEssayId}`, editorVal);
+    localStorage.setItem(`essay_status_${currentSelectedEssayId}`, item.trangThai);
+
+    $('saveStatusText').textContent = '✓ Đã lưu thành công!';
+    setTimeout(() => { $('saveStatusText').textContent = ''; }, 3000);
+    renderEssayListUI();
+    toast('Đã lưu bài tập làm văn của con! 💾');
+  };
+
+  $('essayCompleteCheckbox').onchange = () => {
+    if (!currentSelectedEssayId) return;
+    const item = essayListData.find(x => x.id === currentSelectedEssayId);
+    if (item) {
+      item.trangThai = $('essayCompleteCheckbox').checked ? 'Đã hoàn thành' : 'Chưa làm';
+      renderEssayListUI();
+    }
+  };
+
   // ========================================================
-  // 🐰 DỮ LIỆU PET 50 CẤP & 100 PHỤ KIỆN
+  // CÁC TIỆN ÍCH KHÁC (PET, AI, VÒNG QUAY,...)
   // ========================================================
   const PET_TIERS = [
     { maxLv: 5,  name: 'Thỏ Mầm Non' },
@@ -1056,7 +1159,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   function getPetTier(lv) { return PET_TIERS.find(t => lv <= t.maxLv) || PET_TIERS[PET_TIERS.length - 1]; }
   function getCarrotsNeeded(lv) { if (lv >= 50) return 999; return Math.min(30, Math.floor(2 + (lv - 1) * 0.55)); }
 
-  // 100 PHỤ KIỆN CON GÁI XINH XẮN
   const RAW_ACC_DATA = [
     ['jewelry','🌸','Bông Tai Hoa Anh Đào',4000],['jewelry','🍓','Bông Tai Dâu Tây',5000],['jewelry','🍒','Bông Tai Quả Cherry',6000],['jewelry','🌙','Bông Tai Trăng Khuyết',8000],['jewelry','⭐','Bông Tai Ngôi Sao Nhỏ',8000],['jewelry','💖','Bông Tai Trái Tim Hồng',9000],['jewelry','💎','Bông Tai Kim Cương',15000],['jewelry','🎀','Bông Tai Nơ Bướm',10000],['jewelry','🌼','Bông Tai Cúc Họa Mi',7000],['jewelry','🍎','Bông Tai Táo Đỏ',6000],['jewelry','📿','Dây Chuyền Cầu Vồng',12000],['jewelry','🤍','Vòng Cổ Ngọc Trai Quý Phái',25000],['jewelry','💖','Dây Chuyền Trái Tim Ruby',30000],['jewelry','🗝️','Dây Chuyền Chìa Khóa Bí Mật',28000],['jewelry','🍀','Mặt Dây Cỏ 4 Lá May Mắn',18000],['jewelry','🔔','Vòng Tay Lắc Chuông Nhỏ',16000],['jewelry','💍','Nhẫn Đính Hôn Công Chúa',35000],['jewelry','🔮','Lắc Tay Đá Thạch Anh Tím',42000],['jewelry','✨','Lắc Chân Bạc Ngân Hà',22000],['jewelry','👑','Chuỗi Ngọc Nữ Hoàng',80000],
     ['head','🎀','Kẹp Tóc Nơ Lụa Hồng',3000],['head','🌸','Kẹp Tóc Hoa Đào Xinh',4000],['head','🌻','Cặp Kẹp Hướng Dương',5000],['head','🦋','Kẹp Bướm Phát Sáng',11000],['head','🐰','Băng Đô Tai Thỏ Lông Xù',14000],['head','🦄','Băng Đô Kỳ Lân Cầu Vồng',22000],['head','🐱','Băng Đô Tai Mèo Đính Chuông',16000],['head','👒','Nón Cói Đi Biển Vintage',15000],['head','🧢','Mũ Lưỡi Trai Năng Động',12000],['head','🎓','Mũ Cử Nhân Trí Tuệ',30000],['head','👑','Vương Miện Công Chúa Nhí',35000],['head','❄️','Vương Miện Băng Giá Elsa',65000],['head','🌟','Vương Miện Hoàng Gia Đính Ngọc',90000],['head','🧕','Khăn Trùm Cô Bé Quàng Khăn Đỏ',18000],['head','🌺','Vòng Hoa Đội Đầu Nàng Tiên',26000],['head','🎩','Mũ Phù Thủy Học Viện Magic',40000],['head','🎀','Băng Đô Alice Xứ Sở Diệu Kỳ',20000],['head','🍓','Kẹp Tóc Dâu Tây Đôi',5000],
@@ -1113,6 +1215,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   let aiChatHistory = [];
   let isAiEnglishMode = false;
   let currentAccFilter = 'all';
+  let geminiApiKey = (localStorage.getItem('GEMINI_KEY') || '').trim();
 
   const DEFAULT_SHEET_URL = "https://docs.google.com/spreadsheets/d/1INPJnlsU0saiIBP92mkRCLShU3qWZ20elD1OxRKnNVc/edit?gid=0#gid=0";
   function getStoredSheetUrl() { return localStorage.getItem('CUSTOM_SHEET_URL') || DEFAULT_SHEET_URL; }
@@ -1127,7 +1230,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   function checkWheelEligibility() { const todayTasks = state.tasks.filter(t => t.task_date === todayISO()); const approvedCount = todayTasks.filter(t => state.submissions.some(s => s.task_id === t.id && s.status === 'approved')).length; const kpi = todayTasks.length > 0 ? Math.round((approvedCount / todayTasks.length) * 100) : 0; const is100 = todayTasks.length > 0 && approvedCount === todayTasks.length; const lastSpin = localStorage.getItem('LAST_WHEEL_SPIN_DATE'); const alreadySpun = (lastSpin === todayISO()); return { todayTasks, approvedCount, kpi, is100, alreadySpun }; }
   async function sendTelegramAlert(taskTitle, note) { const token = localStorage.getItem('TELE_TOKEN'); const chatId = localStorage.getItem('TELE_CHAT_ID'); if (!token || !chatId) return; const msg = `🔔 Bé Khánh Huyền vừa nộp bài!\n📝 Bài tập: ${taskTitle}\n💬 Lời nhắn: "${note || 'Con đã hoàn thành ạ!'}"\n👉 Mẹ vào kiểm tra và duyệt bài nhé! 🌸`; try { await fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(msg)}`); } catch(e){} }
 
-  // PROOF DROP ZONE & CTRL + V
   function setProofFile(file) { if (!file) return; currentProofFile = file; $('proofDropPrompt').style.display = 'none'; $('proofImgPreview').style.display = 'block'; if (file.type.startsWith('image/')) { $('previewImgTag').src = URL.createObjectURL(file); $('previewImgTag').style.display = 'inline-block'; $('previewFileName').textContent = '✅ Đã nhận ảnh chụp màn hình!'; } else { $('previewImgTag').style.display = 'none'; $('previewFileName').textContent = `📄 Tệp đính kèm: ${file.name}`; } toast('Đã nhận ảnh chụp màn hình! 📸'); }
   function resetProofFile() { currentProofFile = null; $('proofFileInput').value = ''; $('proofDropPrompt').style.display = 'block'; $('proofImgPreview').style.display = 'none'; $('previewImgTag').src = ''; }
   $('btnRemoveProof').onclick = (e) => { e.stopPropagation(); resetProofFile(); };
@@ -1141,7 +1243,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
 
   // AI THỎ SIÊU QUẬY
   let aiSelectedBase64 = null;
-  let geminiApiKey = (localStorage.getItem('GEMINI_KEY') || '').trim();
   $('btnToggleAiLang').onclick = () => { isAiEnglishMode = !isAiEnglishMode; $('btnToggleAiLang').textContent = isAiEnglishMode ? "🇬🇧 English Buddy" : "🇻🇳 Tiếng Việt"; toast(isAiEnglishMode ? "Đã bật luyện nói Tiếng Anh với Thỏ!" : "Đã chuyển về Tiếng Việt!"); };
   $('btnAiChallenge').onclick = () => { $('aiTextInput').value = "Thỏ ơi, cậu đố tớ 3 câu đố vui tính nhẩm nhanh hoặc từ vựng Tiếng Anh đi nào!"; sendAiMessage(); };
   $('btnResetAiChat').onclick = async () => { const ok = await showCustomConfirm("Cậu muốn tụi mình bắt đầu bài học mới hả?", "Bắt đầu bài mới 🔄", "🐰"); if (ok) { aiChatHistory = []; $('aiChatBox').innerHTML = `<div class="ai-msg bot">🌸 Hí chào Khánh Huyền! Tớ là Thỏ Siêu Quậy nè 🐰 Cậu có câu đố hay bài tập nào thú vị không, tụi mình cùng chiến nào! ⭐🐰</div>`; toast("Đã làm mới cuộc trò chuyện!"); } };
@@ -1178,7 +1279,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
         const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent?key=${geminiApiKey}`;
         const res = await fetch(endpoint, {
           method: 'POST', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ systemInstruction: { parts: [{ text: systemPrompt }] }, contents: contentsPayload, generationConfig: { maxOutputTokens: 250, thinkingConfig: { thinkingLevel: m.includes('lite') ? 'minimal' : 'low' } } })
+          body: JSON.stringify({ systemInstruction: { parts: [{ text: systemPrompt }] }, contents: contentsPayload, generationConfig: { maxOutputTokens: 300, thinkingConfig: { thinkingLevel: m.includes('lite') ? 'minimal' : 'low' } } })
         });
         const data = await res.json();
         if (data.candidates && data.candidates[0]) { localStorage.setItem('GEMINI_WORKING_MODEL', m); return data; }
@@ -1239,7 +1340,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   $('btnAiCheckEssay').onclick = async () => {
       const text = $('essayEditor').value.trim();
       if (!text) return toast('Con chưa viết gì cả! Hãy viết văn rồi nhờ Thỏ sửa nhé!');
-      if (!geminiApiKey) return showCustomAlert("Mẹ cần cài đặt API Key (Nút ⚙️ Key ở góc trên) để Thỏ chấm bài nhé!", "Thiếu API Key 🔑", "🔑");
+      if (!geminiApiKey) return showCustomAlert("Mẹ cần cài đặt API Key (Nút ⚙️ Cài đặt ở góc trên) để Thỏ chấm bài nhé!", "Thiếu API Key 🔑", "🔑");
 
       $('btnAiCheckEssay').disabled = true;
       $('btnAiCheckEssay').textContent = 'Thỏ đang đọc... ⏳';
@@ -1281,7 +1382,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     const wingsLayer = $('svgWingsLayer');
     const earringLayer = $('svgEarringLayer');
 
-    // 1. MẶC VÁY THẬT VÀO NGƯỜI
     if (state.equippedOutfits) {
       const allOut = [];
       for (let i = 1; i <= 50; i++) allOut.push(...getOutfitsForLevel(i));
@@ -1301,7 +1401,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
       dressLayer.innerHTML = '';
     }
 
-    // 2. GẮN PHỤ KIỆN LÊN ĐÚNG VỊ TRÍ
     let headSvg = '', shoesSvg = '', handSvg = '', wingsSvg = '', earringSvg = '';
     state.equippedAccessories.forEach(accId => {
       const a = ACCESSORIES_CATALOG.find(x => x.id === accId);
@@ -1333,9 +1432,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     earringLayer.innerHTML = earringSvg;
   }
 
-  // ========================================================
-  // 🥕 ĐỒNG BỘ THỎ CƯNG & TỦ ĐỒ LÊN SUPABASE CLOUD
-  // ========================================================
   async function syncPetToCloud() {
     localStorage.setItem('PET_MONEY', state.money);
     localStorage.setItem('PET_CARROTS', state.carrots);
@@ -1453,7 +1549,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     syncPetToCloud();
   };
 
-  // PHÒNG THAY ĐỒ & TIỆM
   $('btnOpenPetShop').onclick = () => { renderShopTabs('wardrobe'); $('petShopDialog').showModal(); };
 
   function renderShopTabs(tabName) {
@@ -1588,7 +1683,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     }
   });
 
-  // KHIÊN BẢO VỆ STREAK
   $('streakShieldHint').onclick = async () => {
     if (state.streakShield) return await showCustomAlert("Con đang có Khiên bảo vệ Streak rồi nè! Yên tâm nhé 🛡️", "Khiên bảo vệ 🛡️", "🛡️");
     if (earnedPoints() < 5) return await showCustomAlert("Con cần 5 ⭐ để mua Khiên bảo vệ Streak nhé!", "Chưa đủ sao thưởng ⭐", "⭐");
@@ -1602,7 +1696,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     }
   };
 
-  // VÒNG QUAY MAY MẮN
   const wheelSlices = [
     { text: '+1 ⭐', color: '#ffb3ba' }, { text: '+2 ⭐', color: '#baffc9' },
     { text: 'Youtube 15p', color: '#bae1ff' }, { text: '+3 ⭐', color: '#ffffba' },
@@ -1713,7 +1806,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     requestAnimationFrame(animateWheel);
   };
 
-  // POMODORO YOUTUBE
   let pomoTime = 25 * 60, pomoTimer = null, isPomoRunning = false, isMusicEnabled = true;
   function extractYoutubeId(url) {
     if (!url || url.includes('5qap5aO4i9A')) return 'jfKfPfyJRdk';
@@ -1762,7 +1854,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   $('btnPomoReset').onclick = () => { clearInterval(pomoTimer); isPomoRunning = false; pomoTime = 25 * 60; $('btnPomoStart').textContent = "Bắt đầu ⏱️"; $('pomoYtStatus').textContent = isMusicEnabled ? "Sẵn sàng" : "Đã tắt nhạc"; if (isMusicEnabled) loadYtVideo(getStoredYtUrl(), false); updatePomoDisplay(); };
   $('pomodoroDialog').addEventListener('close', () => { if ($('pomoYtIframe')) $('pomoYtIframe').src = ''; if (isPomoRunning) { clearInterval(pomoTimer); isPomoRunning = false; $('btnPomoStart').textContent = "Bắt đầu ⏱️"; } });
 
-  // FLASHCARD
   const MASTER_FLASHCARDS = [
     { front: "Rectangle", back: "Hình chữ nhật", type: "cambridge", cat: "Tiếng Anh" }, { front: "Triangle", back: "Hình tam giác", type: "cambridge", cat: "Tiếng Anh" },
     { front: "Perimeter", back: "Chu vi", type: "math", cat: "Toán" }, { front: "Area", back: "Diện tích", type: "math", cat: "Toán" },
@@ -1795,7 +1886,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   $('btnFcNext').onclick = () => { if (currentFcIdx < activeFlashcardList.length - 1) { currentFcIdx++; renderFlashcard(); } else { currentFcIdx = 0; renderFlashcard(); } };
   $('btnFcPrev').onclick = () => { if (currentFcIdx > 0) { currentFcIdx--; renderFlashcard(); } };
 
-  // THIỆP VINH DANH
   $('btnOpenCert').onclick = () => { drawCertificate(); $('certDialog').showModal(); };
   function drawCertificate() {
     const canvas = $('certCanvas'), ctx = canvas.getContext('2d'), w = canvas.width, h = canvas.height;
@@ -1815,17 +1905,38 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   }
   $('btnDownloadCert').onclick = () => { const link = document.createElement('a'); link.download = `thiep-khen-thuong-${todayISO()}.png`; link.href = $('certCanvas').toDataURL(); link.click(); toast('Đã tải thiệp khen thưởng! 📥'); };
 
-  // CÀI ĐẶT
-  $('btnConfigSheet').onclick = () => { $('cfgSheetUrl').value = getStoredSheetUrl(); $('cfgTeleToken').value = localStorage.getItem('TELE_TOKEN') || ''; $('cfgTeleChatId').value = localStorage.getItem('TELE_CHAT_ID') || ''; $('configDialog').showModal(); };
-  $('configForm').onsubmit = e => {
-    e.preventDefault(); const url = $('cfgSheetUrl').value.trim();
-    if (url) localStorage.setItem('CUSTOM_SHEET_URL', url);
-    localStorage.setItem('TELE_TOKEN', $('cfgTeleToken').value.trim());
-    localStorage.setItem('TELE_CHAT_ID', $('cfgTeleChatId').value.trim());
-    updateSheetLinkUI(); $('configDialog').close(); toast("Đã lưu cài đặt!"); if (url) syncGoogleSheetsToSupabase();
+  $('btnConfigSheet').onclick = () => {
+    $('cfgSheetUrl').value = getStoredSheetUrl();
+    $('cfgEssaySheetUrl').value = getEssaySheetUrl();
+    $('cfgGeminiKey').value = geminiApiKey;
+    $('cfgTeleToken').value = localStorage.getItem('TELE_TOKEN') || '';
+    $('cfgTeleChatId').value = localStorage.getItem('TELE_CHAT_ID') || '';
+    $('configDialog').showModal();
   };
 
-  // SYNC SHEETS
+  $('configForm').onsubmit = e => {
+    e.preventDefault();
+    const url = $('cfgSheetUrl').value.trim();
+    const essayUrl = $('cfgEssaySheetUrl').value.trim();
+    const key = $('cfgGeminiKey').value.trim();
+
+    if (url) localStorage.setItem('CUSTOM_SHEET_URL', url);
+    if (essayUrl) localStorage.setItem('CUSTOM_ESSAY_SHEET_URL', essayUrl);
+    if (key) {
+      geminiApiKey = key;
+      localStorage.setItem('GEMINI_KEY', key);
+    }
+    localStorage.setItem('TELE_TOKEN', $('cfgTeleToken').value.trim());
+    localStorage.setItem('TELE_CHAT_ID', $('cfgTeleChatId').value.trim());
+
+    updateSheetLinkUI();
+    $('configDialog').close();
+    toast("Đã lưu cài đặt thành công! ✨");
+
+    if (url) syncGoogleSheetsToSupabase();
+    loadEssayTabFromSheet();
+  };
+
   function fetchGoogleSheetJSONP(sheetId, gid = '0') {
     return new Promise((resolve, reject) => {
       const cbName = 'gvizCb_' + Math.floor(Math.random() * 1000000);
@@ -1867,7 +1978,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   }
   $('btnSyncSheet').onclick = syncGoogleSheetsToSupabase;
 
-  // SUPABASE LOAD
   async function loadDataFromSupabase() {
     if (!sb) return render();
     try {
@@ -2019,7 +2129,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     selectedDate = `${selectedMonth}-01`; weekStart = mondayOf(selectedDate); render();
   };
 
-  // QUIZ TỰ CHẤM
   $('btnGenMath10').onclick = () => {
     let lines = [];
     for (let i = 0; i < 10; i++) {
@@ -2071,7 +2180,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     }
   };
 
-  // REWARDS
   function renderRewards() {
     const currentPts = earnedPoints();
     $('rewardsList').innerHTML = state.rewards.map(r => `
@@ -2112,7 +2220,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     }
   });
 
-  // GOAL & REPORT
   $('editGoalBtn').onclick = () => { $('goalInput').value = state.goal; $('goalDialog').showModal(); };
   $('goalForm').onsubmit = e => { e.preventDefault(); state.goal = Math.min(100, Math.max(1, Number($('goalInput').value) || 100)); $('goalDialog').close(); renderGoal(); toast('Đã lưu mục tiêu tuần!'); };
   $('weeklyReportBtn').onclick = () => {
@@ -2121,7 +2228,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     $('reportDialog').showModal();
   };
 
-  // TASK INTERACTIONS
   document.addEventListener('click', async e => {
     const openQuiz = e.target.closest('[data-open-quiz]');
     if (openQuiz) { const t = state.tasks.find(x => x.id === openQuiz.dataset.openQuiz); if (t) openQuizModal(t); return; }
@@ -2164,7 +2270,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     }
   });
 
-  // SUBMIT PROOF
   $('submitProofForm').onsubmit = async e => {
     e.preventDefault(); const taskId = $('proofTaskId').value, note = $('proofNote').value.trim(), currentTask = state.tasks.find(x => x.id === taskId);
     const btn = $('btnUploadProof'); btn.disabled = true; btn.textContent = 'Đang gửi bài... ⏳';
@@ -2211,7 +2316,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     }
   };
 
-  // GIAO BÀI (MẸ)
   $('btnMainAddTask').onclick = () => { $('taskForm').reset(); $('taskId').value = ''; $('taskDate').value = selectedDate; $('taskQuestions').value = ''; $('taskDialog').showModal(); };
   $('taskForm').onsubmit = async e => {
     e.preventDefault();
@@ -2226,7 +2330,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     }
   };
 
-  // PHÂN QUYỀN MẸ / BÉ
   $('btnRoleKid').onclick = () => { isAdminUnlocked = false; $('appBody').classList.remove('unlocked'); $('btnRoleKid').classList.add('active'); $('btnRoleMom').classList.remove('active'); renderTasks(); renderRewards(); };
   $('btnRoleMom').onclick = () => {
     if (!isAdminUnlocked) {
@@ -2246,7 +2349,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   $('btnConfirmMomPass').onclick = verifyMomPassword;
   $('momPassInput').onkeypress = e => { if (e.key === 'Enter') verifyMomPassword(); };
 
-  // ĐIỀU HƯỚNG LỊCH
   document.addEventListener('click', e => {
     const tab = e.target.closest('[data-month]');
     if (tab) { selectedMonth = tab.dataset.month; selectedDate = selectedMonth + '-01'; weekStart = mondayOf(selectedDate); render(); }
@@ -2259,7 +2361,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   $('filterSubject').onchange = e => { filterSubject = e.target.value; renderTasks(); };
   document.querySelectorAll('[data-close]').forEach(b => b.onclick = () => $(b.dataset.close).close());
 
-  // CHUYỂN ĐỔI TAB CHÍNH
   const tabHomeworkBtn = $('tabHomeworkBtn');
   const tabEssayBtn = $('tabEssayBtn');
   const viewHomework = $('viewHomework');
@@ -2277,19 +2378,13 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
       tabHomeworkBtn.classList.remove('active');
       viewEssay.style.display = 'grid';
       viewHomework.style.display = 'none';
+      loadEssayTabFromSheet();
     };
   }
 
-  // KHỞI CHẠY (Bao gồm đọc PDF từ URL Sheets)
   updateSheetLinkUI();
-  
-  // Tự động load file PDF nếu có đuôi ?docid=...
-  const docIdQuery = new URLSearchParams(window.location.search).get('docid');
-  if (docIdQuery) {
-      $('pdfViewer').src = `https://drive.google.com/file/d/${docIdQuery}/preview`;
-  }
-
   loadDataFromSupabase();
+  loadEssayTabFromSheet();
 })();
 </script>
 </body>
