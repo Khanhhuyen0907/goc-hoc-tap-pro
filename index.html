@@ -30,7 +30,7 @@
 body{margin:0;background:linear-gradient(180deg,#fff5f7 0,#fffafb 330px,#fff 100%);font-family:"Quicksand", sans-serif;color:var(--ink);font-size:15px}
 button,input,select,textarea{font:inherit}
 button{cursor:pointer}
-.app{max-width:1220px;margin:0 auto;padding:24px 18px 50px}
+.app{max-width:1560px;margin:0 auto;padding:24px 18px 50px}
 
 /* HEADER */
 .hero{position:relative;overflow:hidden;background:linear-gradient(120deg,#fff0f4,#fff8fb 58%,#f8efff);border:1px solid #f5cbd7;border-radius:24px;padding:24px 28px 20px;box-shadow:var(--shadow)}
@@ -53,7 +53,16 @@ h1{margin:4px 0 8px;font-size:clamp(24px,3.8vw,34px);color:#9f4963;font-weight:8
 .stat .label{font-size:11.5px;color:var(--muted);font-weight:800}
 .stat .value{font-size:25px;font-weight:800;margin-top:5px;color:#a94e69}
 .stat .hint{font-size:11.5px;color:var(--muted);margin-top:3px}
-.layout{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:18px;align-items:start}
+
+/* ĐIỀU HƯỚNG TABS CHÍNH & LAYOUT */
+.main-tabs { display: flex; gap: 12px; margin: 10px 0 20px; }
+.main-tab-btn { background: #fff0f4; border: 2px solid #f4cad7; color: #a64e68; font-weight: 800; padding: 10px 22px; border-radius: 14px; font-size: 15px; cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 8px; }
+.main-tab-btn:hover { background: #ffe3eb; }
+.main-tab-btn.active { background: #e97998; color: #fff; border-color: #e97998; box-shadow: 0 4px 12px rgba(233,121,152,0.25); }
+
+.view-homework { display: grid; grid-template-columns: minmax(400px, 1fr) 340px; gap: 18px; align-items: start; }
+.view-essay { display: grid; grid-template-columns: minmax(350px, 1fr) minmax(400px, 1.2fr); gap: 18px; align-items: stretch; }
+
 .panel{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:18px}
 .panel-head{padding:16px 20px;border-bottom:1px solid #f6e0e6;display:flex;align-items:center;justify-content:space-between;gap:12px;background:linear-gradient(90deg,#fff6f8,#fff);flex-wrap:wrap;}
 .panel-head h2{font-size:17px;margin:0;color:#a64e68}
@@ -259,18 +268,24 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
 .shop-item-name { font-weight: 800; font-size: 12px; color: #51434a; line-height: 1.3; }
 .shop-item-price { font-weight: 900; font-size: 12px; color: #e95f83; margin: 4px 0 6px; }
 
+/* Responsive adjustments cho các tabs */
+@media(max-width:1200px){
+  .view-homework { grid-template-columns: 1fr 340px; }
+  .view-essay { grid-template-columns: 1fr 1fr; }
+}
 @media(max-width:850px){
-  .layout{grid-template-columns:1fr}
-  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .hero-top{grid-template-columns:1fr;gap:14px}
-  .hero-meta{align-items:flex-start;min-width:0}
-  .today-pill{display:inline-block}
-  .hero-tools{margin-top:15px}
-  .tool-group{align-items:flex-start;flex-direction:column;gap:6px}
-  .tool-group-label{min-width:0}
-  .task{grid-template-columns:1fr}
-  .task-actions{margin-top:6px}
-  .quiz-grid{grid-template-columns:1fr}
+  .view-homework { grid-template-columns: 1fr; }
+  .view-essay { grid-template-columns: 1fr; }
+  .stats { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .hero-top { grid-template-columns: 1fr; gap: 14px; }
+  .hero-meta { align-items: flex-start; min-width: 0; }
+  .today-pill { display: inline-block; }
+  .hero-tools { margin-top: 15px; }
+  .tool-group { align-items: flex-start; flex-direction: column; gap: 6px; }
+  .tool-group-label { min-width: 0; }
+  .task { grid-template-columns: 1fr; }
+  .task-actions { margin-top: 6px; }
+  .quiz-grid { grid-template-columns: 1fr; }
 }
 @media(max-width:520px){
   .app{padding:12px 10px 30px}
@@ -324,7 +339,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     </div>
   </header>
 
-  <!-- 5 THẺ THỐNG KÊ -->
+  <!-- 5 THẺ THỐNG KÊ (Hiển thị chung) -->
   <section class="stats">
     <div class="stat"><div class="label">🌷 BÀI HOÀN THÀNH</div><div class="value" id="statDone">0/0</div><div class="hint">Trong tháng đang xem</div></div>
     <div class="stat"><div class="label">🎯 KPI HOÀN THÀNH</div><div class="value" id="statKpi">0%</div><div class="hint">Đã được Mẹ duyệt</div></div>
@@ -337,13 +352,20 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     </div>
   </section>
 
-  <div class="layout">
+  <!-- ĐIỀU HƯỚNG TABS CHÍNH -->
+  <div class="main-tabs">
+    <button class="main-tab-btn active" id="tabHomeworkBtn">📚 Góc Bài Tập</button>
+    <button class="main-tab-btn" id="tabEssayBtn">✍️ Góc Tập Làm Văn</button>
+  </div>
+
+  <!-- VIEW 1: GÓC BÀI TẬP -->
+  <div class="view-homework" id="viewHomework">
     <main>
       <!-- BẢNG KẾ HOẠCH HỌC TẬP -->
       <section class="panel">
         <div class="panel-head">
           <div style="display: flex; align-items: center; gap: 10px;">
-            <h2>🗓️ Kế hoạch học tập</h2>
+            <h2>🗓️ Bài tập cần làm</h2>
             <select id="yearSelect" style="width: 95px; padding: 5px 8px; font-weight: 700; color: #a64e68; background: #fff0f4; border: 1px solid #f4cad7; border-radius: 10px;">
               <option value="2026" selected>2026</option>
               <option value="2027">2027</option>
@@ -355,7 +377,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
               <option value="2033">2033</option>
               <option value="2034">2034</option>
               <option value="2035">2035</option>
-              <option value="2036">2036</option>
             </select>
           </div>
           <div class="flex">
@@ -399,10 +420,9 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
       </section>
     </main>
 
+    <!-- CỘT 3 (BÀI TẬP): THỎ CƯNG VÀ TIỆN ÍCH -->
     <aside>
-      <!-- ==================================================== -->
       <!-- 🐰 BÉ THỎ CÔNG CHÚA MẶC THẬT VÁY ÁO & PHỤ KIỆN -->
-      <!-- ==================================================== -->
       <div class="pet-widget">
         <div class="pet-stage">
           <div class="pet-doll-container">
@@ -505,12 +525,42 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
       </section>
     </aside>
   </div>
+
+  <!-- VIEW 2: GÓC TẬP LÀM VĂN -->
+  <div class="view-essay" id="viewEssay" style="display: none;">
+    <!-- CỘT 1: TÀI LIỆU HỌC TẬP (PDF VIEWER) -->
+    <section class="panel" style="display: flex; flex-direction: column; height: 100%;">
+      <div class="panel-head" style="justify-content: space-between;">
+        <h2 style="display:flex; align-items:center; gap:6px;">📚 Tài liệu học tập</h2>
+        <!-- Nút tải file trực tiếp từ máy (Dự phòng) -->
+        <input type="file" id="pdfUploader" accept="application/pdf" title="Mở file từ máy tính" style="font-size: 12px; max-width: 150px; padding: 5px;">
+      </div>
+      <div class="panel-body" style="padding: 0; flex: 1; display: flex; min-height: 600px;">
+        <!-- Khung hiển thị PDF -->
+        <iframe id="pdfViewer" src="" style="width:100%; height:100%; border:none; background-color: #f9f9f9; flex: 1;"></iframe>
+      </div>
+    </section>
+
+    <!-- CỘT 2: KHU VỰC VIẾT VĂN & BÀI TẬP -->
+    <section class="panel" style="display: flex; flex-direction: column; height: 100%;">
+      <div class="panel-head">
+        <h2>✍️ Góc Tập Làm Văn</h2>
+        <button class="btn btn-primary btn-small" id="btnAiCheckEssay" style="background:#4c9475; box-shadow:0 4px 10px rgba(76,148,117,0.3);">✨ Nhờ Thỏ AI Sửa Bài</button>
+      </div>
+      <div class="panel-body" style="padding: 0; flex: 1; display: flex; min-height: 600px;">
+        <textarea id="essayEditor" placeholder="Con gõ bài văn vào đây nhé... &#10;(Gõ xong bấm nút 'Nhờ Thỏ AI Sửa Bài' ở trên để Thỏ góp ý cho con nha!)" style="width:100%; flex: 1; border:none; resize:none; padding: 20px; font-size: 16px; line-height: 1.8; outline:none; background: #fffcfd;"></textarea>
+      </div>
+    </section>
+  </div>
+
   <div class="footer">🌸 Góc học tập của Khánh Huyền · Kết nối Supabase Cloud & Google Sheets 💕</div>
 </div>
 
 <!-- ==================================================== -->
-<!-- 👑 HỘP THOẠI MẬT MÃ CỦA MẸ (HOÀNG GIA HỒNG) -->
+<!-- CÁC HỘP THOẠI (DIALOGS) -->
 <!-- ==================================================== -->
+
+<!-- 👑 HỘP THOẠI MẬT MÃ CỦA MẸ (HOÀNG GIA HỒNG) -->
 <dialog id="momPassDialog" style="width: min(380px, calc(100% - 24px)); border-radius: 26px; border: 2px solid #f6a9bd; box-shadow: 0 20px 60px rgba(201,92,120,0.3); overflow: hidden;">
   <div style="background: linear-gradient(135deg, #fff0f4, #fff8fb); padding: 26px 22px; text-align: center;">
     <div style="font-size: 45px; margin-bottom: 6px;">👩👑✨</div>
@@ -525,14 +575,13 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   </div>
 </dialog>
 
-<!-- ==================================================== -->
 <!-- 🌸 HỘP THOẠI HOÀNG GIA CHUNG (THAY THẾ TOÀN BỘ ALERT) -->
-<!-- ==================================================== -->
 <dialog id="customModalDialog" style="width: min(400px, calc(100% - 24px)); border-radius: 26px; border: 2px solid #f6a9bd; box-shadow: 0 20px 60px rgba(201,92,120,0.3); overflow: hidden; padding: 0;">
   <div style="background: linear-gradient(135deg, #fff0f4, #fff8fb); padding: 26px 22px; text-align: center;">
     <div id="customModalIcon" style="font-size: 45px; margin-bottom: 6px;">🌸</div>
     <h3 id="customModalTitle" style="margin: 0 0 8px; color: #a64e68; font-size: 19px; font-weight: 800;">Thông báo</h3>
-    <p id="customModalMsg" style="margin: 0 0 16px; font-size: 13.5px; color: #66525a; line-height: 1.5;"></p>
+    <!-- Đã thêm white-space: pre-wrap để hiển thị đoạn văn nhận xét của AI xuống dòng đẹp đẽ -->
+    <p id="customModalMsg" style="margin: 0 0 16px; font-size: 14px; color: #66525a; line-height: 1.6; white-space: pre-wrap; text-align: left;"></p>
     <div id="customModalInputBox" style="display: none; margin-bottom: 16px;">
       <input type="text" id="customModalInput" style="text-align: center; font-size: 14px; font-weight: 700; width: 100%; padding: 10px 12px; border-radius: 12px; border: 2px solid #f4cad7; color: #a64e68; background: #fff; outline: none;">
     </div>
@@ -543,9 +592,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   </div>
 </dialog>
 
-<!-- ==================================================== -->
 <!-- 🛍️ CỬA SỔ PHÒNG THAY ĐỒ & TIỆM THỜI TRANG 100 MÓN -->
-<!-- ==================================================== -->
 <dialog id="petShopDialog" style="width: min(740px, calc(100% - 20px));">
   <div class="modal-head">
     <h2>👗 Phòng Thay Đồ & Tiệm Thời Trang Thỏ Cưng</h2>
@@ -602,9 +649,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   </div>
 </dialog>
 
-<!-- ==================================================== -->
 <!-- 🥕 HIỆU ỨNG THỎ ĂN CÀ RỐT TO GIỮA MÀN HÌNH -->
-<!-- ==================================================== -->
 <div id="bunnyEatingOverlay">
   <div class="bunny-eat-card">
     <div class="bunny-eating-face" id="bunnyEatFace">(｡♥‿♥｡) 🐰🥕✨</div>
@@ -613,9 +658,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   </div>
 </div>
 
-<!-- ==================================================== -->
 <!-- 🐰 CỬA SỔ BẠN HỌC AI THỎ SIÊU QUẬY -->
-<!-- ==================================================== -->
 <dialog id="aiTutorDialog" style="width: min(650px, calc(100% - 20px));">
   <div class="modal-head">
     <h2>🐰 Bạn Học AI Thỏ Siêu Quậy 🌸</h2>
@@ -648,9 +691,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   </div>
 </dialog>
 
-<!-- ==================================================== -->
 <!-- 🎡 CỬA SỔ VÒNG QUAY MAY MẮN -->
-<!-- ==================================================== -->
 <dialog id="wheelDialog" style="position:relative; overflow:visible;">
   <canvas id="wheelConfettiCanvas" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:999;"></canvas>
   <div id="wheelWinCard">
@@ -676,9 +717,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   </div>
 </dialog>
 
-<!-- ==================================================== -->
 <!-- 🍅 CỬA SỔ ĐỒNG HỒ POMODORO TÍCH HỢP YOUTUBE -->
-<!-- ==================================================== -->
 <dialog id="pomodoroDialog" style="width: min(520px, calc(100% - 24px));">
   <div class="modal-head">
     <h2>🍅 Giờ học Pomodoro & Nhạc YouTube</h2>
@@ -715,9 +754,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   </div>
 </dialog>
 
-<!-- ==================================================== -->
 <!-- 🎴 FLASHCARD 3D -->
-<!-- ==================================================== -->
 <dialog id="flashcardDialog">
   <div class="modal-head">
     <h2>🎴 Thẻ học thông minh Flashcard</h2>
@@ -756,9 +793,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   </div>
 </dialog>
 
-<!-- ==================================================== -->
 <!-- 🖼️ THIỆP VINH DANH THÀNH TÍCH -->
-<!-- ==================================================== -->
 <dialog id="certDialog">
   <div class="modal-head"><h2>🖼️ Thiệp vinh danh thành tích</h2><button class="close" data-close="certDialog">×</button></div>
   <div class="modal-body" style="text-align:center;">
@@ -767,9 +802,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   </div>
 </dialog>
 
-<!-- ==================================================== -->
 <!-- ⚙️ CÀI ĐẶT SHEET & TELEGRAM -->
-<!-- ==================================================== -->
 <dialog id="configDialog">
   <div class="modal-head"><h2>⚙️ Cài đặt hệ thống & Thông báo</h2><button class="close" data-close="configDialog">×</button></div>
   <form id="configForm" class="modal-body">
@@ -970,6 +1003,41 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   }
 
   // ========================================================
+  // 📚 XỬ LÝ TÀI LIỆU PDF (GOOGLE DRIVE & UPLOAD TỪ MÁY)
+  // ========================================================
+  const pdfViewer = $('pdfViewer');
+  const pdfUploader = $('pdfUploader');
+
+  // 1. Tự động nhận diện tài liệu nếu mở từ link Google Sheet có đuôi ?docid=...
+  const urlParams = new URLSearchParams(window.location.search);
+  const docId = urlParams.get('docid');
+
+  if (docId) {
+      // Render thẳng file từ Google Drive
+      pdfViewer.src = `https://drive.google.com/file/d/${docId}/preview`;
+  } else {
+      // Mặc định hiển thị trang trắng hoặc hướng dẫn
+      const html = `<html><body style="font-family:'Quicksand',sans-serif;text-align:center;padding-top:100px;color:#8a7b82;background:#f9f9f9;">
+          <h2 style="color:#a64e68;font-size:20px;">Chưa có tài liệu được chọn 🌸</h2>
+          <p style="line-height:1.6;font-size:15px;">Mẹ đính kèm link Drive vào Google Sheet, <br>khi con click vào link web sẽ tự động mở tài liệu ở đây nhé!</p>
+          <p style="font-size:13px;opacity:0.7;">(Con cũng có thể bấm nút "Chọn tệp" ở góc trên<br>để tải trực tiếp file PDF từ máy tính lên).</p>
+          </body></html>`;
+      pdfViewer.src = 'data:text/html;charset=utf-8,' + encodeURIComponent(html);
+  }
+
+  // 2. Xử lý sự kiện khi tự chọn file PDF từ máy tính (dự phòng)
+  if (pdfUploader) {
+      pdfUploader.addEventListener('change', function(event) {
+          const file = event.target.files[0];
+          if (file && file.type === 'application/pdf') {
+              const fileURL = URL.createObjectURL(file);
+              pdfViewer.src = fileURL;
+              toast("Đã mở tài liệu PDF thành công! 📚");
+          }
+      });
+  }
+
+  // ========================================================
   // 🐰 DỮ LIỆU PET 50 CẤP & 100 PHỤ KIỆN
   // ========================================================
   const PET_TIERS = [
@@ -990,17 +1058,11 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
 
   // 100 PHỤ KIỆN CON GÁI XINH XẮN
   const RAW_ACC_DATA = [
-    // Trang sức (20)
     ['jewelry','🌸','Bông Tai Hoa Anh Đào',4000],['jewelry','🍓','Bông Tai Dâu Tây',5000],['jewelry','🍒','Bông Tai Quả Cherry',6000],['jewelry','🌙','Bông Tai Trăng Khuyết',8000],['jewelry','⭐','Bông Tai Ngôi Sao Nhỏ',8000],['jewelry','💖','Bông Tai Trái Tim Hồng',9000],['jewelry','💎','Bông Tai Kim Cương',15000],['jewelry','🎀','Bông Tai Nơ Bướm',10000],['jewelry','🌼','Bông Tai Cúc Họa Mi',7000],['jewelry','🍎','Bông Tai Táo Đỏ',6000],['jewelry','📿','Dây Chuyền Cầu Vồng',12000],['jewelry','🤍','Vòng Cổ Ngọc Trai Quý Phái',25000],['jewelry','💖','Dây Chuyền Trái Tim Ruby',30000],['jewelry','🗝️','Dây Chuyền Chìa Khóa Bí Mật',28000],['jewelry','🍀','Mặt Dây Cỏ 4 Lá May Mắn',18000],['jewelry','🔔','Vòng Tay Lắc Chuông Nhỏ',16000],['jewelry','💍','Nhẫn Đính Hôn Công Chúa',35000],['jewelry','🔮','Lắc Tay Đá Thạch Anh Tím',42000],['jewelry','✨','Lắc Chân Bạc Ngân Hà',22000],['jewelry','👑','Chuỗi Ngọc Nữ Hoàng',80000],
-    // Mũ / Nơ / Vương miện (18)
     ['head','🎀','Kẹp Tóc Nơ Lụa Hồng',3000],['head','🌸','Kẹp Tóc Hoa Đào Xinh',4000],['head','🌻','Cặp Kẹp Hướng Dương',5000],['head','🦋','Kẹp Bướm Phát Sáng',11000],['head','🐰','Băng Đô Tai Thỏ Lông Xù',14000],['head','🦄','Băng Đô Kỳ Lân Cầu Vồng',22000],['head','🐱','Băng Đô Tai Mèo Đính Chuông',16000],['head','👒','Nón Cói Đi Biển Vintage',15000],['head','🧢','Mũ Lưỡi Trai Năng Động',12000],['head','🎓','Mũ Cử Nhân Trí Tuệ',30000],['head','👑','Vương Miện Công Chúa Nhí',35000],['head','❄️','Vương Miện Băng Giá Elsa',65000],['head','🌟','Vương Miện Hoàng Gia Đính Ngọc',90000],['head','🧕','Khăn Trùm Cô Bé Quàng Khăn Đỏ',18000],['head','🌺','Vòng Hoa Đội Đầu Nàng Tiên',26000],['head','🎩','Mũ Phù Thủy Học Viện Magic',40000],['head','🎀','Băng Đô Alice Xứ Sở Diệu Kỳ',20000],['head','🍓','Kẹp Tóc Dâu Tây Đôi',5000],
-    // Túi xách & Balo (10)
     ['bag','👛','Ví Cầm Tay Lọ Lem',9000],['bag','👜','Túi Đeo Chéo Quả Dâu',14000],['bag','🎒','Balo Thỏ Con Đi Học',20000],['bag','🛍️','Giỏ Mây Dã Ngoại Mùa Hè',17000],['bag','👛','Túi Xách Ngọc Trai Công Chúa',38000],['bag','🎒','Balo Cánh Thiên Thần',55000],['bag','👜','Túi Da Thần Thoại Ngân Hà',72000],['bag','👝','Ví Mini Trái Tim Hồng',11000],['bag','🧺','Túi Vải Canvas Thân Thiện',8000],['bag','🧳','Vali Du Lịch Tí Hon',45000],
-    // Giày dép & Vớ ren (11)
     ['shoes','👟','Sneaker Thể Thao Pastel',8000],['shoes','🧦','Vớ Ren Công Chúa Đính Nơ',6000],['shoes','👡','Sandal Nơ Hồng Mùa Hè',12000],['shoes','🩰','Giày Khiêu Vũ Ba-lê Lụa',28000],['shoes','👠','Hài Pha Lê Thủy Tinh Lọ Lem',50000],['shoes','👢','Bốt Cổ Cao Mùa Đông Tuyết',34000],['shoes','🥿','Giày Búp Bê Da Mềm Xinh',19000],['shoes','👡','Guốc Mộc Nhật Bản Cài Hoa',24000],['shoes','⛸️','Giày Trượt Băng Nghệ Thuật',60000],['shoes','👠','Giày Dạ Hội Kim Tuyến',85000],['shoes','🥾','Giày Thám Hiểm Rừng Xanh',22000],
-    // Làm đẹp & Lọ thần (11)
     ['beauty','🪞','Gương Soi Thần Kỳ Hoa Hồng',10000],['beauty','💄','Son Dưỡng Dâu Tây Ngọt Ngào',7000],['beauty','🧴','Nước Hoa Hoa Hồng Pháp',22000],['beauty','💅','Sơn Móng Tay Kim Tuyến',13000],['beauty','🪮','Lược Thần Gỡ Rối Hoàng Cung',11000],['beauty','🧪','Lọ Nước Thần Tình Bạn',32000],['beauty','✨','Bột Phấn Tiên Nữ Tỏa Sáng',46000],['beauty','🫙','Lọ Thủy Tinh 1000 Ngôi Sao Giấy',25000],['beauty','🕯️','Nến Thơm Hương Vani Thư Giãn',15000],['beauty','🫧','Nước Tạo Bong Bóng Thần Tiên',9000],['beauty','📜','Bức Thư Tình Bạn Niêm Phong Sáp',18000],
-    // Cầm tay, Cánh & Thú cưng (30)
     ['hand','🌸','Gậy Phép Thuật Sakura',45000],['hand','🪄','Đũa Thần Tinh Tú Harry',50000],['hand','🧸','Gấu Bông Teddy Tí Hon',12000],['hand','🎈','Chùm Bóng Bay Trái Tim Hồng',8000],['hand','🍭','Kẹo Mút Khổng Lồ 7 Màu',15000],['hand','🍦','Cây Kem Ốc Quế Dâu Socola',7000],['hand','🪭','Quạt Lụa Cung Đình Xếp Ren',19000],['hand','🌂','Ô Che Trong Suốt Hoa Đào',24000],['hand','📖','Sách Phép Thuật Ngàn Năm',38000],['hand','🐱','Mèo Con Lông Trắng Tí Hon',40000],['hand','🐶','Cún Poodle Bông Mini',42000],['hand','🐥','Bé Vịt Vàng Tắm Biển',14000],['hand','🦋','Cánh Bướm Tiên Nữ Phát Sáng',85000],['hand','🪽','Cánh Thiên Thần Thuần Khiết',110000],['hand','💎','Kim Cương Xanh Hy Vọng',95000],['hand','🕊️','Quyền Trượng Nữ Hoàng Vũ Trụ',150000],['hand','🎸','Đàn Ukulele Hồng Tí Hon',33000],['hand','🎨','Bảng Pha Màu Họa Sĩ Nhí',16000],['hand','📷','Máy Ảnh Mini Màu Pastel',27000],['hand','🧋','Ly Trà Sữa Trân Châu Đường Đen',9000],['hand','🍰','Bánh Kem Dâu Sinh Nhật',15000],['hand','🍿','Bắp Rang Bơ Ngọt Ngào',6000],['hand','🎁','Hộp Quà Bí Ẩn Thắt Nơ',21000],['hand','💐','Bó Hoa Hồng Mộng Mơ',28000],['hand','🪀','Con Quay Phát Sáng Yoyo',10000],['hand','🪁','Cánh Diều Cầu Vồng Tí Hon',13000],['hand','🕶️','Kính Râm Trái Tim Thời Thượng',17000],['hand','👓','Kính Tròn Nobita Xì-tin',12000],['hand','🎭','Mặt Nạ Dạ Hội Bí Ẩn',31000],['hand','🌟','Ngôi Sao Ước Nguyện Vĩnh Hằng',160000]
   ];
 
@@ -1170,6 +1232,43 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   }
   $('aiBtnSend').onclick = sendAiMessage;
   $('aiTextInput').onkeypress = e => { if (e.key === 'Enter') sendAiMessage(); };
+
+  // ========================================================
+  // ✨ TÍNH NĂNG NHỜ THỎ AI SỬA BÀI VĂN
+  // ========================================================
+  $('btnAiCheckEssay').onclick = async () => {
+      const text = $('essayEditor').value.trim();
+      if (!text) return toast('Con chưa viết gì cả! Hãy viết văn rồi nhờ Thỏ sửa nhé!');
+      if (!geminiApiKey) return showCustomAlert("Mẹ cần cài đặt API Key (Nút ⚙️ Key ở góc trên) để Thỏ chấm bài nhé!", "Thiếu API Key 🔑", "🔑");
+
+      $('btnAiCheckEssay').disabled = true;
+      $('btnAiCheckEssay').textContent = 'Thỏ đang đọc... ⏳';
+
+      try {
+          const prompt = `Bạn là cô giáo dạy văn tiểu học vô cùng tâm lý và đáng yêu, hóa thân thành "Thỏ AI". Hãy đọc bài văn dưới đây của Khánh Huyền (học sinh tiểu học).
+          Cách làm:
+          1. Khen ngợi điểm tốt, sáng tạo của bé thật nhiệt tình.
+          2. Chỉ ra lỗi chính tả hoặc diễn đạt lủng củng (nếu có) một cách nhẹ nhàng, dễ hiểu.
+          3. Gợi ý 1-2 câu để bài viết sinh động hơn (dùng nhiều tính từ, hình ảnh so sánh...).
+          Giọng văn ngắn gọn, dễ thương, dùng nhiều emoji 🐰🌸✨.
+
+          Bài làm của con:
+          "${text}"`;
+          
+          const data = await callUltraFastGemini([{text: prompt}], "Bạn là Thỏ AI dạy văn cực kỳ dễ thương.");
+          if (data.candidates && data.candidates[0] && data.candidates[0].content) {
+              const allParts = data.candidates[0].content.parts;
+              const replyParts = allParts.filter(p => !p.thought);
+              const reply = cleanMathText((replyParts.length > 0 ? replyParts : allParts).map(p => p.text || '').join('').trim());
+              showCustomAlert(reply, "Thỏ Góp Ý Bài Văn 🐰📝", "📝");
+          }
+      } catch (e) {
+          toast('Có lỗi xảy ra, mẹ kiểm tra lại API Key nhé!');
+      } finally {
+          $('btnAiCheckEssay').disabled = false;
+          $('btnAiCheckEssay').textContent = '✨ Nhờ Thỏ AI Sửa Bài';
+      }
+  };
 
   // ========================================================
   // 👗 BÚP BÊ THỜI TRANG SVG (MẶC THẬT VÁY ÁO & PHỤ KIỆN)
@@ -2160,8 +2259,36 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   $('filterSubject').onchange = e => { filterSubject = e.target.value; renderTasks(); };
   document.querySelectorAll('[data-close]').forEach(b => b.onclick = () => $(b.dataset.close).close());
 
-  // KHỞI CHẠY
+  // CHUYỂN ĐỔI TAB CHÍNH
+  const tabHomeworkBtn = $('tabHomeworkBtn');
+  const tabEssayBtn = $('tabEssayBtn');
+  const viewHomework = $('viewHomework');
+  const viewEssay = $('viewEssay');
+
+  if (tabHomeworkBtn && tabEssayBtn) {
+    tabHomeworkBtn.onclick = () => {
+      tabHomeworkBtn.classList.add('active');
+      tabEssayBtn.classList.remove('active');
+      viewHomework.style.display = 'grid';
+      viewEssay.style.display = 'none';
+    };
+    tabEssayBtn.onclick = () => {
+      tabEssayBtn.classList.add('active');
+      tabHomeworkBtn.classList.remove('active');
+      viewEssay.style.display = 'grid';
+      viewHomework.style.display = 'none';
+    };
+  }
+
+  // KHỞI CHẠY (Bao gồm đọc PDF từ URL Sheets)
   updateSheetLinkUI();
+  
+  // Tự động load file PDF nếu có đuôi ?docid=...
+  const docIdQuery = new URLSearchParams(window.location.search).get('docid');
+  if (docIdQuery) {
+      $('pdfViewer').src = `https://drive.google.com/file/d/${docIdQuery}/preview`;
+  }
+
   loadDataFromSupabase();
 })();
 </script>
