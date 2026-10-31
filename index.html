@@ -61,11 +61,11 @@ h1{margin:4px 0 8px;font-size:clamp(24px,3.8vw,34px);color:#9f4963;font-weight:8
 .main-tab-btn.active { background: #e97998; color: #fff; border-color: #e97998; box-shadow: 0 4px 12px rgba(233,121,152,0.25); }
 
 .view-homework { display: grid; grid-template-columns: minmax(400px, 1fr) 340px; gap: 18px; align-items: start; }
-.view-essay { display: grid; grid-template-columns: 280px minmax(320px, 1fr) minmax(380px, 1.2fr); gap: 16px; align-items: stretch; }
+.view-essay { display: grid; grid-template-columns: 310px minmax(360px, 1.1fr) minmax(400px, 1.25fr); gap: 16px; align-items: stretch; }
 
 .panel{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:18px}
-.panel-head{padding:16px 20px;border-bottom:1px solid #f6e0e6;display:flex;align-items:center;justify-content:space-between;gap:12px;background:linear-gradient(90deg,#fff6f8,#fff);flex-wrap:wrap;}
-.panel-head h2{font-size:17px;margin:0;color:#a64e68}
+.panel-head{padding:14px 18px;border-bottom:1px solid #f6e0e6;display:flex;align-items:center;justify-content:space-between;gap:12px;background:linear-gradient(90deg,#fff6f8,#fff);flex-wrap:wrap;}
+.panel-head h2{font-size:16px;margin:0;color:#a64e68}
 .panel-body{padding:18px 20px}
 .tabs{display:flex;gap:7px;overflow-x:auto;padding:12px 15px 0;background:#fff1f4;border-bottom:1px solid #f5d6df}
 .tab{border:0;background:#ffd5e0;color:#a84e68;font-weight:800;padding:12px 16px;border-radius:12px 12px 0 0;white-space:nowrap;min-width:105px;cursor:pointer;flex-shrink:0}
@@ -87,7 +87,7 @@ h1{margin:4px 0 8px;font-size:clamp(24px,3.8vw,34px);color:#9f4963;font-weight:8
 .task-actions{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
 .icon-btn{border:1px solid #f0d8df;background:#fff8fa;border-radius:8px;color:#a85a71;padding:6px 10px;font-size:12px;cursor:pointer}
 .icon-btn:hover{background:#ffeef3}
-.empty{padding:28px;text-align:center;color:var(--muted);line-height:1.6}
+.empty{padding:24px;text-align:center;color:var(--muted);line-height:1.6}
 .btn{border:0;border-radius:10px;padding:8px 13px;font-weight:800;transition:.15s;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:6px}
 .btn-primary{background:#e97998;color:white;box-shadow:0 4px 10px #e979982c}
 .btn-primary:hover{background:#d96586}
@@ -225,7 +225,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
 .wheel-pointer { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 14px solid transparent; border-right: 14px solid transparent; border-top: 24px solid #e95f83; z-index: 10; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); }
 
 /* ==================================================== */
-/* 🐰 BÚP BÊ THỜI TRANG THỎ CÔNG CHÚA (DRESS-UP DOLL) */
+/* 🐰 BÚP BÊ THỜI TRANG THỎ CÔNG CHÚA */
 /* ==================================================== */
 .pet-widget {
   background: linear-gradient(135deg, #fff0f5, #fffafd);
@@ -265,11 +265,12 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
 .shop-item-name { font-weight: 800; font-size: 12px; color: #51434a; line-height: 1.3; }
 .shop-item-price { font-weight: 900; font-size: 12px; color: #e95f83; margin: 4px 0 6px; }
 
-/* CSS MỚI CHO GÓC TẬP LÀM VĂN 3 CỘT */
-.essay-list-container { display: flex; flex-direction: column; gap: 8px; max-height: 650px; overflow-y: auto; padding-right: 4px; }
-.essay-item-card { background: #fff; border: 1px solid #f4cad7; border-radius: 12px; padding: 12px; cursor: pointer; transition: 0.2s; }
+/* CSS GÓC TẬP LÀM VĂN 3 CỘT */
+.essay-list-container { display: flex; flex-direction: column; gap: 8px; max-height: 620px; overflow-y: auto; padding-right: 4px; }
+.essay-item-card { background: #fff; border: 1px solid #f4cad7; border-radius: 13px; padding: 12px; cursor: pointer; transition: 0.2s; position: relative; }
 .essay-item-card:hover { background: #fff0f4; border-color: #e97998; }
-.essay-item-card.active { background: #fff0f4; border-color: #e97998; box-shadow: 0 4px 12px rgba(233,121,152,0.18); }
+.essay-item-card.active { background: #fff2f6; border-color: #e97998; box-shadow: 0 4px 14px rgba(233,121,152,0.22); }
+.essay-badge-week { display: inline-block; font-size: 10.5px; font-weight: 800; color: #fff; background: #e97998; padding: 2px 7px; border-radius: 6px; margin-bottom: 4px; }
 
 @media(max-width:1200px){
   .view-homework { grid-template-columns: 1fr 340px; }
@@ -333,15 +334,15 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
       <div class="tool-group">
         <span class="tool-group-label">☁️ DỮ LIỆU</span>
         <div class="tool-group-buttons">
-          <a href="https://docs.google.com/spreadsheets/d/1INPJnlsU0saiIBP92mkRCLShU3qWZ20elD1OxRKnNVc/edit?gid=0#gid=0" id="linkOpenSheet" target="_blank" rel="noopener noreferrer" class="btn btn-soft btn-small" style="font-weight:800;text-decoration:none;">📊 Google Sheets</a>
-          <button class="btn btn-soft btn-small" id="btnSyncSheet" style="font-weight:800;color:#1a73e8;border-color:#c2d7fa;background:#f0f6ff;">🔄 Đồng bộ Google Sheets</button>
+          <a href="https://docs.google.com/spreadsheets/d/1INPJnlsU0saiIBP92mkRCLShU3qWZ20elD1OxRKnNVc/edit?gid=0#gid=0" id="linkOpenSheet" target="_blank" rel="noopener noreferrer" class="btn btn-soft btn-small" style="font-weight:800;text-decoration:none;">📊 Google Sheets Bài Tập</a>
+          <button class="btn btn-soft btn-small" id="btnSyncSheet" style="font-weight:800;color:#1a73e8;border-color:#c2d7fa;background:#f0f6ff;">🔄 Đồng bộ Bài Tập</button>
           <button class="btn btn-soft btn-small" id="btnConfigSheet" title="Cài đặt hệ thống">⚙️ Cài đặt</button>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- 5 THẺ THỐNG KÊ (Hiển thị chung) -->
+  <!-- 5 THẺ THỐNG KÊ -->
   <section class="stats">
     <div class="stat"><div class="label">🌷 BÀI HOÀN THÀNH</div><div class="value" id="statDone">0/0</div><div class="hint">Trong tháng đang xem</div></div>
     <div class="stat"><div class="label">🎯 KPI HOÀN THÀNH</div><div class="value" id="statKpi">0%</div><div class="hint">Đã được Mẹ duyệt</div></div>
@@ -363,7 +364,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   <!-- VIEW 1: GÓC BÀI TẬP -->
   <div class="view-homework" id="viewHomework">
     <main>
-      <!-- BẢNG KẾ HOẠCH HỌC TẬP -->
       <section class="panel">
         <div class="panel-head">
           <div style="display: flex; align-items: center; gap: 10px;">
@@ -403,13 +403,11 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
         <div id="taskDays"></div>
       </section>
 
-      <!-- TỔNG KẾT THEO MÔN -->
       <section class="panel">
         <div class="panel-head"><h2>📚 Tổng kết theo môn</h2><span class="kpi-tag" id="subjectMonthLabel"></span></div>
         <div class="panel-body" id="subjectStats"></div>
       </section>
 
-      <!-- LỊCH SỬ HỌC TẬP -->
       <section class="panel">
         <div class="panel-head"><h2>📖 Lịch sử học tập</h2></div>
         <div class="panel-body">
@@ -422,7 +420,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
       </section>
     </main>
 
-    <!-- CỘT 3 (BÀI TẬP): THỎ CƯNG VÀ TIỆN ÍCH -->
+    <!-- CỘT BÊN PHẢI -->
     <aside>
       <div class="pet-widget">
         <div class="pet-stage">
@@ -486,7 +484,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
         </div>
       </div>
 
-      <!-- GÓC ĐỔI QUÀ -->
       <section class="panel">
         <div class="panel-head"><h2>🎁 Góc đổi quà</h2><button class="btn btn-soft btn-small admin-only" id="addRewardBtn">＋ Thêm</button></div>
         <div class="panel-body">
@@ -499,7 +496,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
         </div>
       </section>
 
-      <!-- MỤC TIÊU TUẦN -->
       <section class="panel">
         <div class="panel-head"><h2>🎯 Mục tiêu tuần</h2><button class="btn btn-soft btn-small admin-only" id="editGoalBtn">Sửa</button></div>
         <div class="panel-body">
@@ -513,40 +509,46 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     </aside>
   </div>
 
-  <!-- VIEW 2: GÓC TẬP LÀM VĂN (3 CỘT) -->
+  <!-- VIEW 2: GÓC TẬP LÀM VĂN (3 CỘT NÂNG CẤP) -->
   <div class="view-essay" id="viewEssay" style="display: none;">
-    <!-- CỘT 1: DANH SÁCH BÀI TẬP -->
+    <!-- CỘT 1: DANH SÁCH BÀI TẬP VĂN -->
     <section class="panel" style="display: flex; flex-direction: column; height: 100%;">
-      <div class="panel-head">
-        <h2>📝 Danh Sách Bài Tập</h2>
+      <div class="panel-head" style="justify-content: space-between;">
+        <h2>📝 Danh Sách Bài Văn</h2>
+        <button class="btn btn-soft btn-small" id="btnSyncEssaySheet" title="Đồng bộ từ Google Sheet" style="color:#1a73e8; border-color:#c2d7fa; background:#f0f6ff; font-weight:800;">🔄 Đồng bộ</button>
       </div>
       <div class="panel-body" style="padding: 12px; flex: 1;">
         <div id="essayListContainer" class="essay-list-container">
-          <div class="empty">Đang tải danh sách bài tập từ Google Sheet...</div>
+          <div class="empty">Đang tải danh sách bài tập...</div>
         </div>
       </div>
     </section>
 
-    <!-- CỘT 2: TÀI LIỆU HƯỚNG DẪN -->
+    <!-- CỘT 2: TÀI LIỆU HƯỚNG DẪN & NÚT MỞ THẺ MỚI -->
     <section class="panel" style="display: flex; flex-direction: column; height: 100%;">
       <div class="panel-head" style="justify-content: space-between;">
         <h2 style="display:flex; align-items:center; gap:6px;">📖 Tài Liệu Hướng Dẫn</h2>
+        <a id="btnOpenDocExternal" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-soft btn-small" style="text-decoration:none; display:none; font-weight:800; color:#c95c78;">↗ Mở thẻ mới</a>
       </div>
-      <div class="panel-body" style="padding: 0; flex: 1; display: flex; min-height: 600px;">
-        <iframe id="pdfViewer" src="" style="width:100%; height:100%; border:none; background-color: #f9f9f9; flex: 1;"></iframe>
+      <div class="panel-body" style="padding: 0; flex: 1; display: flex; flex-direction: column; min-height: 600px; background-color: #faf7f8;">
+        <div id="pdfViewerPlaceholder" style="padding: 30px 20px; text-align: center; color: var(--muted); margin: auto;">
+          <div style="font-size: 38px; margin-bottom: 8px;">📑</div>
+          <div style="font-weight: 700;">Chưa chọn tài liệu hoặc bài viết chưa có link tài liệu đính kèm.</div>
+        </div>
+        <iframe id="pdfViewer" src="" style="width:100%; height:100%; border:none; flex: 1; display: none;"></iframe>
       </div>
     </section>
 
-    <!-- CỘT 3: GÓC SOẠN THẢO & AI -->
+    <!-- CỘT 3: GÓC SOẠN THẢO & THỎ AI SỬA BÀI -->
     <section class="panel" style="display: flex; flex-direction: column; height: 100%;">
       <div class="panel-head" style="justify-content: space-between;">
         <h2>✍️ Góc Soạn Thảo</h2>
         <button class="btn btn-primary btn-small" id="btnAiCheckEssay" style="background:#4c9475; box-shadow:0 4px 10px rgba(76,148,117,0.3);">✨ Nhờ Thỏ AI Sửa Bài</button>
       </div>
       <div class="panel-body" style="padding: 12px; flex: 1; display: flex; flex-direction: column;">
-        <textarea id="essayEditor" placeholder="Con chọn bài bên trái, sau đó gõ bài tập làm văn vào đây nhé..." style="width:100%; flex: 1; border:1px solid #f4cad7; border-radius:12px; resize:none; padding: 16px; font-size: 15px; line-height: 1.7; outline:none; background: #fffcfd;"></textarea>
+        <textarea id="essayEditor" placeholder="Con chọn bài bên trái, sau đó gõ bài tập làm văn vào đây nhé..." style="width:100%; flex: 1; min-height: 480px; border:1px solid #f4cad7; border-radius:12px; resize:none; padding: 16px; font-size: 15px; line-height: 1.7; outline:none; background: #fffcfd;"></textarea>
         
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px; pt-2; border-top: 1px solid #f6e0e6;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px; padding-top: 10px; border-top: 1px solid #f6e0e6; flex-wrap: wrap; gap: 8px;">
           <div class="flex" style="gap: 8px;">
             <button class="btn btn-primary btn-small" id="btnSaveEssay">💾 Lưu Bài Viết</button>
             <span id="saveStatusText" style="font-size: 11.5px; color: #36795f; font-weight: 800;"></span>
@@ -761,7 +763,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
         <option value="cambridge">🇬🇧 Tiếng Anh Cambridge</option>
         <option value="math">📐 Toán tính nhẩm Lớp 4</option>
         <option value="daily">🏡 Đời sống & Đồ vật</option>
-        <option value="tasks">📝 Từ bài tập Mẹ giao</option>
       </select>
     </div>
     <div class="small-note" style="margin-bottom:8px;">Chạm vào thẻ để lật xem đáp án 🌟</div>
@@ -800,11 +801,11 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   <div class="modal-head"><h2>⚙️ Cài đặt hệ thống & Thông báo</h2><button class="close" data-close="configDialog">×</button></div>
   <form id="configForm" class="modal-body">
     <div class="field">
-      <label for="cfgSheetUrl">1. Đường link Google Sheet của Mẹ (Góc Bài Tập):</label>
+      <label for="cfgSheetUrl">1. Đường link Google Sheet Góc Bài Tập:</label>
       <input type="text" id="cfgSheetUrl" placeholder="https://docs.google.com/spreadsheets/d/...">
     </div>
     <div class="field" style="margin-top: 14px;">
-      <label for="cfgEssaySheetUrl">2. Đường link Google Sheet Góc Tập Làm Văn (Dán link Sheet chứa danh sách bài văn):</label>
+      <label for="cfgEssaySheetUrl">2. Đường link Google Sheet Góc Tập Làm Văn:</label>
       <input type="text" id="cfgEssaySheetUrl" placeholder="https://docs.google.com/spreadsheets/d/...">
     </div>
     <div class="field" style="margin-top: 14px; background:#fff5f7; padding:12px; border-radius:10px; border:1px solid #f6cfda;">
@@ -812,7 +813,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
       <input type="password" id="cfgGeminiKey" placeholder="Dán mã AIza... vào đây">
     </div>
     <div class="field" style="background:#f0f6ff; padding:12px; border-radius:10px; border:1px solid #c2d7fa; margin-top: 14px;">
-      <label style="color:#1a73e8; margin-bottom:4px;">4. Tự động bắn tin nhắn báo Mẹ qua Telegram khi con nộp bài:</label>
+      <label style="color:#1a73e8; margin-bottom:4px;">4. Báo tin nhắn qua Telegram khi con nộp bài:</label>
       <input type="text" id="cfgTeleToken" placeholder="Telegram Bot Token" style="margin-bottom:8px;">
       <input type="text" id="cfgTeleChatId" placeholder="Telegram Chat ID của Mẹ">
     </div>
@@ -995,69 +996,237 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   }
 
   // ========================================================
-  // ✍️ ĐỒNG BỘ GÓC TẬP LÀM VĂN TỪ GOOGLE SHEET (DÙNG GVIZ CHỐNG LỖI CORS)
+  // ✍️ CƠ CHẾ GOOGLE SHEET JSONP TRIỆT TIÊU LỖI CORS
   // ========================================================
+  function fetchGoogleSheetJSONP(sheetId, gid = '0') {
+    return new Promise((resolve, reject) => {
+      const cbName = 'gvizCb_' + Math.floor(Math.random() * 1000000);
+      const timer = setTimeout(() => { cleanup(); reject(new Error("Quá thời gian tải Google Sheet (12s).")); }, 12000);
+      function cleanup() { clearTimeout(timer); delete window[cbName]; const s = document.getElementById(cbName); if (s) s.remove(); }
+      window[cbName] = function(json) { cleanup(); resolve(json); };
+      const script = document.createElement('script'); script.id = cbName;
+      script.src = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=responseHandler:${cbName}&gid=${gid}`;
+      script.onerror = () => { cleanup(); reject(new Error("Không thể kết nối đến máy chủ Google Sheet.")); };
+      document.body.appendChild(script);
+    });
+  }
+
+  // Chuẩn hóa link Google Drive thành dạng Preview nhúng được vào iframe
+  function formatDriveEmbedUrl(rawUrl) {
+    if (!rawUrl) return '';
+    let url = rawUrl.trim();
+    if (url.includes('drive.google.com')) {
+      if (url.includes('/file/d/')) {
+        url = url.replace(/\/view(\?.*)?$/, '/preview');
+      } else if (url.includes('id=')) {
+        const idMatch = url.match(/id=([a-zA-Z0-9_-]+)/);
+        if (idMatch && idMatch[1]) {
+          url = `https://drive.google.com/file/d/${idMatch[1]}/preview`;
+        }
+      }
+    }
+    return url;
+  }
+
+  // ========================================================
+  // 📚 DỰ PHÒNG DỮ LIỆU AN TOÀN 12 TUẦN (HIỆN RÕ TUẦN 1 VÀ 2)
+  // ========================================================
+  const FALLBACK_12_WEEKS_ESSAY = [
+    {
+      id: "VAN_T01",
+      week: "Tuần 1",
+      tieuDe: "Tuần 1: Kể lại một việc tốt em đã làm để bảo vệ môi trường",
+      monHoc: "Tiếng Việt",
+      ngayCanLam: "2026-03-02",
+      linkTaiLieu: "https://drive.google.com/file/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs/preview",
+      soSao: "3",
+      trangThai: "Chưa làm",
+      noiDungBaiLam: ""
+    },
+    {
+      id: "VAN_T02",
+      week: "Tuần 2",
+      tieuDe: "Tuần 2: Miêu tả một cây hoa khoe sắc rực rỡ vào mùa xuân",
+      monHoc: "Tiếng Việt",
+      ngayCanLam: "2026-03-09",
+      linkTaiLieu: "https://drive.google.com/file/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs/preview",
+      soSao: "3",
+      trangThai: "Chưa làm",
+      noiDungBaiLam: ""
+    },
+    {
+      id: "VAN_T03",
+      week: "Tuần 3",
+      tieuDe: "Tuần 3: Viết thư thăm hỏi và động viên một người bạn thân ở xa",
+      monHoc: "Tiếng Việt",
+      ngayCanLam: "2026-03-16",
+      linkTaiLieu: "",
+      soSao: "2",
+      trangThai: "Chưa làm",
+      noiDungBaiLam: ""
+    },
+    {
+      id: "VAN_T04",
+      week: "Tuần 4",
+      tieuDe: "Tuần 4: Tả một con vật nuôi đáng yêu và gần gũi trong gia đình em",
+      monHoc: "Tiếng Việt",
+      ngayCanLam: "2026-03-23",
+      linkTaiLieu: "",
+      soSao: "2",
+      trangThai: "Chưa làm",
+      noiDungBaiLam: ""
+    },
+    {
+      id: "VAN_T05",
+      week: "Tuần 5",
+      tieuDe: "Tuần 5: Kể lại kỷ niệm đáng nhớ nhất trong ngày đầu tiên vào lớp 1",
+      monHoc: "Tiếng Việt",
+      ngayCanLam: "2026-03-30",
+      linkTaiLieu: "",
+      soSao: "3",
+      trangThai: "Chưa làm",
+      noiDungBaiLam: ""
+    },
+    {
+      id: "VAN_T06",
+      week: "Tuần 6",
+      tieuDe: "Tuần 6: Tả chiếc bàn học thân thiết đã gắn bó với em ở góc phòng",
+      monHoc: "Tiếng Việt",
+      ngayCanLam: "2026-04-06",
+      linkTaiLieu: "",
+      soSao: "2",
+      trangThai: "Chưa làm",
+      noiDungBaiLam: ""
+    },
+    {
+      id: "VAN_T07",
+      week: "Tuần 7",
+      tieuDe: "Tuần 7: Viết đoạn văn ngắn nêu cảm nghĩ của em về người mẹ kính yêu",
+      monHoc: "Tiếng Việt",
+      ngayCanLam: "2026-04-13",
+      linkTaiLieu: "",
+      soSao: "3",
+      trangThai: "Chưa làm",
+      noiDungBaiLam: ""
+    },
+    {
+      id: "VAN_T08",
+      week: "Tuần 8",
+      tieuDe: "Tuần 8: Kể lại câu chuyện cổ tích em yêu thích nhất bằng lời của em",
+      monHoc: "Tiếng Việt",
+      ngayCanLam: "2026-04-20",
+      linkTaiLieu: "",
+      soSao: "3",
+      trangThai: "Chưa làm",
+      noiDungBaiLam: ""
+    },
+    {
+      id: "VAN_T09",
+      week: "Tuần 9",
+      tieuDe: "Tuần 9: Tả một người lao động đang hăng say làm việc (bác nông dân, cô giáo)",
+      monHoc: "Tiếng Việt",
+      ngayCanLam: "2026-04-27",
+      linkTaiLieu: "",
+      soSao: "3",
+      trangThai: "Chưa làm",
+      noiDungBaiLam: ""
+    },
+    {
+      id: "VAN_T10",
+      week: "Tuần 10",
+      tieuDe: "Tuần 10: Tả quang cảnh sân trường nhộn nhịp trong giờ ra chơi",
+      monHoc: "Tiếng Việt",
+      ngayCanLam: "2026-05-04",
+      linkTaiLieu: "",
+      soSao: "2",
+      trangThai: "Chưa làm",
+      noiDungBaiLam: ""
+    },
+    {
+      id: "VAN_T11",
+      week: "Tuần 11",
+      tieuDe: "Tuần 11: Kể về ước mơ sau này của em và lý do em ấp ủ ước mơ ấy",
+      monHoc: "Tiếng Việt",
+      ngayCanLam: "2026-05-11",
+      linkTaiLieu: "",
+      soSao: "3",
+      trangThai: "Chưa làm",
+      noiDungBaiLam: ""
+    },
+    {
+      id: "VAN_T12",
+      week: "Tuần 12",
+      tieuDe: "Tuần 12: Viết bài văn miêu tả cảnh đẹp quê hương hoặc danh lam thắng cảnh",
+      monHoc: "Tiếng Việt",
+      ngayCanLam: "2026-05-18",
+      linkTaiLieu: "",
+      soSao: "3",
+      trangThai: "Chưa làm",
+      noiDungBaiLam: ""
+    }
+  ];
+
   const DEFAULT_ESSAY_SHEET_URL = "https://docs.google.com/spreadsheets/d/1p4TBXqVhIStmcgvK0C6Ktdm84SMMKWr4qjXr-1hqwRg/edit?gid=0#gid=0";
   function getEssaySheetUrl() { return localStorage.getItem('CUSTOM_ESSAY_SHEET_URL') || DEFAULT_ESSAY_SHEET_URL; }
 
   let essayListData = [];
   let currentSelectedEssayId = null;
 
-  function fetchGoogleSheetJSONP(sheetId, gid = '0') {
-    return new Promise((resolve, reject) => {
-      const cbName = 'gvizCb_' + Math.floor(Math.random() * 1000000);
-      const timer = setTimeout(() => { cleanup(); reject(new Error("Quá thời gian tải Google Sheet.")); }, 12000);
-      function cleanup() { clearTimeout(timer); delete window[cbName]; const s = document.getElementById(cbName); if (s) s.remove(); }
-      window[cbName] = function(json) { cleanup(); resolve(json); };
-      const script = document.createElement('script'); script.id = cbName;
-      script.src = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=responseHandler:${cbName}&gid=${gid}`;
-      document.body.appendChild(script);
-    });
-  }
-
-  async function loadEssayTabFromSheet() {
+  async function loadEssayTabFromSheet(isManual = false) {
     const container = $('essayListContainer');
-    if (!container) return;
+    const syncBtn = $('btnSyncEssaySheet');
+    if (syncBtn) { syncBtn.disabled = true; syncBtn.textContent = 'Đang tải... ⏳'; }
+
     try {
       const rawUrl = getEssaySheetUrl();
       const match = rawUrl.match(/\/d\/([a-zA-Z0-9-_]+)/);
-      if (!match) throw new Error("Đường link Google Sheet không hợp lệ.");
+      if (!match) throw new Error("Link Sheet chưa chính xác.");
       const sheetId = match[1];
       const gid = (rawUrl.match(/gid=([0-9]+)/) || [])[1] || '0';
 
       const json = await fetchGoogleSheetJSONP(sheetId, gid);
       const rows = (json && json.table && json.table.rows) ? json.table.rows : [];
       
-      essayListData = [];
+      const loaded = [];
       for (let i = 1; i < rows.length; i++) {
         const c = rows[i].c || [];
         const id = c[0] ? String(c[0].v || '').trim() : '';
         const tieuDe = c[1] ? String(c[1].v || '').trim() : '';
-        const monHoc = c[2] ? String(c[2].v || 'TV').trim() : 'TV';
+        const monHoc = c[2] ? String(c[2].v || 'Tiếng Việt').trim() : 'Tiếng Việt';
         const ngayCanLam = c[3] ? String(c[3].f || c[3].v || '').trim() : '';
         let linkTaiLieu = c[4] ? String(c[4].v || '').trim() : '';
-        
-        if (linkTaiLieu.includes('drive.google.com') && !linkTaiLieu.includes('/preview')) {
-          linkTaiLieu = linkTaiLieu.replace(/\/view.*$/, '/preview');
-        }
+        linkTaiLieu = formatDriveEmbedUrl(linkTaiLieu);
 
-        const soSao = c[5] ? String(c[5].v || '1').trim() : '1';
-        const trangThai = c[6] ? String(c[6].v || 'Chưa làm').trim() : 'Chưa làm';
-        
-        const savedKey = `essay_content_${id}`;
-        const noiDungBaiLam = localStorage.getItem(savedKey) || (c[7] ? String(c[7].v || '').trim() : '');
+        const soSao = c[5] ? String(c[5].v || '2').trim() : '2';
+        const trangThai = localStorage.getItem(`essay_status_${id}`) || (c[6] ? String(c[6].v || 'Chưa làm').trim() : 'Chưa làm');
+        const noiDungBaiLam = localStorage.getItem(`essay_content_${id}`) || (c[7] ? String(c[7].v || '').trim() : '');
 
         if (id && tieuDe) {
-          essayListData.push({ id, tieuDe, monHoc, ngayCanLam, linkTaiLieu, soSao, trangThai, noiDungBaiLam });
+          loaded.push({ id, tieuDe, monHoc, ngayCanLam, linkTaiLieu, soSao, trangThai, noiDungBaiLam });
         }
       }
 
+      if (loaded.length > 0) {
+        essayListData = loaded;
+        if (isManual) toast(`🎉 Đã đồng bộ thành công ${loaded.length} bài văn từ Google Sheets!`);
+      } else {
+        throw new Error("Google Sheet chưa có dòng bài tập nào.");
+      }
+    } catch (err) {
+      console.warn("Dùng dữ liệu dự phòng do lỗi tải Sheet:", err.message);
+      // Nạp dữ liệu dự phòng an toàn 12 tuần
+      essayListData = FALLBACK_12_WEEKS_ESSAY.map(item => ({
+        ...item,
+        trangThai: localStorage.getItem(`essay_status_${item.id}`) || item.trangThai,
+        noiDungBaiLam: localStorage.getItem(`essay_content_${item.id}`) || item.noiDungBaiLam
+      }));
+      if (isManual) toast("Đã nạp 12 tuần bài tập dự phòng (có sẵn Tuần 1 & Tuần 2)!");
+    } finally {
+      if (syncBtn) { syncBtn.disabled = false; syncBtn.textContent = '🔄 Đồng bộ'; }
       renderEssayListUI();
       if (essayListData.length > 0 && !currentSelectedEssayId) {
         selectEssayItem(essayListData[0].id);
       }
-    } catch (err) {
-      container.innerHTML = `<div class="empty" style="color:#b64b63;">Không thể tải danh sách tập làm văn: ${err.message}. Mẹ kiểm tra lại quyền công khai của Google Sheet nhé!</div>`;
     }
   }
 
@@ -1065,19 +1234,24 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     const container = $('essayListContainer');
     if (!container) return;
     if (essayListData.length === 0) {
-      container.innerHTML = `<div class="empty">Chưa có bài tập nào trong Google Sheet.</div>`;
+      container.innerHTML = `<div class="empty">Chưa có bài tập nào.</div>`;
       return;
     }
 
-    container.innerHTML = essayListData.map(item => {
+    container.innerHTML = essayListData.map((item, idx) => {
       const isSelected = item.id === currentSelectedEssayId;
       const isDone = item.trangThai.toLowerCase().includes('đã') || item.trangThai.toLowerCase().includes('hoàn thành');
+      const weekLabel = item.week || `Tuần ${idx + 1}`;
       return `
         <div class="essay-item-card ${isSelected ? 'active' : ''}" data-essay-id="${item.id}">
-          <div style="font-weight: 800; font-size: 13.5px; color: #a64e68; margin-bottom: 4px;">${escapeHTML(item.tieuDe)}</div>
-          <div class="row-between" style="font-size: 11.5px;">
-            <span class="${isDone ? 'text-green-600' : 'text-orange-500'}" style="font-weight:700;">● ${escapeHTML(item.trangThai)}</span>
-            <span class="badge-status" style="background:#fff3c9; color:#8a6a16;">⭐ ${escapeHTML(item.soSao)} sao</span>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span class="essay-badge-week">${escapeHTML(weekLabel)}</span>
+            <span class="badge-status" style="background:#fff3c9; color:#8a6a16; font-size:10px;">⭐ ${escapeHTML(item.soSao)} sao</span>
+          </div>
+          <div style="font-weight: 800; font-size: 13.5px; color: #a64e68; margin: 4px 0;">${escapeHTML(item.tieuDe)}</div>
+          <div class="row-between" style="font-size: 11px;">
+            <span class="${isDone ? 'status-done' : 'status-todo'}" style="padding:2px 6px; border-radius:4px; font-weight:800;">● ${escapeHTML(item.trangThai)}</span>
+            ${item.linkTaiLieu ? '<span style="color:#36795f; font-weight:700;">📄 Có tài liệu</span>' : '<span style="color:#aaa;">(Chưa có tài liệu)</span>'}
           </div>
         </div>
       `;
@@ -1095,8 +1269,26 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     if (!item) return;
 
     const pdfViewer = $('pdfViewer');
-    if (pdfViewer) {
-      pdfViewer.src = item.linkTaiLieu || 'about:blank';
+    const placeholder = $('pdfViewerPlaceholder');
+    const btnOpenExternal = $('btnOpenDocExternal');
+
+    if (item.linkTaiLieu) {
+      if (placeholder) placeholder.style.display = 'none';
+      if (pdfViewer) {
+        pdfViewer.style.display = 'block';
+        pdfViewer.src = item.linkTaiLieu;
+      }
+      if (btnOpenExternal) {
+        btnOpenExternal.style.display = 'inline-flex';
+        btnOpenExternal.href = item.linkTaiLieu.replace('/preview', '/view');
+      }
+    } else {
+      if (pdfViewer) {
+        pdfViewer.style.display = 'none';
+        pdfViewer.src = '';
+      }
+      if (placeholder) placeholder.style.display = 'block';
+      if (btnOpenExternal) btnOpenExternal.style.display = 'none';
     }
 
     const editor = $('essayEditor');
@@ -1110,6 +1302,8 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     }
     $('saveStatusText').textContent = '';
   }
+
+  $('btnSyncEssaySheet').onclick = () => loadEssayTabFromSheet(true);
 
   $('btnSaveEssay').onclick = () => {
     if (!currentSelectedEssayId) return;
@@ -1136,12 +1330,50 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     const item = essayListData.find(x => x.id === currentSelectedEssayId);
     if (item) {
       item.trangThai = $('essayCompleteCheckbox').checked ? 'Đã hoàn thành' : 'Chưa làm';
+      localStorage.setItem(`essay_status_${currentSelectedEssayId}`, item.trangThai);
       renderEssayListUI();
     }
   };
 
   // ========================================================
-  // CÁC TIỆN ÍCH KHÁC (PET, AI, VÒNG QUAY,...)
+  // ✨ TÍNH NĂNG NHỜ THỎ AI SỬA BÀI VĂN
+  // ========================================================
+  $('btnAiCheckEssay').onclick = async () => {
+    const text = $('essayEditor').value.trim();
+    if (!text) return toast('Con chưa viết gì cả! Hãy viết văn rồi nhờ Thỏ sửa nhé!');
+    if (!geminiApiKey) return showCustomAlert("Mẹ cần cài đặt API Key (Nút ⚙️ Cài đặt ở góc trên) để Thỏ chấm bài nhé!", "Thiếu API Key 🔑", "🔑");
+
+    $('btnAiCheckEssay').disabled = true;
+    $('btnAiCheckEssay').textContent = 'Thỏ đang đọc... ⏳';
+
+    try {
+      const prompt = `Bạn là cô giáo dạy văn tiểu học vô cùng tâm lý, ân cần và đáng yêu, hóa thân thành bạn nhỏ "Thỏ Siêu Quậy AI". Hãy đọc bài văn dưới đây của Khánh Huyền (học sinh tiểu học).
+      Cách hướng dẫn con:
+      1. Khen ngợi điểm tốt, các từ ngữ sáng tạo, cảm xúc chân thực của bé thật nhiệt tình.
+      2. Nhẹ nhàng chỉ ra lỗi chính tả hoặc cách diễn đạt lặp từ, câu văn chưa trọn vẹn (nếu có).
+      3. Gợi ý 1-2 câu văn mẫu sinh động (dùng biện pháp so sánh, nhân hóa...).
+      Ngắn gọn, dễ thương, dùng nhiều biểu cảm đáng yêu 🐰🌸✨.
+
+      Bài làm của con:
+      "${text}"`;
+      
+      const data = await callUltraFastGemini([{text: prompt}], "Bạn là Thỏ AI dạy văn cực kỳ dễ thương.");
+      if (data.candidates && data.candidates[0] && data.candidates[0].content) {
+        const allParts = data.candidates[0].content.parts;
+        const replyParts = allParts.filter(p => !p.thought);
+        const reply = cleanMathText((replyParts.length > 0 ? replyParts : allParts).map(p => p.text || '').join('').trim());
+        showCustomAlert(reply, "Thỏ Góp Ý Bài Văn 🐰📝", "📝");
+      }
+    } catch (e) {
+      toast('Có lỗi xảy ra, mẹ kiểm tra lại API Key nhé!');
+    } finally {
+      $('btnAiCheckEssay').disabled = false;
+      $('btnAiCheckEssay').textContent = '✨ Nhờ Thỏ AI Sửa Bài';
+    }
+  };
+
+  // ========================================================
+  // BÚP BÊ VÀ PET LOGIC
   // ========================================================
   const PET_TIERS = [
     { maxLv: 5,  name: 'Thỏ Mầm Non' },
@@ -1270,23 +1502,19 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     div.innerHTML += text; box.appendChild(div); box.scrollTop = box.scrollHeight; return div;
   }
 
-  const ULTRA_FAST_MODELS = ['gemini-3.5-flash-lite', 'gemini-3.6-flash', 'gemini-3.8-flash'];
+  const ULTRA_FAST_MODELS = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash'];
   async function callUltraFastGemini(contentsPayload, systemPrompt) {
-    let saved = localStorage.getItem('GEMINI_WORKING_MODEL') || 'gemini-3.5-flash-lite';
+    let saved = localStorage.getItem('GEMINI_WORKING_MODEL') || 'gemini-2.5-flash';
     let modelsToTry = [saved, ...ULTRA_FAST_MODELS.filter(m => m !== saved)];
     for (const m of modelsToTry) {
       try {
         const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent?key=${geminiApiKey}`;
         const res = await fetch(endpoint, {
           method: 'POST', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ systemInstruction: { parts: [{ text: systemPrompt }] }, contents: contentsPayload, generationConfig: { maxOutputTokens: 300, thinkingConfig: { thinkingLevel: m.includes('lite') ? 'minimal' : 'low' } } })
+          body: JSON.stringify({ systemInstruction: { parts: [{ text: systemPrompt }] }, contents: contentsPayload, generationConfig: { maxOutputTokens: 350 } })
         });
         const data = await res.json();
         if (data.candidates && data.candidates[0]) { localStorage.setItem('GEMINI_WORKING_MODEL', m); return data; }
-        if (data.error && data.error.message && data.error.message.includes('models/')) {
-          const match = data.error.message.match(/use models\/([a-zA-Z0-9._-]+)/);
-          if (match && match[1] && !modelsToTry.includes(match[1])) modelsToTry.push(match[1]);
-        }
       } catch(e) {}
     }
     throw new Error("Không thể kết nối đến máy chủ Google AI. Mẹ kiểm tra lại API Key nhé!");
@@ -1334,46 +1562,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   $('aiBtnSend').onclick = sendAiMessage;
   $('aiTextInput').onkeypress = e => { if (e.key === 'Enter') sendAiMessage(); };
 
-  // ========================================================
-  // ✨ TÍNH NĂNG NHỜ THỎ AI SỬA BÀI VĂN
-  // ========================================================
-  $('btnAiCheckEssay').onclick = async () => {
-      const text = $('essayEditor').value.trim();
-      if (!text) return toast('Con chưa viết gì cả! Hãy viết văn rồi nhờ Thỏ sửa nhé!');
-      if (!geminiApiKey) return showCustomAlert("Mẹ cần cài đặt API Key (Nút ⚙️ Cài đặt ở góc trên) để Thỏ chấm bài nhé!", "Thiếu API Key 🔑", "🔑");
-
-      $('btnAiCheckEssay').disabled = true;
-      $('btnAiCheckEssay').textContent = 'Thỏ đang đọc... ⏳';
-
-      try {
-          const prompt = `Bạn là cô giáo dạy văn tiểu học vô cùng tâm lý và đáng yêu, hóa thân thành "Thỏ AI". Hãy đọc bài văn dưới đây của Khánh Huyền (học sinh tiểu học).
-          Cách làm:
-          1. Khen ngợi điểm tốt, sáng tạo của bé thật nhiệt tình.
-          2. Chỉ ra lỗi chính tả hoặc diễn đạt lủng củng (nếu có) một cách nhẹ nhàng, dễ hiểu.
-          3. Gợi ý 1-2 câu để bài viết sinh động hơn (dùng nhiều tính từ, hình ảnh so sánh...).
-          Giọng văn ngắn gọn, dễ thương, dùng nhiều emoji 🐰🌸✨.
-
-          Bài làm của con:
-          "${text}"`;
-          
-          const data = await callUltraFastGemini([{text: prompt}], "Bạn là Thỏ AI dạy văn cực kỳ dễ thương.");
-          if (data.candidates && data.candidates[0] && data.candidates[0].content) {
-              const allParts = data.candidates[0].content.parts;
-              const replyParts = allParts.filter(p => !p.thought);
-              const reply = cleanMathText((replyParts.length > 0 ? replyParts : allParts).map(p => p.text || '').join('').trim());
-              showCustomAlert(reply, "Thỏ Góp Ý Bài Văn 🐰📝", "📝");
-          }
-      } catch (e) {
-          toast('Có lỗi xảy ra, mẹ kiểm tra lại API Key nhé!');
-      } finally {
-          $('btnAiCheckEssay').disabled = false;
-          $('btnAiCheckEssay').textContent = '✨ Nhờ Thỏ AI Sửa Bài';
-      }
-  };
-
-  // ========================================================
-  // 👗 BÚP BÊ THỜI TRANG SVG (MẶC THẬT VÁY ÁO & PHỤ KIỆN)
-  // ========================================================
   function renderDollLayers() {
     const dressLayer = $('svgDressLayer');
     const headLayer = $('svgHeadLayer');
@@ -1934,20 +2122,8 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     toast("Đã lưu cài đặt thành công! ✨");
 
     if (url) syncGoogleSheetsToSupabase();
-    loadEssayTabFromSheet();
+    loadEssayTabFromSheet(true);
   };
-
-  function fetchGoogleSheetJSONP(sheetId, gid = '0') {
-    return new Promise((resolve, reject) => {
-      const cbName = 'gvizCb_' + Math.floor(Math.random() * 1000000);
-      const timer = setTimeout(() => { cleanup(); reject(new Error("Quá thời gian tải Google Sheet.")); }, 12000);
-      function cleanup() { clearTimeout(timer); delete window[cbName]; const s = document.getElementById(cbName); if (s) s.remove(); }
-      window[cbName] = function(json) { cleanup(); resolve(json); };
-      const script = document.createElement('script'); script.id = cbName;
-      script.src = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=responseHandler:${cbName}&gid=${gid}`;
-      document.body.appendChild(script);
-    });
-  }
 
   async function syncGoogleSheetsToSupabase() {
     const rawUrl = getStoredSheetUrl(); const btn = $('btnSyncSheet');
@@ -1974,7 +2150,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
       await loadDataFromSupabase();
     } catch(err) {
       await showCustomAlert("Lỗi đồng bộ: " + err.message, "Đồng bộ thất bại ⚠️", "⚠️");
-    } finally { btn.disabled = false; btn.textContent = '🔄 Đồng bộ Google Sheets'; }
+    } finally { btn.disabled = false; btn.textContent = '🔄 Đồng bộ Bài Tập'; }
   }
   $('btnSyncSheet').onclick = syncGoogleSheetsToSupabase;
 
