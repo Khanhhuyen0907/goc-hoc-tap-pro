@@ -515,9 +515,19 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     <section class="panel" style="display: flex; flex-direction: column; height: 100%;">
       <div class="panel-head" style="justify-content: space-between;">
         <h2>📝 Danh Sách Bài Văn</h2>
-        <button class="btn btn-soft btn-small" id="btnSyncEssaySheet" title="Đồng bộ từ Google Sheet" style="color:#1a73e8; border-color:#c2d7fa; background:#f0f6ff; font-weight:800;">🔄 Đồng bộ</button>
+        <div class="flex" style="gap: 8px;">
+          <a href="https://docs.google.com/spreadsheets/d/1p4TBXqVhIStmcgvK0C6Ktdm84SMMKWr4qjXr-1hqwRg/edit?gid=0#gid=0" id="linkOpenEssaySheet" target="_blank" rel="noopener noreferrer" class="btn btn-soft btn-small" style="font-weight:800;text-decoration:none;color:#a64e68; border-color:#f4cad7;">📊 GG Sheets</a>
+          <button class="btn btn-soft btn-small" id="btnSyncEssaySheet" title="Đồng bộ từ Google Sheet" style="color:#1a73e8; border-color:#c2d7fa; background:#f0f6ff; font-weight:800;">🔄 Đồng bộ</button>
+        </div>
       </div>
       <div class="panel-body" style="padding: 12px; flex: 1;">
+        
+        <!-- Ô TÌM KIẾM MỚI THÊM -->
+        <div style="margin-bottom: 12px;">
+          <input type="text" id="searchEssayInput" placeholder="🔍 Gõ số bài hoặc tên bài (VD: 30)..." style="width: 100%; border: 1px solid #f4cad7; border-radius: 10px; padding: 9px 12px; font-size: 13px; font-weight: 700; color: #a64e68; background: #fffdfd; outline: none;">
+        </div>
+        <!-- KẾT THÚC Ô TÌM KIẾM -->
+
         <div id="essayListContainer" class="essay-list-container">
           <div class="empty">Đang tải danh sách bài tập...</div>
         </div>
@@ -548,15 +558,20 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
       <div class="panel-body" style="padding: 12px; flex: 1; display: flex; flex-direction: column;">
         <textarea id="essayEditor" placeholder="Con chọn bài bên trái, sau đó gõ bài tập làm văn vào đây nhé..." style="width:100%; flex: 1; min-height: 480px; border:1px solid #f4cad7; border-radius:12px; resize:none; padding: 16px; font-size: 15px; line-height: 1.7; outline:none; background: #fffcfd;"></textarea>
         
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px; padding-top: 10px; border-top: 1px solid #f6e0e6; flex-wrap: wrap; gap: 8px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px; padding-top: 10px; border-top: 1px solid #f6e0e6; flex-wrap: wrap; gap: 8px;" id="essayActionFooter">
           <div class="flex" style="gap: 8px;">
-            <button class="btn btn-primary btn-small" id="btnSaveEssay">💾 Lưu Bài Viết</button>
+            <button class="btn btn-soft btn-small" id="btnSaveEssay">💾 Lưu Nháp</button>
             <span id="saveStatusText" style="font-size: 11.5px; color: #36795f; font-weight: 800;"></span>
           </div>
-          <label style="display: flex; align-items: center; gap: 6px; cursor: pointer; margin: 0;">
-            <input type="checkbox" id="essayCompleteCheckbox" style="width: 16px; height: 16px; accent-color: #e97998;">
-            <span style="font-size: 13px; font-weight: 800; color: #a64e68;">Đã hoàn thành bài tập</span>
-          </label>
+          <div class="flex" style="gap: 8px;" id="essayKidActions">
+             <button class="btn btn-primary btn-small" id="btnSubmitEssayToMom">📤 Nộp Bài Cho Mẹ</button>
+          </div>
+          <div class="flex admin-only" style="gap: 8px;" id="essayMomActions">
+             <button class="btn btn-soft btn-small" id="btnRejectEssay" style="color:#b64b63;">↩️ Yêu cầu sửa lại</button>
+             <button class="btn btn-green btn-small" id="btnApproveEssay">✅ Duyệt & Tặng Thưởng</button>
+          </div>
+          <div id="essayApprovedMsg" style="display:none; font-size: 13px; font-weight: 800; color: #36795f;">✅ Bài đã được Mẹ duyệt!</div>
+          <div id="essayPendingMsg" style="display:none; font-size: 13px; font-weight: 800; color: #c98319;">⏳ Đang chờ Mẹ duyệt...</div>
         </div>
       </div>
     </section>
@@ -1031,140 +1046,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   // ========================================================
   // 📚 DỰ PHÒNG DỮ LIỆU AN TOÀN 12 TUẦN (HIỆN RÕ TUẦN 1 VÀ 2)
   // ========================================================
-  const FALLBACK_12_WEEKS_ESSAY = [
-    {
-      id: "VAN_T01",
-      week: "Tuần 1",
-      tieuDe: "Tuần 1: Kể lại một việc tốt em đã làm để bảo vệ môi trường",
-      monHoc: "Tiếng Việt",
-      ngayCanLam: "2026-03-02",
-      linkTaiLieu: "https://drive.google.com/file/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs/preview",
-      soSao: "3",
-      trangThai: "Chưa làm",
-      noiDungBaiLam: ""
-    },
-    {
-      id: "VAN_T02",
-      week: "Tuần 2",
-      tieuDe: "Tuần 2: Miêu tả một cây hoa khoe sắc rực rỡ vào mùa xuân",
-      monHoc: "Tiếng Việt",
-      ngayCanLam: "2026-03-09",
-      linkTaiLieu: "https://drive.google.com/file/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs/preview",
-      soSao: "3",
-      trangThai: "Chưa làm",
-      noiDungBaiLam: ""
-    },
-    {
-      id: "VAN_T03",
-      week: "Tuần 3",
-      tieuDe: "Tuần 3: Viết thư thăm hỏi và động viên một người bạn thân ở xa",
-      monHoc: "Tiếng Việt",
-      ngayCanLam: "2026-03-16",
-      linkTaiLieu: "",
-      soSao: "2",
-      trangThai: "Chưa làm",
-      noiDungBaiLam: ""
-    },
-    {
-      id: "VAN_T04",
-      week: "Tuần 4",
-      tieuDe: "Tuần 4: Tả một con vật nuôi đáng yêu và gần gũi trong gia đình em",
-      monHoc: "Tiếng Việt",
-      ngayCanLam: "2026-03-23",
-      linkTaiLieu: "",
-      soSao: "2",
-      trangThai: "Chưa làm",
-      noiDungBaiLam: ""
-    },
-    {
-      id: "VAN_T05",
-      week: "Tuần 5",
-      tieuDe: "Tuần 5: Kể lại kỷ niệm đáng nhớ nhất trong ngày đầu tiên vào lớp 1",
-      monHoc: "Tiếng Việt",
-      ngayCanLam: "2026-03-30",
-      linkTaiLieu: "",
-      soSao: "3",
-      trangThai: "Chưa làm",
-      noiDungBaiLam: ""
-    },
-    {
-      id: "VAN_T06",
-      week: "Tuần 6",
-      tieuDe: "Tuần 6: Tả chiếc bàn học thân thiết đã gắn bó với em ở góc phòng",
-      monHoc: "Tiếng Việt",
-      ngayCanLam: "2026-04-06",
-      linkTaiLieu: "",
-      soSao: "2",
-      trangThai: "Chưa làm",
-      noiDungBaiLam: ""
-    },
-    {
-      id: "VAN_T07",
-      week: "Tuần 7",
-      tieuDe: "Tuần 7: Viết đoạn văn ngắn nêu cảm nghĩ của em về người mẹ kính yêu",
-      monHoc: "Tiếng Việt",
-      ngayCanLam: "2026-04-13",
-      linkTaiLieu: "",
-      soSao: "3",
-      trangThai: "Chưa làm",
-      noiDungBaiLam: ""
-    },
-    {
-      id: "VAN_T08",
-      week: "Tuần 8",
-      tieuDe: "Tuần 8: Kể lại câu chuyện cổ tích em yêu thích nhất bằng lời của em",
-      monHoc: "Tiếng Việt",
-      ngayCanLam: "2026-04-20",
-      linkTaiLieu: "",
-      soSao: "3",
-      trangThai: "Chưa làm",
-      noiDungBaiLam: ""
-    },
-    {
-      id: "VAN_T09",
-      week: "Tuần 9",
-      tieuDe: "Tuần 9: Tả một người lao động đang hăng say làm việc (bác nông dân, cô giáo)",
-      monHoc: "Tiếng Việt",
-      ngayCanLam: "2026-04-27",
-      linkTaiLieu: "",
-      soSao: "3",
-      trangThai: "Chưa làm",
-      noiDungBaiLam: ""
-    },
-    {
-      id: "VAN_T10",
-      week: "Tuần 10",
-      tieuDe: "Tuần 10: Tả quang cảnh sân trường nhộn nhịp trong giờ ra chơi",
-      monHoc: "Tiếng Việt",
-      ngayCanLam: "2026-05-04",
-      linkTaiLieu: "",
-      soSao: "2",
-      trangThai: "Chưa làm",
-      noiDungBaiLam: ""
-    },
-    {
-      id: "VAN_T11",
-      week: "Tuần 11",
-      tieuDe: "Tuần 11: Kể về ước mơ sau này của em và lý do em ấp ủ ước mơ ấy",
-      monHoc: "Tiếng Việt",
-      ngayCanLam: "2026-05-11",
-      linkTaiLieu: "",
-      soSao: "3",
-      trangThai: "Chưa làm",
-      noiDungBaiLam: ""
-    },
-    {
-      id: "VAN_T12",
-      week: "Tuần 12",
-      tieuDe: "Tuần 12: Viết bài văn miêu tả cảnh đẹp quê hương hoặc danh lam thắng cảnh",
-      monHoc: "Tiếng Việt",
-      ngayCanLam: "2026-05-18",
-      linkTaiLieu: "",
-      soSao: "3",
-      trangThai: "Chưa làm",
-      noiDungBaiLam: ""
-    }
-  ];
+  
 
   const DEFAULT_ESSAY_SHEET_URL = "https://docs.google.com/spreadsheets/d/1p4TBXqVhIStmcgvK0C6Ktdm84SMMKWr4qjXr-1hqwRg/edit?gid=0#gid=0";
   function getEssaySheetUrl() { return localStorage.getItem('CUSTOM_ESSAY_SHEET_URL') || DEFAULT_ESSAY_SHEET_URL; }
@@ -1213,20 +1095,17 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
         throw new Error("Google Sheet chưa có dòng bài tập nào.");
       }
     } catch (err) {
-      console.warn("Dùng dữ liệu dự phòng do lỗi tải Sheet:", err.message);
-      // Nạp dữ liệu dự phòng an toàn 12 tuần
-      essayListData = FALLBACK_12_WEEKS_ESSAY.map(item => ({
-        ...item,
-        trangThai: localStorage.getItem(`essay_status_${item.id}`) || item.trangThai,
-        noiDungBaiLam: localStorage.getItem(`essay_content_${item.id}`) || item.noiDungBaiLam
-      }));
-      if (isManual) toast("Đã nạp 12 tuần bài tập dự phòng (có sẵn Tuần 1 & Tuần 2)!");
+      console.error("Lỗi tải Sheet:", err.message);
+      essayListData = []; // Chỉ lấy từ Google Sheet, không dùng dự phòng
+      if (isManual) toast("Chưa lấy được dữ liệu từ Sheet: " + err.message);
     } finally {
       if (syncBtn) { syncBtn.disabled = false; syncBtn.textContent = '🔄 Đồng bộ'; }
       renderEssayListUI();
       if (essayListData.length > 0 && !currentSelectedEssayId) {
         selectEssayItem(essayListData[0].id);
       }
+      // Gọi tải dữ liệu Cloud ngay sau khi render xong giao diện
+      loadEssaySubmissionsFromCloud();
     }
   }
 
@@ -1240,8 +1119,12 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
 
     container.innerHTML = essayListData.map((item, idx) => {
       const isSelected = item.id === currentSelectedEssayId;
-      const isDone = item.trangThai.toLowerCase().includes('đã') || item.trangThai.toLowerCase().includes('hoàn thành');
-      const weekLabel = item.week || `Tuần ${idx + 1}`;
+      const weekLabel = item.week || `Bài ${idx + 1}`;
+      let statusClass = 'status-todo';
+      if (item.trangThai === 'Đã duyệt') statusClass = 'status-done';
+      else if (item.trangThai === 'Chờ mẹ duyệt') statusClass = 'status-pending';
+      else if (item.trangThai === 'Cần làm lại') statusClass = 'status-redo';
+      
       return `
         <div class="essay-item-card ${isSelected ? 'active' : ''}" data-essay-id="${item.id}">
           <div style="display:flex; justify-content:space-between; align-items:center;">
@@ -1250,7 +1133,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
           </div>
           <div style="font-weight: 800; font-size: 13.5px; color: #a64e68; margin: 4px 0;">${escapeHTML(item.tieuDe)}</div>
           <div class="row-between" style="font-size: 11px;">
-            <span class="${isDone ? 'status-done' : 'status-todo'}" style="padding:2px 6px; border-radius:4px; font-weight:800;">● ${escapeHTML(item.trangThai)}</span>
+            <span class="badge-status ${statusClass}" style="padding:2px 6px; border-radius:4px; font-weight:800;">● ${escapeHTML(item.trangThai)}</span>
             ${item.linkTaiLieu ? '<span style="color:#36795f; font-weight:700;">📄 Có tài liệu</span>' : '<span style="color:#aaa;">(Chưa có tài liệu)</span>'}
           </div>
         </div>
@@ -1296,42 +1179,99 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
       editor.value = item.noiDungBaiLam || '';
     }
 
-    const checkbox = $('essayCompleteCheckbox');
-    if (checkbox) {
-      checkbox.checked = item.trangThai.toLowerCase().includes('đã') || item.trangThai.toLowerCase().includes('hoàn thành');
-    }
     $('saveStatusText').textContent = '';
+    const st = item.trangThai || 'Chưa làm';
+    const isMom = isAdminUnlocked;
+
+    $('btnSaveEssay').style.display = (st === 'Đã duyệt' || (!isMom && st === 'Chờ mẹ duyệt')) ? 'none' : 'inline-block';
+    $('essayKidActions').style.display = (!isMom && (st === 'Chưa làm' || st === 'Cần làm lại')) ? 'flex' : 'none';
+    $('essayMomActions').style.display = (isMom && st === 'Chờ mẹ duyệt') ? 'flex' : 'none';
+    
+    $('essayApprovedMsg').style.display = (st === 'Đã duyệt') ? 'block' : 'none';
+    $('essayPendingMsg').style.display = (!isMom && st === 'Chờ mẹ duyệt') ? 'block' : 'none';
+
+    if (editor) {
+      editor.disabled = (st === 'Đã duyệt' || (!isMom && st === 'Chờ mẹ duyệt'));
+      editor.style.background = editor.disabled ? '#f9f9f9' : '#fffcfd';
+    }
   }
 
   $('btnSyncEssaySheet').onclick = () => loadEssayTabFromSheet(true);
 
-  $('btnSaveEssay').onclick = () => {
+    // HÀM LƯU LÊN SUPABASE
+  async function saveEssayToSupabase(status, showToastMsg = 'Đã lưu nháp!') {
     if (!currentSelectedEssayId) return;
     const item = essayListData.find(x => x.id === currentSelectedEssayId);
     if (!item) return;
 
     const editorVal = $('essayEditor').value;
-    const isChecked = $('essayCompleteCheckbox').checked;
-
     item.noiDungBaiLam = editorVal;
-    item.trangThai = isChecked ? 'Đã hoàn thành' : 'Chưa làm';
+    item.trangThai = status;
 
     localStorage.setItem(`essay_content_${currentSelectedEssayId}`, editorVal);
-    localStorage.setItem(`essay_status_${currentSelectedEssayId}`, item.trangThai);
+    localStorage.setItem(`essay_status_${currentSelectedEssayId}`, status);
 
-    $('saveStatusText').textContent = '✓ Đã lưu thành công!';
-    setTimeout(() => { $('saveStatusText').textContent = ''; }, 3000);
+    if (sb) {
+      try {
+        await sb.from('essay_submissions').upsert({
+          essay_id: currentSelectedEssayId,
+          content: editorVal,
+          status: status,
+          updated_at: new Date().toISOString()
+        }, { onConflict: 'essay_id' });
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    
     renderEssayListUI();
-    toast('Đã lưu bài tập làm văn của con! 💾');
+    selectEssayItem(currentSelectedEssayId); // Update UI
+    if (showToastMsg) toast(showToastMsg);
+  }
+
+  $('btnSaveEssay').onclick = () => {
+    const item = essayListData.find(x => x.id === currentSelectedEssayId);
+    if (item) saveEssayToSupabase(item.trangThai || 'Chưa làm', '💾 Đã lưu nháp bài tập làm văn!');
   };
 
-  $('essayCompleteCheckbox').onchange = () => {
-    if (!currentSelectedEssayId) return;
+  $('btnSubmitEssayToMom').onclick = async () => {
+    const text = $('essayEditor').value.trim();
+    if (!text) return toast('Con chưa viết gì cả, không thể nộp bài được!');
+    const ok = await showCustomConfirm("Con đã viết xong và muốn gửi Mẹ duyệt bài đúng không?", "Nộp bài cho Mẹ 📤", "📝");
+    if (ok) {
+      $('btnSubmitEssayToMom').disabled = true;
+      $('btnSubmitEssayToMom').textContent = "Đang gửi... ⏳";
+      await saveEssayToSupabase('Chờ mẹ duyệt', '🎉 Đã gửi bài cho Mẹ duyệt!');
+      $('btnSubmitEssayToMom').disabled = false;
+      $('btnSubmitEssayToMom').textContent = "📤 Nộp Bài Cho Mẹ";
+      
+      const item = essayListData.find(x => x.id === currentSelectedEssayId);
+      sendTelegramAlert(item ? item.tieuDe : "Tập làm văn", "Con đã nộp bài tập làm văn rồi ạ!");
+    }
+  };
+
+  $('btnApproveEssay').onclick = async () => {
     const item = essayListData.find(x => x.id === currentSelectedEssayId);
-    if (item) {
-      item.trangThai = $('essayCompleteCheckbox').checked ? 'Đã hoàn thành' : 'Chưa làm';
-      localStorage.setItem(`essay_status_${currentSelectedEssayId}`, item.trangThai);
-      renderEssayListUI();
+    if (!item) return;
+    const ok = await showCustomConfirm("Mẹ đồng ý duyệt bài và tặng sao + tiền cho con chứ?", "Duyệt bài 💖", "✅");
+    if (ok) {
+      await saveEssayToSupabase('Đã duyệt', false);
+      if (!localStorage.getItem(`essay_rewarded_${currentSelectedEssayId}`)) {
+        state.money += 1000;
+        updatePetUI();
+        syncPetToCloud();
+        triggerCelebration(item.soSao || 2);
+        localStorage.setItem(`essay_rewarded_${currentSelectedEssayId}`, 'true');
+      } else {
+        toast('✅ Đã duyệt bài thành công!');
+      }
+    }
+  };
+
+  $('btnRejectEssay').onclick = async () => {
+    const ok = await showCustomConfirm("Mẹ muốn yêu cầu con sửa lại bài này?", "Yêu cầu sửa lại ↩️", "📝");
+    if (ok) {
+      await saveEssayToSupabase('Cần làm lại', 'Đã chuyển trạng thái yêu cầu con làm lại!');
     }
   };
 
@@ -1357,7 +1297,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
       Bài làm của con:
       "${text}"`;
       
-      const data = await callUltraFastGemini([{text: prompt}], "Bạn là Thỏ AI dạy văn cực kỳ dễ thương.");
+      const data = await callUltraFastGemini([{ role: 'user', parts: [{ text: prompt }] }], "Bạn là Thỏ AI dạy văn cực kỳ dễ thương.");
       if (data.candidates && data.candidates[0] && data.candidates[0].content) {
         const allParts = data.candidates[0].content.parts;
         const replyParts = allParts.filter(p => !p.thought);
@@ -1365,7 +1305,8 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
         showCustomAlert(reply, "Thỏ Góp Ý Bài Văn 🐰📝", "📝");
       }
     } catch (e) {
-      toast('Có lỗi xảy ra, mẹ kiểm tra lại API Key nhé!');
+      console.error("Chi tiết lỗi:", e);
+      showCustomAlert(e.message || 'Có lỗi xảy ra, mẹ kiểm tra lại API Key nhé!', 'Lỗi Kết Nối Thỏ AI ⚠️', '⚠️');
     } finally {
       $('btnAiCheckEssay').disabled = false;
       $('btnAiCheckEssay').textContent = '✨ Nhờ Thỏ AI Sửa Bài';
@@ -1447,11 +1388,11 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   let aiChatHistory = [];
   let isAiEnglishMode = false;
   let currentAccFilter = 'all';
-  let geminiApiKey = (localStorage.getItem('GEMINI_KEY') || '').trim();
+  let geminiApiKey = (localStorage.getItem('GEMINI_KEY') || 'AQ.Ab8RN6JNrYBEOb3Ql952IoA3F7Qsol290ieCT228BAcQkLPFJQ').trim();
 
   const DEFAULT_SHEET_URL = "https://docs.google.com/spreadsheets/d/1INPJnlsU0saiIBP92mkRCLShU3qWZ20elD1OxRKnNVc/edit?gid=0#gid=0";
   function getStoredSheetUrl() { return localStorage.getItem('CUSTOM_SHEET_URL') || DEFAULT_SHEET_URL; }
-  function updateSheetLinkUI() { if ($('linkOpenSheet')) $('linkOpenSheet').href = getStoredSheetUrl(); }
+  function updateSheetLinkUI() { if ($('linkOpenSheet')) $('linkOpenSheet').href = getStoredSheetUrl(); if ($('linkOpenEssaySheet')) $('linkOpenEssaySheet').href = getEssaySheetUrl(); }
   function toast(msg){ const t=$('toast'); if(!t) return; t.textContent=msg; t.style.display='block'; clearTimeout(toast.timer); toast.timer=setTimeout(()=>t.style.display='none', 2800); }
   function subjectClass(s){return 'sub-'+(s||'Khác').replaceAll(' ','-');}
   function linkifyDetail(text) { if (!text) return ''; const safe = escapeHTML(text); return safe.replace(/(https?:\/\/[^\s]+)/g, url => `<div><a href="${url}" target="_blank" class="task-link-btn">🔗 Mở bài tập trực tuyến</a></div>`); }
@@ -1502,22 +1443,46 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     div.innerHTML += text; box.appendChild(div); box.scrollTop = box.scrollHeight; return div;
   }
 
-  const ULTRA_FAST_MODELS = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash'];
+  const ULTRA_FAST_MODELS = ['gemini-2.5-flash', 'gemini-2.0-flash-exp', 'gemini-1.5-flash'];
   async function callUltraFastGemini(contentsPayload, systemPrompt) {
-    let saved = localStorage.getItem('GEMINI_WORKING_MODEL') || 'gemini-2.5-flash';
+    let saved = localStorage.getItem('GEMINI_WORKING_MODEL') || 'gemini-1.5-flash';
     let modelsToTry = [saved, ...ULTRA_FAST_MODELS.filter(m => m !== saved)];
+    
+    let lastError = "";
+    
     for (const m of modelsToTry) {
       try {
         const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent?key=${geminiApiKey}`;
         const res = await fetch(endpoint, {
           method: 'POST', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ systemInstruction: { parts: [{ text: systemPrompt }] }, contents: contentsPayload, generationConfig: { maxOutputTokens: 350 } })
+          body: JSON.stringify({ 
+            system_instruction: { parts: [{ text: systemPrompt }] }, 
+            contents: contentsPayload, 
+            generationConfig: { maxOutputTokens: 350 } 
+          })
         });
         const data = await res.json();
-        if (data.candidates && data.candidates[0]) { localStorage.setItem('GEMINI_WORKING_MODEL', m); return data; }
-      } catch(e) {}
+        
+        if (data.error) {
+          console.error(`Lỗi API (${m}):`, data.error.message);
+          lastError = data.error.message;
+          // Nếu model not found, xóa cache model để thử model khác
+          if (data.error.message.includes("not found") || data.error.code === 404) {
+              localStorage.removeItem('GEMINI_WORKING_MODEL');
+          }
+          continue;
+        }
+        
+        if (data.candidates && data.candidates[0]) { 
+          localStorage.setItem('GEMINI_WORKING_MODEL', m); 
+          return data; 
+        }
+      } catch(e) {
+        console.error(`Lỗi mạng/kết nối (${m}):`, e);
+        lastError = "Lỗi mạng hoặc không thể kết nối tới Google.";
+      }
     }
-    throw new Error("Không thể kết nối đến máy chủ Google AI. Mẹ kiểm tra lại API Key nhé!");
+    throw new Error(lastError || "Không thể kết nối đến máy chủ Google AI. Kiểm tra lại API Key nhé!");
   }
 
   async function sendAiMessage() {
@@ -2117,7 +2082,50 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     localStorage.setItem('TELE_TOKEN', $('cfgTeleToken').value.trim());
     localStorage.setItem('TELE_CHAT_ID', $('cfgTeleChatId').value.trim());
 
-    updateSheetLinkUI();
+      async function loadEssaySubmissionsFromCloud() {
+    if (!sb) return;
+    try {
+      const { data, error } = await sb.from('essay_submissions').select('*');
+      if (!error && data) {
+        data.forEach(row => {
+          const item = essayListData.find(x => x.id === row.essay_id);
+          if (item) {
+            item.noiDungBaiLam = row.content || '';
+            item.trangThai = row.status || 'Chưa làm';
+            localStorage.setItem(`essay_content_${item.id}`, item.noiDungBaiLam);
+            localStorage.setItem(`essay_status_${item.id}`, item.trangThai);
+          }
+        });
+        renderEssayListUI();
+        if (currentSelectedEssayId) selectEssayItem(currentSelectedEssayId);
+      }
+    } catch (e) {
+      console.error("Lỗi tải bài văn từ Cloud:", e);
+    }
+  }
+
+  // --- CHỨC NĂNG TÌM KIẾM GÓC TẬP LÀM VĂN ---
+  const searchEssayInput = $('searchEssayInput');
+  if (searchEssayInput) {
+    searchEssayInput.addEventListener('input', function(e) {
+      const query = e.target.value.toLowerCase().trim();
+      const essayCards = document.querySelectorAll('.essay-item-card');
+
+      essayCards.forEach(card => {
+        // Lấy toàn bộ chữ trong thẻ (bao gồm chữ Bài 30 và Tên bài)
+        const cardText = card.innerText.toLowerCase(); 
+        
+        // Nếu có chữ trùng khớp thì hiện, không thì ẩn
+        if (cardText.includes(query)) {
+          card.style.display = 'block'; 
+        } else {
+          card.style.display = 'none';  
+        }
+      });
+    });
+  }
+
+  updateSheetLinkUI();
     $('configDialog').close();
     toast("Đã lưu cài đặt thành công! ✨");
 
@@ -2506,7 +2514,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     }
   };
 
-  $('btnRoleKid').onclick = () => { isAdminUnlocked = false; $('appBody').classList.remove('unlocked'); $('btnRoleKid').classList.add('active'); $('btnRoleMom').classList.remove('active'); renderTasks(); renderRewards(); };
+  $('btnRoleKid').onclick = () => { isAdminUnlocked = false; $('appBody').classList.remove('unlocked'); $('btnRoleKid').classList.add('active'); $('btnRoleMom').classList.remove('active'); renderTasks(); renderRewards(); if(currentSelectedEssayId && $('tabEssayBtn').classList.contains('active')) selectEssayItem(currentSelectedEssayId); };
   $('btnRoleMom').onclick = () => {
     if (!isAdminUnlocked) {
       $('momPassInput').value = ''; $('momPassError').textContent = ''; $('momPassInput').classList.remove('shake-anim');
@@ -2516,7 +2524,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   function verifyMomPassword() {
     if ($('momPassInput').value.trim() === "2017") {
       isAdminUnlocked = true; $('appBody').classList.add('unlocked'); $('btnRoleMom').classList.add('active'); $('btnRoleKid').classList.remove('active');
-      $('momPassDialog').close(); renderTasks(); renderRewards(); toast('👑 Chào Mẹ yêu! Mẹ có thể giao và duyệt bài cho con!');
+      $('momPassDialog').close(); renderTasks(); renderRewards(); if(currentSelectedEssayId && $('tabEssayBtn').classList.contains('active')) selectEssayItem(currentSelectedEssayId); toast('👑 Chào Mẹ yêu! Mẹ có thể giao và duyệt bài cho con!');
     } else {
       const inp = $('momPassInput'); inp.classList.remove('shake-anim'); void inp.offsetWidth; inp.classList.add('shake-anim');
       $('momPassError').textContent = '❌ Mật khẩu chưa đúng rồi Mẹ ơi!'; inp.value = ''; inp.focus();
@@ -2556,6 +2564,49 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
       viewHomework.style.display = 'none';
       loadEssayTabFromSheet();
     };
+  }
+
+    async function loadEssaySubmissionsFromCloud() {
+    if (!sb) return;
+    try {
+      const { data, error } = await sb.from('essay_submissions').select('*');
+      if (!error && data) {
+        data.forEach(row => {
+          const item = essayListData.find(x => x.id === row.essay_id);
+          if (item) {
+            item.noiDungBaiLam = row.content || '';
+            item.trangThai = row.status || 'Chưa làm';
+            localStorage.setItem(`essay_content_${item.id}`, item.noiDungBaiLam);
+            localStorage.setItem(`essay_status_${item.id}`, item.trangThai);
+          }
+        });
+        renderEssayListUI();
+        if (currentSelectedEssayId) selectEssayItem(currentSelectedEssayId);
+      }
+    } catch (e) {
+      console.error("Lỗi tải bài văn từ Cloud:", e);
+    }
+  }
+
+  // --- CHỨC NĂNG TÌM KIẾM GÓC TẬP LÀM VĂN ---
+  const searchEssayInput = $('searchEssayInput');
+  if (searchEssayInput) {
+    searchEssayInput.addEventListener('input', function(e) {
+      const query = e.target.value.toLowerCase().trim();
+      const essayCards = document.querySelectorAll('.essay-item-card');
+
+      essayCards.forEach(card => {
+        // Lấy toàn bộ chữ trong thẻ (bao gồm chữ Bài 30 và Tên bài)
+        const cardText = card.innerText.toLowerCase(); 
+        
+        // Nếu có chữ trùng khớp thì hiện, không thì ẩn
+        if (cardText.includes(query)) {
+          card.style.display = 'block'; 
+        } else {
+          card.style.display = 'none';  
+        }
+      });
+    });
   }
 
   updateSheetLinkUI();
