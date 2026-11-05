@@ -6,12 +6,12 @@
   <meta name="theme-color" content="#f6a9bd">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="Góc Học Tập 🌸">
-  <title>Góc học tập của Khánh Huyền 🌸</title>
+  <meta name="apple-mobile-web-app-title" content="Góc Học Tập ">
+  <title>Góc học tập của Khánh Huyền </title>
 
   <link rel="icon" type="image/png" sizes="192x192" href="https://img.icons8.com/color/192/cherry-blossom.png">
   <link rel="apple-touch-icon" href="https://img.icons8.com/color/192/cherry-blossom.png">
-  <link rel="manifest" href='data:application/manifest+json,{"name":"Góc học tập của Khánh Huyền","short_name":"Góc Học Tập 🌸","start_url":".","display":"standalone","background_color":"#fff5f7","theme_color":"#f6a9bd","icons":[{"src":"https://img.icons8.com/color/192/cherry-blossom.png","sizes":"192x192","type":"image/png"}]}'>
+  <link rel="manifest" href='data:application/manifest+json,{"name":"Góc học tập của Khánh Huyền","short_name":"Góc Học Tập ","start_url":".","display":"standalone","background_color":"#fff5f7","theme_color":"#f6a9bd","icons":[{"src":"https://img.icons8.com/color/192/cherry-blossom.png","sizes":"192x192","type":"image/png"}]}'>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1266,19 +1266,19 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
 
   $('btnSaveEssay').onclick = () => {
     const item = essayListData.find(x => x.id === currentSelectedEssayId);
-    if (item) saveEssayToSupabase(item.trangThai || 'Chưa làm', '💾 Đã lưu nháp bài tập làm văn!');
+    if (item) saveEssayToSupabase(item.trangThai || 'Chưa làm', ' Đã lưu nháp bài tập làm văn!');
   };
 
   $('btnSubmitEssayToMom').onclick = async () => {
     const text = $('essayEditor').value.trim();
     if (!text) return toast('Con chưa viết gì cả, không thể nộp bài được!');
-    const ok = await showCustomConfirm("Con đã viết xong và muốn gửi Mẹ duyệt bài đúng không?", "Nộp bài cho Mẹ 📤", "📝");
+    const ok = await showCustomConfirm("Con đã viết xong và muốn gửi Mẹ duyệt bài đúng không?", "Nộp bài cho Mẹ ", "");
     if (ok) {
       $('btnSubmitEssayToMom').disabled = true;
-      $('btnSubmitEssayToMom').textContent = "Đang gửi... ⏳";
-      await saveEssayToSupabase('Chờ mẹ duyệt', '🎉 Đã gửi bài cho Mẹ duyệt!');
+      $('btnSubmitEssayToMom').textContent = "Đang gửi... ";
+      await saveEssayToSupabase('Chờ mẹ duyệt', ' Đã gửi bài cho Mẹ duyệt!');
       $('btnSubmitEssayToMom').disabled = false;
-      $('btnSubmitEssayToMom').textContent = "📤 Nộp Bài Cho Mẹ";
+      $('btnSubmitEssayToMom').textContent = " Nộp Bài Cho Mẹ";
       
       const item = essayListData.find(x => x.id === currentSelectedEssayId);
       sendTelegramAlert(item ? item.tieuDe : "Tập làm văn", "Con đã nộp bài tập làm văn rồi ạ!");
@@ -1288,7 +1288,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   $('btnApproveEssay').onclick = async () => {
     const item = essayListData.find(x => x.id === currentSelectedEssayId);
     if (!item) return;
-    const ok = await showCustomConfirm("Mẹ đồng ý duyệt bài và tặng sao + tiền cho con chứ?", "Duyệt bài 💖", "✅");
+    const ok = await showCustomConfirm("Mẹ đồng ý duyệt bài và tặng sao + tiền cho con chứ?", "Duyệt bài ", "");
     if (ok) {
       await saveEssayToSupabase('Đã duyệt', false);
       if (!localStorage.getItem(`essay_rewarded_${currentSelectedEssayId}`)) {
@@ -1298,20 +1298,20 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
         triggerCelebration(item.soSao || 2);
         localStorage.setItem(`essay_rewarded_${currentSelectedEssayId}`, 'true');
       } else {
-        toast('✅ Đã duyệt bài thành công!');
+        toast(' Đã duyệt bài thành công!');
       }
     }
   };
 
   $('btnRejectEssay').onclick = async () => {
-    const ok = await showCustomConfirm("Mẹ muốn yêu cầu con sửa lại bài này?", "Yêu cầu sửa lại ↩️", "📝");
+    const ok = await showCustomConfirm("Mẹ muốn yêu cầu con sửa lại bài này?", "Yêu cầu sửa lại ", "");
     if (ok) {
       await saveEssayToSupabase('Cần làm lại', 'Đã chuyển trạng thái yêu cầu con làm lại!');
     }
   };
 
   // ========================================================
-  // ✨ TÍNH NĂNG NHỜ THỎ AI SỬA BÀI VĂN (KHẮC PHỤC LỖI CẮT CỤT)
+  //  TÍNH NĂNG NHỜ THỎ AI SỬA BÀI VĂN (KHẮC PHỤC LỖI CẮT CỤT)
   // ========================================================
   async function callGeminiForEssay(contentsPayload, systemPrompt) {
     let saved = localStorage.getItem('GEMINI_WORKING_MODEL') || 'gemini-1.5-flash';
@@ -1348,16 +1348,29 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   $('btnAiCheckEssay').onclick = async () => {
     const text = $('essayEditor').value.trim();
     if (!text) return toast('Con chưa viết gì cả! Hãy viết văn rồi nhờ Thỏ sửa nhé!');
-    if (!geminiApiKey) return showCustomAlert("Mẹ cần cài đặt API Key (Nút ⚙️ Cài đặt ở góc trên) để Thỏ chấm bài nhé!", "Thiếu API Key 🔑", "🔑");
+    if (!geminiApiKey) return showCustomAlert("Mẹ cần cài đặt API Key (Nút  Cài đặt ở góc trên) để Thỏ chấm bài nhé!", "Thiếu API Key ", "");
 
     $('btnAiCheckEssay').disabled = true;
-    $('btnAiCheckEssay').textContent = 'Thỏ đang sửa bài... ⏳';
+    $('btnAiCheckEssay').textContent = 'Thỏ đang sửa bài... ';
 
     try {
-      const prompt = `Bạn là cô giáo dạy văn tiểu học ân cần, yêu trẻ và thông thái, hóa thân thành bạn "Thỏ Siêu Quậy AI". Hãy đọc bài văn dưới đây của học sinh, sau đó thực hiện:
-      1. Đưa ra lời nhận xét, khen ngợi những ý tưởng sáng tạo và cảm xúc chân thực của con.
-      2. Gợi ý bài viết hoàn chỉnh và hay hơn (dùng từ ngữ sinh động, hình ảnh so sánh, nhân hóa phù hợp lứa tuổi tiểu học).
-      Trình bày rõ ràng, dễ đọc bằng các thẻ HTML cơ bản (như <p>, <b>, <ul>, <li>). Giữ văn phong ngắn gọn, dễ thương, đầy đủ ý, tuyệt đối không bị cụt ngang giữa chừng.
+      const systemPrompt = `Bạn là Thỏ AI – Chuyên gia đánh giá và bồi dưỡng kỹ năng viết văn, chuyên gia Ngữ văn tiểu học nghiêm túc, khách quan, sâu sắc. Đối tượng học sinh: Lớp 4.
+      TRIẾT LÝ: Đánh giá trung thực, không khen xã giao, không tâng bốc. Phân biệt rõ ý tưởng hay nhưng diễn đạt chưa tốt. Trích dẫn bằng chứng cụ thể từ bài viết. Bảo tồn giọng văn, cá tính và trí tưởng tượng tự nhiên của trẻ, không áp đặt văn mẫu người lớn.
+      HÃY THỰC HIỆN ĐÚNG CẤU TRÚC SAU BẰNG CÁC THẺ HTML TRÌNH BÀY ĐẸP MẮT:
+      1. Đánh giá tổng quan (Nhận định thẳng thắn về chất lượng bài).
+      2. Bảng điểm chi tiết (Thang điểm 10): 
+         - Nội dung và ý tưởng (2đ)
+         - Bố cục và phát triển ý (1.5đ)
+         - Quan sát và miêu tả (2đ)
+         - Cảm xúc và sáng tạo (2đ)
+         - Ngôn ngữ và diễn đạt (1.5đ)
+         - Chính tả và ngữ pháp (1đ)
+         => Tổng điểm: .../10
+      3. Phân tích chuyên sâu (Nội dung, bố cục, quan sát, cảm xúc, ngôn ngữ dựa trên dẫn chứng cụ thể).
+      4. Bảng hoặc danh sách Những câu/đoạn cần sửa (Trích nguyên văn - Vấn đề - Hướng sửa).
+      5. Gợi ý chỉnh sửa trọng tâm (Phương án cải thiện cụ thể, giữ nguyên ý tưởng độc đáo của con).
+      6. Điểm mạnh & Điểm yếu cốt lõi, cùng 1-2 bài tập rèn luyện tiếp theo.
+      Sử dụng văn phong nghiêm túc của giáo viên chuyên Văn nhưng gần gũi, khích lệ đúng mực học sinh tiểu học.`;
 
       Bài làm của con:
       "${text}"`;
@@ -1378,14 +1391,14 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
         // Tự động chuyển sang tab "Bài Viết Đã Chỉnh Sửa" để con xem ngay
         $('btnTabAiResult').click();
         $('aiResultContainer').innerHTML = `<div>${reply}</div>`;
-        toast("✨ Thỏ AI đã sửa và hoàn thiện bài văn cho con!");
+        toast(" Thỏ AI đã sửa và hoàn thiện bài văn cho con!");
       }
     } catch (e) {
       console.error("Chi tiết lỗi:", e);
-      showCustomAlert(e.message || 'Có lỗi xảy ra, mẹ kiểm tra lại API Key nhé!', 'Lỗi Kết Nối Thỏ AI ⚠️', '⚠️');
+      showCustomAlert(e.message || 'Có lỗi xảy ra, mẹ kiểm tra lại API Key nhé!', 'Lỗi Kết Nối Thỏ AI ', '');
     } finally {
       $('btnAiCheckEssay').disabled = false;
-      $('btnAiCheckEssay').textContent = '✨ Nhờ Thỏ AI Sửa Bài';
+      $('btnAiCheckEssay').textContent = ' Nhờ Thỏ AI Sửa Bài';
     }
   };
 
