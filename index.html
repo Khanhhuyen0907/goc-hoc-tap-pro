@@ -1245,7 +1245,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     const parts = [intro, body, conclusion].filter(p => p.length > 0);
     const completeBox = $('essayCompleteEditor');
     if (completeBox) {
-      completeBox.value = parts.join('\n\n');
+      completeBox.value = parts.join('\n');
     }
   }
 
