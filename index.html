@@ -6,12 +6,12 @@
   <meta name="theme-color" content="#f6a9bd">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="Góc Học Tập ">
-  <title>Góc học tập của Khánh Huyền </title>
+  <meta name="apple-mobile-web-app-title" content="Góc Học Tập 🌸">
+  <title>Góc học tập của Khánh Huyền 🌸</title>
 
   <link rel="icon" type="image/png" sizes="192x192" href="https://img.icons8.com/color/192/cherry-blossom.png">
   <link rel="apple-touch-icon" href="https://img.icons8.com/color/192/cherry-blossom.png">
-  <link rel="manifest" href='data:application/manifest+json,{"name":"Góc học tập của Khánh Huyền","short_name":"Góc Học Tập ","start_url":".","display":"standalone","background_color":"#fff5f7","theme_color":"#f6a9bd","icons":[{"src":"https://img.icons8.com/color/192/cherry-blossom.png","sizes":"192x192","type":"image/png"}]}'>
+  <link rel="manifest" href='data:application/manifest+json,{"name":"Góc học tập của Khánh Huyền","short_name":"Góc Học Tập 🌸","start_url":".","display":"standalone","background_color":"#fff5f7","theme_color":"#f6a9bd","icons":[{"src":"https://img.icons8.com/color/192/cherry-blossom.png","sizes":"192x192","type":"image/png"}]}'>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -555,7 +555,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
         <h2 style="margin: 0;">✍️ Góc Soạn Thảo</h2>
         <!-- TABS CON TRONG KHUNG SOẠN THẢO -->
         <div class="flex" style="gap: 5px;">
-          <button class="btn btn-soft btn-small active-editor-tab" id="btnTabDraft" style="background:#e97998; color:#fff; border-color:#e97998; font-weight:800;">📝 Soạn Nháp</button>
+          <button class="btn btn-soft btn-small" id="btnTabDraft" style="background:#e97998; color:#fff; border-color:#e97998; font-weight:800;">📝 Soạn Nháp</button>
           <button class="btn btn-soft btn-small" id="btnTabAiResult" style="font-weight:800;">✨ Bài Viết Đã Chỉnh Sửa</button>
         </div>
         <button class="btn btn-primary btn-small" id="btnAiCheckEssay" style="background:#4c9475; box-shadow:0 4px 10px rgba(76,148,117,0.3);">✨ Nhờ Thỏ AI Sửa Bài</button>
@@ -568,7 +568,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
         <div id="aiResultContainer" style="display: none; width:100%; flex: 1; min-height: 480px; border:1px solid #f4cad7; border-radius:12px; padding: 16px; font-size: 15px; line-height: 1.7; overflow-y: auto; background: #fffafb; color: #51434a;">
           <div style="text-align: center; color: var(--muted); margin-top: 100px;">
             <div style="font-size: 38px; margin-bottom: 8px;">🐰✨</div>
-            <div style="font-weight: 700;">Bấm nút "Nhờ Thỏ AI Sửa Bài" phía trên để nhận góp ý và bài viết được trau chuốt hoàn chỉnh tại đây nhé!</div>
+            <div style="font-weight: 700;">Bấm nút "Nhờ Thỏ AI Sửa Bài" phía trên để nhận đánh giá chuyên sâu và bài viết trau chuốt từ Thỏ AI tại đây nhé!</div>
           </div>
         </div>
 
@@ -803,7 +803,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
           <div style="font-size:11px; color:#888;">(Chạm để lật đáp án)</div>
         </div>
         <div class="card-face card-back">
-          <div style="font-size:12px; font-weight:800; color:#36795f;">Giải nghĩa / Đáp án</div>
+          <div style="font-size:12px; font-weight:800; color:#2e6950;">Giải nghĩa / Đáp án</div>
           <div style="font-size:26px; font-weight:900; margin:15px 0;" id="fcBackText">Hình chữ nhật</div>
           <div style="font-size:11px; color:#2e6950;">Giỏi lắm con gái! ⭐</div>
         </div>
@@ -1024,9 +1024,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     });
   }
 
-  // ========================================================
-  // ✍️ CƠ CHẾ GOOGLE SHEET JSONP TRIỆT TIÊU LỖI CORS
-  // ========================================================
   function fetchGoogleSheetJSONP(sheetId, gid = '0') {
     return new Promise((resolve, reject) => {
       const cbName = 'gvizCb_' + Math.floor(Math.random() * 1000000);
@@ -1040,7 +1037,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     });
   }
 
-  // Chuẩn hóa link Google Drive thành dạng Preview nhúng được vào iframe
   function formatDriveEmbedUrl(rawUrl) {
     if (!rawUrl) return '';
     let url = rawUrl.trim();
@@ -1190,7 +1186,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
       if (item.aiResultContent) {
         aiResultDiv.innerHTML = item.aiResultContent;
       } else {
-        aiResultDiv.innerHTML = `<div style="text-align: center; color: var(--muted); margin-top: 100px;"><div style="font-size: 38px; margin-bottom: 8px;">🐰✨</div><div style="font-weight: 700;">Bấm nút "Nhờ Thỏ AI Sửa Bài" phía trên để nhận góp ý và bài viết được trau chuốt hoàn chỉnh tại đây nhé!</div></div>`;
+        aiResultDiv.innerHTML = `<div style="text-align: center; color: var(--muted); margin-top: 100px;"><div style="font-size: 38px; margin-bottom: 8px;">🐰✨</div><div style="font-weight: 700;">Bấm nút "Nhờ Thỏ AI Sửa Bài" phía trên để nhận đánh giá chuyên sâu và bài viết trau chuốt từ Thỏ AI tại đây nhé!</div></div>`;
       }
     }
 
@@ -1266,19 +1262,19 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
 
   $('btnSaveEssay').onclick = () => {
     const item = essayListData.find(x => x.id === currentSelectedEssayId);
-    if (item) saveEssayToSupabase(item.trangThai || 'Chưa làm', ' Đã lưu nháp bài tập làm văn!');
+    if (item) saveEssayToSupabase(item.trangThai || 'Chưa làm', '💾 Đã lưu nháp bài tập làm văn!');
   };
 
   $('btnSubmitEssayToMom').onclick = async () => {
     const text = $('essayEditor').value.trim();
     if (!text) return toast('Con chưa viết gì cả, không thể nộp bài được!');
-    const ok = await showCustomConfirm("Con đã viết xong và muốn gửi Mẹ duyệt bài đúng không?", "Nộp bài cho Mẹ ", "");
+    const ok = await showCustomConfirm("Con đã viết xong và muốn gửi Mẹ duyệt bài đúng không?", "Nộp bài cho Mẹ 📤", "📝");
     if (ok) {
       $('btnSubmitEssayToMom').disabled = true;
-      $('btnSubmitEssayToMom').textContent = "Đang gửi... ";
-      await saveEssayToSupabase('Chờ mẹ duyệt', ' Đã gửi bài cho Mẹ duyệt!');
+      $('btnSubmitEssayToMom').textContent = "Đang gửi... ⏳";
+      await saveEssayToSupabase('Chờ mẹ duyệt', '🎉 Đã gửi bài cho Mẹ duyệt!');
       $('btnSubmitEssayToMom').disabled = false;
-      $('btnSubmitEssayToMom').textContent = " Nộp Bài Cho Mẹ";
+      $('btnSubmitEssayToMom').textContent = "📤 Nộp Bài Cho Mẹ";
       
       const item = essayListData.find(x => x.id === currentSelectedEssayId);
       sendTelegramAlert(item ? item.tieuDe : "Tập làm văn", "Con đã nộp bài tập làm văn rồi ạ!");
@@ -1288,7 +1284,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   $('btnApproveEssay').onclick = async () => {
     const item = essayListData.find(x => x.id === currentSelectedEssayId);
     if (!item) return;
-    const ok = await showCustomConfirm("Mẹ đồng ý duyệt bài và tặng sao + tiền cho con chứ?", "Duyệt bài ", "");
+    const ok = await showCustomConfirm("Mẹ đồng ý duyệt bài và tặng sao + tiền cho con chứ?", "Duyệt bài 💖", "✅");
     if (ok) {
       await saveEssayToSupabase('Đã duyệt', false);
       if (!localStorage.getItem(`essay_rewarded_${currentSelectedEssayId}`)) {
@@ -1298,20 +1294,20 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
         triggerCelebration(item.soSao || 2);
         localStorage.setItem(`essay_rewarded_${currentSelectedEssayId}`, 'true');
       } else {
-        toast(' Đã duyệt bài thành công!');
+        toast('✅ Đã duyệt bài thành công!');
       }
     }
   };
 
   $('btnRejectEssay').onclick = async () => {
-    const ok = await showCustomConfirm("Mẹ muốn yêu cầu con sửa lại bài này?", "Yêu cầu sửa lại ", "");
+    const ok = await showCustomConfirm("Mẹ muốn yêu cầu con sửa lại bài này?", "Yêu cầu sửa lại ↩️", "📝");
     if (ok) {
       await saveEssayToSupabase('Cần làm lại', 'Đã chuyển trạng thái yêu cầu con làm lại!');
     }
   };
 
   // ========================================================
-  //  TÍNH NĂNG NHỜ THỎ AI SỬA BÀI VĂN (KHẮC PHỤC LỖI CẮT CỤT)
+  // ✨ TÍNH NĂNG THỎ AI CHUYÊN GIA ĐÁNH GIÁ VĂN HỌC (CHUẨN 6 BƯỚC)
   // ========================================================
   async function callGeminiForEssay(contentsPayload, systemPrompt) {
     let saved = localStorage.getItem('GEMINI_WORKING_MODEL') || 'gemini-1.5-flash';
@@ -1326,7 +1322,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
           body: JSON.stringify({ 
             system_instruction: { parts: [{ text: systemPrompt }] }, 
             contents: contentsPayload, 
-            generationConfig: { maxOutputTokens: 1000 } // Tăng lượng từ tối đa để không bị cắt cụt ngang chừng
+            generationConfig: { maxOutputTokens: 1200 } 
           })
         });
         const data = await res.json();
@@ -1347,11 +1343,11 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
 
   $('btnAiCheckEssay').onclick = async () => {
     const text = $('essayEditor').value.trim();
-    if (!text) return toast('Con chưa viết gì cả! Hãy viết văn rồi nhờ Thỏ sửa nhé!');
-    if (!geminiApiKey) return showCustomAlert("Mẹ cần cài đặt API Key (Nút  Cài đặt ở góc trên) để Thỏ chấm bài nhé!", "Thiếu API Key ", "");
+    if (!text) return toast('Con chưa viết gì cả! Hãy viết văn rồi nhờ Thỏ AI chấm bài nhé!');
+    if (!geminiApiKey) return showCustomAlert("Mẹ cần cài đặt API Key (Nút ⚙️ Cài đặt ở góc trên) để Thỏ AI làm việc nhé!", "Thiếu API Key 🔑", "🔑");
 
     $('btnAiCheckEssay').disabled = true;
-    $('btnAiCheckEssay').textContent = 'Thỏ đang sửa bài... ';
+    $('btnAiCheckEssay').textContent = 'Thỏ AI đang chấm bài... ⏳';
 
     try {
       const systemPrompt = `Bạn là Thỏ AI – Chuyên gia đánh giá và bồi dưỡng kỹ năng viết văn, chuyên gia Ngữ văn tiểu học nghiêm túc, khách quan, sâu sắc. Đối tượng học sinh: Lớp 4.
@@ -1372,33 +1368,31 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
       6. Điểm mạnh & Điểm yếu cốt lõi, cùng 1-2 bài tập rèn luyện tiếp theo.
       Sử dụng văn phong nghiêm túc của giáo viên chuyên Văn nhưng gần gũi, khích lệ đúng mực học sinh tiểu học.`;
 
-      Bài làm của con:
+      const prompt = `Bài làm của học sinh lớp 4:
       "${text}"`;
       
-      const data = await callGeminiForEssay([{ role: 'user', parts: [{ text: prompt }] }], "Bạn là Thỏ AI dạy văn tiểu học cực kỳ dễ thương và hữu ích.");
+      const data = await callGeminiForEssay([{ role: 'user', parts: [{ text: prompt }] }], systemPrompt);
       if (data.candidates && data.candidates[0] && data.candidates[0].content) {
         const allParts = data.candidates[0].content.parts;
         const replyParts = allParts.filter(p => !p.thought);
         const reply = cleanMathText((replyParts.length > 0 ? replyParts : allParts).map(p => p.text || '').join('').trim());
         
-        // Lưu vào tab bài viết đã chỉnh sửa
         const item = essayListData.find(x => x.id === currentSelectedEssayId);
         if (item) {
           item.aiResultContent = `<div>${reply}</div>`;
           localStorage.setItem(`essay_ai_result_${currentSelectedEssayId}`, item.aiResultContent);
         }
 
-        // Tự động chuyển sang tab "Bài Viết Đã Chỉnh Sửa" để con xem ngay
         $('btnTabAiResult').click();
         $('aiResultContainer').innerHTML = `<div>${reply}</div>`;
-        toast(" Thỏ AI đã sửa và hoàn thiện bài văn cho con!");
+        toast("✨ Thỏ AI đã hoàn thành đánh giá chuyên sâu bài văn!");
       }
     } catch (e) {
       console.error("Chi tiết lỗi:", e);
-      showCustomAlert(e.message || 'Có lỗi xảy ra, mẹ kiểm tra lại API Key nhé!', 'Lỗi Kết Nối Thỏ AI ', '');
+      showCustomAlert(e.message || 'Có lỗi xảy ra, mẹ kiểm tra lại API Key nhé!', 'Lỗi Kết Nối Thỏ AI ⚠️', '⚠️');
     } finally {
       $('btnAiCheckEssay').disabled = false;
-      $('btnAiCheckEssay').textContent = ' Nhờ Thỏ AI Sửa Bài';
+      $('btnAiCheckEssay').textContent = '✨ Nhờ Thỏ AI Sửa Bài';
     }
   };
 
@@ -1427,7 +1421,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     ['bag','👛','Ví Cầm Tay Lọ Lem',9000],['bag','👜','Túi Đeo Chéo Quả Dâu',14000],['bag','🎒','Balo Thỏ Con Đi Học',20000],['bag','🛍️','Giỏ Mây Dã Ngoại Mùa Hè',17000],['bag','👛','Túi Xách Ngọc Trai Công Chúa',38000],['bag','🎒','Balo Cánh Thiên Thần',55000],['bag','👜','Túi Da Thần Thoại Ngân Hà',72000],['bag','👝','Ví Mini Trái Tim Hồng',11000],['bag','🧺','Túi Vải Canvas Thân Thiện',8000],['bag','🧳','Vali Du Lịch Tí Hon',45000],
     ['shoes','👟','Sneaker Thể Thao Pastel',8000],['shoes','🧦','Vớ Ren Công Chúa Đính Nơ',6000],['shoes','👡','Sandal Nơ Hồng Mùa Hè',12000],['shoes','🩰','Giày Khiêu Vũ Ba-lê Lụa',28000],['shoes','👠','Hài Pha Lê Thủy Tinh Lọ Lem',50000],['shoes','👢','Bốt Cổ Cao Mùa Đông Tuyết',34000],['shoes','🥿','Giày Búp Bê Da Mềm Xinh',19000],['shoes','👡','Guốc Mộc Nhật Bản Cài Hoa',24000],['shoes','⛸️','Giày Trượt Băng Nghệ Thuật',60000],['shoes','👠','Giày Dạ Hội Kim Tuyến',85000],['shoes','🥾','Giày Thám Hiểm Rừng Xanh',22000],
     ['beauty','🪞','Gương Soi Thần Kỳ Hoa Hồng',10000],['beauty','💄','Son Dưỡng Dâu Tây Ngọt Ngào',7000],['beauty','🧴','Nước Hoa Hoa Hồng Pháp',22000],['beauty','💅','Sơn Móng Tay Kim Tuyến',13000],['beauty','🪮','Lược Thần Gỡ Rối Hoàng Cung',11000],['beauty','🧪','Lọ Nước Thần Tình Bạn',32000],['beauty','✨','Bột Phấn Tiên Nữ Tỏa Sáng',46000],['beauty','🫙','Lọ Thủy Tinh 1000 Ngôi Sao Giấy',25000],['beauty','🕯️','Nến Thơm Hương Vani Thư Giãn',15000],['beauty','🫧','Nước Tạo Bong Bóng Thần Tiên',9000],['beauty','📜','Bức Thư Tình Bạn Niêm Phong Sáp',18000],
-    ['hand','🌸','Gậy Phép Thuật Sakura',45000],['hand','🪄','Đũa Thần Tinh Tú Harry',50000],['hand','🧸','Gấu Bông Teddy Tí Hon',12000],['hand','🎈','Chùm Bóng Bay Trái Tim Hồng',8000],['hand','🍭','Kẹo Mút Khổng Lồ 7 Màu',15000],['hand','🍦','Cây Kem Ốc Quế Dâu Socola',7000],['hand','🪭','Quạt Lụa Cung Đình Xếp Ren',19000],['hand','🌂','Ô Che Trong Suốt Hoa Đào',24000],['hand','📖','Sách Phép Thuật Ngàn Năm',38000],['hand','🐱','Mèo Con Lông Trắng Tí Hon',40000],['hand','🐶','Cún Poodle Bông Mini',42000],['hand','🐥','Bé Vịt Vàng Tắm Biển',14000],['hand','🦋','Cánh Bướm Tiên Nữ Phát Sáng',85000],['hand','🪽','Cánh Thiên Thần Thuần Khiết',110000],['hand','💎','Kim Cương Xanh Hy Vọng',95000],['hand','🕊️','Quyền Trượng Nữ Hoàng Vũ Trụ',150000],['hand','🎸','Đàn Ukulele Hồng Tí Hon',33000],['hand','🎨','Bảng Pha Màu Họa Sĩ Nhí',16000],['hand','📷','Máy Ảnh Mini Màu Pastel',27000],['hand','🧋','Ly Trà Sữa Trân Châu Đường Đen',9000],['hand','🍰','Bánh Kem Dâu Sinh Nhật',15000],['hand','🍿','Bắp Rang Bơ Ngọt Ngào',6000],['hand','🎁','Hộp Quà Bí Ẩn Thắt Nơ',21000],['hand','💐','Bó Hoa Hồng Mộng Mơ',28000],['hand','🪀','Con Quay Phát Sáng Yoyo',10000],['hand','🪁','Cánh Diều Cầu Vồng Tí Hon',13000],['hand','🕶️','Kính Râm Trái Tim Thời Thượng',17000],['hand','👓','Kính Tròn Nobita Xì-tin',12000],['hand','🎭','Mặt Nạ Dạ Hội Bí Ẩn',31000],['hand','🌟','Ngôi Sao Ước Nguyện Vĩnh Hằng',160000]
+    ['hand','🌸','Gậy Phép Thuật Sakura',45000],['hand','🪄','Đũa Thần Tinh Tú Harry',50000],['hand','🧸','Gấu Bông Teddy Tí Hon',12000],['hand','🎈','Chùm Bóng Bay Trái Tim Hồng',8000],['hand','🍭','Kẹo Mút Khổng Lồ 7 Màu',15000],['hand','🍦','Cây Kem Ốc Quế Dâu Socola',7000],['hand','🪭','Quạt Lụa Cung Đình Xếp Ren',19000],['hand','🌂','Ô Che Trong Suốt Hoa Đào',24000],['hand','📖','Sách Phép Thuật Ngàn Năm',38000],['hand','🐱','Mèo Con Lông Trắng Tí Hon',40000],['hand','🐶','Cún Poodle Bông Mini',42000],['hand','🐥','Bé Vịt Vàng Tắm Biển',14000],['hand','🦋','Cánh Bướm Tiên Nữ Phát Sáng',85000],['hand','🪽','Cánh Thiên Thần Thuần Khiết',110000],['hand','💎','Kim Cương Xanh Hy Vọng',95000],['hand','🕊️','Quyền Trượng Nữ Hoàng Vũ Trụ',150000],['hand','🎸','Đàn Ukulele Hồng Tí Hon',33000],['hand','🎨','Bảng Pha Màu Họa Sĩ Nhí',16000],['hand','📷','Máy Ảnh Mini Màu Pastel',27000],['hand','🧋','Ly Trà Sữa Trân Châu Đường Đen',9000],['hand','🍰','Bánh Kem Dâu Sinh Nhật',15000],['hand','🍿','Bắp Rang Bơ Ngọt Ngào',6000],['hand','🎁','Hộp Quà Bí Ẩn Thắt Nơ',21000],['hand','💐','Bó Hoa Hồng Mộng Mơ',28000],['hand','🪀','Con Quay Phát Sáng Yoyo',10000],['hand','🪁','Cánh Diều Cầu Vồng Tí Hon',13000],['hand','🕶️','Kính Râm Trái Tim Thời Thượng',17000],['hand','👓','Kính Tr tròn Nobita Xì-tin',12000],['hand','🎭','Mặt Nạ Dạ Hội Bí Ẩn',31000],['hand','🌟','Ngôi Sao Ước Nguyện Vĩnh Hằng',160000]
   ];
 
   const ACCESSORIES_CATALOG = RAW_ACC_DATA.map((item, index) => ({
@@ -1490,7 +1484,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   function weekTasks(start=weekStart){ const end = dateAdd(start, 6); return state.tasks.filter(t => t.task_date >= start && t.task_date <= end); }
   function streak(){ const approvedTaskIds = new Set(state.submissions.filter(s => s.status === 'approved').map(s => s.task_id)); const doneDates = new Set(state.tasks.filter(t => approvedTaskIds.has(t.id)).map(t => t.task_date)); let d = todayISO(), n = 0; if(!doneDates.has(d)){ d = dateAdd(d, -1); } while(doneDates.has(d) && n < 365){ n++; d = dateAdd(d, -1); } return n; }
   function checkWheelEligibility() { const todayTasks = state.tasks.filter(t => t.task_date === todayISO()); const approvedCount = todayTasks.filter(t => state.submissions.some(s => s.task_id === t.id && s.status === 'approved')).length; const kpi = todayTasks.length > 0 ? Math.round((approvedCount / todayTasks.length) * 100) : 0; const is100 = todayTasks.length > 0 && approvedCount === todayTasks.length; const lastSpin = localStorage.getItem('LAST_WHEEL_SPIN_DATE'); const alreadySpun = (lastSpin === todayISO()); return { todayTasks, approvedCount, kpi, is100, alreadySpun }; }
-  async function sendTelegramAlert(taskTitle, note) { const token = localStorage.getItem('TELE_TOKEN'); const chatId = localStorage.getItem('TELE_CHAT_ID'); if (!token || !chatId) return; const msg = `🔔 Bé Khánh Huyền vừa nộp bài!\n📝 Bài tập: ${taskTitle}\n💬 Lời nhắn: "${note || 'Con đã hoàn thành ạ!'}"\n👉 Mẹ vào kiểm tra và duyệt bài nhé! 🌸`; try { await fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(msg)}`); } catch(e){} }
+  async function sendTelegramAlert(taskTitle, note) { const token = localStorage.getItem('TELE_TOKEN'); const chatId = localStorage.getItem('TELE_CHAT_ID'); if (!token || !chatId) return; const msg = `🔔 Bé Khánh Huyền vừa nộp bài!\n📝 Bài tập: ${taskTitle}\n💬 Lời nhắn: "${note || 'Con đã hoàn thành ạ ạ!'}"\n👉 Mẹ vào kiểm tra và duyệt bài nhé! 🌸`; try { await fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(msg)}`); } catch(e){} }
 
   function setProofFile(file) { if (!file) return; currentProofFile = file; $('proofDropPrompt').style.display = 'none'; $('proofImgPreview').style.display = 'block'; if (file.type.startsWith('image/')) { $('previewImgTag').src = URL.createObjectURL(file); $('previewImgTag').style.display = 'inline-block'; $('previewFileName').textContent = '✅ Đã nhận ảnh chụp màn hình!'; } else { $('previewImgTag').style.display = 'none'; $('previewFileName').textContent = `📄 Tệp đính kèm: ${file.name}`; } toast('Đã nhận ảnh chụp màn hình! 📸'); }
   function resetProofFile() { currentProofFile = null; $('proofFileInput').value = ''; $('proofDropPrompt').style.display = 'block'; $('proofImgPreview').style.display = 'none'; $('previewImgTag').src = ''; }
@@ -2242,7 +2236,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     }
   }
 
-  // --- CHỨC NĂNG TÌM KIẾM GÓC TẬP LÀM VĂN ---
   const searchEssayInput = $('searchEssayInput');
   if (searchEssayInput) {
     searchEssayInput.addEventListener('input', function(e) {
@@ -2572,11 +2565,11 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   $('btnApproveProof').onclick = () => { if (currentReviewTask) { approveSubmission(currentReviewTask.submission.id, currentReviewTask.task.points); $('reviewDialog').close(); } };
   $('btnRejectProof').onclick = async () => {
     if (!currentReviewTask) return;
-    const reason = await showCustomPrompt("Mẹ nhập lời nhắn cho con nhé:", "Con kiểm tra lại bài và làm lại giúp mẹ nhé!", "Nhắc con làm lại bài ", "");
+    const reason = await showCustomPrompt("Mẹ nhập lời nhắn cho con nhé:", "Con kiểm tra lại bài và làm lại giúp mẹ nhé!", "Nhắc con làm lại bài 📢", "👩📝");
     if (reason === null) return;
     if (sb) {
       await sb.from('task_submissions').update({ status: 'redo', note: reason.trim() || "Con làm lại bài nhé!" }).eq('id', currentReviewTask.submission.id);
-      $('reviewDialog').close(); toast('Đã gửi lời nhắc làm lại cho con! '); await loadDataFromSupabase();
+      $('reviewDialog').close(); toast('Đã gửi lời nhắc làm lại cho con! 📢'); await loadDataFromSupabase();
     }
   };
 
@@ -2590,7 +2583,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     if (sb) {
       const { error } = await sb.from('tasks').insert([{ title, subject, task_date: taskDate, detail, points, questions: parsedQuestions.length > 0 ? parsedQuestions : null }]);
       if (!error) { $('taskDialog').close(); toast('Đã giao bài tập mới!'); await loadDataFromSupabase(); }
-      else await showCustomAlert('Lỗi giao bài: ' + error.message, 'Thông báo lỗi ', '');
+      else await showCustomAlert('Lỗi giao bài: ' + error.message, 'Thông báo lỗi ⚠️', '⚠️');
     }
   };
 
