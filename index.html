@@ -977,7 +977,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
 
   if ('speechSynthesis' in window) { try { window.speechSynthesis.cancel(); } catch(e){} }
 
-  const SUBJECTS = ['Toán','Tiếng Việt','Tiếng Anh','Khoa học','Đọc sách','Khác'];
+  const SUBJECTS = ['Toán','Tiếng Việt','Tiếng Anh','Khoa học','Đọc sách','Môn Khác'];
   const $ = id => document.getElementById(id);
   const todayISO = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; };
   const monthISO = date => date.slice(0,7);
