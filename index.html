@@ -1140,7 +1140,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
       const isSelected = item.id === currentSelectedEssayId;
       const weekLabel = item.week || `Bài ${idx + 1}`;
       
-      // Hiển thị Ngày giao bên cạnh tiêu đề bài tập (Ví dụ: Bài 1 - 31/10/2026)
       const dateDisplay = item.ngayCanLam ? ` - ${item.ngayCanLam}` : '';
       const displayTitle = `${escapeHTML(weekLabel)}${escapeHTML(dateDisplay)}`;
 
@@ -1207,7 +1206,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     if (bodyBox) bodyBox.value = item.body || '';
     if (conclusionBox) conclusionBox.value = item.conclusion || '';
     
-    // Tự động đồng bộ sang bài hoàn chỉnh nếu chưa có custom complete
     if (completeBox) {
       if (item.complete) {
         completeBox.value = item.complete;
@@ -1237,7 +1235,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     });
   }
 
-  // Tự động đồng bộ dữ liệu từ 3 ô Mở bài, Thân bài, Kết bài sang khung "Bài văn hoàn chỉnh" khi gõ
   function updateCompleteEssaySync() {
     const intro = $('essayIntro').value.trim();
     const body = $('essayBody').value.trim();
@@ -1255,7 +1252,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
 
   $('btnSyncEssaySheet').onclick = () => loadEssayTabFromSheet(true);
 
-  // --- TAB CHUYỂN ĐỔI: SOẠN THẢO & BÀI VĂN HOÀN CHỈNH ---
   const btnTabDraft = $('btnTabDraft');
   const btnTabComplete = $('btnTabComplete');
   const draftContainer = $('draftContainer');
@@ -1271,13 +1267,15 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     btnTabComplete.onclick = () => {
       btnTabComplete.style.background = '#e97998'; btnTabComplete.style.color = '#fff'; btnTabComplete.style.borderColor = '#e97998';
       btnTabDraft.style.background = '#fff0f4'; btnTabDraft.style.color = '#a44f68'; btnTabDraft.style.borderColor = '#f2cfda';
-      // Cập nhật lại đồng bộ trước khi chuyển tab
       updateCompleteEssaySync();
       completeContainer.style.display = 'flex';
       draftContainer.style.display = 'none';
     };
   }
 
+  // ========================================================
+  // ĐIỀU CHỈNH 1 & 2: HÀM LƯU BÀI & DUYỆT BÀI ĐỘC LẬP
+  // ========================================================
   async function saveEssayToSupabase(status, showToastMsg = 'Đã lưu nháp!') {
     if (!currentSelectedEssayId) return;
     const item = essayListData.find(x => x.id === currentSelectedEssayId);
@@ -1300,11 +1298,12 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
     localStorage.setItem(`essay_complete_${currentSelectedEssayId}`, completeVal);
     localStorage.setItem(`essay_status_${currentSelectedEssayId}`, status);
 
+    // CHÚ Ý: Việc lưu bài chỉ cập nhật nội dung văn bản & trạng thái, TUYỆT ĐỐI KHÔNG CỘNG TIỀN TẠI ĐÂY.
     if (sb) {
       try {
         await sb.from('essay_submissions').upsert({
           essay_id: currentSelectedEssayId,
-          content: completeVal, // Lưu nội dung hoàn chỉnh lên cloud
+          content: completeVal,
           status: status,
           updated_at: new Date().toISOString()
         }, { onConflict: 'essay_id' });
@@ -1343,17 +1342,25 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
   $('btnApproveEssay').onclick = async () => {
     const item = essayListData.find(x => x.id === currentSelectedEssayId);
     if (!item) return;
+
     const ok = await showCustomConfirm("Mẹ đồng ý duyệt bài và tặng sao + tiền cho con chứ?", "Duyệt bài ", "");
     if (ok) {
+      // 1. Cập nhật trạng thái thành 'Đã duyệt' và lưu nội dung
       await saveEssayToSupabase('Đã duyệt', false);
-      if (!localStorage.getItem(`essay_rewarded_${currentSelectedEssayId}`)) {
+
+      // 2. Việc duyệt bài chỉ được thực hiện ĐÚNG MỘT LẦN DUY NHẤT cho mỗi bài tập
+      const rewardKey = `essay_rewarded_${currentSelectedEssayId}`;
+      const isAlreadyRewarded = localStorage.getItem(rewardKey) === 'true';
+
+      if (!isAlreadyRewarded) {
         state.money += 1000;
         updatePetUI();
         syncPetToCloud();
         triggerCelebration(item.soSao || 2);
-        localStorage.setItem(`essay_rewarded_${currentSelectedEssayId}`, 'true');
+        localStorage.setItem(rewardKey, 'true');
+        toast(' Đã duyệt bài và tặng thưởng thành công!');
       } else {
-        toast(' Đã duyệt bài thành công!');
+        toast(' Bài này đã được duyệt và nhận thưởng trước đó rồi (không cộng thêm tiền)!');
       }
     }
   };
@@ -1428,7 +1435,6 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
         const replyParts = allParts.filter(p => !p.thought);
         const reply = cleanMathText((replyParts.length > 0 ? replyParts : allParts).map(p => p.text || '').join('').trim());
         
-        // Đưa kết quả AI vào ô bài hoàn chỉnh hoặc hiển thị thông báo
         $('essayCompleteEditor').value = text + `\n\n--- ĐÁNH GIÁ TỪ THỎ AI ---\n` + reply.replace(/<[^>]*>?/gm, '');
         updateCompleteEssaySync();
         toast(" Thỏ AI đã hoàn thành đánh giá chuyên sâu bài văn!");
@@ -2543,7 +2549,7 @@ dialog::backdrop{background:rgba(60,36,48,.4);backdrop-filter:blur(3px)}
       $('proofNote').value = ''; resetProofFile();
       if (sub && sub.status === 'redo') {
         $('submitProofModalTitle').textContent = ' Nộp lại bài tập'; $('proofMomAlert').style.display = 'block';
-        $('proofMomAlert').innerHTML = `<b> Lời nhắn từ Mẹ:</b> "${escapeHTML(sub.note || 'Con kiểm tra lại bài và làm lại nhé!')}"`;
+        $('proofMomAlert').innerHTML = `<b> Lời nhắn từ Mẹ:</b> "${escapeHTML(sub.note || 'Con kiểm tra lại bài và làm lại giúp mẹ nhé!')}"`;
       } else { $('submitProofModalTitle').textContent = ' Nộp bài tập'; $('proofMomAlert').style.display = 'none'; }
       $('submitProofDialog').showModal(); return;
     }
